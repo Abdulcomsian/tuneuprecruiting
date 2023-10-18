@@ -12,19 +12,50 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
+        <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+        <title>Cion - Premium Admin Template</title>
+        <!-- Google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&amp;family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900;0,6..12,1000;1,6..12,200;1,6..12,300;1,6..12,400;1,6..12,500;1,6..12,600;1,6..12,700;1,6..12,800;1,6..12,900;1,6..12,1000&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.css') }}">
+        <!-- ico-font-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/icofont.css') }}">
+        <!-- Themify icon-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/themify.css') }}">
+        <!-- Flag icon-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/flag-icon.css') }}">
+        <!-- Feather icon-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/feather-icon.css') }}">
+        <!-- Plugins css start-->
+        <!-- Plugins css Ends-->
+        <!-- Bootstrap css-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css') }}">
+        <!-- App css-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+        <link id="color" rel="stylesheet" href="{{ asset('assets/css/color-1.css') }}" media="screen">
+        <!-- Responsive css-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        <div>
                 {{ $slot }}
-            </div>
         </div>
+
+        <!-- latest jquery-->
+        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+        <!-- Bootstrap js-->
+        <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+        <!-- feather icon js-->
+        <script src="{{ asset('assets/js/icons/feather-icon/feather.min.js') }}"></script>
+        <script src="{{ asset('assets/js/icons/feather-icon/feather-icon.js') }}"></script>
+        <!-- scrollbar js-->
+        <!-- Sidebar jquery-->
+        <script src="{{ asset('assets/js/config.js') }}"></script>
+        <!-- Plugins JS start-->
+        <!-- Plugins JS Ends-->
+        <!-- Theme js-->
+        <script src="{{ asset('assets/js/script.js') }}"></script>
     </body>
 </html>
