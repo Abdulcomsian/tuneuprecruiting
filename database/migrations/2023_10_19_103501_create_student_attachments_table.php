@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('student_attachments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('role')->default('coach'); // default role will be coach
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->foreignId('user_id');
+            $table->string('file');
+            $table->string('file_type');
+            $table->string('trash')->default('active');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('student_attachments');
     }
 };
