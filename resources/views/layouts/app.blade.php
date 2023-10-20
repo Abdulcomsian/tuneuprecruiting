@@ -51,7 +51,7 @@
             <div class="tap-top"><i data-feather="chevrons-up"></i></div>
             <!-- tap on tap ends-->
             <!-- page-wrapper Start-->
-            <div class="page-wrapper" id="pageWrapper">
+            <div class="page-wrapper null compact-sidebar compact-small material-icon" id="pageWrapper">
                 <!-- Page Header Start-->
                 @include('layouts.header')
                 <!-- Page Header Ends-->
@@ -101,6 +101,6 @@
             <!-- Theme js-->
             <script src="{{ asset('assets/js/script.js') }}"></script>
             <script src="{{ asset('assets/js/theme-customizer/customizer.js') }}"></script>
-            <script>new WOW().init(); window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });</script>
+            <script>new WOW().init();</script>
     </body>
 </html>

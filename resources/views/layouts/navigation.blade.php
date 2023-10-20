@@ -22,7 +22,7 @@
                             </svg><span>Home</span>
                         </a>
                     </li>
-                    <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="{{ route('applies.index') }}">
                             <svg class="stroke-icon">
                                 <use href="../assets/svg/icon-sprite.svg#Ui-kites"></use>
                             </svg>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -12,7 +14,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $userId = Auth::user()->id;
+
+        $data['applies'] = Student::find($userId)->paginate(10);
+        return view('backend/applies/applies', $data);
     }
 
     /**

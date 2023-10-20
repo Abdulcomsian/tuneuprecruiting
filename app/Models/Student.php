@@ -16,4 +16,9 @@ class Student extends Model
     {
         return $this->hasMany(StudentAttachments::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'users_students', 'student_id','user_id');
+    }
 }
