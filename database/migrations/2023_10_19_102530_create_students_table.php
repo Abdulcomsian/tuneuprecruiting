@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('home_town');
             $table->string('state');
             $table->string('country');
-            $table->string('status');
+            $table->string('status')->default('unread');
             $table->timestamps();
         });
     }
