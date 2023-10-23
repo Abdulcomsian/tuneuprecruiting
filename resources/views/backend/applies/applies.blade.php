@@ -47,8 +47,21 @@
                                         <td>{{ $apply->state }}</td>
                                         <td>
                                             <ul class="action">
-                                                <li class="edit"> <a href="#"><i class="icofont icofont-heart-alt"></i></a></li>
-                                                <li class="edit"> <a href="#"><i class="icofont icofont-chat"></i></a></li>
+                                                <li class="edit"> <a href="#">
+                                                    @if($apply->status == 'STAR')
+                                                            <i class="fa fa-heart-o"></i>
+                                                    @else
+                                                        <i class="icofont icofont-heart-alt"></i></a>
+                                                    @endif
+
+                                                </li>
+                                                <li class="edit"> <a href="{{ route('chat', $apply->id) }}">
+                                                    @if($apply->status == 'TALKING')
+                                                        <i class="icofont icofont-ui-text-chat"></i>
+                                                    @else
+                                                        <i class="icofont icofont-chat"></i></a>
+                                                    @endif
+                                                </li>
                                                 <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
                                             </ul>
                                         </td>

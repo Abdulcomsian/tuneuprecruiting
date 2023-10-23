@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Student::class, 'users_students', 'user_id', 'student_id');
     }
+
+    public function chats() {
+        return $this->belongsToMany(User::class, 'chats', 'user_id', 'student_id')
+            ->withPivot('message'); // You may need to add more pivot data for the chat
+    }
 }

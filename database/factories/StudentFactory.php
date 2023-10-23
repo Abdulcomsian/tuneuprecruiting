@@ -24,7 +24,7 @@ class StudentFactory extends Factory
             'home_town' => Str::random(10),
             'state' => Str::random(10),
             'country' => $this->faker->country,
-            'status' => Str::random(10),
+            'status' => $this->faker->randomElement(['READ' ,'UNREAD', 'STAR', 'TALKING']),
         ];
     }
 }

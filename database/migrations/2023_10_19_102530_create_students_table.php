@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('home_town');
             $table->string('state');
             $table->string('country');
-            $table->string('status')->default('unread');
+            $table->enum('status',['READ', 'UNREAD', 'STAR','TALKING','DELETE'])->default('UNREAD');
             $table->timestamps();
         });
     }
