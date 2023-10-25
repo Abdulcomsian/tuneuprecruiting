@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('role')->default('coach'); // default role will be coach
             $table->string('email')->unique();
+            $table->string('bio')->nullable();
+            $table->string('website')->nullable();
+            $table->string('about_me')->nullable();
+            $table->string('short_video')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

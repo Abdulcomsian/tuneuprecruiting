@@ -14,11 +14,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $user = User::find(Auth::user()->id);
-
-        $data['applies'] = $user->students()->paginate(10);
-
-        return view('backend/applies/applies', $data);
+        //
     }
 
     /**
