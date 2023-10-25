@@ -21,6 +21,15 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function profile() {
+        $data['user'] = Auth::user();
+        return view('backend/profile/profile', $data);
+    }
+
+    public function updateProfile(Request $request) {
+        dd($request);
+    }
+
     /**
      * Update the user's profile information.
      */
