@@ -19,15 +19,16 @@ class Student extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'users_students', 'student_id','user_id');
+        return $this->hasMany(User::class);
     }
 
-    public function chats() {
-        return $this->belongsToMany(User::class, 'chats', 'student_id', 'user_id')
-            ->orWhere(function ($query) {
-                $query->where('student_id', $this->id)->where('user_id', $this->user_id);
-            })
-            ->withPivot('message')
-            ->orderBy('created_at', 'desc');
+    public function applies()
+    {
+        return $this->hasMany(Apply::class);
+    }
+
+    public function chats()
+    {
+        return $this->hasMany(Chat::class);
     }
 }

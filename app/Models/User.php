@@ -43,13 +43,18 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function students()
+    public function student()
     {
-        return $this->belongsToMany(Student::class, 'users_students', 'user_id', 'student_id');
+        return $this->belongsTo(Student::class);
     }
 
-    public function chats() {
-        return $this->belongsToMany(User::class, 'chats', 'user_id', 'student_id')
-            ->withPivot('message'); // You may need to add more pivot data for the chat
+    public function applies()
+    {
+        return $this->hasMany(Apply::class);
+    }
+
+    public function chats()
+    {
+        return $this->hasMany(Chat::class);
     }
 }
