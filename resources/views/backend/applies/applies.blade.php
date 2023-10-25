@@ -39,12 +39,12 @@
                                 <tbody>
                                 @foreach($applies as $apply)
                                     <tr class="border-bottom-secondary">
-                                        <th scope="row">{{ $apply->first_name . $apply->last_name }}</th>
+                                        <th scope="row">{{ $apply->student->first_name . $apply->student->last_name }}</th>
                                         <td> <img class="img-30 me-2" src="../assets/images/user/1.jpg" alt="profile">Ram Jacob</td>
-                                        <td>{{ $apply->graduation_year }}</td>
-                                        <td>{{ $apply->country }}</td>
-                                        <td>{{ $apply->home_town }}</td>
-                                        <td>{{ $apply->state }}</td>
+                                        <td>{{ $apply->student->graduation_year }}</td>
+                                        <td>{{ $apply->student->country }}</td>
+                                        <td>{{ $apply->student->home_town }}</td>
+                                        <td>{{ $apply->student->state }}</td>
                                         <td>
                                             <ul class="action">
                                                 <li class="edit"> <a href="#">

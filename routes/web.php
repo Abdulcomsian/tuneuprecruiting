@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ApplyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get("/chat/{id}", [ChatController::class, "show"])->name('chat');
 
-    Route::resource('applies', \App\Http\Controllers\StudentController::class);
+    Route::get('/applies', [ApplyController::class, 'applies']);
+    Route::get('/profile', [ProfileController::class, 'profile']);
+    Route::post('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
 
 });
 
