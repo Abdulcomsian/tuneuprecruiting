@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,84 @@ class ProfileController extends Controller
     }
 
     public function updateProfile(Request $request) {
-        dd($request);
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        // Define the validation rules array
+        $rules = [
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'about_me' => 'nullable|string',
+            'bio' => 'nullable|string',
+            'website' => 'nullable|url',
+        ];
+
+        // Add the password rule conditionally
+        if (!empty($request->input('password'))) {
+            $rules['password'] = 'min:8|confirmed';
+        }
+
+        // Validate the request data
+        $request->validate($rules);
+
+        // If the validation fails, the code below won't execute.
+
+        // Update the user's data
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->about_me = $request->input('about_me');
+        $user->bio = $request->input('bio');
+        $user->website = $request->input('website');
+
+        if ($request->has('password') && !empty($request->input('password'))) {
+            $user->password = bcrypt($request->input('password'));
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'Profile updated.');
+    }
+
+    public function updateProfileImage(Request $request) {
+        $user = Auth::user();
+        // uploading profile image
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'file|mimes:jpg,png,jpeg', // Specify allowed file formats
+            ]);
+
+            $oldImagePath = "uploads/users_image/".$user->profile_image;
+            unlink($oldImagePath);
+
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('uploads/users_image'), $filename);
+
+            $user->profile_image = $filename;
+        } else if($request->hasFile('video')) {
+            $request->validate([
+                'video' => 'file|mimes:mp4', // Specify allowed file formats
+            ]);
+
+            $oldVideoLink = "uploads/users_video/".$user->short_video;
+            unlink($oldVideoLink);
+
+            $file= $request->file('video');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('uploads/users_video'), $filename);
+
+            $user->short_video = $filename;
+        }
+        else {
+            return redirect()->back()->with('danger', 'Image not uploaded.');
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'Video or image uploaded...');
     }
 
     /**

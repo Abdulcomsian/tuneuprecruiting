@@ -35,7 +35,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/applies', [ApplyController::class, 'applies']);
     Route::get('/profile', [ProfileController::class, 'profile']);
-    Route::post('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/update/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/update/profile/image', [ProfileController::class, 'updateProfileImage'])->name('profile.image');
 
 });
 

@@ -9,6 +9,7 @@ use App\Models\Student;
 use App\Models\StudentAttachments;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('admin123'), // You should hash the password
+        ]);
+
         User::factory(10)->create();
         Student::factory(10)->create();
         StudentAttachments::factory()->count(5)->create();

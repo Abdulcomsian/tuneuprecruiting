@@ -30,10 +30,30 @@
                                 <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
                             </div>
                             <div class="card-body">
-                                <form>
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                
+                                @if(session('success') || session('danger'))
+                                    @php $className = (session('success')) ? 'success' : 'danger'; @endphp
+                                    @php $message = (session('success')) ? session('success') : session('danger'); @endphp
+                                    <div class="alert alert-{{ $className }}">
+                                        {{ $message }}
+                                    </div>
+                                @endif
+                                <form method="POST" action="{{ route('profile.image') }}" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="row mb-2">
                                         <div class="profile-title">
-                                            <div class="d-flex"><img class="img-70 rounded-circle" alt="" src="../assets/images/user/7.jpg">
+                                            <div class="d-flex">
+                                                @php $profile_image = ($user->profile_image) ? "uploads/users_image/".$user->profile_image : 'assets/images/user/7.jpg'; @endphp
+                                                <img class="img-70 rounded-circle" alt="" src="{{ $profile_image }}">
                                                 <div class="flex-grow-1">
                                                     <h3 class="mb-1">{{ $user->name }}</h3>
                                                     <p>COACH</p>
@@ -42,16 +62,20 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <h6 class="form-label">Bio</h6>
-                                        <textarea class="form-control" rows="5">{{ $user->bio }}</textarea>
+                                        <label for="fileInput">
+                                            Upload an image (JPG, JPEG, or PNG):
+                                        </label>
+                                        <input name="image" type="file" placeholder="Choose image">
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Email-Address</label>
-                                        <input class="form-control" value="{{ $user->email }}" placeholder="your-email@domain.com">
+                                        @php $videoUrl = ($user->short_video) ? 'uploads/users_video/'.$user->short_video : 'assets/images/social-app/timeline-3.png'; @endphp
+                                        <iframe width="100%" class="embed-responsive-item" src="{{ $videoUrl }}" allowfullscreen></iframe>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Website</label>
-                                        <input class="form-control" value="{{ $user->website }}" placeholder="http://Uplor .com">
+                                        <label for="fileInput">
+                                            Upload a video:
+                                        </label>
+                                        <input name="video" type="file">
                                     </div>
                                     <div class="form-footer">
                                         <button class="btn btn-primary btn-block">Save</button>
@@ -106,7 +130,7 @@
                                             <label class="form-label">Confirm Password</label>
                                             <input
                                                 class="form-control"
-                                                name="confirm_password"
+                                                name="password_confirmation"
                                                 type="text"
                                                 placeholder="Confirm Password">
                                         </div>
@@ -160,7 +184,7 @@
                                                 class="form-control"
                                                 name="about_me"
                                                 rows="4"
-                                                placeholder="Enter About your description"></textarea>
+                                                placeholder="Enter About your description">{{ $user->about_me }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -169,64 +193,6 @@
                                 <button class="btn btn-primary" type="submit">Update Profile</button>
                             </div>
                         </form>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header pb-0">
-                                <h3 class="card-title mb-0">Add projects And Upload</h3>
-                                <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
-                            </div>
-                            <div class="table-responsive theme-scrollbar add-project">
-                                <table class="table card-table table-vcenter text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>Project Name</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Price</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><a class="text-inherit" href="#">Untrammelled prevents </a></td>
-                                        <td>28 May 2023</td>
-                                        <td><span class="status-icon bg-success"></span> Completed</td>
-                                        <td>$56,908</td>
-                                        <td class="text-end"><a class="icon" href="javascript:void(0)"></a><a class="btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-transparent btn-sm" href="javascript:void(0)"><i class="fa fa-link"></i> Update</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-danger btn-sm" href="javascript:void(0)"><i class="fa fa-trash"></i> Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a class="text-inherit" href="#">Untrammelled prevents</a></td>
-                                        <td>12 June 2023</td>
-                                        <td><span class="status-icon bg-danger"></span> On going</td>
-                                        <td>$45,087</td>
-                                        <td class="text-end"><a class="icon" href="javascript:void(0)"></a><a class="btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-transparent btn-sm" href="javascript:void(0)"><i class="fa fa-link"></i> Update</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-danger btn-sm" href="javascript:void(0)"><i class="fa fa-trash"></i> Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a class="text-inherit" href="#">Untrammelled prevents</a></td>
-                                        <td>12 July 2023</td>
-                                        <td><span class="status-icon bg-warning"></span> Pending</td>
-                                        <td>$60,123</td>
-                                        <td class="text-end"><a class="icon" href="javascript:void(0)"></a><a class="btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-transparent btn-sm" href="javascript:void(0)"><i class="fa fa-link"></i> Update</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-danger btn-sm" href="javascript:void(0)"><i class="fa fa-trash"></i> Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a class="text-inherit" href="#">Untrammelled prevents</a></td>
-                                        <td>14 June 2023</td>
-                                        <td><span class="status-icon bg-warning"></span> Pending</td>
-                                        <td>$70,435</td>
-                                        <td class="text-end"><a class="icon" href="javascript:void(0)"></a><a class="btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-transparent btn-sm" href="javascript:void(0)"><i class="fa fa-link"></i> Update</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-danger btn-sm" href="javascript:void(0)"><i class="fa fa-trash"></i> Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a class="text-inherit" href="#">Untrammelled prevents</a></td>
-                                        <td>25 June 2023</td>
-                                        <td><span class="status-icon bg-success"></span> Completed</td>
-                                        <td>$15,987</td>
-                                        <td class="text-end"><a class="icon" href="javascript:void(0)"></a><a class="btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-transparent btn-sm" href="javascript:void(0)"><i class="fa fa-link"></i> Update</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-danger btn-sm" href="javascript:void(0)"><i class="fa fa-trash"></i> Delete</a></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
