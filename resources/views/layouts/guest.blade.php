@@ -29,6 +29,11 @@
         <!-- Feather icon-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/feather-icon.css') }}">
         <!-- Plugins css start-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick-theme.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/owlcarousel.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/swiper/swiper.css') }}">
         <!-- Plugins css Ends-->
         <!-- Bootstrap css-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css') }}">
@@ -38,7 +43,7 @@
         <!-- Responsive css-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
     </head>
-    <body class="font-sans text-gray-900 antialiased">
+    <body class="font-sans text-gray-900 antialiased landing-page">
         <div>
                 {{ $slot }}
         </div>
@@ -54,6 +59,16 @@
         <!-- Sidebar jquery-->
         <script src="{{ asset('assets/js/config.js') }}"></script>
         <!-- Plugins JS start-->
+        <script src="{{ asset('assets/js/slick/slick.min.js') }}"></script>
+        <script src="{{ asset('assets/js/slick/slick.js') }}"></script>
+        <script src="{{ asset('assets/js/landing-slick.js') }}"></script>
+        <script src="{{ asset('assets/js/swiper/swiper.js') }}"></script>
+        <script src="{{ asset('assets/js/owlcarousel/owl.carousel.js') }}"></script>
+        <script src="{{ asset('assets/js/owlcarousel/owl-custom.js') }}"></script>
+        <script src="{{ asset('assets/js/animation/wow/wow.min.js') }}"></script>
+        <script src="{{ asset('assets/js/landing_sticky.js') }}"></script>
+        <script src="{{ asset('assets/js/landing.js') }}"></script>
+        <script src="{{ asset('assets/js/jarallax_libs/libs.min.js') }}"></script>
         <!-- Plugins JS Ends-->
         <!-- Theme js-->
         <script src="{{ asset('assets/js/script.js') }}"></script>

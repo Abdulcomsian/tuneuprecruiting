@@ -77,8 +77,10 @@ class ProfileController extends Controller
                 'image' => 'file|mimes:jpg,png,jpeg', // Specify allowed file formats
             ]);
 
-            $oldImagePath = "uploads/users_image/".$user->profile_image;
-            unlink($oldImagePath);
+            if ($user->profile_image) {
+                $oldImagePath = "uploads/users_image/".$user->profile_image;
+                unlink($oldImagePath);
+            }
 
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
@@ -90,8 +92,10 @@ class ProfileController extends Controller
                 'video' => 'file|mimes:mp4', // Specify allowed file formats
             ]);
 
-            $oldVideoLink = "uploads/users_video/".$user->short_video;
-            unlink($oldVideoLink);
+            if ($user->short_video) {
+                $oldVideoLink = "uploads/users_video/".$user->short_video;
+                unlink($oldVideoLink);
+            }
 
             $file= $request->file('video');
             $filename= date('YmdHi').$file->getClientOriginalName();
@@ -100,7 +104,7 @@ class ProfileController extends Controller
             $user->short_video = $filename;
         }
         else {
-            return redirect()->back()->with('danger', 'Image not uploaded.');
+            return redirect()->back()->with('danger', 'Image or video not uploaded.');
         }
 
         $user->save();

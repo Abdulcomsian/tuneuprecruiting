@@ -25,6 +25,10 @@
         <!-- Feather icon-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/feather-icon.css') }}">
         <!-- Plugins css start-->
+        <link rel="icon" href="{{ asset('assets/svg/landing-icons.svg') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/owlcarousel.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/swiper/swiper.css') }}">
+
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick-theme.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/scrollbar.css') }}">
@@ -79,6 +83,15 @@
             <!-- Sidebar jquery-->
             <script src="{{ asset('assets/js/config.js') }}"></script>
             <!-- Plugins JS start-->
+
+            <script src="{{ asset('assets/js/swiper/swiper.js') }}"></script>
+            <script src="{{ asset('assets/js/owlcarousel/owl.carousel.js') }}"></script>
+            <script src="{{ asset('assets/js/owlcarousel/owl-custom.js') }}"></script>
+
+            <script src="{{ asset('assets/js/landing_sticky.js') }}"></script>
+            <script src="{{ asset('assets/js/landing.js') }}"></script>
+            <script src="{{ asset('assets/js/jarallax_libs/libs.min.js') }}"></script>
+
             <script src="{{ asset('assets/js/sidebar-menu.js') }}"></script>
             <script src="{{ asset('assets/js/slick/slick.min.js') }}"></script>
             <script src="{{ asset('assets/js/slick/slick.js') }}"></script>

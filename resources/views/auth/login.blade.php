@@ -5,7 +5,7 @@
             <div class="col-xl-7 p-0">
                 <div class="login-card login-dark">
                     <div>
-                        <div><a class="logo text-start" href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/logo-1.png" alt="looginpage"><img class="img-fluid for-dark" src="../assets/images/logo/logo.png" alt="looginpage"></a></div>
+                        <div><a class="logo text-start" href="{{ url('/') }}"><img class="img-fluid for-light" src="../assets/images/logo/logo-1.png" alt="looginpage"><img class="img-fluid for-dark" src="../assets/images/logo/logo.png" alt="looginpage"></a></div>
                         <div class="login-main">
                             <form class="theme-form"  method="POST" action="{{ route('login') }}">
                                 @csrf
@@ -21,7 +21,7 @@
                                         </ul>
                                     </div>
                                 @endif
-                                
+
                                 <div class="form-group">
                                     <label class="col-form-label">Email Address</label>
                                     <input class="form-control" name="email" type="email" value="{{ old('email') }}" placeholder="Test@gmail.com">
@@ -44,7 +44,7 @@
                                 <div class="social mt-4">
                                     <div class="btn-showcase"><a class="btn btn-light" href="https://www.linkedin.com/login" target="_blank"><i class="txt-linkedin" data-feather="linkedin"></i> LinkedIn </a><a class="btn btn-light" href="https://twitter.com/login?lang=en" target="_blank"><i class="txt-twitter" data-feather="twitter"></i>twitter</a><a class="btn btn-light" href="https://www.facebook.com/" target="_blank"><i class="txt-fb" data-feather="facebook"></i>facebook</a></div>
                                 </div>
-                                <p class="mt-4 mb-0 text-center">Don't have account?<a class="ms-2" href="sign-up.html">Create Account</a></p>
+                                <p class="mt-4 mb-0 text-center">Don't have account?<a class="ms-2" href="{{ route('register') }}">Create Account</a></p>
                             </form>
                         </div>
                     </div>
