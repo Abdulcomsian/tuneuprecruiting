@@ -22,7 +22,8 @@ class ChatFactory extends Factory
         return [
             'user_id' => User::all()->random()->id,
             'student_id' => Student::all()->random()->id,
-            'message' => $this->faker->text(30)
+            'message' => $this->faker->text(100),
+            'sender' => $this->faker->randomElement(['User' ,'Student']),
         ];
     }
 }

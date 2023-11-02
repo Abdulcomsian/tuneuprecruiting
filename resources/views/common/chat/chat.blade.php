@@ -10,7 +10,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">
                                     <svg class="stroke-icon">
-                                        <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
                                     </svg></a></li>
                             <li class="breadcrumb-item">Chat</li>
                             <li class="breadcrumb-item active"> Chat App</li>
@@ -31,9 +31,9 @@
                                     <!-- chat start-->
                                     <div class="chat">
                                         <!-- chat-header start-->
-                                        <div class="chat-header clearfix"><img class="rounded-circle" src="../assets/images/user/8.jpg" alt="">
+                                        <div class="chat-header clearfix"><img class="rounded-circle" src="{{ asset('assets/images/user/8.jpg') }}" alt="">
                                             <div class="about">
-                                                <div class="name">{{ $messages->first()->student->first_name }}   </div>
+                                                <div class="name">{{ $student->first_name }}   </div>
                                                 <div class="status">Last Seen 3:55 PM</div>
                                             </div>
                                             <ul class="list-inline float-start float-sm-end chat-menu-icons">
@@ -41,12 +41,16 @@
                                             </ul>
                                         </div>
                                         <!-- chat-header end-->
-                                        <div class="chat-history chat-msg-box custom-scrollbar">
-                                            <ul>
+                                        <div class="chat-history chat-msg-box custom-scrollbar" id="chat-container">
+                                            <ul id="chatUl">
                                                 @foreach($messages as $message)
-                                                    <li>
-                                                        <div class="message my-message"><img class="rounded-circle float-start chat-user-img img-30" src="../assets/images/user/3.png" alt="">
-                                                            <div class="message-data text-end"><span class="message-data-time">{{ $message->created_at }}</span></div>
+                                                    @php $className = ($message->sender == $type) ? 'my-message' : 'other-message pull-right'; @endphp
+                                                    @php $float = ($message->sender == $type) ? 'float-start' : 'float-end'; @endphp
+                                                    @php $textEnd = ($message->sender == $type) ? 'text-end' : ''; @endphp
+                                                    @php $clearFix = ($message->sender == $type) ? '' : 'clearfix'; @endphp
+                                                    <li class="{{ $clearFix }}">
+                                                        <div class="message {{ $className }}"><img class="rounded-circle {{ $float }} chat-user-img img-30" src="{{ asset('assets/images/user/3.png') }}" alt="">
+                                                            <div class="message-data {{ $textEnd }}"><span class="message-data-time">{{ $message->created_at }}</span></div>
                                                             {{ $message->message }}
                                                         </div>
                                                     </li>
@@ -70,9 +74,14 @@
                                             <div class="row">
                                                 <div class="col-xl-12 d-flex">
                                                     <div class="smiley-box bg-primary">
-                                                        <div class="picker"><img src="../assets/images/smiley.png" alt=""></div>
+                                                        <div class="picker"><img src="{{ asset('assets/images/smiley.png') }}" alt=""></div>
                                                     </div>
                                                     <div class="input-group text-box">
+                                                        <input type="hidden" id="url" value="{{ route('chat.store') }}">
+                                                        <input type="hidden" id="user-type" value="{{ $type }}">
+                                                        <input type="hidden" id="student-id" value="{{ $studentId }}">
+                                                        <input type="hidden" id="user-id" value="{{ $userId }}">
+                                                        <input type="hidden" id="user-image-link" value="{{ asset('assets/images/user/3.png') }}">
                                                         <input class="form-control input-txt-bx" id="message-to-send" type="text" name="message-to-send" placeholder="Type a message......">
                                                         <button class="input-group-text btn btn-primary" type="button">SEND</button>
                                                     </div>
