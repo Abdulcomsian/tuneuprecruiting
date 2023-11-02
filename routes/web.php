@@ -22,7 +22,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('backend/dashboard/dashboard');
+//    return view('backend/dashboard/dashboard');
+    return redirect('/applies');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -31,7 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get("/redirectAuthenticatedUsers", [RedirectAuthenticatedUsersController::class, "home"]);
 
-    Route::get("/chat/{id}", [ChatController::class, "show"])->name('chat');
+    Route::get("/chat/{id}/{type}", [ChatController::class, "show"])->name('chat');
+    Route::post("/chat/store", [ChatController::class, "store"])->name('chat.store');
 
     Route::get('/applies', [ApplyController::class, 'applies']);
     Route::get('/profile', [ProfileController::class, 'profile']);
