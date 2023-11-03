@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Coach;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,9 +21,10 @@ class ApplyFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::all()->random()->id,
-            'student_id' => Student::all()->random()->id,
-            'status' => $this->faker->randomElement(['READ' ,'UNREAD', 'STAR', 'TALKING']),
+            'user_id' => Coach::inRandomOrder()->first(),
+            'student_id' => Student::inRandomOrder()->first(),
+            'status' => $this->faker->randomElement(['READ', 'UNREAD', 'STAR', 'TALKING', 'DELETE']),
         ];
+
     }
 }

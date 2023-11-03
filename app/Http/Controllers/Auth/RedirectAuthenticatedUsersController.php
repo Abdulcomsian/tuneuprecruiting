@@ -12,8 +12,8 @@ class RedirectAuthenticatedUsersController extends Controller
         if (auth()->user()->role == 'coach') {
             return redirect('/dashboard');
         }
-        elseif(auth()->user()->role == 'user') {
-            return redirect('/userDashboard');
+        elseif(auth()->user()->role == 'student') {
+            return redirect('/student/dashboard');
         }
         elseif(auth()->user()->role == 'guest') {
             return redirect('/guestDashboard');

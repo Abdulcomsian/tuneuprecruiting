@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Coach;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,10 +21,11 @@ class ChatFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::all()->random()->id,
-            'student_id' => Student::all()->random()->id,
-            'message' => $this->faker->text(100),
-            'sender' => $this->faker->randomElement(['User' ,'Student']),
+            'user_id' => Coach::inRandomOrder()->first(),
+            'student_id' => Student::inRandomOrder()->first(),
+            'message' => $this->faker->sentence,
+            'status' => $this->faker->randomElement(['unread', 'read']),
+            'sender' => $this->faker->randomElement(['Coach', 'Student']),
         ];
     }
 }
