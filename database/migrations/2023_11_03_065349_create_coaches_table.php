@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('coaches', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->text('bio')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('website')->nullable();
             $table->text('about_me')->nullable();
             $table->string('profile_image')->nullable();

@@ -26,7 +26,6 @@ class CoachFactory extends Factory
 
         return [
             'user_id' => $user->id,
-            'bio' => $this->faker->paragraph,
             'website' => $this->faker->url,
             'about_me' => $this->faker->paragraph,
             'profile_image' => $this->faker->imageUrl(),

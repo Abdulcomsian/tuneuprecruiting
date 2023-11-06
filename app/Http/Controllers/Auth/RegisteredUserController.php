@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coach;
 use App\Models\Student;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -47,6 +48,8 @@ class RegisteredUserController extends Controller
 
         if ($request->role == 'student') {
             Student::create(['user_id' => $user->id, 'first_name' => $user->name]);
+        } else if ($request->role == 'coach') {
+            Coach::create(['user_id' => $user->id, 'first_name' => $user->name]);
         }
 
         event(new Registered($user));

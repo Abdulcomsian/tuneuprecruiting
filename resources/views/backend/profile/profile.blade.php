@@ -93,25 +93,37 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label">Name</label>
+                                            <label class="form-label">First Name</label>
                                             <input
                                                 class="form-control"
-                                                name="name"
-                                                value="{{ $user->name }}"
+                                                name="first_name"
+                                                value="{{ $user->first_name }}"
                                                 type="text"
                                                 placeholder="Name">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-7">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">Last Name</label>
+                                            <input
+                                                class="form-control"
+                                                name="last_name"
+                                                value="{{ $user->last_name }}"
+                                                type="text"
+                                                placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label">Email address</label>
                                             <input
                                                 class="form-control"
                                                 name="email"
-                                                value="{{ $user->email }}"
+                                                value="{{ $email }}"
                                                 type="email"
+                                                disabled
                                                 placeholder="Email">
                                         </div>
                                     </div>

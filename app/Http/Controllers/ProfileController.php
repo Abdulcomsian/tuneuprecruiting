@@ -25,12 +25,16 @@ class ProfileController extends Controller
     }
 
     public function profile() {
-        $data['user'] = Auth::user();
+        $user = Auth::user();
+        $data['user'] = Coach::where(['user_id' => $user->id])->first();
+        $data['email'] = $user->email;
+
         return view('backend/profile/profile', $data);
     }
 
     public function updateProfile(Request $request) {
         $user = Auth::user();
+        $coach = Coach::where(['user_id' => $user->id])->first();
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
@@ -38,8 +42,8 @@ class ProfileController extends Controller
 
         // Define the validation rules array
         $rules = [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'about_me' => 'nullable|string',
             'bio' => 'nullable|string',
             'website' => 'nullable|url',
@@ -56,11 +60,11 @@ class ProfileController extends Controller
         // If the validation fails, the code below won't execute.
 
         // Update the user's data
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->about_me = $request->input('about_me');
-        $user->bio = $request->input('bio');
-        $user->website = $request->input('website');
+        $coach->first_name = $request->input('first_name');
+        $coach->last_name = $request->input('last_name');
+        $coach->about_me = $request->input('about_me');
+        $coach->website = $request->input('website');
+        $coach->save();
 
         if ($request->has('password') && !empty($request->input('password'))) {
             $user->password = bcrypt($request->input('password'));
