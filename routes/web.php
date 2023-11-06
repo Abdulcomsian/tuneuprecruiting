@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ApplyController;
+use App\Http\Controllers\StudentDashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'profile']);
     Route::post('/update/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/update/profile/image', [ProfileController::class, 'updateProfileImage'])->name('profile.image');
+
+    // student
+    Route::get('/student/dashboard', [StudentDashboard::class, 'dashboard']);
 
 });
 

@@ -21,30 +21,46 @@
                                         </ul>
                                     </div>
                                 @endif
-
                                 <div class="form-group">
-                                    <label class="col-form-label pt-0">Your Name</label>
                                     <div class="row g-2">
                                         <div class="col-6">
+                                            <label class="col-form-label pt-0">Your Name</label>
                                             <input class="form-control" name="name" value="{{ old('name') }}" type="text" required="" placeholder="name">
                                         </div>
                                         <div class="col-6">
+                                            <label class="col-form-label pt-0">Email</label>
                                             <input class="form-control" name="email" value="{{ old('email') }}" type="email" required="" placeholder="Test@gmail.com">
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <label class="col-form-label">Password</label>
+                                    <label class="col-form-label">Type</label>
                                     <div class="form-input position-relative">
-                                        <input class="form-control" type="password" name="password" required="" placeholder="*********">
-                                        <div class="show-hide"><span class="show"></span></div>
+                                        <select name="role" id="" class="form-control">
+                                            <option value="">Choose</option>
+                                            <option value="student">Student</option>
+                                            <option value="coach">Coach</option>
+                                        </select>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <label class="col-form-label">Confirm Password</label>
-                                    <div class="form-input position-relative">
-                                        <input class="form-control" type="password" name="password_confirmation" required="" placeholder="*********">
-                                        <div class="show-hide"><span class="show"></span></div>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <label class="col-form-label">Password</label>
+                                            <div class="form-input position-relative">
+                                                <input class="form-control" type="password" name="password" required="" placeholder="*********">
+                                                <div class="show-hide"><span class="show"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="col-form-label">Confirm Password</label>
+                                            <div class="form-input position-relative">
+                                                <input class="form-control" type="password" name="password_confirmation" required="" placeholder="*********">
+                                                <div class="show-hide"><span class="show"></span></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group mb-0">

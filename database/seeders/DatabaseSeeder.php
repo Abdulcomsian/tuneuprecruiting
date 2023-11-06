@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Apply;
 use App\Models\Chat;
+use App\Models\Coach;
 use App\Models\Student;
 use App\Models\StudentAttachments;
 use App\Models\User;
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory(10)->create();
+        Coach::factory(10)->create();
         Student::factory(10)->create();
         StudentAttachments::factory()->count(5)->create();
         Apply::factory(10)->create();
