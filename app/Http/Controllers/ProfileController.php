@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Coach;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -71,6 +73,18 @@ class ProfileController extends Controller
 
     public function updateProfileImage(Request $request) {
         $user = Auth::user();
+
+        if ($user->role == 'student') {
+            $data = Student::where(['user_id' => $user->id])->first();
+            $imagePath = 'uploads/students_image/';
+            $videoPath = 'uploads/students_videos/';
+        } else if ($user->role == 'coach') {
+            $data = Coach::where(['user_id' => $user->id])->first();
+            $imagePath = 'uploads/users_image/';
+            $videoPath = 'uploads/users_video/';
+        } else {
+            dd("Error: invalid user role");
+        }
         // uploading profile image
         if ($request->hasFile('image')) {
             $request->validate([
@@ -78,36 +92,36 @@ class ProfileController extends Controller
             ]);
 
             if ($user->profile_image) {
-                $oldImagePath = "uploads/users_image/".$user->profile_image;
+                $oldImagePath = $imagePath . $user->profile_image;
                 unlink($oldImagePath);
             }
 
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('uploads/users_image'), $filename);
+            $file-> move(public_path($imagePath), $filename);
 
-            $user->profile_image = $filename;
+            $data->profile_image = $filename;
         } else if($request->hasFile('video')) {
             $request->validate([
                 'video' => 'file|mimes:mp4', // Specify allowed file formats
             ]);
 
             if ($user->short_video) {
-                $oldVideoLink = "uploads/users_video/".$user->short_video;
+                $oldVideoLink = $videoPath . $user->short_video;
                 unlink($oldVideoLink);
             }
 
             $file= $request->file('video');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('uploads/users_video'), $filename);
+            $file-> move(public_path($videoPath), $filename);
 
-            $user->short_video = $filename;
+            $data->short_video = $filename;
         }
         else {
             return redirect()->back()->with('danger', 'Image or video not uploaded.');
         }
 
-        $user->save();
+        $data->save();
 
         return redirect()->back()->with('success', 'Video or image uploaded...');
     }

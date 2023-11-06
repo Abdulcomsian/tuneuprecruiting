@@ -153,6 +153,7 @@
                             </p>
                         </div>
                     </div>
+                    @php if (auth()->user()->role == 'coach'): @endphp
                     <ul class="profile-dropdown onhover-show-div">
                         <li><a href="{{ url('profile') }}"><i data-feather="user"></i><span>Account </span></a></li>
                         <li>
@@ -162,6 +163,18 @@
                             </form>
                         </li>
                     </ul>
+                    @php endif; @endphp
+                    @php if (auth()->user()->role == 'student'): @endphp
+                        <ul class="profile-dropdown onhover-show-div">
+                            <li><a href="{{ url('profile/student') }}"><i data-feather="user"></i><span>Account</span></a></li>
+                            <li>
+                                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="log-in"> </i><span>Logout</span></a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    @php endif; @endphp
                 </li>
             </ul>
         </div>

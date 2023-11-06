@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\StudentDashboard;
+use App\Http\Controllers\StudentProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,8 @@ Route::middleware('auth')->group(function () {
 
     // student
     Route::get('/student/dashboard', [StudentDashboard::class, 'dashboard']);
-
+    Route::get('/profile/student', [StudentProfileController::class, 'profile']);
+    Route::post('/update/student/profile', [StudentProfileController::class, 'updateProfile'])->name('student.profile.update');
 });
 
 require __DIR__.'/auth.php';

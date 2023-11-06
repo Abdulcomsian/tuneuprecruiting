@@ -52,11 +52,11 @@
                                     <div class="row mb-2">
                                         <div class="profile-title">
                                             <div class="d-flex">
-                                                @php $profile_image = ($user->profile_image) ? asset("uploads/users_image/".$user->profile_image) : asset('assets/images/user/7.jpg'); @endphp
+                                                @php $profile_image = ($user->profile_image) ? asset("uploads/students_image/".$user->profile_image) : asset('assets/images/user/7.jpg'); @endphp
                                                 <img class="img-70 rounded-circle" alt="" src="{{ $profile_image }}">
                                                 <div class="flex-grow-1">
-                                                    <h3 class="mb-1">{{ $user->name }}</h3>
-                                                    <p>COACH</p>
+                                                    <h3 class="mb-1">{{ $user->first_name }}</h3>
+                                                    <p>{{ ucfirst(auth()->user()->role) }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -68,7 +68,7 @@
                                         <input name="image" type="file" placeholder="Choose image">
                                     </div>
                                     <div class="mb-3">
-                                        @php $videoUrl = ($user->short_video) ? asset('uploads/users_video/'.$user->short_video) : asset('assets/images/social-app/timeline-3.png'); @endphp
+                                        @php $videoUrl = ($user->short_video) ? asset('uploads/students_videos/'.$user->short_video) : asset('assets/images/social-app/timeline-3.png'); @endphp
                                         <iframe width="100%" class="embed-responsive-item" src="{{ $videoUrl }}" allowfullscreen></iframe>
                                     </div>
                                     <div class="mb-3">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="col-xl-8">
-                        <form class="card" method="post" action="{{ route('profile.update') }}">
+                        <form class="card" method="post" action="{{ route('student.profile.update') }}">
                             @csrf
                             <div class="card-header pb-0">
                                 <h3 class="card-title mb-0">Edit Profile</h3>
@@ -93,25 +93,37 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label">Name</label>
+                                            <label class="form-label">First Name</label>
                                             <input
                                                 class="form-control"
-                                                name="name"
-                                                value="{{ $user->name }}"
+                                                name="first_name"
+                                                value="{{ $user->first_name }}"
                                                 type="text"
                                                 placeholder="Name">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-7">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">Last Name</label>
+                                            <input
+                                                class="form-control"
+                                                name="last_name"
+                                                value="{{ $user->last_name }}"
+                                                type="text"
+                                                placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label">Email address</label>
                                             <input
                                                 class="form-control"
-                                                name="email"
-                                                value="{{ $user->email }}"
-                                                type="email"
+                                                name="graduation_year"
+                                                value="{{ $email }}"
+                                                type="text"
+
                                                 placeholder="Email">
                                         </div>
                                     </div>
@@ -135,22 +147,35 @@
                                                 placeholder="Confirm Password">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Address</label>
+                                            <label class="form-label">Graduation Year</label>
                                             <input
                                                 class="form-control"
-                                                name="address"
+                                                name="graduation_year"
                                                 type="text"
-                                                placeholder="Home Address">
+                                                value="{{ $user->graduation_year }}"
+                                                placeholder="Graduation Year">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Home Town</label>
+                                            <input
+                                                class="form-control"
+                                                name="home_town"
+                                                type="text"
+                                                value="{{ $user->home_town }}"
+                                                placeholder="Home Town">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label">City</label>
+                                            <label class="form-label">State</label>
                                             <input
                                                 class="form-control"
-                                                name="city"
+                                                name="state"
+                                                value="{{ $user->state }}"
                                                 type="text"
                                                 placeholder="City">
                                         </div>
@@ -168,23 +193,13 @@
                                     <div class="col-md-5">
                                         <div class="mb-3">
                                             <label class="form-label">Country</label>
-                                            <select class="form-control btn-square">
+                                            <select class="form-control btn-square" name="country">
                                                 <option value="0">--Select--</option>
                                                 <option value="1">Germany</option>
                                                 <option value="2">Canada</option>
                                                 <option value="3">Usa</option>
                                                 <option value="4">Aus</option>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div>
-                                            <label class="form-label">About Me</label>
-                                            <textarea
-                                                class="form-control"
-                                                name="about_me"
-                                                rows="4"
-                                                placeholder="Enter About your description">{{ $user->about_me }}</textarea>
                                         </div>
                                     </div>
                                 </div>

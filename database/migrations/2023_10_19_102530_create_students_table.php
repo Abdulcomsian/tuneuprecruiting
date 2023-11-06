@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('first_name');
-            $table->string('last_name');
-            $table->string('graduation_year');
-            $table->string('home_town');
-            $table->string('state');
-            $table->string('country');
+            $table->string('last_name')->nullable();
+            $table->string('graduation_year')->nullable();
+            $table->string('home_town')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->string('profile_image')->nullable();
+            $table->string('short_video')->nullable();
             $table->timestamps();
         });
     }

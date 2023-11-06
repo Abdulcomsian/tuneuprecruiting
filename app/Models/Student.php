@@ -9,6 +9,16 @@ class Student extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'first_name',
+        'last_name',
+        'graduation_year',
+        'home_town',
+        'state',
+        'country',
+    ];
+
     /**
      * Get the attachments for the student.
      */
