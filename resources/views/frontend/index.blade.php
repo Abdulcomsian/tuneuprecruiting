@@ -15,11 +15,6 @@
                             <ul class="landing-menu nav nav-pills">
                                 <li class="nav-item menu-back">back<i class="fa fa-angle-right"></i></li>
                                 <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#demo">Layout</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#Applications">Applications</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#core-feature">Core Feature </a></li>
-                                <li class="nav-item"><a class="nav-link" href="https://docs.pixelstrap.com/cion/document/" target="_blank">Documentation</a></li>
-                                <li class="nav-item"><a class="nav-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe6hKUXw_By-pg7yabL0FxoTM02ZPTxoXy8PE3yboRuUCuyeA/viewform" target="_blank">Hire us</a></li>
                             </ul>
                             <div class="buy-block"><a class="btn-landing btn-white" href="{{ route('login') }}">Login</a>
                                 <div class="toggle-menu"><i class="fa fa-bars"></i></div>
