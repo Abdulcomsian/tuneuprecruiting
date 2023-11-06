@@ -83,7 +83,7 @@
                                                         <input type="hidden" id="user-id" value="{{ $userId }}">
                                                         <input type="hidden" id="user-image-link" value="{{ asset('assets/images/user/3.png') }}">
                                                         <input class="form-control input-txt-bx" id="message-to-send" type="text" name="message-to-send" placeholder="Type a message......">
-                                                        <button class="input-group-text btn btn-primary" type="button">SEND</button>
+                                                        <button class="input-group-text btn btn-primary" id="btn-send" type="button">SEND</button>
                                                     </div>
                                                 </div>
                                             </div>

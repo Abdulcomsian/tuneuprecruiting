@@ -28,6 +28,8 @@ $(document).ready(function() {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+            $('#btn-send').prop("disabled", true);
+            $('#btn-send').text('Wait....');
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -44,6 +46,11 @@ $(document).ready(function() {
                         </li>`;
 
                     $("#chatUl").append(liElement);
+                    $("#message-to-send").val("");
+
+                    $('#btn-send').prop("disabled", false);
+                    $('#btn-send').text('SEND');
+
                     scrollToBottom();
                 },
                 error: function(xhr, status, error) {
