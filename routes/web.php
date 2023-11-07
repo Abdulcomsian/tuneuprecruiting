@@ -7,6 +7,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\StudentDashboard;
 use App\Http\Controllers\StudentProfileController;
+use App\Http\Controllers\ProgramController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get("/redirectAuthenticatedUsers", [RedirectAuthenticatedUsersController::class, "home"]);
+
+    Route::resource('program', ProgramController::class);
 
     Route::get("/chat/{id}/{type}", [ChatController::class, "show"])->name('chat');
     Route::post("/chat/store", [ChatController::class, "store"])->name('chat.store');

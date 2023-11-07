@@ -31,6 +31,12 @@
                                     <use href="{{asset('assets/svg/icon-sprite.svg#fill-ui')}}"></use>
                                 </svg><span>Applies</span></a>
                         </li>
+
+                        <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="{{ route('program.index') }}">
+                                <svg class="stroke-icon">
+                                    <use href="{{asset('assets/svg/icon-sprite.svg#Form')}}"></use>
+                                </svg><span>Program</span></a>
+                        </li>
                     </ul>
                 @php endif; @endphp
 

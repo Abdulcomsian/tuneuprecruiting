@@ -44,6 +44,12 @@
         <link id="color" rel="stylesheet" href="{{ asset('assets/css/color-1.css') }}" media="screen">
         <!-- Responsive css-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
+
+        <!-- latest jquery-->
+        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+        <!-- Bootstrap js-->
+        <script src="{{ asset('assets/js/bootstrap/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
     </head>
     <body>
             <!-- Loader starts-->
@@ -70,10 +76,6 @@
                     @include('layouts.footer')
                 </div>
             </div>
-            <!-- latest jquery-->
-            <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-            <!-- Bootstrap js-->
-            <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
             <!-- feather icon js-->
             <script src="{{ asset('assets/js/icons/feather-icon/feather.min.js') }}"></script>
             <script src="{{ asset('assets/js/icons/feather-icon/feather-icon.js') }}"></script>
@@ -96,6 +98,10 @@
             <script src="{{ asset('assets/js/slick/slick.min.js') }}"></script>
             <script src="{{ asset('assets/js/slick/slick.js') }}"></script>
             <script src="{{ asset('assets/js/header-slick.js') }}"></script>
+            <script src="{{ asset('assets/js/height-equal.js') }}"></script>
+            <script src="{{ asset('assets/js/tooltip-init.js') }}"></script>
+            <script src="{{ asset('assets/js/modalpage/validation-modal.js') }}"></script>
+
             <script src="{{ asset('assets/js/chart/chartist/chartist.js') }}"></script>
             <script src="{{ asset('assets/js/chart/chartist/chartist-plugin-tooltip.js') }}"></script>
             <script src="{{ asset('assets/js/chart/apex-chart/apex-chart.js') }}"></script>

@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Apply;
 use App\Models\Chat;
 use App\Models\Coach;
+use App\Models\Program;
 use App\Models\Student;
 use App\Models\StudentAttachments;
 use App\Models\User;
@@ -31,7 +32,7 @@ class DatabaseSeeder extends Seeder
         StudentAttachments::factory()->count(5)->create();
         Apply::factory(10)->create();
         Chat::factory(100)->create();
-
+        Program::factory(20)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
