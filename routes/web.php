@@ -8,6 +8,7 @@ use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\StudentDashboard;
 use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\StudentApplyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,9 +47,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/update/profile/image', [ProfileController::class, 'updateProfileImage'])->name('profile.image');
 
     // student
-    Route::get('/student/dashboard', [StudentDashboard::class, 'dashboard']);
+//    Route::get('/student/dashboard', [StudentDashboard::class, 'dashboard']);
+    Route::get('/student/dashboard', [StudentApplyController::class, 'programs']);
     Route::get('/profile/student', [StudentProfileController::class, 'profile']);
     Route::post('/update/student/profile', [StudentProfileController::class, 'updateProfile'])->name('student.profile.update');
+    Route::get('/program/view/{id}', [StudentApplyController::class, 'viewProgram'])->name('program.view');
 });
 
 require __DIR__.'/auth.php';
