@@ -22,7 +22,7 @@
         <div class="container-fluid basic_table">
             <div class="row">
                 <div class="col-sm-12">
-                    <button class="btn btn-success mb-2 float-end" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalfullscreen">Add a Program</button>
+                    <button class="btn btn-success mb-2 float-end" type="button" id="btn-add">Add a Program</button>
                 </div>
             </div>
             <div class="row">
@@ -112,6 +112,7 @@
                         <form method="POST" id="frm-program" action="{{ route('program.store') }}" class="row g-3 needs-validation" novalidate="">
                             @csrf
                             <input type="hidden" name="_method" value="POST" id="route-method">
+                            <input type="hidden" value="{{ route('program.store') }}" id="route-post-method">
                             <div class="col-md-4">
                                 <label class="form-label" for="validationCustom01">Program Name</label>
                                 <input
@@ -149,7 +150,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <button class="btn btn-primary" type="submit">Add</button>
+                                <button class="btn btn-primary" id="btn-from-add" type="submit">Add</button>
                             </div>
                         </form>
                     </div>
@@ -162,7 +163,29 @@
         <!-- End full screen modal -->
     </div>
     <script>
+        $('#btn-add').click(function () {
+            // empty inputs
+            resetFormInputs();
+
+            $('#exampleModalfullscreen').modal('show');
+        })
+
+        function resetFormInputs() {
+            $('#route-method').val('POST');
+            $('#btn-from-add').text("Add");
+            const postRoute = $('#route-post-method').val();
+
+            const form = $('#frm-program');
+            form.attr('action', postRoute);
+
+            $('.program-name').val('');
+            $('.session').val('');
+            $('.number-of-students').val('');
+            $('.detail').val('');
+        }
+
         $('.btn-edit').on('click', function () {
+            $('#btn-from-add').text("Update");
             const route = $(this).data('route');
             const getDataRoute = $(this).data('get-data-route');
 
