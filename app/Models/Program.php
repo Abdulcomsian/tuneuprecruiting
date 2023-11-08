@@ -16,4 +16,9 @@ class Program extends Model
         'session',
         'details'
     ];
+
+    public function coach()
+    {
+        return $this->belongsTo(Coach::class);
+    }
 }

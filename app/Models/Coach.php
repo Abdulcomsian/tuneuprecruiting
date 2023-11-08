@@ -18,4 +18,9 @@ class Coach extends Model
         'profile_image',
         'short_video',
     ];
+
+    public function programs()
+    {
+        return $this->hasMany(Program::class);
+    }
 }
