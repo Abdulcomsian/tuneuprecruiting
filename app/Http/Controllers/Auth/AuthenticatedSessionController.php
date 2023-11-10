@@ -37,9 +37,11 @@ class AuthenticatedSessionController extends Controller
         if ($user->role == 'student') {
             $student = Student::where('user_id', $user->id)->first();
             Session::put('studentId', $student->id);
+            Session::put('profileImage', $student->profile_image);
         } else if ($user->role == 'coach') {
             $coach = Coach::where('user_id', $user->id)->first();
             Session::put('coachId', $coach->id);
+            Session::put('profileImage', $coach->profile_image);
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);

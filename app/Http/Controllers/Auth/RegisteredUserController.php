@@ -50,9 +50,11 @@ class RegisteredUserController extends Controller
         if ($request->role == 'student') {
             $student = Student::create(['user_id' => $user->id, 'first_name' => $user->name]);
             Session::put('studentId', $student->id);
+            Session::put('profileImage', $student->profile_image);
         } else if ($request->role == 'coach') {
             $coach = Coach::create(['user_id' => $user->id, 'first_name' => $user->name]);
             Session::put('coachId', $coach->id);
+            Session::put('profileImage', $coach->profile_image);
         }
 
         event(new Registered($user));

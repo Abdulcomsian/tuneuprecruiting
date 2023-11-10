@@ -38,15 +38,8 @@
                     <div class="onhover-show-div notification-dropdown">
                         <h6 class="f-18 mb-0 dropdown-title">Notitications</h6>
                         <ul>
-                            <li class="b-l-primary border-4 mt-3"><a href="email-application.html">
-                                    <p>New Review Receive<span class="font-danger">10 min.</span></p></a></li>
-                            <li class="b-l-success border-4 mt-3"><a href="invoice.html">
-                                    <p>Transaction $250 Success<span class="font-success">1 hr </span></p></a></li>
-                            <li class="b-l-secondary border-4 mt-3"><a href="email-compose.html">
-                                    <p>Order Place Success<span class="font-secondary">3 hr</span></p></a></li>
-                            <li class="b-l-warning border-4 mt-3"><a href="email-application.html">
-                                    <p>Netflix Subscription...<span class="font-warning">6 hr</span></p></a></li>
-                            <li><a class="f-w-700" href="email-application.html">Check all</a></li>
+{{--                            <li class="b-l-primary border-4 mt-3"><a href="email-application.html">--}}
+{{--                                    <p>New Review Receive<span class="font-danger">10 min.</span></p></a></li>--}}
                         </ul>
                     </div>
                 </li>
@@ -114,26 +107,6 @@
                                     <div class="notification-right"><i data-feather="x"></i></div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="d-flex align-items-start">
-                                    <div class="message-img bg-light-primary"><img src="{{asset('assets/images/user/6.jpg')}}" alt=""></div>
-                                    <div class="flex-grow-1">
-                                        <h5 class="mb-1"><a href="email-application.html">Jason Borne</a></h5>
-                                        <p>Thank you for rating us.</p>
-                                    </div>
-                                    <div class="notification-right"><i data-feather="x"></i></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-flex align-items-start">
-                                    <div class="message-img bg-light-primary"><img src="{{asset('assets/images/user/10.jpg')}}" alt=""></div>
-                                    <div class="flex-grow-1">
-                                        <h5 class="mb-1"><a href="email-application.html">Sarah Loren</a></h5>
-                                        <p>What`s the project report update?</p>
-                                    </div>
-                                    <div class="notification-right"><i data-feather="x"></i></div>
-                                </div>
-                            </li>
                             <li><a class="f-w-700" href="chat.html">Check all</a></li>
                         </ul>
                     </div>
@@ -146,11 +119,13 @@
                     </div>
                 </li>
                 <li class="profile-nav onhover-dropdown pe-0 py-0">
-                    <div class="d-flex align-items-center profile-media"><img class="b-r-25" src="{{asset('assets/images/dashboard/profile.png')}}" alt="">
+                    <div class="d-flex align-items-center profile-media">
+                        @php $profileImage = (Session::has('profileImage')) ? asset("uploads/students_image/".Session::get('profileImage')) : asset('assets/images/dashboard/profile.png'); @endphp
+                        <img style="width: 35px; height: 35px;" class="b-r-25" src="{{ $profileImage }}" alt="">
                         <div class="flex-grow-1 user"><span>Helen Walter</span>
                             <p class="mb-0 font-nunito">Admin
                                 <svg>
-                                    <use href="{{asset('assets/svg/icon-sprite.svg#header-arrow-down')}}"></use>
+                                    <use href="{{ $profileImage }}"></use>
                                 </svg>
                             </p>
                         </div>
