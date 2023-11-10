@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Coach;
+use App\Models\Student;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -28,6 +31,16 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+      
+        $user = auth()->user();
+
+        if ($user->role == 'student') {
+            $student = Student::where('user_id', $user->id)->first();
+            Session::put('studentId', $student->id);
+        } else if ($user->role == 'coach') {
+            $coach = Coach::where('user_id', $user->id)->first();
+            Session::put('coachId', $coach->id);
+        }
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -47,9 +48,11 @@ class RegisteredUserController extends Controller
         ]);
 
         if ($request->role == 'student') {
-            Student::create(['user_id' => $user->id, 'first_name' => $user->name]);
+            $student = Student::create(['user_id' => $user->id, 'first_name' => $user->name]);
+            Session::put('studentId', $student->id);
         } else if ($request->role == 'coach') {
-            Coach::create(['user_id' => $user->id, 'first_name' => $user->name]);
+            $coach = Coach::create(['user_id' => $user->id, 'first_name' => $user->name]);
+            Session::put('coachId', $coach->id);
         }
 
         event(new Registered($user));
