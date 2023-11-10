@@ -13,7 +13,11 @@ class RedirectAuthenticatedUsersController extends Controller
             return redirect('/dashboard');
         }
         elseif(auth()->user()->role == 'student') {
-            return redirect('/student/dashboard');
+            if (auth()->user()->is_profile_completed == 'not-completed') {
+                return redirect('/profile/student');
+            } else {
+                return redirect('/student/dashboard');
+            }
         }
         elseif(auth()->user()->role == 'guest') {
             return redirect('/guestDashboard');

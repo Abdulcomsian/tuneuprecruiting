@@ -58,6 +58,7 @@ class StudentProfileController extends Controller
             $user->password = bcrypt($request->input('password'));
         }
 
+        $user->is_profile_completed = 'completed';
         $user->save();
 
         return redirect()->back()->with('success', 'Profile updated.');
