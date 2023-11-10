@@ -15,7 +15,7 @@ class ProgramController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $data['programs'] = Program::where(['user_id' =>$user->id])->paginate(10);
+        $data['programs'] = Program::where(['coach_id' =>$user->id])->paginate(10);
         return view('backend/program/programs', $data);
     }
 
@@ -33,7 +33,7 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $request->request->add(['user_id' => $user->id]);
+        $request->request->add(['coach_id' => $user->id]);
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);

@@ -10,7 +10,7 @@ class Program extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'coach_id',
         'program_name',
         'number_of_students',
         'session',
