@@ -50,6 +50,7 @@
                         </ul>
                     </div>
                 </li>
+                @php if (auth()->user()->role == 'teacher'): @endphp
                 <li class="onhover-dropdown">
                     <svg>
                         <use href="{{asset('assets/svg/icon-sprite.svg#Bookmark')}}"></use>
@@ -93,6 +94,7 @@
                         </div>
                     </div>
                 </li>
+                @endif
                 <li class="onhover-dropdown message-box">
                     <div class="message notification-box">
                         <svg>
