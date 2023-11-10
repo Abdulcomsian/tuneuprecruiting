@@ -58,6 +58,16 @@
                                 </svg><span>Home</span>
                             </a>
                         </li>
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title" href="{{ url('student/applies') }}">
+                                <svg class="stroke-icon">
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#Perk-Ui') }}"></use>
+                                </svg>
+                                <svg class="fill-icon">
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#fill-home') }}"></use>
+                                </svg><span>Applies</span>
+                            </a>
+                        </li>
                     </ul>
                 @php endif; @endphp
             </div>
