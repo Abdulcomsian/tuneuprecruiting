@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -105,6 +106,8 @@ class ProfileController extends Controller
             $file-> move(public_path($imagePath), $filename);
 
             $data->profile_image = $filename;
+
+            Session::put('profileImage', $filename);
         } else if($request->hasFile('video')) {
             $request->validate([
                 'video' => 'file|mimes:mp4', // Specify allowed file formats

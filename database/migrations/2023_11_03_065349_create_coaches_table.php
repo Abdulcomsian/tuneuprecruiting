@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('website')->nullable();
             $table->text('about_me')->nullable();
-            $table->string('profile_image')->nullable();
+            $table->string('profile_image')->default('default.jpg');
             $table->string('short_video')->nullable();
             $table->timestamps();
         });

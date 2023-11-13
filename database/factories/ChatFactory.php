@@ -21,7 +21,7 @@ class ChatFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => Coach::inRandomOrder()->first(),
+            'coach_id' => Coach::inRandomOrder()->first(),
             'student_id' => Student::inRandomOrder()->first(),
             'message' => $this->faker->sentence,
             'status' => $this->faker->randomElement(['unread', 'read']),

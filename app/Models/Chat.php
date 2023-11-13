@@ -21,9 +21,9 @@ class Chat extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function user()
+    public function coach()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Coach::class);
     }
 
     public function apply()

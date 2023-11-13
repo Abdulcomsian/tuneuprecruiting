@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ApplyController;
-use App\Http\Controllers\StudentDashboard;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\StudentApplyController;
@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('program', ProgramController::class);
 
-    Route::get("/chat/{id}/{type}", [ChatController::class, "show"])->name('chat');
+    Route::get("/chat/{id}/{type}/{messageId?}", [ChatController::class, "show"])->name('chat');
     Route::post("/chat/store", [ChatController::class, "store"])->name('chat.store');
 
     Route::get('/applies', [ApplyController::class, 'applies']);
@@ -53,6 +53,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/student', [StudentProfileController::class, 'profile']);
     Route::post('/update/student/profile', [StudentProfileController::class, 'updateProfile'])->name('student.profile.update');
     Route::get('/program/view/{id}', [StudentApplyController::class, 'viewProgram'])->name('program.view');
+
+    // Messages
+    Route::get('/notification/messages', [MessageController::class, 'notificationMessages']);
 });
 
 require __DIR__.'/auth.php';

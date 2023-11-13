@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('home_town')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
-            $table->string('profile_image')->nullable();
+            $table->string('profile_image')->default('default.jpg');
             $table->string('short_video')->nullable();
             $table->timestamps();
         });
