@@ -23,35 +23,34 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="table-responsive theme-scrollbar">
-                            <table class="table">
-                                <thead>
-                                <tr class="border-bottom-primary">
-                                    <th scope="col">Coach Name</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($applies as $apply)
-                                    <tr class="border-bottom-secondary">
-                                        <td>{{ $apply->first_name . " " . $apply->last_name }}</td>
-                                        <td>{{ $apply->status }}</td>
-                                        <td>{{ $apply->created_at }}</td>
-                                        <td>
-                                            <ul class="action">
-                                                <li class="edit"> <a href="{{ route('chat', [ 'id' => $apply->user_id, 'type' => 'Student' ]) }}">
-                                                        <i class="icofont icofont-chat"></i></a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <div class="dataTables_paginate paging_simple_numbers">
-                                {{ $applies->links() }}
+                        <div class="card-body">
+                            <div class="table-responsive theme-scrollbar">
+                                <table class="display" id="basic-1">
+                                    <thead>
+                                        <tr>
+                                            <th>Coach Name</th>
+                                            <th>Status</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($applies as $apply)
+                                            <tr class="border-bottom-secondary">
+                                                <td>{{ $apply->first_name . " " . $apply->last_name }}</td>
+                                                <td>{{ $apply->status }}</td>
+                                                <td>{{ $apply->created_at }}</td>
+                                                <td>
+                                                    <ul class="action">
+                                                        <li class="edit"> <a href="{{ route('chat', [ 'id' => $apply->user_id, 'type' => 'Student' ]) }}">
+                                                                <i class="icofont icofont-chat"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

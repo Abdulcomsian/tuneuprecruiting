@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Session;
 class StudentApplyController extends Controller
 {
     public function programs() {
-        $data['programs'] = Program::with('coach')->paginate(10);
+        $data['programs'] = Program::with('coach')->get();
 //        $programs = Program::with('coach')->paginate(10);
 //        dd($programs);
         return view('student_backend/programs/programs', $data);
@@ -21,7 +21,7 @@ class StudentApplyController extends Controller
 
     public function applies() {
         $studentId = Session::get('studentId');
-        $data['applies'] = Apply::join('coaches', 'coaches.id', '=', 'applies.user_id')->where(['applies.student_id' => $studentId])->paginate(10);
+        $data['applies'] = Apply::join('coaches', 'coaches.id', '=', 'applies.user_id')->where(['applies.student_id' => $studentId])->get();
 
         return view('student_backend/applies/applies', $data);
     }

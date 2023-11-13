@@ -23,54 +23,53 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="table-responsive theme-scrollbar">
-                            <table class="table">
-                                <thead>
-                                <tr class="border-bottom-primary">
-                                    <th scope="col">Full Name</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Graduation Year</th>
-                                    <th scope="col">Country</th>
-                                    <th scope="col">Home Town</th>
-                                    <th scope="col">State</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($applies as $apply)
-                                    <tr class="border-bottom-secondary">
-                                        <th scope="row">{{ $apply->student->first_name . $apply->student->last_name }}</th>
-                                        <td> <img class="img-30 me-2" src="../assets/images/user/1.jpg" alt="profile">Ram Jacob</td>
-                                        <td>{{ $apply->student->graduation_year }}</td>
-                                        <td>{{ $apply->student->country }}</td>
-                                        <td>{{ $apply->student->home_town }}</td>
-                                        <td>{{ $apply->student->state }}</td>
-                                        <td>
-                                            <ul class="action">
-                                                <li class="edit"> <a href="#">
-                                                    @if($apply->status == 'STAR')
-                                                            <i class="fa fa-heart-o"></i>
-                                                    @else
-                                                        <i class="icofont icofont-heart-alt"></i></a>
-                                                    @endif
+                        <div class="card-body">
+                            <div class="table-responsive theme-scrollbar">
+                                <table class="display" id="basic-1">
+                                    <thead>
+                                        <tr>
+                                            <th>Full Name</th>
+                                            <th>Image</th>
+                                            <th>Graduation Year</th>
+                                            <th>Country</th>
+                                            <th>Home Town</th>
+                                            <th>State</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($applies as $apply)
+                                            <tr class="border-bottom-secondary">
+                                                <th scope="row">{{ $apply->student->first_name . $apply->student->last_name }}</th>
+                                                <td> <img class="img-30 me-2" src="../assets/images/user/1.jpg" alt="profile">Ram Jacob</td>
+                                                <td>{{ $apply->student->graduation_year }}</td>
+                                                <td>{{ $apply->student->country }}</td>
+                                                <td>{{ $apply->student->home_town }}</td>
+                                                <td>{{ $apply->student->state }}</td>
+                                                <td>
+                                                    <ul class="action">
+                                                        <li class="edit"> <a href="#">
+                                                                @if($apply->status == 'STAR')
+                                                                    <i class="fa fa-heart-o"></i>
+                                                                @else
+                                                                    <i class="icofont icofont-heart-alt"></i></a>
+                                                            @endif
 
-                                                </li>
-                                                <li class="edit"> <a href="{{ route('chat', [ 'id' => $apply->id, 'type' => 'User' ]) }}">
-                                                    @if($apply->status == 'TALKING')
-                                                        <i class="icofont icofont-ui-text-chat"></i>
-                                                    @else
-                                                        <i class="icofont icofont-chat"></i></a>
-                                                    @endif
-                                                </li>
-                                                <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <div class="dataTables_paginate paging_simple_numbers">
-                                {{ $applies->links() }}
+                                                        </li>
+                                                        <li class="edit"> <a href="{{ route('chat', [ 'id' => $apply->id, 'type' => 'User' ]) }}">
+                                                                @if($apply->status == 'TALKING')
+                                                                    <i class="icofont icofont-ui-text-chat"></i>
+                                                                @else
+                                                                    <i class="icofont icofont-chat"></i></a>
+                                                            @endif
+                                                        </li>
+                                                        <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

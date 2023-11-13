@@ -23,47 +23,46 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="table-responsive theme-scrollbar">
-                            <table class="table">
-                                <thead>
-                                <tr class="border-bottom-primary">
-                                    <th scope="col">Coach Name</th>
-                                    <th scope="col">Program Name</th>
-                                    <th scope="col">Session</th>
-                                    <th scope="col">Number of Students</th>
-                                    <th scope="col">Detail</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($programs as $program)
-                                    <tr class="border-bottom-secondary">
-                                        <td>{{ $program->coach->first_name . " " . $program->coach->last_name }}</td>
-                                        <td>{{ $program->program_name }}</td>
-                                        <td>{{ $program->session }}</td>
-                                        <td>{{ $program->number_of_students }}</td>
-                                        <td>{{ $program->details }}</td>
-                                        <td>
-                                            <ul class="action">
-                                                <li>
-                                                    <a
-                                                        class="btn-edit"
-                                                        data-get-data-route="{{ route('program.edit', $program->id) }}"
-                                                        data-route="{{ route('program.update', $program->id) }}">
-                                                        <i class="icon-pencil-alt"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="edit"> <a href="{{ route('chat', [ 'id' => $program->coach_id, 'type' => 'Student' ]) }}">
-                                                        <i class="icofont icofont-chat"></i></a>
-                                                </li>
-                                            </ul>
-                                        </td>
+                        <div class="card-body">
+                            <div class="table-responsive theme-scrollbar">
+                                <table class="display" id="basic-1">
+                                    <thead>
+                                    <tr>
+                                        <th>Coach Name</th>
+                                        <th>Program Name</th>
+                                        <th>Session</th>
+                                        <th>Number of Students</th>
+                                        <th>Detail</th>
+                                        <th>Action</th>
                                     </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <div class="dataTables_paginate paging_simple_numbers">
-                                {{ $programs->links() }}
+                                    </thead>
+                                    <tbody>
+                                        @foreach($programs as $program)
+                                            <tr class="border-bottom-secondary">
+                                                <td>{{ $program->coach->first_name . " " . $program->coach->last_name }}</td>
+                                                <td>{{ $program->program_name }}</td>
+                                                <td>{{ $program->session }}</td>
+                                                <td>{{ $program->number_of_students }}</td>
+                                                <td>{{ $program->details }}</td>
+                                                <td>
+                                                    <ul class="action">
+                                                        <li>
+                                                            <a
+                                                                class="btn-edit"
+                                                                data-get-data-route="{{ route('program.edit', $program->id) }}"
+                                                                data-route="{{ route('program.update', $program->id) }}">
+                                                                <i class="icon-pencil-alt"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="edit"> <a href="{{ route('chat', [ 'id' => $program->coach_id, 'type' => 'Student' ]) }}">
+                                                                <i class="icofont icofont-chat"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

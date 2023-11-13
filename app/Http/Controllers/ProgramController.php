@@ -15,7 +15,7 @@ class ProgramController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $data['programs'] = Program::where(['coach_id' =>$user->id])->paginate(10);
+        $data['programs'] = Program::where(['coach_id' =>$user->id])->get();
         return view('backend/program/programs', $data);
     }
 
