@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('applies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBiginteger('user_id')->unsigned();
             $table->unsignedBiginteger('student_id')->unsigned();
+            $table->unsignedBiginteger('program_id')->unsigned();
             $table->enum('status',['READ', 'UNREAD', 'STAR','TALKING','DELETE'])->default('UNREAD');
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
 
             $table->timestamps();
         });

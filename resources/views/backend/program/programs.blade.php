@@ -36,6 +36,7 @@
                                             <th scope="col">Name</th>
                                             <th scope="col">Session</th>
                                             <th scope="col">Number of Students</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col">Detail</th>
                                             <th scope="col">Action</th>
                                         </tr>
@@ -46,6 +47,7 @@
                                                 <td>{{ $program->program_name }}</td>
                                                 <td>{{ $program->session }}</td>
                                                 <td>{{ $program->number_of_students }}</td>
+                                                <td>{{ $program->status }}</td>
                                                 <td>{{ $program->details }}</td>
                                                 <td>
                                                     <ul class="action">
@@ -54,6 +56,14 @@
                                                                 @method('DELETE')
                                                                 @csrf
                                                                 {{--                                                        <input type="submit" value="Delete" />--}}
+                                                                <a
+                                                                    href="{{ route('program.show', $program->id) }}"
+                                                                    class="btn-edit"
+                                                                    data-get-data-route="{{ route('program.edit', $program->id) }}"
+                                                                    data-route="{{ route('program.update', $program->id) }}">
+                                                                    <i class="icon-pencil-alt"></i>
+                                                                </a>
+
                                                                 <a
                                                                     class="btn-edit"
                                                                     data-get-data-route="{{ route('program.edit', $program->id) }}"
@@ -81,7 +91,7 @@
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="fullScreenModalLabel">Full screen modal</h1>
+                        <h1 class="modal-title fs-5" id="fullScreenModalLabel">Add a new program</h1>
                         <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body dark-modal">

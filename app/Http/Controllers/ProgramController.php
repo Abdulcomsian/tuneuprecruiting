@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apply;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +59,9 @@ class ProgramController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data['applies'] = Apply::join('students', 'students.id', '=', 'applies.student_id')->where(['program_id' => $id])->get();
+
+        return view('backend/program/program_applies', $data);
     }
 
     /**

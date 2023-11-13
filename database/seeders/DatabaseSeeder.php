@@ -30,9 +30,9 @@ class DatabaseSeeder extends Seeder
         Coach::factory(10)->create();
         Student::factory(10)->create();
         StudentAttachments::factory()->count(5)->create();
+        Program::factory(20)->create();
         Apply::factory(10)->create();
         Chat::factory(100)->create();
-        Program::factory(20)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

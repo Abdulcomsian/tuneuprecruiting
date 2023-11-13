@@ -14,6 +14,7 @@ class Program extends Model
         'program_name',
         'number_of_students',
         'session',
+        'status',
         'details'
     ];
 
