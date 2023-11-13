@@ -120,7 +120,12 @@
                 </li>
                 <li class="profile-nav onhover-dropdown pe-0 py-0">
                     <div class="d-flex align-items-center profile-media">
-                        @php $profileImage = (Session::has('profileImage')) ? asset("uploads/students_image/".Session::get('profileImage')) : asset('assets/images/dashboard/profile.png'); @endphp
+                        @php if (auth()->user()->role == 'student')
+                            $profileImage = (Session::has('profileImage')) ? asset("uploads/students_image/".Session::get('profileImage')) : asset('assets/images/dashboard/profile.png');
+                        @endphp
+                        @php if (auth()->user()->role == 'coach')
+                            $profileImage = (Session::has('profileImage')) ? asset("uploads/users_image/".Session::get('profileImage')) : asset('assets/images/dashboard/profile.png');
+                        @endphp
                         <img style="width: 35px; height: 35px;" class="b-r-25" src="{{ $profileImage }}" alt="">
                         <div class="flex-grow-1 user"><span>Helen Walter</span>
                             <p class="mb-0 font-nunito">Admin
