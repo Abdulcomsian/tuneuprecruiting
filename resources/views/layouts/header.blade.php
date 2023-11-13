@@ -95,19 +95,10 @@
                         </svg><span class="rounded-pill badge-secondary"> </span>
                     </div>
                     <div class="onhover-show-div message-dropdown">
-                        <h6 class="f-18 mb-0 dropdown-title">Message                               </h6>
-                        <ul>
-                            <li>
-                                <div class="d-flex align-items-start">
-                                    <div class="message-img bg-light-primary"><img src="{{asset('assets/images/user/3.jpg')}}" alt=""></div>
-                                    <div class="flex-grow-1">
-                                        <h5 class="mb-1"><a href="email-application.html">Emay Walter</a></h5>
-                                        <p>Do you want to go see movie?</p>
-                                    </div>
-                                    <div class="notification-right"><i data-feather="x"></i></div>
-                                </div>
-                            </li>
-                            <li><a class="f-w-700" href="chat.html">Check all</a></li>
+                        <h6 class="f-18 mb-0 dropdown-title">Message</h6>
+                        <input type="hidden" value="{{ auth()->user()->role }}" id="user-type">
+                        <ul id="message-notification">
+
                         </ul>
                     </div>
                 </li>

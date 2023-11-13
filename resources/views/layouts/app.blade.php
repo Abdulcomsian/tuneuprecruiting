@@ -122,5 +122,72 @@
             <script src="{{ asset('assets/js/theme-customizer/customizer.js') }}"></script>
             <script src="{{ asset('assets/js/custom-js/chat.js') }}"></script>
             <script>new WOW().init();</script>
+
+            <script>
+                function makeAjaxCall() {
+                    $.ajax({
+                        url: '/notification/messages',
+                        method: 'GET',
+                        success: function(response) {
+                            var ul = $('#message-notification'); // Assuming you have only one ul, adjust this selector as needed
+
+                            // Clear the existing content in the ul
+                            ul.empty();
+
+                            response.forEach(function(message) {
+                                var li = $('<li>').attr('data-id', message.id)
+                                    .attr('data-coach', message.coach_id)
+                                    .attr('class', 'li-notification')
+                                    .attr('data-student', message.student_id);
+                                var div = $('<div class="d-flex align-items-start">');
+
+                                var imgSrc = 'uploads/common/'+message.profile_image; // Use profile image if available, else a default
+
+                                var img = $('<img>').attr('src', imgSrc).attr('alt', 'User Image');
+                                var imgDiv = $('<div class="message-img bg-light-primary">').append(img);
+
+                                var flexDiv = $('<div class="flex-grow-1">');
+                                var h5 = $('<h5 class="mb-1">').html('<a>' + message.first_name + '</a>');
+                                var p = $('<p>').text(message.message);
+                                var notificationRight = $('<div class="notification-right">').html('<i data-feather="x"></i>');
+
+                                // Append all elements to the li
+                                flexDiv.append(h5, p);
+                                div.append(imgDiv, flexDiv, notificationRight);
+                                li.append(div);
+
+                                // Append the created li to the ul
+                                ul.append(li);
+                            });
+
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX call error: ' + error);
+                        }
+                    });
+                }
+
+                makeAjaxCall();
+
+                // Set an interval to call the function every minute (60,000 milliseconds)
+                setInterval(makeAjaxCall, 60000);
+
+                $(document).on('click', '.li-notification', function() {
+                    const id = $(this).data('id');
+                    const coachId = $(this).data('coach');
+                    const studentId = $(this).data('student');
+                    console.log(id, coachId, studentId);
+                    const userType = $('#user-type').val();
+
+                    if (userType == 'coach') {
+                        var url = '/chat/' + studentId + '/' + userType + '/' + id;
+                    } else {
+                        var url = '/chat/' + coachId + '/' + userType + '/' + id;
+                    }
+
+                    window.location.href = url;
+                });
+
+            </script>
     </body>
 </html>
