@@ -70,10 +70,6 @@
                                     </div>
                                     <button class="btn btn-primary btn-block w-100" type="submit">Create Account</button>
                                 </div>
-                                <h4 class="text-muted mt-4 or">Or signup with</h4>
-                                <div class="social mt-4">
-                                    <div class="btn-showcase"><a class="btn btn-light" href="https://www.linkedin.com/login" target="_blank"><i class="txt-linkedin" data-feather="linkedin"></i> LinkedIn </a><a class="btn btn-light" href="https://twitter.com/login?lang=en" target="_blank"><i class="txt-twitter" data-feather="twitter"></i>twitter</a><a class="btn btn-light" href="https://www.facebook.com/" target="_blank"><i class="txt-fb" data-feather="facebook"></i>facebook</a></div>
-                                </div>
                                 <p class="mt-4 mb-0 text-center">Already have an account?<a class="ms-2" href="{{ route('login') }}">Sign in</a></p>
                             </form>
                         </div>
