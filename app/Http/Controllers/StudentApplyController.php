@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Apply;
 use App\Models\Coach;
 use App\Models\Program;
+use App\Models\ProgramQuestion;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -19,9 +21,21 @@ class StudentApplyController extends Controller
         return view('student_backend/programs/programs', $data);
     }
 
+    public function studentApply($programId) {
+        $data['program'] = Program::find($programId);
+        $data['questions'] = ProgramQuestion::where(['program_id' => $programId])->get();
+
+        $user = auth()->user();
+        $data['user'] = Student::where(['user_id' => $user->id])->first();
+
+        return view('student_backend/applies/apply', $data);
+    }
+
     public function applies() {
         $studentId = Session::get('studentId');
-        $data['applies'] = Apply::join('coaches', 'coaches.id', '=', 'applies.user_id')->where(['applies.student_id' => $studentId])->get();
+        $data['applies'] = Apply::join('programs', 'programs.id', '=', 'applies.program_id')
+            ->join('coaches', 'coaches.id', '=', 'programs.coach_id')
+            ->where(['applies.student_id' => $studentId])->get();
 
         return view('student_backend/applies/applies', $data);
     }

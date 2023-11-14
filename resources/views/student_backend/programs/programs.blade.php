@@ -47,11 +47,8 @@
                                                 <td>
                                                     <ul class="action">
                                                         <li>
-                                                            <a
-                                                                class="btn-edit"
-                                                                data-get-data-route="{{ route('program.edit', $program->id) }}"
-                                                                data-route="{{ route('program.update', $program->id) }}">
-                                                                <i class="icon-pencil-alt"></i>
+                                                            <a href="{{ url('/program/apply/'. $program->id) }}">
+                                                                <i class="icofont icofont-law-document"></i>
                                                             </a>
                                                         </li>
                                                         <li class="edit"> <a href="{{ route('chat', [ 'id' => $program->coach_id, 'type' => 'Student' ]) }}">
