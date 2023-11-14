@@ -29,7 +29,7 @@
                                     <thead>
                                         <tr>
                                             <th>Full Name</th>
-                                            <th>Image</th>
+                                            <th>Program</th>
                                             <th>Graduation Year</th>
                                             <th>Country</th>
                                             <th>Home Town</th>
@@ -41,7 +41,7 @@
                                         @foreach($applies as $apply)
                                             <tr class="border-bottom-secondary">
                                                 <th scope="row">{{ $apply->student->first_name . $apply->student->last_name }}</th>
-                                                <td> <img class="img-30 me-2" src="../assets/images/user/1.jpg" alt="profile">Ram Jacob</td>
+                                                <td>{{ $apply->program_name }}</td>
                                                 <td>{{ $apply->student->graduation_year }}</td>
                                                 <td>{{ $apply->student->country }}</td>
                                                 <td>{{ $apply->student->home_town }}</td>

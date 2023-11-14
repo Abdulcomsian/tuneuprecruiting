@@ -4,7 +4,7 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3>Total Applications</h3>
+                        <h3></h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
@@ -21,6 +21,64 @@
         <!-- Container-fluid starts-->
         <div class="container-fluid basic_table">
             <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Program</h3>
+                        </div>
+                        <div class="card-block row">
+                            <div class="col-sm-12 col-lg-12 col-xl-12">
+                                <div class="table-responsive theme-scrollbar">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Program Name</td>
+                                                <td>{{ $program[0]->program_name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Session</td>
+                                                <td>{{ $program[0]->session }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Number of Students</td>
+                                                <td>{{ $program[0]->number_of_students }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Questions</h3>
+                        </div>
+                        <div class="card-block row">
+                            <div class="col-sm-12 col-lg-12 col-xl-12">
+                                <div class="table-responsive theme-scrollbar">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Question</th>
+                                            <th scope="col">Type</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($program as $question)
+                                                <tr>
+                                                    <td>{{ $question->question }}</td>
+                                                    <td>{{ $question->type }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">

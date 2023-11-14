@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Apply;
 use App\Models\Program;
+use App\Models\ProgramQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,7 +26,7 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend/program/add_new_program');
     }
 
     /**
@@ -49,7 +50,23 @@ class ProgramController extends Controller
         // Validate the request data
         $request->validate($rules);
 
-        Program::create($request->all());
+        $program = Program::create($request->all());
+        $questions = $request->questions;
+        $types = $request->types;
+
+        if (!empty($questions)) {
+            for ($i = 0; $i < count($questions); $i++) {
+                if (!empty(trim($questions[$i])) && !empty(trim($types[$i]))) {
+                    $data = [
+                        'program_id' => $program->id,
+                        'question' => $questions[$i],
+                        'type' => $types[$i]
+                    ];
+
+                    ProgramQuestion::create($data);
+                }
+            }
+        }
 
         return redirect()->back()->with('success', 'Program created.');
     }
@@ -59,7 +76,11 @@ class ProgramController extends Controller
      */
     public function show(string $id)
     {
-        $data['applies'] = Apply::join('students', 'students.id', '=', 'applies.student_id')->where(['program_id' => $id])->get();
+        $data['applies'] = Apply::join('students', 'students.id', '=', 'applies.student_id')
+            ->where(['program_id' => $id])
+            ->get();
+
+        $data['program'] = Program::join('program_questions', 'program_questions.program_id', '=', 'programs.id')->where(['programs.id' => $id])->get();
 
         return view('backend/program/program_applies', $data);
     }
@@ -70,7 +91,10 @@ class ProgramController extends Controller
     public function edit(string $id)
     {
         $program = Program::find($id);
-        return response()->json($program);
+        $data['questions'] = ProgramQuestion::where(['program_id' => $program->id])->get();
+        $data['program'] = $program;
+
+        return view('backend/program/edit_program', $data);
     }
 
     /**
@@ -89,10 +113,32 @@ class ProgramController extends Controller
             'program_name' => 'required|string',
             'number_of_students' => 'required|string',
             'session' => 'required|string',
+            'details' => 'string',
         ]);
 
         // Update the post with the validated data
         $program->update($validatedData);
+
+        // update questions
+        $questionIds = $request->ids;
+        $questions = $request->questions;
+        $types = $request->types;
+
+        $counter = 0;
+        for ($i = 0; $i < count($questionIds); $i++) {
+            $programQuestion = ProgramQuestion::find($questionIds[$i]);
+            $programQuestion->question = $questions[$i];
+            $programQuestion->type = $types[$i];
+            $programQuestion->save();
+
+            $counter++;
+        }
+
+        for ($i = $counter; $i < count($questions); $i++) {
+            $data = ['program_id' => $id, 'question' => $questions[$i], 'type' => $types[$i]];
+            ProgramQuestion::create($data);
+        }
+
 
         return redirect()->back()->with('success', 'Program updated.');
     }

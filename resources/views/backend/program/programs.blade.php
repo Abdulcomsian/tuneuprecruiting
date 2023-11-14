@@ -22,7 +22,7 @@
         <div class="container-fluid basic_table">
             <div class="row">
                 <div class="col-sm-12">
-                    <button class="btn btn-success mb-2 float-end" type="button" id="btn-add">Add a Program</button>
+                    <a class="btn btn-success mb-2 float-end" type="button" href="{{ route('program.create') }}">Add a Program</a>
                 </div>
             </div>
             <div class="row">
@@ -61,13 +61,10 @@
                                                                     class="btn-edit"
                                                                     data-get-data-route="{{ route('program.edit', $program->id) }}"
                                                                     data-route="{{ route('program.update', $program->id) }}">
-                                                                    <i class="icon-pencil-alt"></i>
+                                                                    <i class="icofont icofont-eye-alt"></i>
                                                                 </a>
 
-                                                                <a
-                                                                    class="btn-edit"
-                                                                    data-get-data-route="{{ route('program.edit', $program->id) }}"
-                                                                    data-route="{{ route('program.update', $program->id) }}">
+                                                                <a href="{{ route('program.edit', $program->id) }}">
                                                                     <i class="icon-pencil-alt"></i>
                                                                 </a>
                                                                 <button style="background: none; border: none;" type="submit"><i class="icon-trash"></i></button>

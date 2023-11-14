@@ -32,10 +32,34 @@
                                 </svg><span>Applies</span></a>
                         </li>
 
-                        <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="{{ route('program.index') }}">
+                        <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
                                 <svg class="stroke-icon">
                                     <use href="{{asset('assets/svg/icon-sprite.svg#Form')}}"></use>
+                                </svg>
+                                <svg class="fill-icon">
+                                    <use href="../assets/svg/icon-sprite.svg#fill-Editor"></use>
                                 </svg><span>Program</span></a>
+                            <ul class="sidebar-submenu custom-scrollbar">
+                                <li class="sidebar-head">Programs</li>
+
+                                <li class="main-submenu">
+                                    <a class="d-flex" href="{{ route('program.create') }}">
+                                        <svg class="stroke-icon">
+                                            <use href="../assets/svg/icon-sprite.svg#stroke-file"></use>
+                                        </svg>
+                                        <svg class="fill-icon">
+                                            <use href="../assets/svg/icon-sprite.svg#fill-file"></use>
+                                        </svg>Add new program
+                                    </a>
+                                </li>
+                                <li class="main-submenu"><a class="d-flex" href="{{ route('program.index') }}">
+                                        <svg class="stroke-icon">
+                                            <use href="../assets/svg/icon-sprite.svg#stroke-board"></use>
+                                        </svg>
+                                        <svg class="fill-icon">
+                                            <use href="../assets/svg/icon-sprite.svg#fill-board"></use>
+                                        </svg>Program list</a></li>
+                            </ul>
                         </li>
                     </ul>
                 @php endif; @endphp
