@@ -11,7 +11,8 @@ class ProgramQuestion extends Model
 
     protected $fillable = [
         'program_id',
-        'question',
-        'type'
+        'label',
+        'type',
+        'answer'
     ];
 }

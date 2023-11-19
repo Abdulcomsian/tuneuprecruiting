@@ -20,8 +20,9 @@ class ProgramQuestionFactory extends Factory
     {
         return [
             'program_id' => Program::inRandomOrder()->first(),
-            'question' => $this->faker->sentence,
-            'type' => $this->faker->randomElement(['text', 'checkbox', 'file']),
+            'label' => $this->faker->sentence,
+            'answer' => $this->faker->sentence,
+            'type' => $this->faker->randomElement(['text', 'select', 'file']),
         ];
     }
 }

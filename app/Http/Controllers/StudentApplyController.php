@@ -33,7 +33,21 @@ class StudentApplyController extends Controller
         return view('student_backend/applies/apply', $data);
     }
 
-    public function apply(Request $request) {
+    public function apply(Request $request, $programId) {
+        $label = $request->label;
+        $type = $request->type;
+        $answer = $request->answer;
+
+        for ($i = 0; $i < count($label); $i++) {
+            $tableData = [
+                'program_id' => $programId,
+                'label' => $label[$i],
+                'type' => $type[$i],
+                'answer' => $answer[$i]
+            ];
+
+            ProgramQuestion::create($tableData);
+        }
         dd($request->all());
     }
 

@@ -119,13 +119,13 @@
                                             <label class="form-label" for="validationCustom02">{{ $field->label }}</label>
                                             @if($field->type == 'select')
                                                 @php $checkForMultiple = ($field->multiple) ? 'multiple' : ''; @endphp
-                                                <select name="custom[]" id="" {{ $checkForMultiple  }} class="form-control">
+                                                <select name="answer[]" id="" {{ $checkForMultiple  }} class="form-control">
                                                     @foreach($field->values as $value)
                                                         <option value="{{ $value->value }}">{{ $value->label }}</option>
                                                     @endforeach
                                                 </select>
                                             @else
-                                                <input name="custom[]" type="{{ $field->type }}" class="form-control">
+                                                <input name="answer[]" type="{{ $field->type }}" class="form-control">
                                             @endif
                                         </div>
                                     @endforeach
