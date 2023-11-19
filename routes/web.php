@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
 //    Route::get('/student/dashboard', [StudentDashboard::class, 'dashboard']);
     Route::get('/student/dashboard', [StudentApplyController::class, 'programs']);
     Route::get('/program/apply/{programId}', [StudentApplyController::class, 'studentApply']);
+    Route::post('/program/apply/{programId}', [StudentApplyController::class, 'apply'])->name('program.apply');
     Route::get('/student/applies', [StudentApplyController::class, 'applies']);
     Route::get('/profile/student', [StudentProfileController::class, 'profile']);
     Route::post('/update/student/profile', [StudentProfileController::class, 'updateProfile'])->name('student.profile.update');

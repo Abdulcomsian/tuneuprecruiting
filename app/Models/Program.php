@@ -15,7 +15,8 @@ class Program extends Model
         'number_of_students',
         'session',
         'status',
-        'details'
+        'details',
+        'custom_fields'
     ];
 
     public function coach()

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('program_name')->nullable();
             $table->string('session')->nullable();
             $table->string('number_of_students')->nullable();
-            $table->string('status')->default('active');
+            $table->text('custom_fields')->nullable();
+            $table->string('status')->default('public');
             $table->text('details')->nullable();
             $table->timestamps();
         });

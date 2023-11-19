@@ -45,8 +45,9 @@
                             <form method="POST" id="frm-program" action="{{ route('program.store') }}" class="row g-3 needs-validation" novalidate="">
                                 @csrf
                                 <input type="hidden" name="_method" value="POST" id="route-method">
+                                <input type="hidden" name="custom_fields" id="custom-fields">
                                 <input type="hidden" value="{{ route('program.store') }}" id="route-post-method">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label class="form-label" for="validationCustom01">Program Name</label>
                                     <input
                                         class="form-control program-name"
@@ -56,7 +57,7 @@
                                         placeholder="Enter program name"
                                         required="">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label class="form-label" for="validationCustom02">Session</label>
                                     <input
                                         class="form-control session"
@@ -66,7 +67,7 @@
                                         placeholder="Enter session"
                                         required="">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label class="form-label" for="validationCustom02">Number of Students</label>
                                     <input
                                         class="form-control number-of-students"
@@ -76,6 +77,14 @@
                                         placeholder="Enter number"
                                         required="">
                                 </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom02">Status</label>
+                                    <select name="status" id="program-status" class="form-control">
+                                        <option value=""></option>
+                                        <option value="public">Public</option>
+                                        <option value="drop">Drop</option>
+                                    </select>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label class="form-label" for="exampleFormControlInput1">Details</label>
@@ -83,14 +92,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div id="newinput"></div>
-                                    <button id="rowAdder" type="button" class="btn btn-dark">
-                                        <span class="bi bi-plus-square-dotted">
-                                        </span> ADD Question
-                                    </button>
-                                </div>
-                                <div class="col-md-12">
-                                    <button class="btn btn-primary float-end" id="btn-from-add" type="submit">Add Program</button>
+                                    <div id="build-wrap"></div>
                                 </div>
                             </form>
                         </div>
@@ -100,34 +102,23 @@
         </div>
         <!-- Container-fluid Ends-->
     </div>
-    <script type="text/javascript">
-        $("#rowAdder").click(function () {
-            newRowAdd =
-                '<div id="row" class="d-flex">' +
-                '<div class="col-md-10">' +
-                '<div class="input-group mb-3">' +
-                '<div class="input-group-prepend">' +
-                '<button class="btn btn-danger" id="DeleteRow" type="button">' +
-                '<i class="bi bi-trash"></i> Delete</button>' +
-                '</div>' +
-                '<input type="text" required name="questions[]" class="form-control m-input">' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-md-2">' +
-                '<select required name="types[]" id="" class="form-control">' +
-                '<option value="">Question type</option>' +
-                '<option value="text">Text</option>' +
-                '<option value="radio">Radio</option>' +
-                '<option value="checkbox">Checkbox</option>' +
-                '<option value="file">File</option>' +
-                '</select>' +
-                '</div>' +
-                '</div>';
-
-            $('#newinput').append(newRowAdd);
+    <script>
+        jQuery($ => {
+            const fbTemplate = document.getElementById('build-wrap');
+            $(fbTemplate).formBuilder();
         });
-        $("body").on("click", "#DeleteRow", function () {
-            $(this).parents("#row").remove();
-        })
+
+       $('#btn-from-add').click(function () {
+           var codeElement = $('.formData-json');
+
+           // Get the text content of the code element and trim whitespace
+           var jsonString = $.trim(codeElement.html());
+
+           // Parse the JSON string to a JavaScript object
+           // var jsonArray = JSON.parse(jsonString);
+
+           // Output the JSON array to the console (you can do whatever you want with it)
+           console.log(jsonString);
+       })
     </script>
 </x-app-layout>

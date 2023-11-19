@@ -42,9 +42,8 @@
                                     {{ $message }}
                                 </div>
                             @endif
-                            <form method="POST" id="frm-program" action="{{ route('program.update', $program->id) }}" class="row g-3 needs-validation" novalidate="">
+                            <form method="POST" id="frm-program" action="{{ route('program.apply', $program->id) }}" class="row g-3 needs-validation" novalidate="">
                                 @csrf
-                                <input type="hidden" name="_method" value="PUT" id="route-method">
                                 <input type="hidden" name="program_id" value="{{ $program->id }}">
                                 <div class="col-md-4">
                                     <label class="form-label" for="validationCustom01">First Name</label>
@@ -113,15 +112,21 @@
                                         required="">
                                 </div>
 
-                                    @foreach($questions as $question)
+                                    @foreach($customFields as $field)
+                                        <input type="hidden" name="label[]" value="{{ $field->label }}">
+                                        <input type="hidden" name="type[]" value="{{ $field->type }}">
                                         <div class="col-md-4">
-                                            <label class="form-label" for="validationCustom02">{{ $question->question }}</label>
-                                            <input
-                                                class="form-control"
-                                                id="validationCustom02"
-                                                type="{{ $question->type }}"
-                                                name="custom_question[]"
-                                                required="">
+                                            <label class="form-label" for="validationCustom02">{{ $field->label }}</label>
+                                            @if($field->type == 'select')
+                                                @php $checkForMultiple = ($field->multiple) ? 'multiple' : ''; @endphp
+                                                <select name="custom[]" id="" {{ $checkForMultiple  }} class="form-control">
+                                                    @foreach($field->values as $value)
+                                                        <option value="{{ $value->value }}">{{ $value->label }}</option>
+                                                    @endforeach
+                                                </select>
+                                            @else
+                                                <input name="custom[]" type="{{ $field->type }}" class="form-control">
+                                            @endif
                                         </div>
                                     @endforeach
 

@@ -50,6 +50,9 @@
         <!-- Bootstrap js-->
         <script src="{{ asset('assets/js/bootstrap/popper.min.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/formBuilder/jquerysctipttop.css') }}">
+
     </head>
     <body>
             <!-- Loader starts-->
@@ -122,6 +125,16 @@
             <script src="{{ asset('assets/js/theme-customizer/customizer.js') }}"></script>
             <script src="{{ asset('assets/js/custom-js/chat.js') }}"></script>
             <script>new WOW().init();</script>
+
+{{--            <script src="{{ asset('assets/formBuilder/jquery.min.js') }}"></script>--}}
+            <script src="{{ asset('assets/formBuilder/jquery-ui.min.js') }}"></script>
+            <script src="{{ asset('assets/formBuilder/form-builder.min.js') }}"></script>
+            <script>
+                jQuery($ => {
+                    const fbTemplate = document.getElementById('build-wrap');
+                    $(fbTemplate).formBuilder();
+                });
+            </script>
 
             <script>
                 function makeAjaxCall() {

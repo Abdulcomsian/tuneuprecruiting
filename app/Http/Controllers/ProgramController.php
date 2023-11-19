@@ -51,22 +51,6 @@ class ProgramController extends Controller
         $request->validate($rules);
 
         $program = Program::create($request->all());
-        $questions = $request->questions;
-        $types = $request->types;
-
-        if (!empty($questions)) {
-            for ($i = 0; $i < count($questions); $i++) {
-                if (!empty(trim($questions[$i])) && !empty(trim($types[$i]))) {
-                    $data = [
-                        'program_id' => $program->id,
-                        'question' => $questions[$i],
-                        'type' => $types[$i]
-                    ];
-
-                    ProgramQuestion::create($data);
-                }
-            }
-        }
 
         return redirect()->back()->with('success', 'Program created.');
     }

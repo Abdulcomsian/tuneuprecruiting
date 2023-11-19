@@ -23,12 +23,18 @@ class StudentApplyController extends Controller
 
     public function studentApply($programId) {
         $data['program'] = Program::find($programId);
+        $data['customFields'] = json_decode($data['program']->custom_fields);
+        //dd($data['customFields']);
         $data['questions'] = ProgramQuestion::where(['program_id' => $programId])->get();
 
         $user = auth()->user();
         $data['user'] = Student::where(['user_id' => $user->id])->first();
 
         return view('student_backend/applies/apply', $data);
+    }
+
+    public function apply(Request $request) {
+        dd($request->all());
     }
 
     public function applies() {
