@@ -38,7 +38,36 @@ class StudentApplyController extends Controller
         $type = $request->type;
         $answer = $request->answer;
 
+        if($request->has('files')) {
+            $files = $request->file('files');
+            dd($files);
+            foreach ($files as $file) {
+                $request->validate([
+                    $file => 'file|mimes:jpg,png,jpeg,mp4', // Specify allowed file formats
+                ]);
+
+                $filename= date('YmdHi').$file->getClientOriginalName();
+                dd($filename);
+                $imagePath = 'uploads/apply_data/';
+                $file-> move(public_path($imagePath), $filename);
+
+                //$data->profile_image = $filename;
+            }
+            dd("Works");
+            dd($request->all());
+        }
+        die;
+        dd($request->all());
+        for ($i = 0; $i < count($type); $i++) {
+            if ($type == 'file') {
+
+            }
+        }
+
         for ($i = 0; $i < count($label); $i++) {
+            if ($type[$i] == 'file') {
+
+            }
             $tableData = [
                 'program_id' => $programId,
                 'label' => $label[$i],

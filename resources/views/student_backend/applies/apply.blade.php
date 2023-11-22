@@ -124,6 +124,8 @@
                                                         <option value="{{ $value->value }}">{{ $value->label }}</option>
                                                     @endforeach
                                                 </select>
+                                            @elseif($field->type == 'file')
+                                                <input class="form-control" type="file" name="files[]" accept="image/*,video/*">
                                             @else
                                                 <input name="answer[]" type="{{ $field->type }}" class="form-control">
                                             @endif
