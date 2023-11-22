@@ -42,7 +42,7 @@
                                     {{ $message }}
                                 </div>
                             @endif
-                            <form method="POST" id="frm-program" action="{{ route('program.apply', $program->id) }}" class="row g-3 needs-validation" novalidate="">
+                            <form method="POST" id="frm-program" action="{{ route('program.apply', $program->id) }}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate="">
                                 @csrf
                                 <input type="hidden" name="program_id" value="{{ $program->id }}">
                                 <div class="col-md-4">
@@ -111,23 +111,41 @@
                                         placeholder="Enter number"
                                         required="">
                                 </div>
-
-                                    @foreach($customFields as $field)
-                                        <input type="hidden" name="label[]" value="{{ $field->label }}">
-                                        <input type="hidden" name="type[]" value="{{ $field->type }}">
+                                    @php $checkboxCounter = 0; @endphp
+                                    @foreach($customFields as $key => $field)
+                                        @if($field->type !== 'file')
+                                            <input type="hidden" name="label[]" value="{{ $field->label }}">
+                                            <input type="hidden" name="type[]" value="{{ $field->type }}">
+                                        @endif
+                                        @php $required = ($field->required) ? 'required' : ''; @endphp
                                         <div class="col-md-4">
                                             <label class="form-label" for="validationCustom02">{{ $field->label }}</label>
                                             @if($field->type == 'select')
                                                 @php $checkForMultiple = ($field->multiple) ? 'multiple' : ''; @endphp
-                                                <select name="answer[]" id="" {{ $checkForMultiple  }} class="form-control">
+                                                <select name="answer[]" id="" {{ $checkForMultiple  }} {{ $required }} class="form-control">
                                                     @foreach($field->values as $value)
                                                         <option value="{{ $value->value }}">{{ $value->label }}</option>
                                                     @endforeach
                                                 </select>
                                             @elseif($field->type == 'file')
-                                                <input class="form-control" type="file" name="files[]" accept="image/*,video/*">
+                                                <input type="hidden" name="file_label[]" value="{{ $field->label }}">
+                                                <input type="hidden" name="file_type[]" value="{{ $field->type }}">
+                                                <input class="form-control" {{ $required }} type="file" name="files[]" accept="image/*,video/*">
+                                            @elseif($field->type == 'radio-group')
+                                                <br />
+                                                @foreach($field->values as $value)
+                                                    <input type="radio" class="form-check-input" id="radio-{{ $key }}" name="answer[]" {{ $required }} value="{{ $value->value }}">
+                                                    <label class="form-check-label" for="radio-{{ $key }}">{{ $value->label }}</label>
+                                                @endforeach
+                                            @elseif($field->type == 'checkbox-group')
+                                                @php $checkboxCounter++; @endphp
+                                                @foreach($field->values as $value)
+                                                    <br />
+                                                    <input type="checkbox" class="form-check-input" value="{{ $value->value }}" name="checkbox_{{ $checkboxCounter }}[]">
+                                                    <label class="form-check-label" for="checkbox-primary-1">{{ $value->label }}</label>
+                                                @endforeach
                                             @else
-                                                <input name="answer[]" type="{{ $field->type }}" class="form-control">
+                                                <input name="answer[]" {{ $required }} type="{{ $field->type }}" class="form-control">
                                             @endif
                                         </div>
                                     @endforeach
