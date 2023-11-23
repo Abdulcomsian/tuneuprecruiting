@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::post("/chat/store", [ChatController::class, "store"])->name('chat.store');
 
     Route::get('/applies', [ApplyController::class, 'applies']);
+    Route::get('/apply/view/{id}', [ApplyController::class, 'viewApply']);
     Route::get('/profile', [ProfileController::class, 'profile']);
     Route::post('/update/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/update/profile/image', [ProfileController::class, 'updateProfileImage'])->name('profile.image');

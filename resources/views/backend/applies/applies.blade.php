@@ -63,7 +63,7 @@
                                                                     <i class="icofont icofont-chat"></i></a>
                                                             @endif
                                                         </li>
-                                                        <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
+                                                        <li class="edit"><a href="{{ url('/apply/view/'.$apply->id) }}"><i class="icofont icofont-eye-alt"></i></a></li>
                                                     </ul>
                                                 </td>
                                             </tr>

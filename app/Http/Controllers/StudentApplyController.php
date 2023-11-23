@@ -36,9 +36,10 @@ class StudentApplyController extends Controller
     }
 
     public function apply(Request $request, $programId) {
-        $user = auth()->user();
+        // $user = auth()->user();
+        $studentId = Session::get('studentId');
         // check when already applied
-        $numRows = Apply::where(['student_id' => $user->id])->count();
+        $numRows = Apply::where(['student_id' => $studentId])->count();
         if ($numRows > 0) {
             return redirect()->back()->with('success', 'You have previously submitted an application for this program.');
         }
@@ -48,7 +49,7 @@ class StudentApplyController extends Controller
         $answer = $request->answer;
 
         $programData = [
-            'student_id' => $user->id,
+            'student_id' => $studentId,
             'program_id' => $programId,
             'status' => 'UNREAD'
         ];
