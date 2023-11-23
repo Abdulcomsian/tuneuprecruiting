@@ -113,7 +113,7 @@
                                 </div>
                                     @php $checkboxCounter = 0; @endphp
                                     @foreach($customFields as $key => $field)
-                                        @if($field->type !== 'file')
+                                        @if($field->type !== 'file' && $field->type !== 'checkbox-group')
                                             <input type="hidden" name="label[]" value="{{ $field->label }}">
                                             <input type="hidden" name="type[]" value="{{ $field->type }}">
                                         @endif
@@ -138,12 +138,14 @@
                                                     <label class="form-check-label" for="radio-{{ $key }}">{{ $value->label }}</label>
                                                 @endforeach
                                             @elseif($field->type == 'checkbox-group')
-                                                @php $checkboxCounter++; @endphp
+                                                <input type="hidden" name="checkbox_labels[]" value="{{ $field->label }}">
+                                                <input type="hidden" name="checkbox_types[]" value="{{ $field->type }}">
+                                                <br />
                                                 @foreach($field->values as $value)
-                                                    <br />
                                                     <input type="checkbox" class="form-check-input" value="{{ $value->value }}" name="checkbox_{{ $checkboxCounter }}[]">
                                                     <label class="form-check-label" for="checkbox-primary-1">{{ $value->label }}</label>
                                                 @endforeach
+                                                @php $checkboxCounter++; @endphp
                                             @else
                                                 <input name="answer[]" {{ $required }} type="{{ $field->type }}" class="form-control">
                                             @endif

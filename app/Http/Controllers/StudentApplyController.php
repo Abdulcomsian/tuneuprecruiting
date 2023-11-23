@@ -37,6 +37,11 @@ class StudentApplyController extends Controller
 
     public function apply(Request $request, $programId) {
         $user = auth()->user();
+        // check when already applied
+        $numRows = Apply::where(['student_id' => $user->id])->count();
+        if ($numRows > 0) {
+            return redirect()->back()->with('success', 'You have previously submitted an application for this program.');
+        }
 
         $label = $request->label;
         $type = $request->type;
@@ -49,6 +54,23 @@ class StudentApplyController extends Controller
         ];
 
         $apply = Apply::create($programData);
+
+        if ($request->has('checkbox_labels')) {
+            $checkboxLabels = $request->checkbox_labels;
+            $checkboxTypes = $request->checkbox_types;
+
+            for ($i = 0; $i < count($checkboxLabels); $i++) {
+                $variableName = 'checkbox_'.$i;
+                $tableData = [
+                    'apply_id' => $apply->id,
+                    'label' => $checkboxLabels[$i],
+                    'type' => $checkboxTypes[$i],
+                    'answer' => json_encode($request->$variableName)
+                ];
+
+                ApplyDetail::create($tableData);
+            }
+        }
 
         if($request->has('files')) {
             $file_label = $request->file_label;
