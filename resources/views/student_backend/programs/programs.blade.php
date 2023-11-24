@@ -47,7 +47,7 @@
                                                 <td>
                                                     <ul class="action">
                                                         <li>
-                                                            <a href="{{ url('/program/apply/'. $program->id) }}">
+                                                            <a href="{{ url('/program/apply/'. encrypt($program->id)) }}">
                                                                 <i class="icofont icofont-law-document"></i>
                                                             </a>
                                                         </li>

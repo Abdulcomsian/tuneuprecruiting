@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Apply;
 use App\Models\ApplyDetail;
 use App\Models\User;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +30,12 @@ class ApplyController extends Controller
     }
 
     public function viewApply($id) {
+        try {
+            $id = decrypt($id);
+        } catch (DecryptException $e) {
+            return view('common/error')->with('errorMessage', 'Invalid or tampered ID');
+        }
+
         $data['apply'] = Apply::where(['id' => $id])->first();
         $data['applyDetails'] = ApplyDetail::where(['apply_id' => $id])->get();
         // dd($data['applyDetails']);

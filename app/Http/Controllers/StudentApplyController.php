@@ -9,6 +9,7 @@ use App\Models\Coach;
 use App\Models\Program;
 use App\Models\ProgramQuestion;
 use App\Models\Student;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -23,6 +24,12 @@ class StudentApplyController extends Controller
     }
 
     public function studentApply($programId) {
+        try {
+            $programId = decrypt($programId);
+        } catch (DecryptException $e) {
+            return view('common/error')->with('errorMessage', 'Invalid or tampered ID');
+        }
+
         $data['program'] = Program::find($programId);
         $data['customFields'] = json_decode($data['program']->custom_fields);
 

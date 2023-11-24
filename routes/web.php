@@ -22,7 +22,8 @@ use App\Http\Controllers\StudentApplyController;
 */
 
 Route::get('/', function () {
-    return view('frontend/index');
+    return redirect('/dashboard');
+    //return view('frontend/index');
 });
 
 Route::get('/dashboard', function () {
