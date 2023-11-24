@@ -46,7 +46,7 @@ class StudentApplyController extends Controller
         // $user = auth()->user();
         $studentId = Session::get('studentId');
         // check when already applied
-        $numRows = Apply::where(['student_id' => $studentId])->count();
+        $numRows = Apply::where(['student_id' => $studentId, 'program_id' => $programId])->count();
         if ($numRows > 0) {
             return redirect()->back()->with('success', 'You have previously submitted an application for this program.');
         }
@@ -90,13 +90,16 @@ class StudentApplyController extends Controller
 
             foreach ($request->file('files') as $key => $file) {
 
-                $file->store('uploads/apply_data/'); // 'uploads' is the storage folder; adjust as needed asset('storage/' . $file->file_path)
+                //$file->store('uploads/apply_data/'); // 'uploads' is the storage folder; adjust as needed asset('storage/' . $file->file_path)
+
+                $filename= date('YmdHi').$file->getClientOriginalName();
+                $file-> move(public_path('uploads/apply_data'), $filename);
 
                 $tableData = [
                     'apply_id' => $apply->id,
                     'label' => $file_label[$key],
                     'type' => $file_type[$key],
-                    'answer' => $file->getClientOriginalName()
+                    'answer' => $filename
                 ];
 
                 ApplyDetail::create($tableData);

@@ -8,6 +8,7 @@ use App\Models\Program;
 use App\Models\ProgramQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ProgramController extends Controller
 {
@@ -35,7 +36,7 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $request->request->add(['coach_id' => $user->id]);
+        $request->request->add(['coach_id' => Session::get('coachId')]);
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);

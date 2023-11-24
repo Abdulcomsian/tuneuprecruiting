@@ -28,7 +28,12 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
 //    return view('backend/dashboard/dashboard');
-    return redirect('/applies');
+    if (auth()->user()->role == 'coach') {
+        return redirect('/applies');
+    }
+
+    return redirect('/student/dashboard');
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

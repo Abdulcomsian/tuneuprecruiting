@@ -124,7 +124,7 @@
                                                 @php $checkForMultiple = ($field->multiple) ? 'multiple' : ''; @endphp
                                                 <select name="answer[]" id="" {{ $checkForMultiple  }} {{ $required }} class="form-control">
                                                     @foreach($field->values as $value)
-                                                        <option value="{{ $value->value }}">{{ $value->label }}</option>
+                                                        <option value="{{ $value->label }}">{{ $value->label }}</option>
                                                     @endforeach
                                                 </select>
                                             @elseif($field->type == 'file')
@@ -142,7 +142,7 @@
                                                 <input type="hidden" name="checkbox_types[]" value="{{ $field->type }}">
                                                 <br />
                                                 @foreach($field->values as $value)
-                                                    <input type="checkbox" class="form-check-input" value="{{ $value->value }}" name="checkbox_{{ $checkboxCounter }}[]">
+                                                    <input type="checkbox" class="form-check-input" value="{{ $value->label }}" name="checkbox_{{ $checkboxCounter }}[]">
                                                     <label class="form-check-label" for="checkbox-primary-1">{{ $value->label }}</label>
                                                 @endforeach
                                                 @php $checkboxCounter++; @endphp
