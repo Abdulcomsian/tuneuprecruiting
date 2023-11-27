@@ -20,7 +20,7 @@ $(document).ready(function() {
             const userType = $("#user-type").val();
             const formattedTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             const userImage = $('#user-image-link').val();
-            const studentId = $('#student-id').val();
+            const receiverId = $('#receiver-id').val();
             const userId = $('#user-id').val();
 
             $.ajaxSetup({
@@ -33,7 +33,7 @@ $(document).ready(function() {
             $.ajax({
                 url: url,
                 type: 'POST',
-                data: { 'userType' : userType, 'message' : message, 'studentId' : studentId, 'userId' : userId },
+                data: { 'userType' : userType, 'message' : message, 'receiverId' : receiverId, 'userId' : userId },
                 dataType: 'json',
                 success: function(data) {
                     console.log(data);
@@ -55,7 +55,7 @@ $(document).ready(function() {
                 },
                 error: function(xhr, status, error) {
                     // Handle errors here
-                    console.error("Error: " + error);
+                    console.log("Error: " + error);
                 }
             });
         }

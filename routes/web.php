@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('program', ProgramController::class);
 
-    Route::get("/chat/{id}/{type}/{messageId?}", [ChatController::class, "show"])->name('chat');
+    Route::get("/chat/{id?}", [ChatController::class, "show"])->name('chat');
     Route::post("/chat/store", [ChatController::class, "store"])->name('chat.store');
 
     Route::get('/applies', [ApplyController::class, 'applies']);

@@ -11,7 +11,7 @@ class Chat extends Model
 
     protected $fillable = [
         'message',
-        'user_id',
+        'coach_id',
         'student_id',
         'sender'
     ];

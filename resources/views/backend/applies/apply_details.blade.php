@@ -48,7 +48,7 @@
                                                 <td>{{ $detail->label }}</td>
                                                 <td>
                                                     @if($detail->type == 'file')
-                                                        <img width="100%" class="embed-responsive-item" src="{{ asset('storage/apply_data/'.$detail->answer) }}"></img>
+                                                        <a href="{{ asset('uploads/apply_data/'.$detail->answer) }}">{{ $detail->answer }}</a>
                                                     @else
                                                         {{ $detail->answer }}
                                                     @endif
