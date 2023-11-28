@@ -53,7 +53,7 @@
                                         <div class="profile-title">
                                             <div class="d-flex">
                                                 @php $profile_image = ($user->profile_image) ? asset("uploads/users_image/".$user->profile_image) : asset('assets/images/user/7.jpg'); @endphp
-                                                <img class="img-70 rounded-circle" alt="" src="{{ $profile_image }}">
+                                                <img class="img-70 rounded-circle" alt="" src="{{ $profile_image }}" style="width: 70px; height: 70px;">
                                                 <div class="flex-grow-1">
                                                     <h3 class="mb-1">{{ $user->name }}</h3>
                                                     <p>COACH</p>

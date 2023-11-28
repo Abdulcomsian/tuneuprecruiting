@@ -79,14 +79,13 @@ class ProfileController extends Controller
     public function updateProfileImage(Request $request) {
         $user = Auth::user();
 
+        $imagePath = 'uploads/users_image/';
+        $videoPath = 'uploads/users_video/';
+
         if ($user->role == 'student') {
             $data = Student::where(['user_id' => $user->id])->first();
-            $imagePath = 'uploads/students_image/';
-            $videoPath = 'uploads/students_videos/';
         } else if ($user->role == 'coach') {
             $data = Coach::where(['user_id' => $user->id])->first();
-            $imagePath = 'uploads/users_image/';
-            $videoPath = 'uploads/users_video/';
         } else {
             dd("Error: invalid user role");
         }
@@ -96,7 +95,7 @@ class ProfileController extends Controller
                 'image' => 'file|mimes:jpg,png,jpeg', // Specify allowed file formats
             ]);
 
-            if ($user->profile_image) {
+            if ($user->profile_image != 'default.jpg') {
                 $oldImagePath = $imagePath . $user->profile_image;
                 unlink($oldImagePath);
             }
