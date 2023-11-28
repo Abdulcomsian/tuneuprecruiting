@@ -60,4 +60,37 @@ $(document).ready(function() {
             });
         }
     });
+
+    function newMessages() {
+        const id = $('#receiver-id').val();
+        const ul = $('#message-notification');
+        var baseUrl = "{{ url('/') }}";
+        $.ajax({
+            url: '/chat/new/'+id, // Replace with your actual endpoint
+            method: 'GET',
+            success: function(data) {
+                data.forEach(function(message) {
+                    var liElement = `
+                        <li class="clearfix">
+                            <div class="message other-message pull-right"><img class="rounded-circle float-end chat-user-img img-30" src="/uploads/users_image/${message.profile_image}" alt="">
+                                <div class="message-dat"><span class="message-data-time">${message.created_at}</span></div>
+                                ${message.message}
+                            </div>
+                        </li>`;
+
+                    $("#chatUl").append(liElement);
+                    scrollToBottom();
+                })
+                // Handle the success response
+                console.log(data);
+            },
+            error: function(error) {
+                // Handle the error response
+                console.error('Error:', error);
+            }
+        });
+    }
+
+    // Set up an interval to make the AJAX call every 15 seconds
+    setInterval(newMessages, 15000);
 });

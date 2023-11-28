@@ -35,8 +35,8 @@ class ChatController extends Controller
                 ->get();
             $data['users'] = $users;
 
-            $id = ($id == null) ? $users[0]->student_id : $id;
-            dd($id);
+            $id = ($id == null) ? $users[0]->id : $id;
+
             $student = Student::find($id);
 
             $data['receiver'] = $student;
@@ -47,23 +47,65 @@ class ChatController extends Controller
                 ->join('coaches', 'coaches.id', '=', 'chats.coach_id')
                 ->where(['chats.student_id' => $student->id])->get();
             $data['type'] = 'Coach';
+
+            if ($data['messages']) {
+                $chat = Chat::where(['student_id' => $id, 'coach_id' => $coach->id]);
+                $chat->update(['status' => 'read']);
+            }
         } else {
+            $studentId = Session::get('studentId');
+            $student = Student::find($studentId);
 
+            $users = Program::select('students.*')
+                ->join('applies', 'applies.program_id', '=', 'programs.id')
+                ->join('students', 'students.id', '=', 'applies.student_id')
+                ->where(['student_id' => $studentId])
+                ->get();
+            $data['users'] = $users;
+
+            $id = ($id == null) ? $users[0]->id : $id;
+
+            $coach = Coach::find($id);
+
+            $data['receiver'] = $coach;
+            $data['sender'] = $student;
+
+            $data['messages'] = Chat::select('chats.*', 'students.profile_image as student_image', 'coaches.profile_image as coach_image')
+                ->join('students', 'students.id', '=', 'chats.student_id')
+                ->join('coaches', 'coaches.id', '=', 'chats.coach_id')
+                ->where(['chats.student_id' => $student->id])->get();
+            $data['type'] = 'Student';
+
+            if ($data['messages']) {
+                $chat = Chat::where(['student_id' => $student->id, 'coach_id' => $id]);
+                $chat->update(['status' => 'read']);
+            }
         }
-        // $data['student'] = Student::find($id);
-        // $data['messages'] = Chat::where(['coach_id' => $user->id, 'student_id' => $id])->with(['student'])->get();
 
-//        $data['type'] = $userType;
         $data['studentId'] = $id;
         $data['userId'] = $user->id;
 
-        if (false) {
-            $chat = Chat::find($messageId);
-            $chat->status = 'read';
-            $chat->save();
+        return view('common/chat/chat', $data);
+    }
+
+    public function getNewMessages($id) {
+        $user = Auth::user();
+
+        if ($user->role == 'coach') {
+            $coachId = Session::get('coachId');
+            $newMessages = Chat::select('chats.*', 'students.profile_image', 'students.first_name')
+                ->join('students', 'students.id', '=', 'chats.student_id')
+                ->where(['student_id' => $id, 'status' => 'unread', 'chats.sender' => 'Coach', 'chats.coach_id' => $coachId])
+                ->get();
+        } else {
+            $studentId = Session::get('studentId');
+            $newMessages = Chat::select('chats.*', 'coaches.profile_image', 'coaches.first_name')
+                ->join('coaches', 'coaches.id', '=', 'chats.coach_id')
+                ->where(['coach_id' => $id, 'status' => 'unread', 'chats.sender' => 'Coach', 'chats.student_id' => $studentId])
+                ->get();
         }
 
-        return view('common/chat/chat', $data);
+        return response($newMessages);
     }
 
     public function store(Request $request) {

@@ -138,6 +138,7 @@
 
             <script>
                 function makeAjaxCall() {
+                    var baseUrl = "{{ url('/') }}";
                     $.ajax({
                         url: '/notification/messages',
                         method: 'GET',
@@ -150,11 +151,12 @@
                             response.forEach(function(message) {
                                 var li = $('<li>').attr('data-id', message.id)
                                     .attr('data-coach', message.coach_id)
+                                    .attr('data-role', message.role)
                                     .attr('class', 'li-notification')
                                     .attr('data-student', message.student_id);
                                 var div = $('<div class="d-flex align-items-start">');
 
-                                var imgSrc = 'uploads/common/'+message.profile_image; // Use profile image if available, else a default
+                                var imgSrc = baseUrl + '/uploads/users_image/'+message.profile_image; // Use profile image if available, else a default
 
                                 var img = $('<img>').attr('src', imgSrc).attr('alt', 'User Image');
                                 var imgDiv = $('<div class="message-img bg-light-primary">').append(img);
@@ -172,6 +174,7 @@
                                 // Append the created li to the ul
                                 ul.append(li);
                             });
+                            ul.append('<li></li>');
 
                         },
                         error: function(xhr, status, error) {
@@ -186,16 +189,16 @@
                 setInterval(makeAjaxCall, 60000);
 
                 $(document).on('click', '.li-notification', function() {
-                    const id = $(this).data('id');
+                    // const id = $(this).data('id');
                     const coachId = $(this).data('coach');
+                    const role = $(this).data('role');
                     const studentId = $(this).data('student');
-                    console.log(id, coachId, studentId);
-                    const userType = $('#user-type').val();
+                    console.log(role, coachId, studentId);
 
-                    if (userType == 'coach') {
-                        var url = '/chat/' + studentId + '/' + userType + '/' + id;
+                    if (role == 'Coach') {
+                        var url = '/chat/' + studentId;
                     } else {
-                        var url = '/chat/' + coachId + '/' + userType + '/' + id;
+                        var url = '/chat/' + coachId;
                     }
 
                     window.location.href = url;

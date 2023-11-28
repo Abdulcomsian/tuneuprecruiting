@@ -32,7 +32,7 @@
                                         <ul class="list theme-scrollbar">
                                             @foreach($users as $user)
                                                 <li class="clearfix">
-                                                    <a href="{{ route('chat', [ 'id' => $user->id, 'type' => 'Coach' ]) }}">
+                                                    <a href="{{ route('chat', [ 'id' => encrypt($user->id), 'type' => 'Coach' ]) }}">
                                                         <img class="rounded-circle user-image" src="{{ asset('uploads/users_image/'.$user->profile_image) }}" alt="">
                                                         <div class="about">
                                                             <div class="name">{{ $user->first_name }}</div>
@@ -60,8 +60,8 @@
                                         <!-- chat-header start-->
                                         <div class="chat-header clearfix"><img class="rounded-circle" src="{{ asset('uploads/users_image/'.$receiver->profile_image) }}" alt="">
                                             <div class="about">
-                                                <div class="name">{{ $sender->first_name }}</div>
-                                                <div class="status">{{ $sender->last_name }}</div>
+                                                <div class="name">{{ $receiver->first_name }}</div>
+                                                <div class="status">{{ $receiver->last_name }}</div>
                                             </div>
                                             <ul class="list-inline float-start float-sm-end chat-menu-icons">
 
