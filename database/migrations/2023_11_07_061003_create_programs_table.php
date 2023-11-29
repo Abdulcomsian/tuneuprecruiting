@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('session')->nullable();
             $table->string('number_of_students')->nullable();
             $table->text('custom_fields')->nullable();
+            $table->text('video')->nullable();
             $table->string('status')->default('public');
             $table->text('details')->nullable();
             $table->timestamps();

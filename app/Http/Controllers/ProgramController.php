@@ -51,6 +51,18 @@ class ProgramController extends Controller
         // Validate the request data
         $request->validate($rules);
 
+        if ($request->hasFile('video_file')) {
+            $request->validate([
+                'video_file' => 'file|mimes:mp4,mov,jpeg', // Specify allowed file formats
+            ]);
+
+            $file= $request->file('video_file');
+            $videoName = date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('uploads/program_videos/'), $videoName);
+
+            $request->request->add(['video' => $videoName]);
+        }
+        
         $program = Program::create($request->all());
 
         return redirect()->back()->with('success', 'Program created.');
@@ -65,7 +77,10 @@ class ProgramController extends Controller
             ->where(['program_id' => $id])
             ->get();
 
-        $data['program'] = Program::join('program_questions', 'program_questions.program_id', '=', 'programs.id')->where(['programs.id' => $id])->get();
+        $program = Program::find($id);
+        $data['program'] = $program;
+
+        $data['questions'] = json_decode($program->custom_fields);
 
         return view('backend/program/program_applies', $data);
     }

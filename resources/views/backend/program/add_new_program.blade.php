@@ -42,7 +42,7 @@
                                     {{ $message }}
                                 </div>
                             @endif
-                            <form method="POST" id="frm-program" action="{{ route('program.store') }}" class="row g-3 needs-validation" novalidate="">
+                            <form method="POST" id="frm-program" action="{{ route('program.store') }}" class="row g-3 needs-validation" novalidate="" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="POST" id="route-method">
                                 <input type="hidden" name="custom_fields" id="custom-fields">
@@ -85,7 +85,16 @@
                                         <option value="drop">Drop</option>
                                     </select>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="validationCustom02">Video</label>
+                                    <input
+                                        class="form-control video"
+                                        id="validationCustom02"
+                                        type="file"
+                                        name="video_file"
+                                        accept="video/*">
+                                </div>
+                                <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="exampleFormControlInput1">Details</label>
                                         <textarea class="form-control detail" name="details"></textarea>

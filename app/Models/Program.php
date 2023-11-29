@@ -16,6 +16,7 @@ class Program extends Model
         'session',
         'status',
         'details',
+        'video',
         'custom_fields'
     ];
 
