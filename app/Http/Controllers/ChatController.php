@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Session;
 
 class ChatController extends Controller
 {
+    public function getMessagesOfAUser($where) {
+        return Chat::select('chats.*', 'students.profile_image as student_image', 'coaches.profile_image as coach_image')
+            ->join('students', 'students.id', '=', 'chats.student_id')
+            ->join('coaches', 'coaches.id', '=', 'chats.coach_id')
+            ->where($where)->get();
+    }
     public function show(Request $request, $id = null) {
         try {
             $id = decrypt($id);
@@ -25,6 +31,7 @@ class ChatController extends Controller
         $user = Auth::user();
 
         if ($user->role == 'coach') {
+            $data['type'] = 'Coach';
             $coachId = Session::get('coachId');
             $coach = Coach::find($coachId);
 
@@ -42,23 +49,20 @@ class ChatController extends Controller
             $data['receiver'] = $student;
             $data['sender'] = $coach;
 
-            $data['messages'] = Chat::select('chats.*', 'students.profile_image as student_image', 'coaches.profile_image as coach_image')
-                ->join('students', 'students.id', '=', 'chats.student_id')
-                ->join('coaches', 'coaches.id', '=', 'chats.coach_id')
-                ->where(['chats.student_id' => $student->id])->get();
-            $data['type'] = 'Coach';
+            $data['messages'] = $this->getMessagesOfAUser(['chats.student_id' => $student->id]);
 
             if ($data['messages']) {
                 $chat = Chat::where(['student_id' => $id, 'coach_id' => $coach->id]);
                 $chat->update(['status' => 'read']);
             }
         } else {
+            $data['type'] = 'Student';
             $studentId = Session::get('studentId');
             $student = Student::find($studentId);
 
-            $users = Program::select('students.*')
+            $users = Program::select('coaches.*')
+                ->join('coaches', 'coaches.id', '=', 'programs.coach_id')
                 ->join('applies', 'applies.program_id', '=', 'programs.id')
-                ->join('students', 'students.id', '=', 'applies.student_id')
                 ->where(['student_id' => $studentId])
                 ->get();
             $data['users'] = $users;
@@ -70,11 +74,7 @@ class ChatController extends Controller
             $data['receiver'] = $coach;
             $data['sender'] = $student;
 
-            $data['messages'] = Chat::select('chats.*', 'students.profile_image as student_image', 'coaches.profile_image as coach_image')
-                ->join('students', 'students.id', '=', 'chats.student_id')
-                ->join('coaches', 'coaches.id', '=', 'chats.coach_id')
-                ->where(['chats.student_id' => $student->id])->get();
-            $data['type'] = 'Student';
+            $data['messages'] = $this->getMessagesOfAUser(['chats.student_id' => $student->id]);
 
             if ($data['messages']) {
                 $chat = Chat::where(['student_id' => $student->id, 'coach_id' => $id]);
@@ -93,16 +93,23 @@ class ChatController extends Controller
 
         if ($user->role == 'coach') {
             $coachId = Session::get('coachId');
+            $where = ['student_id' => $id, 'status' => 'unread', 'chats.sender' => 'Student', 'chats.coach_id' => $coachId];
             $newMessages = Chat::select('chats.*', 'students.profile_image', 'students.first_name')
                 ->join('students', 'students.id', '=', 'chats.student_id')
-                ->where(['student_id' => $id, 'status' => 'unread', 'chats.sender' => 'Coach', 'chats.coach_id' => $coachId])
+                ->where($where)
                 ->get();
         } else {
             $studentId = Session::get('studentId');
+            $where = ['coach_id' => $id, 'status' => 'unread', 'chats.sender' => 'Coach', 'chats.student_id' => $studentId];
             $newMessages = Chat::select('chats.*', 'coaches.profile_image', 'coaches.first_name')
                 ->join('coaches', 'coaches.id', '=', 'chats.coach_id')
-                ->where(['coach_id' => $id, 'status' => 'unread', 'chats.sender' => 'Coach', 'chats.student_id' => $studentId])
+                ->where($where)
                 ->get();
+        }
+
+        if ($newMessages) {
+            $chat = Chat::where($where);
+            $chat->update(['status' => 'read']);
         }
 
         return response($newMessages);
