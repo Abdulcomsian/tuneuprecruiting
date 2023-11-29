@@ -33,15 +33,15 @@
                                         <tbody>
                                             <tr>
                                                 <td>Program Name</td>
-                                                <td>{{ $program[0]->program_name }}</td>
+                                                <td>{{ $program->program_name }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Session</td>
-                                                <td>{{ $program[0]->session }}</td>
+                                                <td>{{ $program->session }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Number of Students</td>
-                                                <td>{{ $program[0]->number_of_students }}</td>
+                                                <td>{{ $program->number_of_students }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -66,12 +66,14 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($program as $question)
+                                            @forelse($questions as $question)
                                                 <tr>
-                                                    <td>{{ $question->question }}</td>
+                                                    <td>{{ $question->label }}</td>
                                                     <td>{{ $question->type }}</td>
                                                 </tr>
-                                            @endforeach
+                                            @empty
+                                                <p>No items found.</p>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

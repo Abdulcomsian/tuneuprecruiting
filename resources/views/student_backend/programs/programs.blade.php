@@ -54,6 +54,9 @@
                                                         <li class="edit"> <a href="{{ route('chat', [ 'id' => $program->coach_id, 'type' => 'Student' ]) }}">
                                                                 <i class="icofont icofont-chat"></i></a>
                                                         </li>
+                                                        <li class="edit"> <a href="{{ route('program.view', encrypt($program->id)) }}">
+                                                                <i class="icofont icofont-eye-alt"></i></a>
+                                                        </li>
                                                     </ul>
                                                 </td>
                                             </tr>

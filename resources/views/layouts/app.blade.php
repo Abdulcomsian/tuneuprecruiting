@@ -143,6 +143,7 @@
                         url: '/notification/messages',
                         method: 'GET',
                         success: function(response) {
+                            console.log(response)
                             var ul = $('#message-notification'); // Assuming you have only one ul, adjust this selector as needed
 
                             // Clear the existing content in the ul

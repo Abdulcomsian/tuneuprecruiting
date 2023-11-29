@@ -130,9 +130,15 @@ class StudentApplyController extends Controller
     }
 
     public function viewProgram($programId) {
-        $program = Program::find($programId); // Assuming you have a Program with ID 1
-        $coach = $program->coach;
+        try {
+            $programId = decrypt($programId);
+        } catch (DecryptException $e) {
+            return view('common/error')->with('errorMessage', 'Invalid or tampered ID');
+        }
+        $program = Program::find($programId);
+        $data['program'] = $program;
+        $data['coach'] = Coach::find($program->coach_id);
 
-//        return view('student_backend/programs/');
+        return view('student_backend/programs/view_program', $data);
     }
 }
