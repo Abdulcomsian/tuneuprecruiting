@@ -119,6 +119,7 @@
             <script src="{{ asset('assets/js/datatable/datatables/dataTables.select.min.js') }}"></script>
             <script src="{{ asset('assets/js/dashboard/dashboard_2.js') }}"></script>
             <script src="{{ asset('assets/js/animation/wow/wow.min.js') }}"></script>
+
             <!-- Plugins JS Ends-->
             <!-- Theme js-->
             <script src="{{ asset('assets/js/script.js') }}"></script>
@@ -203,6 +204,70 @@
                     }
 
                     window.location.href = url;
+                });
+
+                $(document).ready(function () {
+                    // Setup - add a text input to each footer cell
+                    $('#data-table thead tr')
+                        .clone(true)
+                        .addClass('filters')
+                        .appendTo('#data-table thead');
+
+                    var table = $('#data-table').DataTable({
+                        orderCellsTop: true,
+                        fixedHeader: true,
+                        initComplete: function () {
+                            var api = this.api();
+
+                            // For each column
+                            api
+                                .columns()
+                                .eq(0)
+                                .each(function (colIdx) {
+                                    // Set the header cell to contain the input element
+                                    var cell = $('.filters th').eq(
+                                        $(api.column(colIdx).header()).index()
+                                    );
+                                    var title = $(cell).text();
+                                    if(title !== 'Action') {
+                                        $(cell).html('<input style="width: 140px;" type="text" placeholder="' + title + '" />');
+                                    }
+
+                                    // On every keypress in this input
+                                    $(
+                                        'input',
+                                        $('.filters th').eq($(api.column(colIdx).header()).index())
+                                    )
+                                        .off('keyup change')
+                                        .on('change', function (e) {
+                                            // Get the search value
+                                            $(this).attr('title', $(this).val());
+                                            var regexr = '({search})'; //$(this).parents('th').find('select').val();
+
+                                            var cursorPosition = this.selectionStart;
+                                            // Search the column for that value
+                                            api
+                                                .column(colIdx)
+                                                .search(
+                                                    this.value != ''
+                                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                                        : '',
+                                                    this.value != '',
+                                                    this.value == ''
+                                                )
+                                                .draw();
+                                        })
+                                        .on('keyup', function (e) {
+                                            e.stopPropagation();
+
+                                            $(this).trigger('change');
+                                            $(this)
+                                                .focus()[0]
+                                                .setSelectionRange(cursorPosition, cursorPosition);
+                                        });
+                                });
+                        },
+                    });
                 });
 
             </script>

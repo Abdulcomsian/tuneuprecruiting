@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive theme-scrollbar">
-                                <table class="display" id="basic-1">
+                                <table class="display" id="data-table">
                                     <thead>
                                         <tr>
                                             <th>Coach Name</th>
