@@ -82,7 +82,7 @@
                                     <select name="status" id="program-status" class="form-control">
                                         <option value=""></option>
                                         <option value="public">Public</option>
-                                        <option value="drop">Drop</option>
+                                        <option value="drops">Drops</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">

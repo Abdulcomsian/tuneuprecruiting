@@ -18,7 +18,8 @@ class ProgramController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $data['programs'] = Program::where(['coach_id' =>$user->id])->get();
+        $coachId = Session::get('coachId');
+        $data['programs'] = Program::where(['coach_id' => $coachId])->get();
         return view('backend/program/programs', $data);
     }
 
@@ -62,7 +63,7 @@ class ProgramController extends Controller
 
             $request->request->add(['video' => $videoName]);
         }
-        
+
         $program = Program::create($request->all());
 
         return redirect()->back()->with('success', 'Program created.');
@@ -90,10 +91,7 @@ class ProgramController extends Controller
      */
     public function edit(string $id)
     {
-        $program = Program::find($id);
-        $data['questions'] = ProgramQuestion::where(['program_id' => $program->id])->get();
-        $data['program'] = $program;
-
+        $data['program'] = Program::find($id);
         return view('backend/program/edit_program', $data);
     }
 
@@ -103,9 +101,12 @@ class ProgramController extends Controller
     public function update(Request $request, string $id)
     {
         $program = Program::find($id);
+        $this->authorize('edit', $program);
 
         if (!$program) {
             return redirect()->back()->with('danger', 'Program not exist.');
+        } elseif($program->status == 'public') {
+            return redirect()->back()->with('danger', 'You are unable to modify the program public status.');
         }
 
         // Validate the request data
@@ -114,31 +115,12 @@ class ProgramController extends Controller
             'number_of_students' => 'required|string',
             'session' => 'required|string',
             'details' => 'string',
+            'custom_fields' => 'string',
+            'status' => 'string',
         ]);
 
         // Update the post with the validated data
         $program->update($validatedData);
-
-        // update questions
-        $questionIds = $request->ids;
-        $questions = $request->questions;
-        $types = $request->types;
-
-        $counter = 0;
-        for ($i = 0; $i < count($questionIds); $i++) {
-            $programQuestion = ProgramQuestion::find($questionIds[$i]);
-            $programQuestion->question = $questions[$i];
-            $programQuestion->type = $types[$i];
-            $programQuestion->save();
-
-            $counter++;
-        }
-
-        for ($i = $counter; $i < count($questions); $i++) {
-            $data = ['program_id' => $id, 'question' => $questions[$i], 'type' => $types[$i]];
-            ProgramQuestion::create($data);
-        }
-
 
         return redirect()->back()->with('success', 'Program updated.');
     }

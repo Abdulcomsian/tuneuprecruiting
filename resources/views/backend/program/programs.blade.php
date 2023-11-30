@@ -52,10 +52,6 @@
                                                 <td>
                                                     <ul class="action">
                                                         <li class="delete">
-                                                            <form action="{{ route('program.destroy', $program->id) }}" method="POST">
-                                                                @method('DELETE')
-                                                                @csrf
-                                                                {{--                                                        <input type="submit" value="Delete" />--}}
                                                                 <a
                                                                     href="{{ route('program.show', $program->id) }}"
                                                                     class="btn-edit"
@@ -63,13 +59,8 @@
                                                                     data-route="{{ route('program.update', $program->id) }}">
                                                                     <i class="icofont icofont-eye-alt"></i>
                                                                 </a>
-
-                                                                <a href="{{ route('program.edit', $program->id) }}">
-                                                                    <i class="icon-pencil-alt"></i>
-                                                                </a>
-                                                                <button style="background: none; border: none;" type="submit"><i class="icon-trash"></i></button>
-                                                            </form>
                                                         </li>
+                                                        <li class="edit ml-3"><a href="{{ route('program.edit', $program->id) }}"><i class="fa fa-pencil-square-o"></i></a></li>
                                                     </ul>
                                                 </td>
                                             </tr>

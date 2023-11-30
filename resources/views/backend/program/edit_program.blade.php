@@ -4,7 +4,7 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3></h3>
+                        <h3>Add new program</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
@@ -13,7 +13,7 @@
                                         <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
                                     </svg></a></li>
                             <li class="breadcrumb-item">Program</li>
-                            <li class="breadcrumb-item">Edit</li>
+                            <li class="breadcrumb-item">Add</li>
                         </ol>
                     </div>
                 </div>
@@ -42,11 +42,12 @@
                                     {{ $message }}
                                 </div>
                             @endif
-                            <form method="POST" id="frm-program" action="{{ route('program.update', $program->id) }}" class="row g-3 needs-validation" novalidate="">
+                            <form method="POST" id="frm-program" action="{{ route('program.update', $program->id) }}" class="row g-3 needs-validation" novalidate="" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT" id="route-method">
-                                <input type="hidden" name="program_id" value="{{ $program->id }}">
-                                <div class="col-md-4">
+                                <input type="hidden" name="custom_fields" id="custom-fields">
+                                <input type="hidden" value="{{ route('program.store') }}" id="route-post-method">
+                                <div class="col-md-3">
                                     <label class="form-label" for="validationCustom01">Program Name</label>
                                     <input
                                         class="form-control program-name"
@@ -57,7 +58,7 @@
                                         placeholder="Enter program name"
                                         required="">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label class="form-label" for="validationCustom02">Session</label>
                                     <input
                                         class="form-control session"
@@ -68,7 +69,7 @@
                                         placeholder="Enter session"
                                         required="">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label class="form-label" for="validationCustom02">Number of Students</label>
                                     <input
                                         class="form-control number-of-students"
@@ -79,41 +80,32 @@
                                         placeholder="Enter number"
                                         required="">
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom02">Status</label>
+                                    <select name="status" id="program-status" class="form-control">
+                                        <option value="{{ $program->status }}">{{ $program->status }}</option>
+                                        <option value=""></option>
+                                        <option value="public">Public</option>
+                                        <option value="drops">Drops</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="validationCustom02">Video</label>
+                                    <input
+                                        class="form-control video"
+                                        id="validationCustom02"
+                                        type="file"
+                                        name="video_file"
+                                        accept="video/*">
+                                </div>
+                                <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="exampleFormControlInput1">Details</label>
                                         <textarea class="form-control detail" name="details">{{ $program->details }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    @foreach($questions as $question)
-                                        <div id="row" class="d-flex">
-                                            <input type="hidden" name="ids[]" value="{{ $question->id }}">
-                                            <div class="col-md-10">
-                                                <div class="input-group mb-3">
-
-                                                    <input type="text" name="questions[]" value="{{ $question->question }}" class="form-control m-input">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <select name="types[]" id="" class="form-control">
-                                                    <option value="{{ $question->type }}">{{ $question->type }}</option>
-                                                    <option value="text">Text</option>
-                                                    <option value="radio">Radio</option>
-                                                    <option value="checkbox">Checkbox</option>
-                                                    <option value="file">File</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    <div id="newinput"></div>
-                                    <button id="rowAdder" type="button" class="btn btn-dark">
-                                        <span class="bi bi-plus-square-dotted">
-                                        </span> ADD Question
-                                    </button>
-                                </div>
-                                <div class="col-md-12">
-                                    <button class="btn btn-primary float-end" id="btn-from-add" type="submit">Add Program</button>
+                                    <div id="build-wrap"></div>
                                 </div>
                             </form>
                         </div>
@@ -123,34 +115,7 @@
         </div>
         <!-- Container-fluid Ends-->
     </div>
-    <script type="text/javascript">
-        $("#rowAdder").click(function () {
-            newRowAdd =
-                '<div id="row" class="d-flex">' +
-                '<div class="col-md-10">' +
-                '<div class="input-group mb-3">' +
-                '<div class="input-group-prepend">' +
-                '<button class="btn btn-danger" id="DeleteRow" type="button">' +
-                '<i class="bi bi-trash"></i> Delete</button>' +
-                '</div>' +
-                '<input type="text" required name="questions[]" class="form-control m-input">' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-md-2">' +
-                '<select required name="types[]" id="" class="form-control">' +
-                '<option value="">Question type</option>' +
-                '<option value="text">Text</option>' +
-                '<option value="radio">Radio</option>' +
-                '<option value="checkbox">Checkbox</option>' +
-                '<option value="file">File</option>' +
-                '</select>' +
-                '</div>' +
-                '</div>';
-
-            $('#newinput').append(newRowAdd);
-        });
-        $("body").on("click", "#DeleteRow", function () {
-            $(this).parents("#row").remove();
-        })
+    <script>
+        const fields = <?= $program->custom_fields ?>;
     </script>
 </x-app-layout>

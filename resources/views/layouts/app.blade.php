@@ -130,10 +130,21 @@
 {{--            <script src="{{ asset('assets/formBuilder/jquery.min.js') }}"></script>--}}
             <script src="{{ asset('assets/formBuilder/jquery-ui.min.js') }}"></script>
             <script src="{{ asset('assets/formBuilder/form-builder.min.js') }}"></script>
+{{--            <script src="https://formbuilder.online/assets/js/form-render.min.js"></script>--}}
             <script>
-                jQuery($ => {
+                jQuery(function($) {
                     const fbTemplate = document.getElementById('build-wrap');
-                    $(fbTemplate).formBuilder();
+                    const formBuilder = $(fbTemplate).formBuilder();
+
+                    function renderFormFromJsonArray() {
+                        // Code to be executed after 15 seconds
+                        formBuilder.actions.setData(fields);
+                    }
+
+                    if (fields) {
+                        // Set a time interval of 15 seconds (15000 milliseconds)
+                        setTimeout(renderFormFromJsonArray, 5000);
+                    }
                 });
             </script>
 
