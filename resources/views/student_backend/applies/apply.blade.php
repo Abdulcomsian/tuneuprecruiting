@@ -112,46 +112,47 @@
                                         required="">
                                 </div>
                                     @php $checkboxCounter = 0; @endphp
-                                    @foreach($customFields as $key => $field)
-                                        @if($field->type !== 'file' && $field->type !== 'checkbox-group')
-                                            <input type="hidden" name="label[]" value="{{ $field->label }}">
-                                            <input type="hidden" name="type[]" value="{{ $field->type }}">
-                                        @endif
-                                        @php $required = ($field->required) ? 'required' : ''; @endphp
-                                        <div class="col-md-4">
-                                            <label class="form-label" for="validationCustom02">{{ $field->label }}</label>
-                                            @if($field->type == 'select')
-                                                @php $checkForMultiple = ($field->multiple) ? 'multiple' : ''; @endphp
-                                                <select name="answer[]" id="" {{ $checkForMultiple  }} {{ $required }} class="form-control">
-                                                    @foreach($field->values as $value)
-                                                        <option value="{{ $value->label }}">{{ $value->label }}</option>
-                                                    @endforeach
-                                                </select>
-                                            @elseif($field->type == 'file')
-                                                <input type="hidden" name="file_label[]" value="{{ $field->label }}">
-                                                <input type="hidden" name="file_type[]" value="{{ $field->type }}">
-                                                <input class="form-control" {{ $required }} type="file" name="files[]" accept="image/*,video/*">
-                                            @elseif($field->type == 'radio-group')
-                                                <br />
-                                                @foreach($field->values as $value)
-                                                    <input type="radio" class="form-check-input" id="radio-{{ $key }}" name="answer[]" {{ $required }} value="{{ $value->value }}">
-                                                    <label class="form-check-label" for="radio-{{ $key }}">{{ $value->label }}</label>
-                                                @endforeach
-                                            @elseif($field->type == 'checkbox-group')
-                                                <input type="hidden" name="checkbox_labels[]" value="{{ $field->label }}">
-                                                <input type="hidden" name="checkbox_types[]" value="{{ $field->type }}">
-                                                <br />
-                                                @foreach($field->values as $value)
-                                                    <input type="checkbox" class="form-check-input" value="{{ $value->label }}" name="checkbox_{{ $checkboxCounter }}[]">
-                                                    <label class="form-check-label" for="checkbox-primary-1">{{ $value->label }}</label>
-                                                @endforeach
-                                                @php $checkboxCounter++; @endphp
-                                            @else
-                                                <input name="answer[]" {{ $required }} type="{{ $field->type }}" class="form-control">
+                                    @if(!empty($customFields))
+                                        @foreach($customFields as $key => $field)
+                                            @if($field->type !== 'file' && $field->type !== 'checkbox-group')
+                                                <input type="hidden" name="label[]" value="{{ $field->label }}">
+                                                <input type="hidden" name="type[]" value="{{ $field->type }}">
                                             @endif
-                                        </div>
-                                    @endforeach
-
+                                            @php $required = ($field->required) ? 'required' : ''; @endphp
+                                            <div class="col-md-4">
+                                                <label class="form-label" for="validationCustom02">{{ $field->label }}</label>
+                                                @if($field->type == 'select')
+                                                    @php $checkForMultiple = ($field->multiple) ? 'multiple' : ''; @endphp
+                                                    <select name="answer[]" id="" {{ $checkForMultiple  }} {{ $required }} class="form-control">
+                                                        @foreach($field->values as $value)
+                                                            <option value="{{ $value->label }}">{{ $value->label }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                @elseif($field->type == 'file')
+                                                    <input type="hidden" name="file_label[]" value="{{ $field->label }}">
+                                                    <input type="hidden" name="file_type[]" value="{{ $field->type }}">
+                                                    <input class="form-control" {{ $required }} type="file" name="files[]" accept="image/*,video/*">
+                                                @elseif($field->type == 'radio-group')
+                                                    <br />
+                                                    @foreach($field->values as $value)
+                                                        <input type="radio" class="form-check-input" id="radio-{{ $key }}" name="answer[]" {{ $required }} value="{{ $value->value }}">
+                                                        <label class="form-check-label" for="radio-{{ $key }}">{{ $value->label }}</label>
+                                                    @endforeach
+                                                @elseif($field->type == 'checkbox-group')
+                                                    <input type="hidden" name="checkbox_labels[]" value="{{ $field->label }}">
+                                                    <input type="hidden" name="checkbox_types[]" value="{{ $field->type }}">
+                                                    <br />
+                                                    @foreach($field->values as $value)
+                                                        <input type="checkbox" class="form-check-input" value="{{ $value->label }}" name="checkbox_{{ $checkboxCounter }}[]">
+                                                        <label class="form-check-label" for="checkbox-primary-1">{{ $value->label }}</label>
+                                                    @endforeach
+                                                    @php $checkboxCounter++; @endphp
+                                                @else
+                                                    <input name="answer[]" {{ $required }} type="{{ $field->type }}" class="form-control">
+                                                @endif
+                                            </div>
+                                        @endforeach
+                                   @endif
                                 <div class="col-md-12">
                                     <button class="btn btn-primary float-end" id="btn-from-add" type="submit">Apply</button>
                                 </div>

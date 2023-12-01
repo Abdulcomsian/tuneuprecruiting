@@ -45,6 +45,8 @@ class StudentApplyController extends Controller
     public function apply(Request $request, $programId) {
         // $user = auth()->user();
         $studentId = Session::get('studentId');
+
+        
         // check when already applied
         $numRows = Apply::where(['student_id' => $studentId, 'program_id' => $programId])->count();
         if ($numRows > 0) {
@@ -106,15 +108,17 @@ class StudentApplyController extends Controller
             }
         }
 
-        for ($i = 0; $i < count($label); $i++) {
-            $tableData = [
-                'apply_id' => $apply->id,
-                'label' => $label[$i],
-                'type' => $type[$i],
-                'answer' => $answer[$i]
-            ];
+        if ($label || empty($label)) {
+            for ($i = 0; $i < count($label); $i++) {
+                $tableData = [
+                    'apply_id' => $apply->id,
+                    'label' => $label[$i],
+                    'type' => $type[$i],
+                    'answer' => $answer[$i]
+                ];
 
-            ApplyDetail::create($tableData);
+                ApplyDetail::create($tableData);
+            }
         }
 
         return redirect()->back()->with('success', 'Apply Stored Successfully....');
