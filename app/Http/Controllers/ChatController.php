@@ -42,14 +42,20 @@ class ChatController extends Controller
                 ->get();
             $data['users'] = $users;
 
-            $id = ($id == null) ? $users[0]->id : $id;
+            if (!$users->isEmpty() && $id == null) {
+                $id = $users[0]->id;
+            }
 
             $student = Student::find($id);
 
             $data['receiver'] = $student;
             $data['sender'] = $coach;
 
-            $data['messages'] = $this->getMessagesOfAUser(['chats.student_id' => $student->id]);
+            if ($student) {
+                $data['messages'] = $this->getMessagesOfAUser(['chats.student_id' => $student->id]);
+            } else {
+                $data['messages'] = [];
+            }
 
             if ($data['messages']) {
                 $chat = Chat::where(['student_id' => $id, 'coach_id' => $coach->id]);
@@ -67,7 +73,9 @@ class ChatController extends Controller
                 ->get();
             $data['users'] = $users;
 
-            $id = ($id == null) ? $users[0]->id : $id;
+            if (!$users->isEmpty() && $id == null) {
+                $id = $users[0]->id;
+            }
 
             $coach = Coach::find($id);
 
