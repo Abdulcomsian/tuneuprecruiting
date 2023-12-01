@@ -29,6 +29,23 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            @if(session('success') || session('danger'))
+                                @php $className = (session('success')) ? 'success' : 'danger'; @endphp
+                                @php $message = (session('success')) ? session('success') : session('danger'); @endphp
+                                <div class="alert alert-{{ $className }}">
+                                    {{ $message }}
+                                </div>
+                            @endif
                             <div class="table-responsive theme-scrollbar">
                                 <table class="display" id="data-table">
                                     <thead>
@@ -51,16 +68,9 @@
                                                 <td>{{ $program->details }}</td>
                                                 <td>
                                                     <ul class="action">
-                                                        <li class="delete">
-                                                                <a
-                                                                    href="{{ route('program.show', $program->id) }}"
-                                                                    class="btn-edit"
-                                                                    data-get-data-route="{{ route('program.edit', $program->id) }}"
-                                                                    data-route="{{ route('program.update', $program->id) }}">
-                                                                    <i class="icofont icofont-eye-alt"></i>
-                                                                </a>
-                                                        </li>
-                                                        <li class="edit ml-3"><a href="{{ route('program.edit', $program->id) }}"><i class="fa fa-pencil-square-o"></i></a></li>
+                                                        <li class="edit"><a href="{{ route('program.show', $program->id) }}"><i class="icofont icofont-eye-alt"></i></a></li>
+                                                        <li class="edit"><a href="{{ route('program.edit', $program->id) }}"><i class="fa fa-pencil-square-o"></i></a></li>
+                                                        <li class="delete"><a href="{{ route('program.destroy', $program->id) }}"><i class="fa fa-trash"></i></a></li>
                                                     </ul>
                                                 </td>
                                             </tr>

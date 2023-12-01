@@ -56,7 +56,7 @@
                                                             @endif
 
                                                         </li>
-                                                        <li class="edit"> <a href="{{ route('chat', [ 'id' => $apply->id, 'type' => 'User' ]) }}">
+                                                        <li class="edit"> <a href="{{ route('chat', encrypt($apply->student_id)) }}">
                                                                 @if($apply->status == 'TALKING')
                                                                     <i class="icofont icofont-ui-text-chat"></i>
                                                                 @else

@@ -83,7 +83,7 @@
                                 <div class="col-md-3">
                                     <label class="form-label" for="validationCustom02">Status</label>
                                     <select name="status" id="program-status" class="form-control">
-                                        <option value="{{ $program->status }}">{{ $program->status }}</option>
+                                        <option value="{{ $program->status }}">{{ ucfirst($program->status) }}</option>
                                         <option value=""></option>
                                         <option value="public">Public</option>
                                         <option value="drops">Drops</option>

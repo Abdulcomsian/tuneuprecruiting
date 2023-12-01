@@ -21,7 +21,7 @@ class ChatController extends Controller
             ->join('coaches', 'coaches.id', '=', 'chats.coach_id')
             ->where($where)->get();
     }
-    public function show(Request $request, $id = null) {
+    public function show($id = null) {
         try {
             $id = decrypt($id);
         } catch (DecryptException $e) {

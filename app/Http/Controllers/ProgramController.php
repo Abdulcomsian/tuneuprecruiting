@@ -74,12 +74,15 @@ class ProgramController extends Controller
      */
     public function show(string $id)
     {
+        $program = Program::find($id);
+
+        $this->authorize('edit', $program);
+
+        $data['program'] = $program;
+
         $data['applies'] = Apply::join('students', 'students.id', '=', 'applies.student_id')
             ->where(['program_id' => $id])
             ->get();
-
-        $program = Program::find($id);
-        $data['program'] = $program;
 
         $data['questions'] = json_decode($program->custom_fields);
 
@@ -91,7 +94,15 @@ class ProgramController extends Controller
      */
     public function edit(string $id)
     {
-        $data['program'] = Program::find($id);
+        $program = Program::find($id);
+
+        $this->authorize('edit', $program);
+
+        if($program->status == 'public') {
+            return redirect()->back()->with('danger', 'You are unable to modify the program public status.');
+        }
+
+        $data['program'] = $program;
         return view('backend/program/edit_program', $data);
     }
 
@@ -130,6 +141,8 @@ class ProgramController extends Controller
      */
     public function destroy($id)
     {
+        $program = Program::find($id);
+        $this->authorize('edit', $program);
         Program::destroy($id);
         return redirect()->back()->with('success', 'Program deleted.');
     }
