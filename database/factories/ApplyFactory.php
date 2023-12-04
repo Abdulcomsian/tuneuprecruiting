@@ -24,7 +24,6 @@ class ApplyFactory extends Factory
         return [
             'program_id' => Program::inRandomOrder()->first(),
             'student_id' => Student::inRandomOrder()->first(),
-            'status' => $this->faker->randomElement(['READ', 'UNREAD', 'STAR', 'TALKING', 'DELETE']),
         ];
 
     }

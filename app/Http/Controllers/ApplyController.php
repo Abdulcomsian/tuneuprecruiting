@@ -17,6 +17,7 @@ class ApplyController extends Controller
             ->join('programs', 'programs.id', '=', 'applies.program_id')
             ->join('students', 'students.id', '=', 'applies.student_id')
             ->where('programs.coach_id', Session::get('coachId'))
+            ->orderBy('applies.id', 'desc')
             ->get();
 
         return view('backend/applies/applies', $data);

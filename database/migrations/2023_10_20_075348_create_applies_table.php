@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBiginteger('student_id')->unsigned();
             $table->unsignedBiginteger('program_id')->unsigned();
-            $table->enum('status',['READ', 'UNREAD', 'STAR','TALKING','DELETE'])->default('UNREAD');
+            $table->string('trash')->default('active');
+            $table->string('star')->nullable();
+            $table->string('talking')->nullable();
+            $table->string('read')->default('unread');
 
             $table->timestamps();
         });

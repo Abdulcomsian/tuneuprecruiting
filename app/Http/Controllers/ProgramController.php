@@ -133,7 +133,7 @@ class ProgramController extends Controller
         // Update the post with the validated data
         $program->update($validatedData);
 
-        return redirect()->back()->with('success', 'Program updated.');
+        return redirect()->route('program.index');
     }
 
     /**

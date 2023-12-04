@@ -58,14 +58,15 @@
                         <div class="card-block row">
                             <div class="col-sm-12 col-lg-12 col-xl-12">
                                 <div class="table-responsive theme-scrollbar">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Question</th>
-                                            <th scope="col">Type</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+                                    @if($questions)
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Question</th>
+                                                <th scope="col">Type</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
                                             @forelse($questions as $question)
                                                 <tr>
                                                     <td>{{ $question->label }}</td>
@@ -74,8 +75,11 @@
                                             @empty
                                                 <p>No items found.</p>
                                             @endforelse
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    @else
+                                        <p class="m-3">No Question or custom fields.</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>

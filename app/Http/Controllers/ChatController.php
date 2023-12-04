@@ -35,10 +35,17 @@ class ChatController extends Controller
             $coachId = Session::get('coachId');
             $coach = Coach::find($coachId);
 
-            $users = Program::select('students.*')
-                ->join('applies', 'applies.program_id', '=', 'programs.id')
-                ->join('students', 'students.id', '=', 'applies.student_id')
-                ->where(['coach_id' => $coachId])
+//            $users = Program::select('students.*')
+//                ->join('applies', 'applies.program_id', '=', 'programs.id')
+//                ->join('students', 'students.id', '=', 'applies.student_id')
+//                ->where(['coach_id' => $coachId])
+//                ->get();
+//            $data['users'] = $users;
+
+            $users = Student::join('chats', 'chats.student_id', '=', 'students.id')
+                ->where(['chats.coach_id' => $coachId])
+                ->select('students.*') // Select the columns you need from the coaches table
+                ->distinct()
                 ->get();
             $data['users'] = $users;
 
@@ -66,10 +73,17 @@ class ChatController extends Controller
             $studentId = Session::get('studentId');
             $student = Student::find($studentId);
 
-            $users = Program::select('coaches.*')
-                ->join('coaches', 'coaches.id', '=', 'programs.coach_id')
-                ->join('applies', 'applies.program_id', '=', 'programs.id')
-                ->where(['student_id' => $studentId])
+//            $users = Program::select('coaches.*')
+//                ->join('coaches', 'coaches.id', '=', 'programs.coach_id')
+//                ->join('applies', 'applies.program_id', '=', 'programs.id')
+//                ->where(['student_id' => $studentId])
+//                ->get();
+//            $data['users'] = $users;
+
+            $users = Coach::join('chats', 'chats.coach_id', '=', 'coaches.id')
+                ->where(['chats.student_id' => $studentId])
+                ->select('coaches.*') // Select the columns you need from the coaches table
+                ->distinct()
                 ->get();
             $data['users'] = $users;
 
@@ -82,7 +96,7 @@ class ChatController extends Controller
             $data['receiver'] = $coach;
             $data['sender'] = $student;
 
-            $data['messages'] = $this->getMessagesOfAUser(['chats.student_id' => $student->id]);
+            $data['messages'] = $this->getMessagesOfAUser(['chats.coach_id' => $id, 'chats.student_id' => $student->id]);
 
             if ($data['messages']) {
                 $chat = Chat::where(['student_id' => $student->id, 'coach_id' => $id]);

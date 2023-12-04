@@ -70,7 +70,13 @@
                                                     <ul class="action">
                                                         <li class="edit"><a href="{{ route('program.show', $program->id) }}"><i class="icofont icofont-eye-alt"></i></a></li>
                                                         <li class="edit"><a href="{{ route('program.edit', $program->id) }}"><i class="fa fa-pencil-square-o"></i></a></li>
-                                                        <li class="delete"><a href="{{ route('program.destroy', $program->id) }}"><i class="fa fa-trash"></i></a></li>
+                                                        <li class="delete">
+                                                            <form method="POST" action="{{ route('program.destroy', $program->id) }}" onsubmit='return confirm("Are you sure?")'>
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <a href="#" onclick="$(this).closest('form').submit();"><i class="fa fa-trash"></i></a>
+                                                            </form>
+                                                        </li>
                                                     </ul>
                                                 </td>
                                             </tr>

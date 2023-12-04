@@ -51,7 +51,7 @@
                                                                 <i class="icofont icofont-law-document"></i>
                                                             </a>
                                                         </li>
-                                                        <li class="edit"> <a href="{{ route('chat', [ 'id' => $program->coach_id, 'type' => 'Student' ]) }}">
+                                                        <li class="edit"> <a href="{{ route('chat', encrypt($program->coach_id)) }}">
                                                                 <i class="icofont icofont-chat"></i></a>
                                                         </li>
                                                         <li class="edit"> <a href="{{ route('program.view', encrypt($program->id)) }}">

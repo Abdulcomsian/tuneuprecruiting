@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Session;
 class StudentApplyController extends Controller
 {
     public function programs() {
-        $data['programs'] = Program::with('coach')->get();
-//        $programs = Program::with('coach')->paginate(10);
-//        dd($programs);
+        $data['programs'] = Program::with('coach')->where(['programs.status' => 'public'])->get();
         return view('student_backend/programs/programs', $data);
     }
 
@@ -46,7 +44,7 @@ class StudentApplyController extends Controller
         // $user = auth()->user();
         $studentId = Session::get('studentId');
 
-        
+
         // check when already applied
         $numRows = Apply::where(['student_id' => $studentId, 'program_id' => $programId])->count();
         if ($numRows > 0) {

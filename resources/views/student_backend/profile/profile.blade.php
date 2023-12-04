@@ -199,11 +199,11 @@
                                         <div class="mb-3">
                                             <label class="form-label">Country</label>
                                             <select class="form-control btn-square" name="country">
-                                                <option value="0">--Select--</option>
-                                                <option value="1">Germany</option>
-                                                <option value="2">Canada</option>
-                                                <option value="3">Usa</option>
-                                                <option value="4">Aus</option>
+                                                <option value="">--Select--</option>
+                                                <option value="germany">Germany</option>
+                                                <option value="canada">Canada</option>
+                                                <option value="usa">Usa</option>
+                                                <option value="aus"></option>
                                             </select>
                                         </div>
                                     </div>

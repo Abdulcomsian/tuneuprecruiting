@@ -92,7 +92,7 @@
                     <div class="message notification-box">
                         <svg>
                             <use href="{{asset('assets/svg/icon-sprite.svg#Message')}}"></use>
-                        </svg><span class="rounded-pill badge-secondary"> </span>
+                        </svg><span class="rounded-pill badge-secondary" id="message-badge" style="display: none;"> </span>
                     </div>
                     <div class="onhover-show-div message-dropdown">
                         <h6 class="f-18 mb-0 dropdown-title">Message</h6>
@@ -111,15 +111,16 @@
                 </li>
                 <li class="profile-nav onhover-dropdown pe-0 py-0">
                     <div class="d-flex align-items-center profile-media">
-                        @php if (auth()->user()->role == 'student')
+                        @php $role = auth()->user()->role; @endphp
+                        @php if ($role == 'student')
                             $profileImage = (Session::has('profileImage')) ? asset("uploads/students_image/".Session::get('profileImage')) : asset('assets/images/dashboard/profile.png');
                         @endphp
-                        @php if (auth()->user()->role == 'coach')
+                        @php if ($role == 'coach')
                             $profileImage = (Session::has('profileImage')) ? asset("uploads/users_image/".Session::get('profileImage')) : asset('assets/images/dashboard/profile.png');
                         @endphp
                         <img style="width: 35px; height: 35px;" class="b-r-25" src="{{ $profileImage }}" alt="">
-                        <div class="flex-grow-1 user"><span>Helen Walter</span>
-                            <p class="mb-0 font-nunito">Admin
+                        <div class="flex-grow-1 user"><span>{{ Session::get('firstName') . ' ' . Session::get('lastName') }}</span>
+                            <p class="mb-0 font-nunito">{{ ucfirst($role) }}
                                 <svg>
                                     <use href="{{ $profileImage }}"></use>
                                 </svg>

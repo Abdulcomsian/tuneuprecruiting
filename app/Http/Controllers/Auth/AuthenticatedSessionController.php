@@ -37,10 +37,14 @@ class AuthenticatedSessionController extends Controller
         if ($user->role == 'student') {
             $student = Student::where('user_id', $user->id)->first();
             Session::put('studentId', $student->id);
+            Session::put('firstName', $student->first_name);
+            Session::put('lastName', $student->last_name);
             Session::put('profileImage', $student->profile_image);
         } else if ($user->role == 'coach') {
             $coach = Coach::where('user_id', $user->id)->first();
             Session::put('coachId', $coach->id);
+            Session::put('firstName', $coach->first_name);
+            Session::put('lastName', $coach->last_name);
             Session::put('profileImage', $coach->profile_image);
         }
 
