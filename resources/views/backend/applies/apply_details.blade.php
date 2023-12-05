@@ -30,7 +30,6 @@
                                         <tr>
                                             <th>Question</th>
                                             <th>Answer</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -52,11 +51,6 @@
                                                     @else
                                                         {{ $detail->answer }}
                                                     @endif
-                                                </td>
-                                                <td>
-                                                    <ul class="action">
-                                                        <li class="edit"><a href="{{ url('/apply/view/'.$detail->id) }}"><i class="icofont icofont-eye-alt"></i></a></li>
-                                                    </ul>
                                                 </td>
                                             </tr>
                                         @endforeach

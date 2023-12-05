@@ -81,7 +81,7 @@ class ProgramController extends Controller
         $data['program'] = $program;
 
         $data['applies'] = Apply::join('students', 'students.id', '=', 'applies.student_id')
-            ->where(['program_id' => $id])
+            ->where(['program_id' => $id, 'applies.trash' => 'active'])
             ->get();
 
         $data['questions'] = json_decode($program->custom_fields);

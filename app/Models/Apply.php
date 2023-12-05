@@ -12,7 +12,10 @@ class Apply extends Model
     protected $fillable = [
         'program_id',
         'student_id',
-        'status'
+        'trash',
+        'star',
+        'talking',
+        'read',
     ];
 
     public function student()

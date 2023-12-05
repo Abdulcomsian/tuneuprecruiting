@@ -142,13 +142,17 @@
                                                     <input type="hidden" name="checkbox_labels[]" value="{{ $field->label }}">
                                                     <input type="hidden" name="checkbox_types[]" value="{{ $field->type }}">
                                                     <br />
-                                                    @foreach($field->values as $value)
-                                                        <input type="checkbox" class="form-check-input" value="{{ $value->label }}" name="checkbox_{{ $checkboxCounter }}[]">
-                                                        <label class="form-check-label" for="checkbox-primary-1">{{ $value->label }}</label>
-                                                    @endforeach
+                                                    <div class="checkbox-group" {{ $required }}>
+                                                        @foreach($field->values as $value)
+                                                            <input type="checkbox" class="form-check-input" value="{{ $value->label }}" name="checkbox_{{ $checkboxCounter }}[]">
+                                                            <label class="form-check-label" for="checkbox-primary-1">{{ $value->label }}</label>
+                                                        @endforeach
+                                                    </div>
                                                     @php $checkboxCounter++; @endphp
                                                 @else
-                                                    <input name="answer[]" {{ $required }} type="{{ $field->type }}" class="form-control">
+                                                    @php $min = (isset($field->min)) ? "min=".$field->min : ''; @endphp
+                                                    @php $max = (isset($field->max)) ? "max=".$field->max : ''; @endphp
+                                                    <input name="answer[]" {{ $min }} {{ $max }} {{ $required }} type="{{ $field->type }}" class="form-control">
                                                 @endif
                                             </div>
                                         @endforeach
