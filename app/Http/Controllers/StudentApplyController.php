@@ -13,6 +13,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class StudentApplyController extends Controller
 {
@@ -49,6 +50,34 @@ class StudentApplyController extends Controller
         $numRows = Apply::where(['student_id' => $studentId, 'program_id' => $programId])->count();
         if ($numRows > 0) {
             return redirect()->back()->with('success', 'You have previously submitted an application for this program.');
+        }
+
+        // validation
+        $program = Program::find($programId);
+        $inputs = json_decode($program->custom_fields);
+
+        $selectListCounter = 0;
+        $inputCounter = 0;
+        foreach ($inputs as $key => $input) {
+            if ($input->type == 'checkbox-group') {
+                if ($input->required) {
+                    $rules["checkbox_$selectListCounter"] = 'required';
+                    $messages["checkbox_$selectListCounter.required"] = "The {$input->label} field is required.";
+                }
+                $selectListCounter++;
+            } else {
+                if ($input->required) {
+                    $rules["answer$inputCounter"] = 'required';
+                    $messages["answer$inputCounter.required"] = "The {$input->label} field is required.";
+                }
+                $inputCounter++;
+            }
+        }
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $label = $request->label;
