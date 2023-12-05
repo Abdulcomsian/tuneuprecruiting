@@ -21,7 +21,7 @@ class ChatController extends Controller
             ->join('coaches', 'coaches.id', '=', 'chats.coach_id')
             ->where($where)->get();
     }
-    public function show($id = null) {
+    public function show(Request $request, $id = null) {
         try {
             $id = decrypt($id);
         } catch (DecryptException $e) {
@@ -148,6 +148,9 @@ class ChatController extends Controller
             $tableData['sender'] = 'Coach';
             $tableData['coach_id'] = Session::get('coachId');
             $tableData['student_id'] = $request->receiverId;
+
+            $apply = Apply::where(['student_id' => $request->receiverId]);
+            $apply->update(['talking' => 'talking']);
         } else {
             $tableData['sender'] = 'Student';
             $tableData['student_id'] = Session::get('studentId');
