@@ -89,11 +89,10 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive theme-scrollbar">
-                                <table class="display" id="basic-1">
+                                <table class="display" id="data-table">
                                     <thead>
                                     <tr>
                                         <th>Full Name</th>
-                                        <th>Image</th>
                                         <th>Graduation Year</th>
                                         <th>Country</th>
                                         <th>Home Town</th>
@@ -105,29 +104,35 @@
                                     @foreach($applies as $apply)
                                         <tr class="border-bottom-secondary">
                                             <th scope="row">{{ $apply->student->first_name . $apply->student->last_name }}</th>
-                                            <td> <img class="img-30 me-2" src="../assets/images/user/1.jpg" alt="profile">Ram Jacob</td>
                                             <td>{{ $apply->student->graduation_year }}</td>
                                             <td>{{ $apply->student->country }}</td>
                                             <td>{{ $apply->student->home_town }}</td>
                                             <td>{{ $apply->student->state }}</td>
                                             <td>
                                                 <ul class="action">
-                                                    <li class="edit"> <a href="#">
-                                                            @if($apply->status == 'STAR')
-                                                                <i class="fa fa-heart-o"></i>
-                                                            @else
+                                                    <li class="edit"> <a href="{{ url('apply/status/'.encrypt($apply->id)) }}">
+                                                            @if($apply->star == 'star')
                                                                 <i class="icofont icofont-heart-alt"></i></a>
+                                                        @else
+                                                            <i class="fa fa-heart-o"></i>
                                                         @endif
 
                                                     </li>
-                                                    <li class="edit"> <a href="{{ route('chat', [ 'id' => $apply->id, 'type' => 'User' ]) }}">
-                                                            @if($apply->status == 'TALKING')
+                                                    <li class="edit"> <a href="{{ route('chat', encrypt($apply->student_id)) }}">
+                                                            @if($apply->talking == 'talking')
                                                                 <i class="icofont icofont-ui-text-chat"></i>
                                                             @else
                                                                 <i class="icofont icofont-chat"></i></a>
                                                         @endif
                                                     </li>
-                                                    <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
+                                                    <li class="edit"><a href="{{ url('/apply/view/'. encrypt($apply->id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
+                                                    <li class="delete">
+                                                        <form method="POST" action="{{ route('apply.destroy', ['id' => encrypt($apply->id)]) }}" onsubmit='return confirm("Are you sure?")'>
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a href="#" onclick="$(this).closest('form').submit();"><i class="fa fa-trash"></i></a>
+                                                        </form>
+                                                    </li>
                                                 </ul>
                                             </td>
                                         </tr>

@@ -40,7 +40,7 @@
                                     <tbody>
                                         @foreach($applies as $apply)
                                             <tr class="border-bottom-secondary">
-                                                <th scope="row">{{ $apply->first_name . $apply->last_name }}</th>
+                                                <th scope="row">{{ $apply->first_name . ' ' . $apply->last_name }}</th>
                                                 <td>{{ $apply->program_name }}</td>
                                                 <td>{{ $apply->graduation_year }}</td>
                                                 <td>{{ $apply->country }}</td>
@@ -48,22 +48,29 @@
                                                 <td>{{ $apply->state }}</td>
                                                 <td>
                                                     <ul class="action">
-                                                        <li class="edit"> <a href="#">
-                                                                @if($apply->status == 'STAR')
-                                                                    <i class="fa fa-heart-o"></i>
-                                                                @else
+                                                        <li class="edit"> <a href="{{ url('apply/status/'.encrypt($apply->apply_id)) }}">
+                                                                @if($apply->star == 'star')
                                                                     <i class="icofont icofont-heart-alt"></i></a>
-                                                            @endif
+                                                                @else
+                                                                    <i class="fa fa-heart-o"></i>
+                                                               @endif
 
                                                         </li>
                                                         <li class="edit"> <a href="{{ route('chat', encrypt($apply->student_id)) }}">
-                                                                @if($apply->status == 'TALKING')
+                                                                @if($apply->talking == 'talking')
                                                                     <i class="icofont icofont-ui-text-chat"></i>
                                                                 @else
                                                                     <i class="icofont icofont-chat"></i></a>
                                                             @endif
                                                         </li>
-                                                        <li class="edit"><a href="{{ url('/apply/view/'. encrypt($apply->id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
+                                                        <li class="edit"><a href="{{ url('/apply/view/'. encrypt($apply->program_id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
+                                                        <li class="delete">
+                                                            <form method="POST" action="{{ route('apply.destroy', ['id' => encrypt($apply->apply_id)]) }}" onsubmit='return confirm("Are you sure?")'>
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <a href="#" onclick="$(this).closest('form').submit();"><i class="fa fa-trash"></i></a>
+                                                            </form>
+                                                        </li>
                                                     </ul>
                                                 </td>
                                             </tr>

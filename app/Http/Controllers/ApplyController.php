@@ -13,14 +13,47 @@ use Illuminate\Support\Facades\Session;
 class ApplyController extends Controller
 {
     public function applies() {
-        $data['applies'] = Apply::select('programs.*', 'students.first_name', 'students.id as student_id', 'students.last_name', 'students.graduation_year', 'students.country', 'students.home_town', 'students.state')
+        $data['applies'] = Apply::select('programs.*', 'applies.*', 'applies.id as apply_id', 'students.first_name', 'students.id as student_id', 'students.last_name', 'students.graduation_year', 'students.country', 'students.home_town', 'students.state')
             ->join('programs', 'programs.id', '=', 'applies.program_id')
             ->join('students', 'students.id', '=', 'applies.student_id')
-            ->where('programs.coach_id', Session::get('coachId'))
+            ->where(['programs.coach_id' => Session::get('coachId'), 'applies.trash' => 'active'])
             ->orderBy('applies.id', 'desc')
             ->get();
 
         return view('backend/applies/applies', $data);
+    }
+
+    public function changeStatusToStar($applyId) {
+        try {
+            $applyId = decrypt($applyId);
+        } catch (DecryptException $e) {
+            return view('common/error')->with('errorMessage', 'Invalid or tampered ID');
+        }
+
+        $apply = Apply::find($applyId);
+        if ($apply->star == 'star') {
+            $apply->star = '';
+        } else {
+            $apply->star = 'star';
+        }
+
+        $apply->save();
+
+        return redirect()->back()->with('success', 'Star.');
+    }
+
+    public function destroy($id) {
+        try {
+            $id = decrypt($id);
+        } catch (DecryptException $e) {
+            return view('common/error')->with('errorMessage', 'Invalid or tampered ID');
+        }
+
+        $apply = Apply::find($id);
+        $apply->trash = 'trash';
+        $apply->save();
+
+        return redirect()->back()->with('success', 'Deleted.');
     }
 
     public function viewApply($id) {
@@ -30,10 +63,10 @@ class ApplyController extends Controller
             return view('common/error')->with('errorMessage', 'Invalid or tampered ID');
         }
 
-        $apply = Apply::where(['program_id' => $id])->first();
+        $apply = Apply::find($id);
         $data['apply'] = $apply;
         $data['applyDetails'] = ApplyDetail::where(['apply_id' => $apply->id])->get();
-        // dd($data['applyDetails']);
+
         return view('backend/applies/apply_details', $data);
     }
 }
