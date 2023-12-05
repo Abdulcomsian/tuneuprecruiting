@@ -9,6 +9,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\StudentApplyController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::post("/chat/store", [ChatController::class, "store"])->name('chat.store');
 
     Route::get('/applies', [ApplyController::class, 'applies']);
+    Route::get('/apply/status/{id}', [ApplyController::class, 'changeStatusToStar']);
+    Route::delete('/apply/destroy/{id}', [ApplyController::class, 'destroy'])->name('apply.destroy');
     Route::get('/apply/view/{id}', [ApplyController::class, 'viewApply']);
     Route::get('/profile', [ProfileController::class, 'profile']);
     Route::post('/update/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
@@ -66,6 +69,9 @@ Route::middleware('auth')->group(function () {
 
     // Messages
     Route::get('/notification/messages', [MessageController::class, 'notificationMessages']);
+
+    Route::get('send-mail', [MailController::class, 'index']);
+
 });
 
 require __DIR__.'/auth.php';
