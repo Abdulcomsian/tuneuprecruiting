@@ -112,15 +112,18 @@
                                         required="">
                                 </div>
                                     @php $checkboxCounter = 0; @endphp
+                                    @php $inputCounter = 0; @endphp
+                                    @php $radioCounter = 0; @endphp
                                     @if(!empty($customFields))
                                         @foreach($customFields as $key => $field)
-                                            @if($field->type !== 'file' && $field->type !== 'checkbox-group')
+                                            @if($field->type !== 'file' && $field->type !== 'checkbox-group' && $field->type !== 'radio-group')
                                                 <input type="hidden" name="label[]" value="{{ $field->label }}">
                                                 <input type="hidden" name="type[]" value="{{ $field->type }}">
                                             @endif
                                             @php $required = ($field->required) ? 'required' : ''; @endphp
+                                            @php $requiredLabel = ($field->required) ? "<span class='text-danger'>*</span>" : ''; @endphp
                                             <div class="col-md-4">
-                                                <label class="form-label" for="validationCustom02">{{ $field->label }}</label>
+                                                <label class="form-label" for="validationCustom02">{{ $field->label }} {!! $requiredLabel !!}</label>
                                                 @if($field->type == 'select')
                                                     @php $checkForMultiple = ($field->multiple) ? 'multiple' : ''; @endphp
                                                     <select name="answer[]" id="" {{ $checkForMultiple  }} {{ $required }} class="form-control">
@@ -133,26 +136,30 @@
                                                     <input type="hidden" name="file_type[]" value="{{ $field->type }}">
                                                     <input class="form-control" {{ $required }} type="file" name="files[]" accept="image/*,video/*">
                                                 @elseif($field->type == 'radio-group')
+                                                    <input type="hidden" name="radio_label[]" value="{{ $field->label }}">
                                                     <br />
-                                                    @foreach($field->values as $value)
-                                                        <input type="radio" class="form-check-input" id="radio-{{ $key }}" name="answer[]" {{ $required }} value="{{ $value->value }}">
-                                                        <label class="form-check-label" for="radio-{{ $key }}">{{ $value->label }}</label>
+                                                    @foreach($field->values as $radioKey => $value)
+                                                        <input type="hidden" name="radio_counter" value="{{ $radioCounter }}">
+                                                        <input type="radio" class="form-check-input" id="radio-{{ $key }}-{{ $radioKey }}" name="radio_{{ $radioCounter }}" {{ $required }} value="{{ $value->label }}">
+                                                        <label class="form-check-label" for="radio-{{ $key }}-{{ $radioKey }}">{{ $value->label }}</label>
                                                     @endforeach
+                                                    @php $radioCounter++ @endphp
                                                 @elseif($field->type == 'checkbox-group')
                                                     <input type="hidden" name="checkbox_labels[]" value="{{ $field->label }}">
                                                     <input type="hidden" name="checkbox_types[]" value="{{ $field->type }}">
                                                     <br />
-                                                    <div class="checkbox-group" {{ $required }}>
-                                                        @foreach($field->values as $value)
-                                                            <input type="checkbox" class="form-check-input" value="{{ $value->label }}" name="checkbox_{{ $checkboxCounter }}[]">
-                                                            <label class="form-check-label" for="checkbox-primary-1">{{ $value->label }}</label>
+                                                    <div class="form-group checkbox-group">
+                                                        @foreach($field->values as $checkboxKey => $value)
+                                                            <input type="checkbox" id="checkbox-{{$key}}-{{ $checkboxKey }}" class="form-check-input" value="{{ $value->label }}" name="checkbox_{{ $checkboxCounter }}[]" {{ in_array($value->label, old('checkbox_'.$checkboxCounter, [])) ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="checkbox-{{$key}}-{{ $checkboxKey }}">{{ $value->label }}</label>
                                                         @endforeach
                                                     </div>
                                                     @php $checkboxCounter++; @endphp
                                                 @else
                                                     @php $min = (isset($field->min)) ? "min=".$field->min : ''; @endphp
                                                     @php $max = (isset($field->max)) ? "max=".$field->max : ''; @endphp
-                                                    <input name="answer[]" {{ $min }} {{ $max }} {{ $required }} type="{{ $field->type }}" class="form-control">
+                                                    <input name="answer[]" value="{{ old('answer.'.$inputCounter) }}" {{ $min }} {{ $max }} {{ $required }} type="{{ $field->type }}" class="form-control">
+                                                    @php $inputCounter++; @endphp
                                                 @endif
                                             </div>
                                         @endforeach

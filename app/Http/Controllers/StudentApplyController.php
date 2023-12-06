@@ -49,7 +49,7 @@ class StudentApplyController extends Controller
         // check when already applied
         $numRows = Apply::where(['student_id' => $studentId, 'program_id' => $programId])->count();
         if ($numRows > 0) {
-            return redirect()->back()->with('success', 'You have previously submitted an application for this program.');
+            //return redirect()->back()->with('success', 'You have previously submitted an application for this program.');
         }
 
         // validation
@@ -58,6 +58,11 @@ class StudentApplyController extends Controller
 
         $selectListCounter = 0;
         $inputCounter = 0;
+        $fileCounter = 0;
+        $radioCounter = 0;
+        $rules = [];
+        $messages = [];
+
         foreach ($inputs as $key => $input) {
             if ($input->type == 'checkbox-group') {
                 if ($input->required) {
@@ -65,16 +70,29 @@ class StudentApplyController extends Controller
                     $messages["checkbox_$selectListCounter.required"] = "The {$input->label} field is required.";
                 }
                 $selectListCounter++;
+            } else if($input->type == 'file') {
+                if ($input->required) {
+                    $rules["files.$fileCounter"] = 'required';
+                    $messages["files.$fileCounter.required"] = "The {$input->label} field is required.";
+                }
+                $fileCounter++;
+            } else if ($input->type == 'radio-group') {
+                if ($input->required) {
+                    $rules["radio_$radioCounter"] = 'required';
+                    $messages["radio_$radioCounter.required"] = "The {$input->label} field is required.";
+                }
+                $radioCounter++;
             } else {
                 if ($input->required) {
-                    $rules["answer$inputCounter"] = 'required';
-                    $messages["answer$inputCounter.required"] = "The {$input->label} field is required.";
+                    $rules["answer.$inputCounter"] = 'required';
+                    $messages["answer.$inputCounter.required"] = "The {$input->label} field is required.";
                 }
                 $inputCounter++;
             }
         }
 
         $validator = Validator::make($request->all(), $rules, $messages);
+        //dd($validator);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -91,6 +109,25 @@ class StudentApplyController extends Controller
         ];
 
         $apply = Apply::create($programData);
+
+        // radio buttons
+        if ($request->has('radio_counter')) {
+            $radioCounter = $request->radio_counter;
+            $radioLabel = $request->radio_label;
+
+            for ($i = 0; $i <= $radioCounter; $i++) {
+                $variableName = 'radio_'.$i;
+
+                $tableData = [
+                    'apply_id' => $apply->id,
+                    'label' => $radioLabel[$i],
+                    'type' => "radio-group",
+                    'answer' => $request->$variableName
+                ];
+
+                ApplyDetail::create($tableData);
+            }
+        }
 
         if ($request->has('checkbox_labels')) {
             $checkboxLabels = $request->checkbox_labels;

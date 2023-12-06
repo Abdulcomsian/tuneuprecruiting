@@ -63,7 +63,7 @@
                                                                     <i class="icofont icofont-chat"></i></a>
                                                             @endif
                                                         </li>
-                                                        <li class="edit"><a href="{{ url('/apply/view/'. encrypt($apply->program_id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
+                                                        <li class="edit"><a href="{{ url('/apply/view/'. encrypt($apply->apply_id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
                                                         <li class="delete">
                                                             <form method="POST" action="{{ route('apply.destroy', ['id' => encrypt($apply->apply_id)]) }}" onsubmit='return confirm("Are you sure?")'>
                                                                 @csrf
