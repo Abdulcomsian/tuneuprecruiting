@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ApplyController;
-use App\Http\Controllers\MessageController;
 use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\StudentApplyController;
@@ -37,7 +36,7 @@ Route::get('/dashboard', function () {
 
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -48,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get("/chat/{id?}", [ChatController::class, "show"])->name('chat');
     Route::get("/chat/new/{id}", [ChatController::class, "getNewMessages"])->name('chat.new');
     Route::post("/chat/store", [ChatController::class, "store"])->name('chat.store');
+    Route::get('/notification/messages', [ChatController::class, 'notificationMessages']);
 
     Route::get('/applies', [ApplyController::class, 'applies']);
     Route::get('/apply/status/{id}', [ApplyController::class, 'changeStatusToStar']);
@@ -67,11 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/update/student/profile', [StudentProfileController::class, 'updateProfile'])->name('student.profile.update');
     Route::get('/program/view/{id}', [StudentApplyController::class, 'viewProgram'])->name('program.view');
 
-    // Messages
-    Route::get('/notification/messages', [MessageController::class, 'notificationMessages']);
-
     Route::get('send-mail', [MailController::class, 'index']);
-
 });
 
 require __DIR__.'/auth.php';

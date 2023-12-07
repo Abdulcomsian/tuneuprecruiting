@@ -22,18 +22,11 @@ class StudentApplyController extends Controller
         return view('student_backend/programs/programs', $data);
     }
 
-    public function studentApply($programId) {
-        try {
-            $programId = decrypt($programId);
-        } catch (DecryptException $e) {
-            return view('common/error')->with('errorMessage', 'Invalid or tampered ID');
-        }
+    public function studentApply(Request $request) {
+        $programId = $request->id;
 
         $data['program'] = Program::find($programId);
         $data['customFields'] = json_decode($data['program']->custom_fields);
-
-        //dd($data['customFields']);
-        //$data['questions'] = ProgramQuestion::where(['program_id' => $programId])->get();
 
         $user = auth()->user();
         $data['user'] = Student::where(['user_id' => $user->id])->first();
@@ -46,54 +39,59 @@ class StudentApplyController extends Controller
         $studentId = Session::get('studentId');
 
 
-        // check when already applied
-        $numRows = Apply::where(['student_id' => $studentId, 'program_id' => $programId])->count();
-        if ($numRows > 0) {
+        // Check when already applied
+        if (Apply::where(['student_id' => $studentId, 'program_id' => $programId])->exists()) {
             return redirect()->back()->with('success', 'You have previously submitted an application for this program.');
         }
 
-        // validation
+        // Get program and custom fields
         $program = Program::find($programId);
         $inputs = json_decode($program->custom_fields);
 
+        // Initialize counters and arrays
         $selectListCounter = 0;
-        $inputCounter = 0;
         $fileCounter = 0;
         $radioCounter = 0;
         $rules = [];
         $messages = [];
 
+        // Loop through custom fields and build rules and messages
         foreach ($inputs as $key => $input) {
-            if ($input->type == 'checkbox-group') {
-                if ($input->required) {
-                    $rules["checkbox_$selectListCounter"] = 'required';
-                    $messages["checkbox_$selectListCounter.required"] = "The {$input->label} field is required.";
-                }
-                $selectListCounter++;
-            } else if($input->type == 'file') {
-                if ($input->required) {
-                    $rules["files.$fileCounter"] = 'required';
-                    $messages["files.$fileCounter.required"] = "The {$input->label} field is required.";
-                }
-                $fileCounter++;
-            } else if ($input->type == 'radio-group') {
-                if ($input->required) {
-                    $rules["radio_$radioCounter"] = 'required';
-                    $messages["radio_$radioCounter.required"] = "The {$input->label} field is required.";
-                }
-                $radioCounter++;
-            } else {
-                if ($input->required) {
-                    $rules["answer.$inputCounter"] = 'required';
-                    $messages["answer.$inputCounter.required"] = "The {$input->label} field is required.";
-                }
-                $inputCounter++;
+            switch ($input->type) {
+                case 'checkbox-group':
+                    if ($input->required) {
+                        $rules["checkbox_{$selectListCounter}"] = 'required';
+                        $messages["checkbox_{$selectListCounter}.required"] = "The {$input->label} field is required.";
+                    }
+                    $selectListCounter++;
+                    break;
+                case 'file':
+                    if ($input->required) {
+                        $rules["files.{$fileCounter}"] = 'required';
+                        $messages["files.{$fileCounter}.required"] = "The {$input->label} field is required.";
+                    }
+                    $fileCounter++;
+                    break;
+                case 'radio-group':
+                    if ($input->required) {
+                        $rules["radio_{$radioCounter}"] = 'required';
+                        $messages["radio_{$radioCounter}.required"] = "The {$input->label} field is required.";
+                    }
+                    $radioCounter++;
+                    break;
+                default:
+                    if ($input->required) {
+                        $rules["answer.{$key}"] = 'required';
+                        $messages["answer.{$key}.required"] = "The {$input->label} field is required.";
+                    }
+                    break;
             }
         }
 
+        // Validate request data
         $validator = Validator::make($request->all(), $rules, $messages);
-        //dd($validator);
 
+        // Handle validation errors
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -197,12 +195,8 @@ class StudentApplyController extends Controller
         return view('student_backend/applies/applies', $data);
     }
 
-    public function viewProgram($programId) {
-        try {
-            $programId = decrypt($programId);
-        } catch (DecryptException $e) {
-            return view('common/error')->with('errorMessage', 'Invalid or tampered ID');
-        }
+    public function viewProgram(Request $request) {
+        $programId = $request->id;
         $program = Program::find($programId);
         $data['program'] = $program;
         $data['coach'] = Coach::find($program->coach_id);

@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Coach;
 use App\Models\Student;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -35,13 +35,9 @@ class ProfileController extends Controller
 
     public function updateProfile(Request $request) {
         $user = Auth::user();
-        $coach = Coach::where(['user_id' => $user->id])->first();
+        $coach = Coach::where('user_id', $user->id)->firstOrFail();
 
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
-
-        // Define the validation rules array
+        // Define validation rules
         $rules = [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
@@ -50,30 +46,28 @@ class ProfileController extends Controller
             'website' => 'nullable|url',
         ];
 
-        // Add the password rule conditionally
+        // Add password rule if provided
         if (!empty($request->input('password'))) {
-            $rules['password'] = 'min:8|confirmed';
+            $rules['password'] = 'required|min:8|confirmed';
         }
 
-        // Validate the request data
-        $request->validate($rules);
+        // Validate request data
+        $validator = Validator::make($request->all(), $rules);
 
-        // If the validation fails, the code below won't execute.
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-        // Update the user's data
-        $coach->first_name = $request->input('first_name');
-        $coach->last_name = $request->input('last_name');
-        $coach->about_me = $request->input('about_me');
-        $coach->website = $request->input('website');
+        // Update user data
+        $coach->fill($request->only(['first_name', 'last_name', 'about_me', 'website']));
         $coach->save();
 
-        if ($request->has('password') && !empty($request->input('password'))) {
+        if ($request->has('password')) {
             $user->password = bcrypt($request->input('password'));
+            $user->save();
         }
 
-        $user->save();
-
-        return redirect()->back()->with('success', 'Profile updated.');
+        return back()->with('success', 'Profile updated.');
     }
 
     public function updateProfileImage(Request $request) {
@@ -82,54 +76,59 @@ class ProfileController extends Controller
         $imagePath = 'uploads/users_image/';
         $videoPath = 'uploads/users_video/';
 
-        if ($user->role == 'student') {
-            $data = Student::where(['user_id' => $user->id])->first();
-        } else if ($user->role == 'coach') {
-            $data = Coach::where(['user_id' => $user->id])->first();
-        } else {
+        $data = ($user->role === 'student')
+            ? Student::where(['user_id' => $user->id])->first()
+            : Coach::where(['user_id' => $user->id])->first();
+
+        if (!$data) {
             dd("Error: invalid user role");
         }
-        // uploading profile image
+
+        // validate image upload
         if ($request->hasFile('image')) {
             $request->validate([
-                'image' => 'file|mimes:jpg,png,jpeg', // Specify allowed file formats
+                'image' => 'required|file|mimes:jpg,png,jpeg', // Specify allowed file formats
             ]);
 
-            if ($user->profile_image != 'default.jpg' && $user->profile_image != null) {
-                $oldImagePath = $imagePath . $user->profile_image;
-                unlink($oldImagePath);
-            }
+            $oldImagePath = $imagePath . $data->profile_image;
+            $this->deleteFileIfExists($oldImagePath);
 
-            $file= $request->file('image');
-            $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path($imagePath), $filename);
-
+            $filename = $this->uploadFile($request->file('image'), $imagePath);
             $data->profile_image = $filename;
 
             Session::put('profileImage', $filename);
-        } else if($request->hasFile('video')) {
+        } else if ($request->hasFile('video')) {
             $request->validate([
-                'video' => 'file|mimes:mp4', // Specify allowed file formats
+                'video' => 'required|file|mimes:mp4', // Specify allowed file formats
             ]);
 
-            if ($user->short_video) {
-                $oldVideoLink = $videoPath . $user->short_video;
-                unlink($oldVideoLink);
-            }
+            $oldVideoLink = $videoPath . $data->short_video;
+            $this->deleteFileIfExists($oldVideoLink);
 
-            $file= $request->file('video');
-            $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path($videoPath), $filename);
-
+            $filename = $this->uploadFile($request->file('video'), $videoPath);
             $data->short_video = $filename;
-        }
-        else {
+        } else {
             return redirect()->back()->with('danger', 'Image or video not uploaded.');
         }
 
         $data->save();
 
         return redirect()->back()->with('success', 'Video or image uploaded...');
+    }
+
+    private function uploadFile($file, $path): string
+    {
+        $filename = date('YmdHi') . $file->getClientOriginalName();
+        $file->move(public_path($path), $filename);
+
+        return $filename;
+    }
+
+    private function deleteFileIfExists($path): void
+    {
+        if (file_exists($path) && is_file($path)) {
+            unlink($path);
+        }
     }
 
     /**

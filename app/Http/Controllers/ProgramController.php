@@ -37,36 +37,52 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $request->request->add(['coach_id' => Session::get('coachId')]);
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
 
+        // Define validation rules
         $rules = [
             'program_name' => 'required|string',
-            'number_of_students' => 'required|string',
+            'number_of_students' => 'required|integer', // Changed type to integer
             'session' => 'required|string',
         ];
 
-        // Validate the request data
-        $request->validate($rules);
+        // Add coach ID
+        $request->merge(['coach_id' => Session::get('coachId')]);
 
-        if ($request->hasFile('video_file')) {
-            $request->validate([
-                'video_file' => 'file|mimes:mp4,mov,jpeg', // Specify allowed file formats
-            ]);
+        // Validate request data
+        $validator = Validator::make($request->all(), $rules);
 
-            $file= $request->file('video_file');
-            $videoName = date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('uploads/program_videos/'), $videoName);
-
-            $request->request->add(['video' => $videoName]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $program = Program::create($request->all());
+        // Handle video upload
+        if ($request->hasFile('video_file')) {
+            $videoFile = $request->file('video_file');
+            $allowedFormats = ['mp4', 'mov', 'jpeg'];
+
+            $validator = Validator::make(['video_file' => $videoFile], [
+                'video_file' => 'required|file|mimes:' . implode(',', $allowedFormats),
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $videoName = date('YmdHi') . $videoFile->getClientOriginalName();
+            $videoFile->move(public_path('uploads/program_videos/'), $videoName);
+
+            $request->merge(['video' => $videoName]);
+        }
+
+        // Create program
+        Program::create($request->all());
 
         return redirect()->back()->with('success', 'Program created.');
+
     }
 
     /**
