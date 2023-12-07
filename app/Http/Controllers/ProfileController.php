@@ -95,7 +95,7 @@ class ProfileController extends Controller
                 'image' => 'file|mimes:jpg,png,jpeg', // Specify allowed file formats
             ]);
 
-            if ($user->profile_image != 'default.jpg') {
+            if ($user->profile_image != 'default.jpg' && $user->profile_image != null) {
                 $oldImagePath = $imagePath . $user->profile_image;
                 unlink($oldImagePath);
             }

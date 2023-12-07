@@ -38,6 +38,7 @@
                                         <input id="checkbox1" name="remember" type="checkbox">
                                         <label class="text-muted" for="checkbox1">Remember password</label>
                                     </div>
+                                    <a class="link" href="{{ route('password.request') }}">Forgot password?</a>
                                     <button class="btn btn-primary btn-block w-100" type="submit">Sign in</button>
                                 </div>
                                 <p class="mt-4 mb-0 text-center">Don't have account?<a class="ms-2" href="{{ route('register') }}">Create Account</a></p>

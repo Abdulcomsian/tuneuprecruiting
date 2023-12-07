@@ -113,10 +113,10 @@
                     <div class="d-flex align-items-center profile-media">
                         @php $role = auth()->user()->role; @endphp
                         @php if ($role == 'student')
-                            $profileImage = (Session::has('profileImage')) ? asset("uploads/students_image/".Session::get('profileImage')) : asset('assets/images/dashboard/profile.png');
+                            $profileImage = (Session::has('profileImage')) ? asset("uploads/users_image/".Session::get('profileImage')) : asset('uploads/users_image/default.jpg');
                         @endphp
                         @php if ($role == 'coach')
-                            $profileImage = (Session::has('profileImage')) ? asset("uploads/users_image/".Session::get('profileImage')) : asset('assets/images/dashboard/profile.png');
+                            $profileImage = (Session::has('profileImage')) ? asset("uploads/users_image/".Session::get('profileImage')) : asset('uploads/users_image/default.jpg');
                         @endphp
                         <img style="width: 35px; height: 35px;" class="b-r-25" src="{{ $profileImage }}" alt="">
                         <div class="flex-grow-1 user"><span>{{ Session::get('firstName') . ' ' . Session::get('lastName') }}</span>

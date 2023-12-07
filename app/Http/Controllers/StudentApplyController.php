@@ -49,7 +49,7 @@ class StudentApplyController extends Controller
         // check when already applied
         $numRows = Apply::where(['student_id' => $studentId, 'program_id' => $programId])->count();
         if ($numRows > 0) {
-            //return redirect()->back()->with('success', 'You have previously submitted an application for this program.');
+            return redirect()->back()->with('success', 'You have previously submitted an application for this program.');
         }
 
         // validation
