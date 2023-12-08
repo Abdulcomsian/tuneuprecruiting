@@ -58,14 +58,14 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::post('/update/profile/image', [ProfileController::class, 'updateProfileImage'])->name('profile.image');
 
     // student
-//    Route::get('/student/dashboard', [StudentDashboard::class, 'dashboard']);
     Route::get('/student/dashboard', [StudentApplyController::class, 'programs']);
-    Route::get('/program/apply/{programId}', [StudentApplyController::class, 'studentApply']);
-    Route::post('/program/apply/{programId}', [StudentApplyController::class, 'apply'])->name('program.apply');
+    Route::get('/program/apply/{id}', [StudentApplyController::class, 'studentApply']);
+    Route::post('/program/apply/{id}', [StudentApplyController::class, 'apply'])->name('program.apply');
     Route::get('/student/applies', [StudentApplyController::class, 'applies']);
     Route::get('/profile/student', [StudentProfileController::class, 'profile']);
     Route::post('/update/student/profile', [StudentProfileController::class, 'updateProfile'])->name('student.profile.update');
     Route::get('/program/view/{id}', [StudentApplyController::class, 'viewProgram'])->name('program.view');
+    Route::get('/program/apply/view/{id}', [StudentApplyController::class, 'applyView'])->name('program.apply.view');
 
     Route::get('send-mail', [MailController::class, 'index']);
 });

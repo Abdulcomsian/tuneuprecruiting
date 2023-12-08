@@ -188,7 +188,8 @@ class StudentApplyController extends Controller
 
     public function applies() {
         $studentId = Session::get('studentId');
-        $data['applies'] = Apply::join('programs', 'programs.id', '=', 'applies.program_id')
+        $data['applies'] = Apply::select('applies.*', 'applies.id as apply_id', 'programs.*', 'coaches.*')
+            ->join('programs', 'programs.id', '=', 'applies.program_id')
             ->join('coaches', 'coaches.id', '=', 'programs.coach_id')
             ->where(['applies.student_id' => $studentId])->get();
 
@@ -202,5 +203,16 @@ class StudentApplyController extends Controller
         $data['coach'] = Coach::find($program->coach_id);
 
         return view('student_backend/programs/view_program', $data);
+    }
+
+    public function applyView(Request $request) {
+        $applyId = $request->id;
+
+        $data['applyDetails'] = Apply::join('apply_details', 'applies.id', '=', 'apply_details.apply_id')
+            ->join('programs', 'programs.id', '=', 'applies.program_id')
+            ->where(['applies.id' => $applyId])
+            ->get();
+
+        return view('student_backend/applies/view_apply', $data);
     }
 }

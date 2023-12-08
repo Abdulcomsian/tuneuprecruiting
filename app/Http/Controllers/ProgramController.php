@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Apply;
 use App\Models\Program;
-use App\Models\ProgramQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -17,7 +15,6 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
         $coachId = Session::get('coachId');
         $data['programs'] = Program::where(['coach_id' => $coachId])->get();
         return view('backend/program/programs', $data);

@@ -29,6 +29,8 @@
                                     <thead>
                                         <tr>
                                             <th>Coach Name</th>
+                                            <th>Program Name</th>
+                                            <th>Session</th>
                                             <th>Status</th>
                                             <th>Date</th>
                                             <th>Action</th>
@@ -38,12 +40,17 @@
                                         @foreach($applies as $apply)
                                             <tr class="border-bottom-secondary">
                                                 <td>{{ $apply->first_name . " " . $apply->last_name }}</td>
+                                                <td>{{ $apply->program_name }}</td>
+                                                <td>{{ $apply->session }}</td>
                                                 <td>{{ $apply->status }}</td>
                                                 <td>{{ $apply->created_at }}</td>
                                                 <td>
                                                     <ul class="action">
-                                                        <li class="edit"> <a href="{{ route('chat', [ 'id' => $apply->user_id, 'type' => 'Student' ]) }}">
+                                                        <li class="edit"> <a href="{{ route('chat', encrypt($apply->coach_id)) }}">
                                                                 <i class="icofont icofont-chat"></i></a>
+                                                        </li>
+                                                        <li class="edit"> <a href="{{ route('program.apply.view', encrypt($apply->apply_id)) }}">
+                                                                <i class="icofont icofont-eye-alt"></i></a>
                                                         </li>
                                                     </ul>
                                                 </td>

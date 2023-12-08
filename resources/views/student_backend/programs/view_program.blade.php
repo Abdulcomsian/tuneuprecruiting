@@ -48,6 +48,12 @@
                                                 <td>Number of Students</td>
                                                 <td>{{ $program->number_of_students }}</td>
                                             </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <a class="btn btn-success float-end" href="{{ url('/program/apply/'. encrypt($program->id)) }}">Apply</a>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
