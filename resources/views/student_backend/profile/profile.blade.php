@@ -52,7 +52,7 @@
                                         {{ $message }}
                                     </div>
                                 @endif
-                                <form method="POST" action="{{ route('profile.image') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('student.profile.update') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-2">
                                         <div class="profile-title">
@@ -70,7 +70,7 @@
                                         <label for="fileInput">
                                             Upload an image (JPG, JPEG, or PNG):
                                         </label>
-                                        <input name="image" type="file" placeholder="Choose image">
+                                        <input name="profile_image" type="file" placeholder="Choose image" accept=".jpg,.jpeg,png">
                                     </div>
                                     <div class="mb-3">
                                         @php $videoUrl = ($user->short_video) ? asset('uploads/students_videos/'.$user->short_video) : asset('assets/images/social-app/timeline-3.png'); @endphp
@@ -80,20 +80,23 @@
                                         <label for="fileInput">
                                             Upload a video:
                                         </label>
-                                        <input name="video" type="file">
+                                        <input name="short_video" type="file">
                                     </div>
-                                    <div class="form-footer">
-                                        <button class="btn btn-primary btn-block">Save</button>
+                                    <div class="mb-3">
+                                        @php $videoUrl = ($user->cv) ? asset('uploads/student_cv/'.$user->cv) : asset('assets/images/social-app/timeline-3.png'); @endphp
+                                        <iframe width="100%" class="embed-responsive-item" src="{{ $videoUrl }}" allowfullscreen></iframe>
                                     </div>
-                                </form>
+                                    <div class="mb-3">
+                                        <label for="fileInput">
+                                            Upload a CV:
+                                        </label>
+                                        <input name="cv" type="file" accept=".doc,.ppt,.pdf">
+                                    </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-8">
-                        <form class="card" method="post" action="{{ route('student.profile.update') }}">
-                            @csrf
                             <div class="card-header pb-0">
-                                <h3 class="card-title mb-0">Edit Profile</h3>
                                 <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
                             </div>
                             <div class="card-body">
@@ -174,7 +177,7 @@
                                                 placeholder="Home Town">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-4">
+                                    <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">State</label>
                                             <input
@@ -185,20 +188,13 @@
                                                 placeholder="City">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-3">
-                                        <div class="mb-3">
-                                            <label class="form-label">Postal Code</label>
-                                            <input
-                                                class="form-control"
-                                                name="postal_code"
-                                                type="number"
-                                                placeholder="ZIP Code">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Country</label>
                                             <select class="form-control btn-square" name="country">
+                                                @if($user->country)
+                                                    <option value="{{ $user->country }}">{{ $user->country }}</option>
+                                                @endif
                                                 <option value="">--Select--</option>
                                                 <option value="germany">Germany</option>
                                                 <option value="canada">Canada</option>

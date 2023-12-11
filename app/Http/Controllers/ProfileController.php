@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
+use App\Helpers\FileUploadHelper;
 
 class ProfileController extends Controller
 {
@@ -58,6 +59,13 @@ class ProfileController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        // Image upload
+        $coach = FileUploadHelper::handleFileUpload($request, 'profile_image', 'uploads/users_image/', $coach);
+        Session::put('profileImage', $coach->profile_image);
+
+        // Video upload
+        $coach = FileUploadHelper::handleFileUpload($request, 'short_video', 'uploads/users_video/', $coach);
+
         // Update user data
         $coach->fill($request->only(['first_name', 'last_name', 'about_me', 'website']));
         $coach->save();
@@ -68,67 +76,6 @@ class ProfileController extends Controller
         }
 
         return back()->with('success', 'Profile updated.');
-    }
-
-    public function updateProfileImage(Request $request) {
-        $user = Auth::user();
-
-        $imagePath = 'uploads/users_image/';
-        $videoPath = 'uploads/users_video/';
-
-        $data = ($user->role === 'student')
-            ? Student::where(['user_id' => $user->id])->first()
-            : Coach::where(['user_id' => $user->id])->first();
-
-        if (!$data) {
-            dd("Error: invalid user role");
-        }
-
-        // validate image upload
-        if ($request->hasFile('image')) {
-            $request->validate([
-                'image' => 'required|file|mimes:jpg,png,jpeg', // Specify allowed file formats
-            ]);
-
-            $oldImagePath = $imagePath . $data->profile_image;
-            $this->deleteFileIfExists($oldImagePath);
-
-            $filename = $this->uploadFile($request->file('image'), $imagePath);
-            $data->profile_image = $filename;
-
-            Session::put('profileImage', $filename);
-        } else if ($request->hasFile('video')) {
-            $request->validate([
-                'video' => 'required|file|mimes:mp4', // Specify allowed file formats
-            ]);
-
-            $oldVideoLink = $videoPath . $data->short_video;
-            $this->deleteFileIfExists($oldVideoLink);
-
-            $filename = $this->uploadFile($request->file('video'), $videoPath);
-            $data->short_video = $filename;
-        } else {
-            return redirect()->back()->with('danger', 'Image or video not uploaded.');
-        }
-
-        $data->save();
-
-        return redirect()->back()->with('success', 'Video or image uploaded...');
-    }
-
-    private function uploadFile($file, $path): string
-    {
-        $filename = date('YmdHi') . $file->getClientOriginalName();
-        $file->move(public_path($path), $filename);
-
-        return $filename;
-    }
-
-    private function deleteFileIfExists($path): void
-    {
-        if (file_exists($path) && is_file($path)) {
-            unlink($path);
-        }
     }
 
     /**

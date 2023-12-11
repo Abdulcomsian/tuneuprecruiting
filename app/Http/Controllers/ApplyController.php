@@ -45,6 +45,8 @@ class ApplyController extends Controller
         $apply = Apply::find($applyId);
         $data['apply'] = $apply;
 
+        $data['studentDetail'] = Apply::join('students', 'students.id', '=', 'applies.student_id')->where(['applies.id' => $applyId])->first();
+//        dd($data['studentDetail']);
         $data['applyDetails'] = ApplyDetail::where(['apply_id' => $apply->id])->get();
 
         return view('backend/applies/apply_details', $data);

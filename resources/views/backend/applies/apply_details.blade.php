@@ -25,6 +25,28 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive theme-scrollbar">
+                                <table class="table mb-5">
+                                    <thead>
+                                        <tr>
+                                            <th>Complete Name</th>
+                                            <th>Graduation Year</th>
+                                            <th>Country</th>
+                                            <th>Home Town</th>
+                                            <th>State</th>
+                                            <th>CV</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $studentDetail->first_name . ' ' . $studentDetail->last_name }}</td>
+                                            <td>{{ $studentDetail->graduation_year }}</td>
+                                            <td>{{ $studentDetail->country }}</td>
+                                            <td>{{ $studentDetail->home_town }}</td>
+                                            <td>{{ $studentDetail->state }}</td>
+                                            <td><a href="{{ asset('uploads/student_cv/'.$studentDetail->cv) }}">{{ $studentDetail->cv }}</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <table class="display" id="basic-1">
                                     <thead>
                                         <tr>

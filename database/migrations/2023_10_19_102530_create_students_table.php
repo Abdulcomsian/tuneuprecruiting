@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('profile_image')->default('default.jpg');
             $table->string('short_video')->nullable();
+            $table->string('cv')->nullable();
             $table->timestamps();
         });
     }

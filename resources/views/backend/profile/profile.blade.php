@@ -47,7 +47,7 @@
                                         {{ $message }}
                                     </div>
                                 @endif
-                                <form method="POST" action="{{ route('profile.image') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-2">
                                         <div class="profile-title">
@@ -65,7 +65,7 @@
                                         <label for="fileInput">
                                             Upload an image (JPG, JPEG, or PNG):
                                         </label>
-                                        <input name="image" type="file" placeholder="Choose image">
+                                        <input name="profile_image" type="file" placeholder="Choose image">
                                     </div>
                                     <div class="mb-3">
                                         @php $videoUrl = ($user->short_video) ? asset('uploads/users_video/'.$user->short_video) : asset('assets/images/social-app/timeline-3.png'); @endphp
@@ -75,17 +75,13 @@
                                         <label for="fileInput">
                                             Upload a video:
                                         </label>
-                                        <input name="video" type="file">
+                                        <input name="short_video" type="file">
                                     </div>
-                                    <div class="form-footer">
-                                        <button class="btn btn-primary btn-block">Save</button>
-                                    </div>
-                                </form>
+
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-8">
-                        <form class="card" method="post" action="{{ route('profile.update') }}">
                             @csrf
                             <div class="card-header pb-0">
                                 <h3 class="card-title mb-0">Edit Profile</h3>
@@ -147,49 +143,7 @@
                                                 placeholder="Confirm Password">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Address</label>
-                                            <input
-                                                class="form-control"
-                                                name="address"
-                                                type="text"
-                                                placeholder="Home Address">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="mb-3">
-                                            <label class="form-label">City</label>
-                                            <input
-                                                class="form-control"
-                                                name="city"
-                                                type="text"
-                                                placeholder="City">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-3">
-                                        <div class="mb-3">
-                                            <label class="form-label">Postal Code</label>
-                                            <input
-                                                class="form-control"
-                                                name="postal_code"
-                                                type="number"
-                                                placeholder="ZIP Code">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="mb-3">
-                                            <label class="form-label">Country</label>
-                                            <select class="form-control btn-square">
-                                                <option value="0">--Select--</option>
-                                                <option value="1">Germany</option>
-                                                <option value="2">Canada</option>
-                                                <option value="3">Usa</option>
-                                                <option value="4">Aus</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mb-5">
                                         <div>
                                             <label class="form-label">About Me</label>
                                             <textarea

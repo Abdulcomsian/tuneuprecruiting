@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use App\Helpers\FileUploadHelper;
 
 class StudentProfileController extends Controller
 {
@@ -43,7 +44,15 @@ class StudentProfileController extends Controller
         // Validate the request data
         $request->validate($rules);
 
-        // If the validation fails, the code below won't execute.
+        // Image upload
+        $student = FileUploadHelper::handleFileUpload($request, 'profile_image', 'uploads/users_image/', $student);
+        Session::put('profileImage', $student->profile_image);
+
+        // Video upload
+        $student = FileUploadHelper::handleFileUpload($request, 'short_video', 'uploads/students_videos/', $student);
+
+        // CV upload
+        $student = FileUploadHelper::handleFileUpload($request, 'cv', 'uploads/student_cv/', $student);
 
         // Update the user's data
         $student->first_name = $request->input('first_name');
@@ -62,5 +71,31 @@ class StudentProfileController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Profile updated.');
+    }
+
+    function handleFileUpload($request, $fieldName, $uploadPath, $student) {
+        if ($request->hasFile($fieldName)) {
+            $request->validate([
+                $fieldName => 'required|file',
+            ]);
+
+            $this->deleteFileIfExists($uploadPath.$student->$fieldName);
+
+            $student->$fieldName = $this->uploadFile($request->file($fieldName), $uploadPath);
+        }
+        return $student;
+    }
+
+    private function uploadFile($file, $path): string{
+        $filename = date('YmdHi') . $file->getClientOriginalName();
+        $file->move(public_path($path), $filename);
+        return $filename;
+    }
+
+    private function deleteFileIfExists($path): void
+    {
+        if (file_exists($path) && is_file($path)) {
+            unlink($path);
+        }
     }
 }
