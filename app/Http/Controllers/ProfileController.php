@@ -70,7 +70,7 @@ class ProfileController extends Controller
         $coach->fill($request->only(['first_name', 'last_name', 'about_me', 'website']));
         $coach->save();
 
-        if ($request->has('password')) {
+        if ($request->has('password') && !empty($request->input('password'))) {
             $user->password = bcrypt($request->input('password'));
             $user->save();
         }

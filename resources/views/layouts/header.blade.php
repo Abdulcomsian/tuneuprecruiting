@@ -1,6 +1,10 @@
 <div class="page-header">
     <div class="header-wrapper row">
-        <div class="logo-wrapper"><a href="index.html"><img class="img-fluid" src="{{asset('assets/images/logo/logo.png')}}" alt=""></a></div>
+        <div class="logo-wrapper" style="background-color: #fff">
+            <a href="index.html">
+                <img class="img-fluid" src="{{asset('assets/images/logo/logo.png')}}" alt="">
+            </a>
+        </div>
         <svg class="stroke-icon toggle-sidebar">
             <use class="status_toggle middle sidebar-toggle" href="{{asset('assets/svg/icon-sprite.svg#Grid')}}"> </use>
         </svg>

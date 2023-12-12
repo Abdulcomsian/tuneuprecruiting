@@ -1,8 +1,10 @@
 <x-guest-layout>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-5"><img class="bg-img-cover bg-center" src="../assets/images/login/3.jpg" alt="looginpage"></div>
-            <div class="col-xl-7 p-0">
+            <div class="col-xl-7">
+                <img class="bg-img-cover bg-center" src="../assets/images/login/1.jpg" alt="looginpage">
+            </div>
+            <div class="col-xl-5 p-0">
                 <div class="login-card login-dark">
                     <div>
                         <div><a class="logo text-start" href="{{ url('/') }}"><img class="img-fluid for-light" src="../assets/images/logo/logo-1.png" alt="looginpage"><img class="img-fluid for-dark" src="../assets/images/logo/logo.png" alt="looginpage"></a></div>

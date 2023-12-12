@@ -42,7 +42,7 @@
                                     {{ $message }}
                                 </div>
                             @endif
-                            <form method="POST" id="frm-program" action="{{ route('program.apply', $program->id) }}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate="">
+                            <form method="POST" id="frm-program" action="{{ route('program.apply', encrypt($program->id)) }}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate="">
                                 @csrf
                                 <input type="hidden" name="program_id" value="{{ $program->id }}">
                                 <div class="col-md-4">

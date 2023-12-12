@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Apply;
 use App\Models\ApplyDetail;
 use App\Models\Coach;
 use App\Models\Program;
-use App\Models\ProgramQuestion;
 use App\Models\Student;
-use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\ApplyRequest;
+
 
 class StudentApplyController extends Controller
 {
@@ -34,66 +31,12 @@ class StudentApplyController extends Controller
         return view('student_backend/applies/apply', $data);
     }
 
-    public function apply(Request $request, $programId) {
-        // $user = auth()->user();
+    public function apply(ApplyRequest $request) {
         $studentId = Session::get('studentId');
 
-
         // Check when already applied
-        if (Apply::where(['student_id' => $studentId, 'program_id' => $programId])->exists()) {
+        if (Apply::where(['student_id' => $studentId, 'program_id' => $request->id])->count()) {
             return redirect()->back()->with('success', 'You have previously submitted an application for this program.');
-        }
-
-        // Get program and custom fields
-        $program = Program::find($programId);
-        $inputs = json_decode($program->custom_fields);
-
-        // Initialize counters and arrays
-        $selectListCounter = 0;
-        $fileCounter = 0;
-        $radioCounter = 0;
-        $rules = [];
-        $messages = [];
-
-        // Loop through custom fields and build rules and messages
-        foreach ($inputs as $key => $input) {
-            switch ($input->type) {
-                case 'checkbox-group':
-                    if ($input->required) {
-                        $rules["checkbox_{$selectListCounter}"] = 'required';
-                        $messages["checkbox_{$selectListCounter}.required"] = "The {$input->label} field is required.";
-                    }
-                    $selectListCounter++;
-                    break;
-                case 'file':
-                    if ($input->required) {
-                        $rules["files.{$fileCounter}"] = 'required';
-                        $messages["files.{$fileCounter}.required"] = "The {$input->label} field is required.";
-                    }
-                    $fileCounter++;
-                    break;
-                case 'radio-group':
-                    if ($input->required) {
-                        $rules["radio_{$radioCounter}"] = 'required';
-                        $messages["radio_{$radioCounter}.required"] = "The {$input->label} field is required.";
-                    }
-                    $radioCounter++;
-                    break;
-                default:
-                    if ($input->required) {
-                        $rules["answer.{$key}"] = 'required';
-                        $messages["answer.{$key}.required"] = "The {$input->label} field is required.";
-                    }
-                    break;
-            }
-        }
-
-        // Validate request data
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        // Handle validation errors
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $label = $request->label;
@@ -102,7 +45,7 @@ class StudentApplyController extends Controller
 
         $programData = [
             'student_id' => $studentId,
-            'program_id' => $programId,
+            'program_id' => $request->id,
             'status' => 'UNREAD'
         ];
 
@@ -153,9 +96,6 @@ class StudentApplyController extends Controller
             ]);
 
             foreach ($request->file('files') as $key => $file) {
-
-                //$file->store('uploads/apply_data/'); // 'uploads' is the storage folder; adjust as needed asset('storage/' . $file->file_path)
-
                 $filename= date('YmdHi').$file->getClientOriginalName();
                 $file-> move(public_path('uploads/apply_data'), $filename);
 
