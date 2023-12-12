@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Helpers\FileUploadHelper;
+use App\Http\Requests\StudentProfileRequest;
 
 class StudentProfileController extends Controller
 {
@@ -18,31 +18,13 @@ class StudentProfileController extends Controller
         return view('student_backend/profile/profile', $data);
     }
 
-    public function updateProfile(Request $request) {
+    public function updateProfile(StudentProfileRequest $request) {
         $user = Auth::user();
         $student = Student::where(['user_id' => $user->id])->first();
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
-
-        // Define the validation rules array
-        $rules = [
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'graduation_year' => 'required|string',
-            'home_town' => 'required|string',
-            'state' => 'required|string',
-            'country' => 'required|string',
-        ];
-
-        // Add the password rule conditionally
-        if (!empty($request->input('password'))) {
-            $rules['password'] = 'min:8|confirmed';
-        }
-
-        // Validate the request data
-        $request->validate($rules);
 
         // Image upload
         $student = FileUploadHelper::handleFileUpload($request, 'profile_image', 'uploads/users_image/', $student);
@@ -71,31 +53,5 @@ class StudentProfileController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Profile updated.');
-    }
-
-    function handleFileUpload($request, $fieldName, $uploadPath, $student) {
-        if ($request->hasFile($fieldName)) {
-            $request->validate([
-                $fieldName => 'required|file',
-            ]);
-
-            $this->deleteFileIfExists($uploadPath.$student->$fieldName);
-
-            $student->$fieldName = $this->uploadFile($request->file($fieldName), $uploadPath);
-        }
-        return $student;
-    }
-
-    private function uploadFile($file, $path): string{
-        $filename = date('YmdHi') . $file->getClientOriginalName();
-        $file->move(public_path($path), $filename);
-        return $filename;
-    }
-
-    private function deleteFileIfExists($path): void
-    {
-        if (file_exists($path) && is_file($path)) {
-            unlink($path);
-        }
     }
 }

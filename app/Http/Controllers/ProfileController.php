@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Coach;
-use App\Models\Student;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use App\Helpers\FileUploadHelper;
+use App\Http\Requests\CoachProfileRequest;
 
 class ProfileController extends Controller
 {
@@ -34,30 +33,9 @@ class ProfileController extends Controller
         return view('backend/profile/profile', $data);
     }
 
-    public function updateProfile(Request $request) {
+    public function updateProfile(CoachProfileRequest $request) {
         $user = Auth::user();
         $coach = Coach::where('user_id', $user->id)->firstOrFail();
-
-        // Define validation rules
-        $rules = [
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'about_me' => 'nullable|string',
-            'bio' => 'nullable|string',
-            'website' => 'nullable|url',
-        ];
-
-        // Add password rule if provided
-        if (!empty($request->input('password'))) {
-            $rules['password'] = 'required|min:8|confirmed';
-        }
-
-        // Validate request data
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         // Image upload
         $coach = FileUploadHelper::handleFileUpload($request, 'profile_image', 'uploads/users_image/', $coach);

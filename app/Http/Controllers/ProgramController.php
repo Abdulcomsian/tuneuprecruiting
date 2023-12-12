@@ -7,6 +7,7 @@ use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\ProgramRequest;
 
 class ProgramController extends Controller
 {
@@ -31,43 +32,16 @@ class ProgramController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(ProgramRequest $request) {
         $user = Auth::user();
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        // Define validation rules
-        $rules = [
-            'program_name' => 'required|string',
-            'number_of_students' => 'required|integer', // Changed type to integer
-            'session' => 'required|string',
-        ];
-
-        // Add coach ID
-        $request->merge(['coach_id' => Session::get('coachId')]);
-
-        // Validate request data
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
         // Handle video upload
         if ($request->hasFile('video_file')) {
             $videoFile = $request->file('video_file');
-            $allowedFormats = ['mp4', 'mov', 'jpeg'];
-
-            $validator = Validator::make(['video_file' => $videoFile], [
-                'video_file' => 'required|file|mimes:' . implode(',', $allowedFormats),
-            ]);
-
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
 
             $videoName = date('YmdHi') . $videoFile->getClientOriginalName();
             $videoFile->move(public_path('uploads/program_videos/'), $videoName);
@@ -122,7 +96,7 @@ class ProgramController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProgramRequest $request, string $id)
     {
         $program = Program::find($id);
         $this->authorize('edit', $program);
@@ -133,18 +107,8 @@ class ProgramController extends Controller
             return redirect()->back()->with('danger', 'You are unable to modify the program public status.');
         }
 
-        // Validate the request data
-        $validatedData = $request->validate([
-            'program_name' => 'required|string',
-            'number_of_students' => 'required|string',
-            'session' => 'required|string',
-            'details' => 'string',
-            'custom_fields' => 'string',
-            'status' => 'string',
-        ]);
-
         // Update the post with the validated data
-        $program->update($validatedData);
+        $program->update($request->all());
 
         return redirect()->route('program.index');
     }
