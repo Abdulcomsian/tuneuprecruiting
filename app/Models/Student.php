@@ -17,6 +17,17 @@ class Student extends Model
         'home_town',
         'state',
         'country',
+        'academic_honors',
+        'birth_date',
+        'class_rank',
+        'college',
+        'core_gpa',
+        'gpa',
+        'gender',
+        'grad_year',
+        'height',
+        'home_phone',
+        'interest_level',
     ];
 
     /**

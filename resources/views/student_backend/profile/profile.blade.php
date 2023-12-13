@@ -96,6 +96,7 @@
                         </div>
                     </div>
                     <div class="col-xl-8">
+                        <div class="card">
                             <div class="card-header pb-0">
                                 <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
                             </div>
@@ -205,8 +206,75 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer text-end">
-                                <button class="btn btn-primary" type="submit">Update Profile</button>
+                        </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title mb-0">Additional Information</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="academic-honors" class="form-label">Academic Honors</label>
+                                            <input type="text" name="academic_honors" value="{{ $user->academic_honors }}" class="form-control" id="academic-honors">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="birth-date" class="form-label">Birth Date</label>
+                                            <input type="date" name="birth_date" value="{{ $user->birth_date }}" class="form-control" id="birth-date">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="class-rank" class="form-label">Class Rank</label>
+                                            <input type="text" name="class_rank" value="{{ $user->class_rank }}" class="form-control" id="class-rank">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="college" class="form-label">College</label>
+                                            <input type="text" name="college" value="{{ $user->college }}" class="form-control" id="college">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="core-gpa" class="form-label">Core GPA</label>
+                                            <input type="text" name="core_gpa" value="{{ $user->core_gpa }}" class="form-control" id="core-gpa">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="gpa" class="form-label">GPA</label>
+                                            <input type="text" name="gpa" value="{{ $user->gpa }}" class="form-control" id="gpa">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="gender" class="form-label">Gender</label> <br />
+                                            <input type="radio" name="gender" {{ ($user->gender == 'male') ? 'checked' : '' }} class="form-check-input" value="male" id="male">
+                                            <label class="form-check-label" for="male">Male</label>
+                                            <input type="radio" name="gender" {{ ($user->gender == 'female') ? 'checked' : '' }} class="form-check-input" value="female" id="female">
+                                            <label class="form-check-label" for="female">Female</label>
+                                            <input type="radio" name="gender" {{ ($user->gender == 'other') ? 'checked' : '' }} class="form-check-input" value="other" id="other">
+                                            <label class="form-check-label" for="other">Other</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label for="grad" class="form-label">Grad. Year</label>
+                                            <input type="text" name="grad_year" value="{{ $user->grad_year }}" class="form-control" id="grad">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="height" class="form-label">Height</label>
+                                            <input type="text" name="height" value="{{ $user->height }}" class="form-control" id="height">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="home-phone" class="form-label">Home Phone</label>
+                                            <input type="text" name="home_phone" value="{{ $user->home_phone }}" class="form-control" id="home-phone">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="interest-level" class="form-label">Interests Level</label>
+                                            <input type="text" name="interest_level" value="{{ $user->interest_level }}" class="form-control" id="interest-level">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="card-footer text-end">
+                                        <button class="btn btn-primary" type="submit">Update Profile</button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>

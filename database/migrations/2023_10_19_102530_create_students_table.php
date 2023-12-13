@@ -23,6 +23,17 @@ return new class extends Migration
             $table->string('profile_image')->default('default.jpg');
             $table->string('short_video')->nullable();
             $table->string('cv')->nullable();
+            $table->string('academic_honors')->nullable();
+            $table->string('birth_date')->nullable();
+            $table->string('class_rank')->nullable();
+            $table->string('college')->nullable();
+            $table->string('core_gpa')->nullable();
+            $table->string('gpa')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('grad_year')->nullable();
+            $table->string('height')->nullable();
+            $table->string('home_phone')->nullable();
+            $table->string('interest_level')->nullable();
             $table->timestamps();
         });
     }
