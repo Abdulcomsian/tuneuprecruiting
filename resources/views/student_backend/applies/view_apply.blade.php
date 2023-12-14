@@ -24,6 +24,28 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Program Name</th>
+                                        <th>Session</th>
+                                        <th>Number of Students</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $applyDetails[0]->program_name }}</td>
+                                        <td>{{ $applyDetails[0]->session }}</td>
+                                        <td>{{ $applyDetails[0]->number_of_students }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
                             <div class="table-responsive theme-scrollbar">
                                 <table class="display" id="basic-1">
                                     <thead>

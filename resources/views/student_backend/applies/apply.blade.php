@@ -37,6 +37,13 @@
                                     </ul>
                                 </div>
                             @endif
+                                @if(session('success') || session('danger'))
+                                    @php $className = (session('success')) ? 'success' : 'danger'; @endphp
+                                    @php $message = (session('success')) ? session('success') : session('danger'); @endphp
+                                    <div class="alert alert-{{ $className }}">
+                                        {{ $message }}
+                                    </div>
+                                @endif
                             <form method="POST" id="frm-program" action="{{ route('program.apply', encrypt($program->id)) }}" enctype="multipart/form-data" class="row g-3">
                                 @csrf
                                 <input type="hidden" name="program_id" value="{{ $program->id }}">
@@ -48,6 +55,7 @@
                                         id="validationCustom01"
                                         type="text"
                                         name="program_name"
+                                        disabled
                                         value="{{ $user->first_name }}"
                                         placeholder="Enter program name"
                                         required="">
@@ -59,6 +67,7 @@
                                         id="validationCustom02"
                                         type="text"
                                         name="session"
+                                        disabled
                                         value="{{ $user->last_name }}"
                                         placeholder="Enter session"
                                         required="">
@@ -70,6 +79,7 @@
                                         id="validationCustom02"
                                         type="text"
                                         name="number_of_students"
+                                        disabled
                                         value="{{ $user->graduation_year }}"
                                         placeholder="Enter number"
                                         required="">
@@ -81,6 +91,7 @@
                                         id="validationCustom02"
                                         type="text"
                                         name="number_of_students"
+                                        disabled
                                         value="{{ $user->home_town }}"
                                         placeholder="Enter number"
                                         required="">
@@ -94,6 +105,7 @@
                                         id="validationCustom02"
                                         type="text"
                                         name="number_of_students"
+                                        disabled
                                         value="{{ $user->state }}"
                                         placeholder="Enter number"
                                         required="">
@@ -105,6 +117,7 @@
                                         id="validationCustom02"
                                         type="text"
                                         name="number_of_students"
+                                        disabled
                                         value="{{ $user->country }}"
                                         placeholder="Enter number"
                                         required="">
@@ -167,13 +180,6 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            @if(session('success') || session('danger'))
-                                @php $className = (session('success')) ? 'success' : 'danger'; @endphp
-                                @php $message = (session('success')) ? session('success') : session('danger'); @endphp
-                                <div class="alert alert-{{ $className }}">
-                                    {{ $message }}
-                                </div>
-                            @endif
                                     @php $checkboxCounter = 0; @endphp
                                     @php $inputCounter = 0; @endphp
                                     @php $radioCounter = 0; @endphp

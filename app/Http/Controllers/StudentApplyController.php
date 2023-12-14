@@ -39,6 +39,11 @@ class StudentApplyController extends Controller
             return redirect()->back()->with('success', 'You have previously submitted an application for this program.');
         }
 
+        // update student
+        $student = Student::find($studentId);
+        $student->fill($request->all());
+        $student->save();
+
         $label = $request->label;
         $type = $request->type;
         $answer = $request->answer;

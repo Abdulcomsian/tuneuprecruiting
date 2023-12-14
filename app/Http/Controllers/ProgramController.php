@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Apply;
 use App\Models\Program;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\ProgramRequest;
@@ -53,7 +52,6 @@ class ProgramController extends Controller
         Program::create($request->all());
 
         return redirect()->back()->with('success', 'Program created.');
-
     }
 
     /**
@@ -67,7 +65,8 @@ class ProgramController extends Controller
 
         $data['program'] = $program;
 
-        $data['applies'] = Apply::join('students', 'students.id', '=', 'applies.student_id')
+        $data['applies'] = Apply::select('applies.*', 'applies.id as apply_id', 'students.*')
+            ->join('students', 'students.id', '=', 'applies.student_id')
             ->where(['program_id' => $id, 'applies.trash' => 'active'])
             ->get();
 
