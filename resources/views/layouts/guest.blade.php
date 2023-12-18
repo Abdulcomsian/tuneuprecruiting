@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Tune Up Recruiting') }}</title>
+        <title>Tune Up Recruiting</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -14,7 +14,7 @@
         <!-- Scripts -->
         <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
         <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
-        <title>Cion - Premium Admin Template</title>
+
         <!-- Google font-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
