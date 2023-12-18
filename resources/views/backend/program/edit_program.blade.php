@@ -48,7 +48,7 @@
                                 <input type="hidden" name="custom_fields" id="custom-fields">
                                 <input type="hidden" value="{{ route('program.store') }}" id="route-post-method">
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom01">Program Name</label>
+                                    <label class="form-label" for="validationCustom01">Program Name <span class="text-danger">*</span></label>
                                     <input
                                         class="form-control program-name"
                                         id="validationCustom01"
@@ -59,7 +59,7 @@
                                         required="">
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Session</label>
+                                    <label class="form-label" for="validationCustom02">Session <span class="text-danger">*</span></label>
                                     <input
                                         class="form-control session"
                                         id="validationCustom02"
@@ -70,7 +70,7 @@
                                         required="">
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Number of Students</label>
+                                    <label class="form-label" for="validationCustom02">Number of Students <span class="text-danger">*</span></label>
                                     <input
                                         class="form-control number-of-students"
                                         id="validationCustom02"
@@ -81,7 +81,7 @@
                                         required="">
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Status</label>
+                                    <label class="form-label" for="validationCustom02">Status <span class="text-danger">*</span></label>
                                     <select name="status" id="program-status" class="form-control">
                                         <option value="{{ $program->status }}">{{ ucfirst($program->status) }}</option>
                                         <option value=""></option>
@@ -100,8 +100,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label" for="exampleFormControlInput1">Details</label>
-                                        <textarea class="form-control detail" name="details">{{ $program->details }}</textarea>
+                                        <label class="form-label" for="exampleFormControlInput1">Details <span class="text-danger">*</span></label>
+                                        <textarea class="form-control detail" required name="details">{{ $program->details }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

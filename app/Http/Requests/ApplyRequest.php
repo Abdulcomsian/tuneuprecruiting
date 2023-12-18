@@ -7,8 +7,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ApplyRequest extends FormRequest
 {
-    protected $messages;
-    protected $rules;
+    protected $messages = [];
+    protected $rules = [];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class ApplyRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
 
         // Get program and custom fields
@@ -69,10 +69,14 @@ class ApplyRequest extends FormRequest
             }
         }
 
+        if (!$this->rules) {
+            return [];
+        }
+
         return $this->rules;
     }
 
-    public function messages() : array {
+    public function messages() {
         return $this->messages;
     }
 }

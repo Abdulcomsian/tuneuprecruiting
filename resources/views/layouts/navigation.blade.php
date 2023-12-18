@@ -24,22 +24,13 @@
                                 </svg><span>Home</span>
                             </a>
                         </li>
-                        <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="{{ url('applies') }}">
-                                <svg class="stroke-icon">
-                                    <use href="{{ asset('assets/svg/icon-sprite.svg#Ui-kites') }}"></use>
-                                </svg>
-                                <svg class="fill-icon">
-                                    <use href="{{asset('assets/svg/icon-sprite.svg#fill-ui')}}"></use>
-                                </svg><span>Applies</span></a>
-                        </li>
-
                         <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
                                 <svg class="stroke-icon">
                                     <use href="{{asset('assets/svg/icon-sprite.svg#Form')}}"></use>
                                 </svg>
                                 <svg class="fill-icon">
                                     <use href="../assets/svg/icon-sprite.svg#fill-Editor"></use>
-                                </svg><span>Program</span></a>
+                                </svg><span>Programs</span></a>
                             <ul class="sidebar-submenu custom-scrollbar">
                                 <li class="sidebar-head">Programs</li>
 
@@ -61,6 +52,14 @@
                                             <use href="../assets/svg/icon-sprite.svg#fill-board"></use>
                                         </svg>Program list</a></li>
                             </ul>
+                        </li>
+                        <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="{{ url('applies') }}">
+                                <svg class="stroke-icon">
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#Ui-kites') }}"></use>
+                                </svg>
+                                <svg class="fill-icon">
+                                    <use href="{{asset('assets/svg/icon-sprite.svg#fill-ui')}}"></use>
+                                </svg><span>Applications</span></a>
                         </li>
 
                         <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="{{ url('/chat/'.encrypt(null)) }}">
@@ -89,7 +88,7 @@
                                 </svg>
                                 <svg class="fill-icon">
                                     <use href="{{ asset('assets/svg/icon-sprite.svg#fill-home') }}"></use>
-                                </svg><span>Home</span>
+                                </svg><span>Available Programs</span>
                             </a>
                         </li>
                         <li class="sidebar-list">
@@ -99,7 +98,7 @@
                                 </svg>
                                 <svg class="fill-icon">
                                     <use href="{{ asset('assets/svg/icon-sprite.svg#fill-home') }}"></use>
-                                </svg><span>Applies</span>
+                                </svg><span>My Applications</span>
                             </a>
                         </li>
 

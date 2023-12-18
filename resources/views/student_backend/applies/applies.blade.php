@@ -4,7 +4,7 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3>Total Applies</h3>
+                        <h3> My Applications</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
@@ -12,7 +12,7 @@
                                     <svg class="stroke-icon">
                                         <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
                                     </svg></a></li>
-                            <li class="breadcrumb-item">Applies</li>
+                            <li class="breadcrumb-item">My Applications</li>
                         </ol>
                     </div>
                 </div>

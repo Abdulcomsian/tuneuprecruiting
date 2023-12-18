@@ -104,7 +104,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label">First Name</label>
+                                            <label class="form-label">First Name <span class="text-danger">*</span></label>
                                             <input
                                                 class="form-control"
                                                 name="first_name"
@@ -115,7 +115,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label">Last Name</label>
+                                            <label class="form-label">Last Name <span class="text-danger">*</span></label>
                                             <input
                                                 class="form-control"
                                                 name="last_name"
@@ -126,13 +126,13 @@
                                     </div>
                                     <div class="col-sm-6 col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label">Email address</label>
+                                            <label class="form-label">Email address <span class="text-danger">*</span></label>
                                             <input
                                                 class="form-control"
                                                 name="graduation_year"
                                                 value="{{ $email }}"
                                                 type="text"
-
+                                                disabled
                                                 placeholder="Email">
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Graduation Year</label>
+                                            <label class="form-label">Graduation Year <span class="text-danger">*</span></label>
                                             <input
                                                 class="form-control"
                                                 name="graduation_year"
@@ -169,7 +169,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Home Town</label>
+                                            <label class="form-label">Home Town <span class="text-danger">*</span></label>
                                             <input
                                                 class="form-control"
                                                 name="home_town"
@@ -180,7 +180,7 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">State</label>
+                                            <label class="form-label">State <span class="text-danger">*</span></label>
                                             <input
                                                 class="form-control"
                                                 name="state"
@@ -191,7 +191,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Country</label>
+                                            <label class="form-label">Country <span class="text-danger">*</span></label>
                                             <select class="form-control btn-square" name="country">
                                                 @if($user->country)
                                                     <option value="{{ $user->country }}">{{ $user->country }}</option>

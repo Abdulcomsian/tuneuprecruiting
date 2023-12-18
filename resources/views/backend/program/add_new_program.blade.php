@@ -42,47 +42,47 @@
                                     {{ $message }}
                                 </div>
                             @endif
-                            <form method="POST" id="frm-program" action="{{ route('program.store') }}" class="row g-3 needs-validation" novalidate="" enctype="multipart/form-data">
+                            <form method="POST" id="frm-program" action="{{ route('program.store') }}" class="row g-3" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="POST" id="route-method">
                                 <input type="hidden" name="custom_fields" id="custom-fields">
                                 <input type="hidden" value="{{ route('program.store') }}" id="route-post-method">
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom01">Program Name</label>
+                                    <label class="form-label" for="program-name">Program Name  <span class="text-danger">*</span></label>
                                     <input
                                         class="form-control program-name"
-                                        id="validationCustom01"
+                                        id="program-name"
                                         type="text"
                                         name="program_name"
                                         placeholder="Enter program name"
-                                        required="">
+                                        required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Session</label>
+                                    <label class="form-label" for="validationCustom02">Session <span class="text-danger">*</span></label>
                                     <input
                                         class="form-control session"
                                         id="validationCustom02"
                                         type="text"
                                         name="session"
                                         placeholder="Enter session"
-                                        required="">
+                                        required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Number of Students</label>
+                                    <label class="form-label" for="validationCustom02">Number of Students <span class="text-danger">*</span></label>
                                     <input
                                         class="form-control number-of-students"
                                         id="validationCustom02"
                                         type="text"
                                         name="number_of_students"
                                         placeholder="Enter number"
-                                        required="">
+                                        required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Status</label>
-                                    <select name="status" id="program-status" class="form-control">
+                                    <label class="form-label" for="validationCustom02">Status <span class="text-danger">*</span></label>
+                                    <select name="status" required id="program-status" class="form-control">
                                         <option value=""></option>
                                         <option value="public">Public</option>
-                                        <option value="drops">Drops</option>
+                                        <option value="drops">Dropped</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
@@ -96,8 +96,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label" for="exampleFormControlInput1">Details</label>
-                                        <textarea class="form-control detail" name="details"></textarea>
+                                        <label class="form-label" for="exampleFormControlInput1">Details <span class="text-danger">*</span></label>
+                                        <textarea class="form-control detail" required name="details"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

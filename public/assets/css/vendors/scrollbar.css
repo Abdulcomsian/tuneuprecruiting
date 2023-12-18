@@ -25,7 +25,8 @@
   top: 0;
   bottom: 0;
   right: 0;
-  width: auto !important;
+  /*width: auto !important;*/
+    width: 120px;
   height: auto !important;
   z-index: 0;
 }
