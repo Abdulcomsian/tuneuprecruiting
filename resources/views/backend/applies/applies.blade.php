@@ -12,7 +12,7 @@
                                     <svg class="stroke-icon">
                                         <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
                                     </svg></a></li>
-                            <li class="breadcrumb-item">Applies</li>
+                            <li class="breadcrumb-item">Total Applications</li>
                         </ol>
                     </div>
                 </div>
