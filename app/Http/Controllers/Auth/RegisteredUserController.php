@@ -40,19 +40,28 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Split the string into parts based on the first space
+        $nameAndRest = explode(' ', $request->name, 2);
+
+        // The first part is the name
+        $firstName = $nameAndRest[0];
+
+        // The second part is the rest of the string
+        $lastName = isset($nameAndRest[1]) ? $nameAndRest[1] : '';
+
         $user = User::create([
-            'name' => $request->name,
+            'name' => $firstName,
             'email' => $request->email,
             'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
 
         if ($request->role == 'student') {
-            $student = Student::create(['user_id' => $user->id, 'first_name' => $user->name]);
+            $student = Student::create(['user_id' => $user->id, 'first_name' => $firstName, 'last_name' => $lastName]);
             Session::put('studentId', $student->id);
             Session::put('profileImage', $student->profile_image);
         } else if ($request->role == 'coach') {
-            $coach = Coach::create(['user_id' => $user->id, 'first_name' => $user->name]);
+            $coach = Coach::create(['user_id' => $user->id, 'first_name' => $firstName, 'last_name' => $lastName]);
             Session::put('coachId', $coach->id);
             Session::put('profileImage', $coach->profile_image);
         }
