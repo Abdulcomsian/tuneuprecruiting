@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <label class="col-form-label">Type</label>
                                     <div class="form-input position-relative">
-                                        <select name="role" id="" class="form-control">
+                                        <select name="role" id="" class="form-control" required>
                                             <option value="">Choose</option>
                                             <option value="student">Student</option>
                                             <option value="coach">Coach</option>
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="form-group mb-0">
                                     <div class="checkbox p-0">
-                                        <input id="checkbox1" type="checkbox">
+                                        <input id="checkbox1" type="checkbox" required>
                                         <label class="text-muted" for="checkbox1">Agree with<a class="ms-2" href="#">Privacy Policy</a></label>
                                     </div>
                                     <button class="btn btn-primary btn-block w-100" type="submit">Create Account</button>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('apply_id');
             $table->string('label');
             $table->string('type');
-            $table->text('answer');
+            $table->text('answer')->nullable();
             $table->timestamps();
         });
     }

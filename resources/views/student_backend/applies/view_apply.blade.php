@@ -27,6 +27,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
+                                        <th>Coach Name</th>
                                         <th>Program Name</th>
                                         <th>Session</th>
                                         <th>Number of Students</th>
@@ -34,9 +35,10 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{{ $applyDetails[0]->program_name }}</td>
-                                        <td>{{ $applyDetails[0]->session }}</td>
-                                        <td>{{ $applyDetails[0]->number_of_students }}</td>
+                                        <td>{{ $program->first_name ?? null }}</td>
+                                        <td>{{ $program->program_name ?? null }}</td>
+                                        <td>{{ $program->session ?? null }}</td>
+                                        <td>{{ $program->number_of_students ?? null }}</td>
                                     </tr>
                                 </tbody>
                             </table>

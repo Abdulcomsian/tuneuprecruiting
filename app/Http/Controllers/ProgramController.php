@@ -102,7 +102,7 @@ class ProgramController extends Controller
 
         if (!$program) {
             return redirect()->back()->with('danger', 'Program not exist.');
-        } elseif($program->status == 'public') {
+        } elseif($program->status == ucfirst('Public')) {
             return redirect()->back()->with('danger', 'You are unable to modify the program public status.');
         }
 

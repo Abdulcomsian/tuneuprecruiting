@@ -22,7 +22,11 @@ class StudentApplyController extends Controller
     public function studentApply(Request $request) {
         $programId = $request->id;
 
-        $data['program'] = Program::find($programId);
+        $data['program'] = Program::select('programs.*', 'coaches.first_name', 'coaches.last_name')
+            ->join('coaches', 'coaches.id', '=', 'programs.coach_id')
+            ->where(['programs.id' => $programId])
+            ->first();
+
         $data['customFields'] = json_decode($data['program']->custom_fields);
 
         $user = auth()->user();
@@ -115,16 +119,18 @@ class StudentApplyController extends Controller
             }
         }
 
-        if ($label || empty($label)) {
-            for ($i = 0; $i < count($label); $i++) {
-                $tableData = [
-                    'apply_id' => $apply->id,
-                    'label' => $label[$i],
-                    'type' => $type[$i],
-                    'answer' => $answer[$i]
-                ];
+        if ($request->has('label')) {
+            if ($label || empty($label)) {
+                for ($i = 0; $i < count($label); $i++) {
+                    $tableData = [
+                        'apply_id' => $apply->id,
+                        'label' => $label[$i],
+                        'type' => $type[$i],
+                        'answer' => $answer[$i]
+                    ];
 
-                ApplyDetail::create($tableData);
+                    ApplyDetail::create($tableData);
+                }
             }
         }
 
@@ -157,6 +163,11 @@ class StudentApplyController extends Controller
             ->join('programs', 'programs.id', '=', 'applies.program_id')
             ->where(['applies.id' => $applyId])
             ->get();
+
+        $data['program'] = Program::join('applies', 'applies.program_id', '=', 'programs.id')
+            ->join('coaches', 'coaches.id', '=', 'programs.coach_id')
+            ->where(['applies.id' => $applyId])
+            ->first();
 
         return view('student_backend/applies/view_apply', $data);
     }

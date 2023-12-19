@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">
+                            <li class="breadcrumb-item"><a href="{{ url('/') }}">
                                     <svg class="stroke-icon">
                                         <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
                                     </svg></a></li>
@@ -110,6 +110,7 @@
                                                 name="first_name"
                                                 value="{{ $user->first_name }}"
                                                 type="text"
+                                                required
                                                 placeholder="Name">
                                         </div>
                                     </div>
@@ -121,7 +122,8 @@
                                                 name="last_name"
                                                 value="{{ $user->last_name }}"
                                                 type="text"
-                                                placeholder="Name">
+                                                required
+                                                placeholder="Last Name">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-4">
@@ -133,6 +135,7 @@
                                                 value="{{ $email }}"
                                                 type="text"
                                                 disabled
+                                                required
                                                 placeholder="Email">
                                         </div>
                                     </div>
@@ -164,6 +167,7 @@
                                                 name="graduation_year"
                                                 type="text"
                                                 value="{{ $user->graduation_year }}"
+                                                required
                                                 placeholder="Graduation Year">
                                         </div>
                                     </div>
@@ -175,6 +179,7 @@
                                                 name="home_town"
                                                 type="text"
                                                 value="{{ $user->home_town }}"
+                                                required
                                                 placeholder="Home Town">
                                         </div>
                                     </div>
@@ -185,6 +190,7 @@
                                                 class="form-control"
                                                 name="state"
                                                 value="{{ $user->state }}"
+                                                required
                                                 type="text"
                                                 placeholder="City">
                                         </div>
@@ -192,7 +198,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Country <span class="text-danger">*</span></label>
-                                            <select class="form-control btn-square" name="country">
+                                            <select class="form-control btn-square" name="country" required>
                                                 @if($user->country)
                                                     <option value="{{ $user->country }}">{{ $user->country }}</option>
                                                 @endif

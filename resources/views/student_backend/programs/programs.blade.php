@@ -4,13 +4,13 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3>Total Programs</h3>
+                        <h3>Available Programs</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">
+                            <li class="breadcrumb-item"><a href="{{ url('/') }}">
                                     <svg class="stroke-icon">
-                                        <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
                                     </svg></a></li>
                             <li class="breadcrumb-item">Programs</li>
                         </ol>

@@ -48,32 +48,32 @@
                                 <input type="hidden" name="custom_fields" id="custom-fields">
                                 <input type="hidden" value="{{ route('program.store') }}" id="route-post-method">
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom01">Program Name <span class="text-danger">*</span></label>
+                                    <label class="form-label" for="program-name">Program Name <span class="text-danger">*</span></label>
                                     <input
                                         class="form-control program-name"
-                                        id="validationCustom01"
+                                        id="program-name"
                                         type="text"
                                         name="program_name"
                                         value="{{ $program->program_name }}"
                                         placeholder="Enter program name"
-                                        required="">
+                                        required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Session <span class="text-danger">*</span></label>
+                                    <label class="form-label" for="session">Session <span class="text-danger">*</span></label>
                                     <input
                                         class="form-control session"
-                                        id="validationCustom02"
+                                        id="session"
                                         type="text"
                                         name="session"
                                         value="{{ $program->session }}"
                                         placeholder="Enter session"
-                                        required="">
+                                        required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Number of Students <span class="text-danger">*</span></label>
+                                    <label class="form-label" for="number-of-students">Number of Students <span class="text-danger">*</span></label>
                                     <input
                                         class="form-control number-of-students"
-                                        id="validationCustom02"
+                                        id="number-of-students"
                                         type="text"
                                         name="number_of_students"
                                         value="{{ $program->number_of_students }}"
@@ -81,27 +81,27 @@
                                         required="">
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Status <span class="text-danger">*</span></label>
+                                    <label class="form-label" for="program-status">Status <span class="text-danger">*</span></label>
                                     <select name="status" id="program-status" class="form-control">
                                         <option value="{{ $program->status }}">{{ ucfirst($program->status) }}</option>
                                         <option value=""></option>
-                                        <option value="public">Public</option>
-                                        <option value="drops">Drops</option>
+                                        <option value="Public">Public</option>
+                                        <option value="Dropped">Dropped</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label" for="validationCustom02">Video</label>
+                                    <label class="form-label" for="video">Video</label>
                                     <input
                                         class="form-control video"
-                                        id="validationCustom02"
+                                        id="video"
                                         type="file"
                                         name="video_file"
                                         accept="video/*">
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label" for="exampleFormControlInput1">Details <span class="text-danger">*</span></label>
-                                        <textarea class="form-control detail" required name="details">{{ $program->details }}</textarea>
+                                        <label class="form-label" for="details">Details <span class="text-danger">*</span></label>
+                                        <textarea class="form-control detail" id="details" required name="details">{{ $program->details }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
