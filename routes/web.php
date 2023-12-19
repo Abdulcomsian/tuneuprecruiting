@@ -9,6 +9,8 @@ use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\StudentApplyController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\AdminDashboard;
+use App\Http\Controllers\RecruiterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,8 @@ Route::get('/dashboard', function () {
 //    return view('backend/dashboard/dashboard');
     if (auth()->user()->role == 'coach') {
         return redirect('/applies');
+    } elseif (auth()->user()->role == 'admin') {
+        return redirect('/admin/dashboard');
     }
 
     return redirect('/student/dashboard');
@@ -37,6 +41,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'decrypt.id'])->group(function () {
+    Route::get('/admin/dashboard', [AdminDashboard::class, 'dashboard']);
+    Route::resource('recuriter', RecruiterController::class);
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

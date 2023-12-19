@@ -119,7 +119,7 @@
                         @php if ($role == 'student')
                             $profileImage = (Session::has('profileImage')) ? asset("uploads/users_image/".Session::get('profileImage')) : asset('uploads/users_image/default.jpg');
                         @endphp
-                        @php if ($role == 'coach')
+                        @php if ($role == 'coach' || $role == 'admin')
                             $profileImage = (Session::has('profileImage')) ? asset("uploads/users_image/".Session::get('profileImage')) : asset('uploads/users_image/default.jpg');
                         @endphp
                         <img style="width: 35px; height: 35px;" class="b-r-25" src="{{ $profileImage }}" alt="">

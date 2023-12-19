@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Coach;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class CoachController extends Controller
+class RecruiterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -59,8 +61,17 @@ class CoachController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Coach $coach)
+    public function destroy($userId)
     {
-        //
+        $user = Auth::user();
+        if ($user->role !== 'admin') {
+            return response()->view('common.error', ['errorMessage' => 'UnAuthorize']);
+        }
+        $userToDelete = User::findOrFail($userId);
+        $userToDelete->delete();
+
+        Coach::where(['user_id' => $userId])->delete();
+
+        return redirect()->back()->with('success', 'Recruiter deleted.');
     }
 }
