@@ -84,8 +84,10 @@ class ChatController extends Controller
         return view('common/chat/chat', $data);
     }
 
-    public function getNewMessages($id)
+    public function getNewMessages(Request $request)
     {
+        $id = $request->id;
+
         $user = Auth::user();
         $role = $user->role;
 
@@ -99,8 +101,9 @@ class ChatController extends Controller
             $profileFields = ['coaches.profile_image', 'coaches.first_name'];
         }
 
+        $receiver = $role == 'coach' ? 'student' : 'coach';
         $newMessages = Chat::select('chats.*', ...$profileFields)
-            ->join($role === 'coach' ? 'students' : 'coaches', "{$role}s.id", '=', "chats.{$role}_id")
+            ->join($role === 'coach' ? 'students' : 'coaches', $role === 'coach' ? 'students.id' : 'coaches.id', '=', "chats.{$receiver}_id")
             ->where($where)
             ->get();
 
@@ -114,6 +117,8 @@ class ChatController extends Controller
 
     public function store(Request $request)
     {
+        $request->receiverId = decrypt($request->receiverId);
+
         $user = Auth::user();
 
         $tableData = [

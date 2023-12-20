@@ -100,7 +100,7 @@
                                                         <div class="input-group text-box">
                                                             <input type="hidden" id="url" value="{{ route('chat.store') }}">
                                                             <input type="hidden" id="user-type" value="{{ $type }}">
-                                                            <input type="hidden" id="receiver-id" value="{{ $receiver->id }}">
+                                                            <input type="hidden" id="receiver-id" value="{{ encrypt($receiver->id) }}">
                                                             <input type="hidden" id="user-id" value="{{ $userId }}">
                                                             <input type="hidden" id="user-image-link" value="{{ asset('uploads/users_image/'.$sender->profile_image) }}">
                                                             <input class="form-control input-txt-bx" id="message-to-send" type="text" name="message-to-send" placeholder="Type a message......">

@@ -51,7 +51,12 @@
                                             <tr>
                                                 <td></td>
                                                 <td>
-                                                    <a class="btn btn-success float-end" href="{{ url('/program/apply/'. encrypt($program->id)) }}">Apply</a>
+                                                    @php $countApplies = countProgramApply($program->id); @endphp
+                                                    @if($countApplies > 0)
+                                                        <p class="float-end">Already applied.</p>
+                                                    @else
+                                                        <a class="btn btn-success float-end" href="{{ url('/program/apply/'. encrypt($program->id)) }}">Apply</a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         </tbody>
