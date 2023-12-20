@@ -202,11 +202,9 @@
                                                 @if($user->country)
                                                     <option value="{{ $user->country }}">{{ $user->country }}</option>
                                                 @endif
-                                                <option value="">--Select--</option>
-                                                <option value="germany">Germany</option>
-                                                <option value="canada">Canada</option>
-                                                <option value="usa">Usa</option>
-                                                <option value="aus"></option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{$country->name}}">{{$country->name}} - {{$country->code}}</option>
+                                                    @endforeach
                                             </select>
                                         </div>
                                     </div>

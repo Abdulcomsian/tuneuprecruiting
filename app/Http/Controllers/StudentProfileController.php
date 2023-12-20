@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -14,6 +15,8 @@ class StudentProfileController extends Controller
         $user = Auth::user();
         $data['user'] = Student::where(['user_id' => $user->id])->first();
         $data['email'] = $user->email;
+
+        $data['countries'] = Country::all();
 
         return view('student_backend/profile/profile', $data);
     }
