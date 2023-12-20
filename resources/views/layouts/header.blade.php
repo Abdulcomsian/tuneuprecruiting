@@ -124,7 +124,7 @@
                         @endphp
                         <img style="width: 35px; height: 35px;" class="b-r-25" src="{{ $profileImage }}" alt="">
                         <div class="flex-grow-1 user"><span>{{ Session::get('firstName') . ' ' . Session::get('lastName') }}</span>
-                            <p class="mb-0 font-nunito">{{ ucfirst($role) }}
+                            <p class="mb-0 font-nunito">{{ (ucfirst($role) == 'Coach' ? 'Recruiter' : ucfirst($role)) }}
                                 <svg>
                                     <use href="{{ $profileImage }}"></use>
                                 </svg>
