@@ -44,7 +44,6 @@
                                                 <td>{{ $user->about_me }}</td>
                                                 <td>
                                                     <ul class="action">
-                                                        <li class="edit"><a href="{{ url('/apply/view/'. encrypt($user->id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
                                                         <li class="delete">
                                                             <form method="POST" action="{{ route('recuriter.destroy', $user->id) }}" onsubmit='return confirm("Are you sure?")'>
                                                                 @csrf

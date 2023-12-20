@@ -39,7 +39,7 @@
                                     <tbody>
                                         @foreach($programs as $program)
                                             <tr class="border-bottom-secondary">
-                                                <td>{{ $program->coach->first_name . " " . $program->coach->last_name }}</td>
+                                                <td>{{ $program->coach->first_name ?? '' . " " . $program->coach->last_name ?? '' }}</td>
                                                 <td>{{ $program->program_name }}</td>
                                                 <td>{{ $program->session }}</td>
                                                 <td>{{ $program->number_of_students }}</td>

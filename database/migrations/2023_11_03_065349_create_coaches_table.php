@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('about_me')->nullable();
             $table->string('profile_image')->default('default.jpg');
             $table->string('short_video')->nullable();
+            $table->string('trash')->default('active');
             $table->timestamps();
         });
     }

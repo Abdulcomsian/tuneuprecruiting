@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apply;
+use App\Models\ApplyDetail;
 use App\Models\Coach;
 use App\Http\Controllers\Controller;
+use App\Models\Program;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,9 +71,25 @@ class RecruiterController extends Controller
             return response()->view('common.error', ['errorMessage' => 'UnAuthorize']);
         }
         $userToDelete = User::findOrFail($userId);
-        $userToDelete->delete();
+        $userToDelete->trash = 'trashed';
+        $userToDelete->save();
 
-        Coach::where(['user_id' => $userId])->delete();
+        $coach = Coach::where(['user_id' => $userId])->first();
+        $coach->trash = 'trashed';
+        $coach->save();
+
+        $programs = Program::where(['coach_id' => $coach->id])->get();
+        Program::where(['coach_id' => $coach->id])->update(['trash' => 'trashed']);
+
+        if ($programs) {
+            foreach ($programs as $program) {
+                $applies = Apply::where(['program_id' => $program->id])->get();
+                Apply::where(['program_id' => $program->id])->update(['trash' => 'trashed']);
+                foreach ($applies as $apply) {
+                    ApplyDetail::where(['apply_id' => $apply->id])->update(['trash' => 'trashed']);
+                }
+            }
+        }
 
         return redirect()->back()->with('success', 'Recruiter deleted.');
     }

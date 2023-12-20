@@ -11,7 +11,7 @@ class AdminDashboard extends Controller
     public function dashboard() {
         $data['users'] = User::select('users.*', 'coaches.first_name', 'coaches.last_name', 'coaches.website', 'coaches.about_me')
             ->join('coaches', 'coaches.user_id', '=', 'users.id')
-            ->where(['users.role' => 'coach'])
+            ->where(['users.role' => 'coach', 'coaches.trash' => 'active'])
             ->get();
 
         return view('admin/dashboard/dashboard', $data);

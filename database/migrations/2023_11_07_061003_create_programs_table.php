@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('video')->nullable();
             $table->string('status')->default('public');
             $table->text('details')->nullable();
+            $table->string('trash')->default('active');
             $table->timestamps();
         });
     }

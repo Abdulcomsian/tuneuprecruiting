@@ -49,9 +49,9 @@ class ProgramController extends Controller
         }
 
         // Create program
-        Program::create($request->all());
+        $programId = Program::create($request->all());
 
-        return redirect()->back()->with('success', 'Program created.');
+        return redirect()->route('program.show', $programId);
     }
 
     /**

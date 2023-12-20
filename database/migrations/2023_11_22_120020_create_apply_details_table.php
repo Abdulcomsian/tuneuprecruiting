@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('label');
             $table->string('type');
             $table->text('answer')->nullable();
+            $table->string('trash')->default('active');
             $table->timestamps();
         });
     }

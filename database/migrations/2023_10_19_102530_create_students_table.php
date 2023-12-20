@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('height')->nullable();
             $table->string('home_phone')->nullable();
             $table->string('interest_level')->nullable();
+            $table->string('trash')->default('active');
             $table->timestamps();
         });
     }

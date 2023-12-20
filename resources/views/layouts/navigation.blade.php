@@ -75,14 +75,14 @@
 
                 @php if (auth()->user()->role == 'admin'): @endphp
                 <ul class="sidebar-links" id="simple-bar">
-                    <li class="back-btn"><a href="{{ url('student/dashboard') }}"></a>
+                    <li class="back-btn"><a href="{{ url('admin/dashboard') }}"></a>
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                     </li>
                     <li class="sidebar-main-title">
                         <div></div>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="{{ url('student/dashboard') }}">
+                        <a class="sidebar-link sidebar-title" href="{{ url('admin/dashboard') }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#home') }}"></use>
                             </svg>
