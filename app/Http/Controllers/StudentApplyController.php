@@ -134,7 +134,7 @@ class StudentApplyController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Apply Stored Successfully....');
+        return redirect()->route('program.apply.view', encrypt($apply->id));
     }
 
     public function applies() {

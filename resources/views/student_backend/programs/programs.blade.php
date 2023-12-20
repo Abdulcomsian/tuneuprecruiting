@@ -38,23 +38,28 @@
                                     </thead>
                                     <tbody>
                                         @foreach($programs as $program)
-                                            <tr class="border-bottom-secondary">
-                                                <td>{{ $program->coach->first_name ?? '' . " " . $program->coach->last_name ?? '' }}</td>
+                                            @php $countApplies = countProgramApply($program->id); @endphp
+                                            @php $backgroundColor = ($countApplies > 0) ? 'bg-success' : ''; @endphp
+                                            @php $textColor = ($countApplies > 0) ? 'text-white' : ''; @endphp
+                                            <tr class="border-bottom-secondary {{ $backgroundColor }}">
+                                                <td class="{{ $backgroundColor }}">{{ $program->coach->first_name ?? '' . " " . $program->coach->last_name ?? '' }}</td>
                                                 <td>{{ $program->program_name }}</td>
                                                 <td>{{ $program->session }}</td>
                                                 <td>{{ $program->number_of_students }}</td>
                                                 <td>{{ $program->details }}</td>
                                                 <td>
                                                     <ul class="action">
-                                                        <li>
-                                                            <a title="Apply to this Program" href="{{ url('/program/apply/'. encrypt($program->id)) }}">
-                                                                <i class="icofont icofont-law-document"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="edit"> <a href="{{ route('chat', encrypt($program->coach_id)) }}">
+                                                        @if($countApplies == 0)
+                                                            <li>
+                                                                <a class="{{ $textColor }}" title="Apply to this Program" href="{{ url('/program/apply/'. encrypt($program->id)) }}">
+                                                                    <i class="icofont icofont-law-document"></i>
+                                                                </a>
+                                                            </li>
+                                                        @endif
+                                                        <li> <a class="{{ $textColor }}" href="{{ route('chat', encrypt($program->coach_id)) }}">
                                                                 <i class="icofont icofont-chat"></i></a>
                                                         </li>
-                                                        <li class="edit"> <a href="{{ route('program.view', encrypt($program->id)) }}">
+                                                        <li> <a class="{{ $textColor }}" href="{{ route('program.view', encrypt($program->id)) }}">
                                                                 <i class="icofont icofont-eye-alt"></i></a>
                                                         </li>
                                                     </ul>
