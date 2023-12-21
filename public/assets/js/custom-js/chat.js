@@ -73,9 +73,9 @@ $(document).ready(function() {
         const id = $('#receiver-id').val();
         console.log('/chat/new/'+id);
         const ul = $('#message-notification');
-        var baseUrl = "{{ url('/') }}";
+        var baseUrl = $('#base-url').val();
         $.ajax({
-            url: '/chat/new/'+id, // Replace with your actual endpoint
+            url: baseUrl + '/chat/new/'+id, // Replace with your actual endpoint
             method: 'GET',
             success: function(data) {
                 console.log(data);

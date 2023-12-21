@@ -64,6 +64,7 @@
             <!-- tap on tap ends-->
             <!-- page-wrapper Start-->
             <div class="page-wrapper null compact-sidebar compact-small material-icon" id="pageWrapper">
+                <input type="hidden" id="base-url" value="{{ url('/') }}">
                 <!-- Page Header Start-->
                 @include('layouts.header')
                 <!-- Page Header Ends-->
