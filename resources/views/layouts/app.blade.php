@@ -152,7 +152,7 @@
                 function makeAjaxCall() {
                     var baseUrl = "{{ url('/') }}";
                     $.ajax({
-                        url: '/notification/messages',
+                        url: baseUrl + '/notification/messages',
                         method: 'GET',
                         success: function(response) {
                            if(response && response.length > 0) {

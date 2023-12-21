@@ -6,6 +6,8 @@ function scrollToBottom() {
 scrollToBottom();
 
 $(document).ready(function() {
+    var baseUrl = $('#base-url').val();
+
     $("#message-to-send").keydown(function(event) {
         if (event.which == 13) {
             sendMessage();
@@ -71,16 +73,13 @@ $(document).ready(function() {
 
     function newMessages() {
         const id = $('#receiver-id').val();
-        console.log('/chat/new/'+id);
         const ul = $('#message-notification');
-        var baseUrl = $('#base-url').val();
         $.ajax({
             url: baseUrl + '/chat/new/'+id, // Replace with your actual endpoint
             method: 'GET',
             success: function(data) {
                 console.log(data);
                 if (data && data.length > 0) {
-                    // data = JSON.parse(data);
                     data.forEach(function(message) {
                         var liElement = `
                         <li class="clearfix">
