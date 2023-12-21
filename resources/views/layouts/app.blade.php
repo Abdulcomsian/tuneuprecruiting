@@ -149,8 +149,8 @@
             </script>
 
             <script>
+                var baseUrl = "{{ url('/') }}";
                 function makeAjaxCall() {
-                    var baseUrl = "{{ url('/') }}";
                     $.ajax({
                         url: baseUrl + '/notification/messages',
                         method: 'GET',
@@ -212,9 +212,9 @@
                     console.log(role, coachId, studentId);
 
                     if (role == 'Coach') {
-                        var url = '/chat/' + studentId;
+                        var url = baseUrl + '/chat/' + studentId;
                     } else {
-                        var url = '/chat/' + coachId;
+                        var url = baseUrl + '/chat/' + coachId;
                     }
 
                     window.location.href = url;
