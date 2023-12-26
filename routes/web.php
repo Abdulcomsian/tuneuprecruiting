@@ -41,6 +41,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'decrypt.id'])->group(function () {
+    // admin
     Route::get('/admin/dashboard', [AdminDashboard::class, 'dashboard']);
     Route::resource('recuriter', RecruiterController::class);
 

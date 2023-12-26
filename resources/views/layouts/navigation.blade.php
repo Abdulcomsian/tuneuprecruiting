@@ -91,6 +91,30 @@
                             </svg><span>Dashboard</span>
                         </a>
                     </li>
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                            <svg class="stroke-icon">
+                                <use href="{{asset('assets/svg/icon-sprite.svg#stroke-user')}}"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="../assets/svg/icon-sprite.svg#fill-user"></use>
+                            </svg><span>Recruiter</span></a>
+                        <ul class="sidebar-submenu custom-scrollbar">
+                            <li class="sidebar-head">Recruiter</li>
+
+                            <li class="main-submenu">
+                                <a class="d-flex" href="{{ route('recuriter.create') }}">
+                                    <i data-feather="user-plus"></i> Add new Recruiter
+                                </a>
+                            </li>
+                            <li class="main-submenu"><a class="d-flex" href="{{ route('recuriter.index') }}">
+                                    <svg class="stroke-icon">
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-board') }}"></use>
+                                    </svg>
+                                    <svg class="fill-icon">
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#fill-board') }}"></use>
+                                    </svg>Recruiter list</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 @php endif; @endphp
 

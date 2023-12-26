@@ -35,30 +35,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-form-label">Type</label>
-                                    <div class="form-input position-relative">
-                                        <select name="role" id="" class="form-control" required>
-                                            <option value="">Choose</option>
-                                            <option value="student">Student</option>
-                                            <option value="coach">Coach</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
                                     <div class="row g-2">
-                                        <div class="col-6">
+                                        <div class="col-12">
                                             <label class="col-form-label">Password</label>
                                             <div class="form-input position-relative">
                                                 <input class="form-control" type="password" name="password" required="" placeholder="*********">
-                                                <div class="show-hide"><span class="show"></span></div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-12">
                                             <label class="col-form-label">Confirm Password</label>
                                             <div class="form-input position-relative">
                                                 <input class="form-control" type="password" name="password_confirmation" required="" placeholder="*********">
-                                                <div class="show-hide"><span class="show"></span></div>
                                             </div>
                                         </div>
                                     </div>

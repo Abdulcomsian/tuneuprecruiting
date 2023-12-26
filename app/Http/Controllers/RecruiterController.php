@@ -8,8 +8,13 @@ use App\Models\Coach;
 use App\Http\Controllers\Controller;
 use App\Models\Program;
 use App\Models\User;
+use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Mail;
+use App\Mail\CreateRecruiterAccountMail;
 
 class RecruiterController extends Controller
 {
@@ -18,7 +23,8 @@ class RecruiterController extends Controller
      */
     public function index()
     {
-        //
+        $data['recruiters'] = Coach::all();
+        return view('admin/recruiter/recruiter_list', $data);
     }
 
     /**
@@ -26,7 +32,7 @@ class RecruiterController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/recruiter/add_new_recruiter');
     }
 
     /**
@@ -34,7 +40,28 @@ class RecruiterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $password = 'password' . rand(9999, 99999);
+        $user = User::create([
+            'name' => $request->first_name,
+            'email' => $request->email,
+            'role' => 'coach',
+            'password' => Hash::make($password),
+        ]);
+
+        $coach = Coach::create([
+            'user_id' => $user->id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'college_or_university' => $request->college_or_university,
+            'gender' => $request->gender,
+            'program_type' => $request->program_type
+        ]);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        dd($status);
     }
 
     /**

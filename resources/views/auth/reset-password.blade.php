@@ -26,7 +26,7 @@
                                     <input type="hidden" name="token" value="{{ $request->route('token') }}">
                                     <h4>Create Your Password</h4>
                                     <div class="form-group">
-                                        <label class="col-form-label">New Password</label>
+                                        <label class="col-form-label">Email</label>
                                         <div class="form-input position-relative">
                                             <input
                                                 class="form-control"
@@ -34,7 +34,7 @@
                                                 name="email"
                                                 value="{{ old('email', $request->email) }}"
                                                 required
-                                                autofocus
+                                                readonly
                                                 autocomplete="username">
                                         </div>
                                     </div>

@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('website')->nullable();
+            $table->string('college_or_university')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('program_type')->nullable();
             $table->text('about_me')->nullable();
             $table->string('profile_image')->default('default.jpg');
             $table->string('short_video')->nullable();
