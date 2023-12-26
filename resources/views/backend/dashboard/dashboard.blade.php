@@ -13,12 +13,7 @@
                                     </div>
                                     <div class="col-sm-6 pe-0">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="index.html">
-                                                    <svg class="stroke-icon">
-                                                        <use href="{{ asset('assets/svg/icon-sprite.svg') }}"></use>
-                                                    </svg></a></li>
-                                            <li class="breadcrumb-item">Dashboard</li>
-                                            <li class="breadcrumb-item active">CRM Dashboard</li>
+                                            {!! generateBreadcrumbs(["Dashboard"]) !!}
                                         </ol>
                                     </div>
                                 </div>

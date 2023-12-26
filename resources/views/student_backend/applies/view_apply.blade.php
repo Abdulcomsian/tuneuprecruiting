@@ -8,11 +8,7 @@
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">
-                                    <svg class="stroke-icon">
-                                        <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
-                                    </svg></a></li>
-                            <li class="breadcrumb-item">Applies</li>
+                            {!! generateBreadcrumbs(["Applies"]) !!}
                         </ol>
                     </div>
                 </div>

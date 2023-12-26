@@ -8,12 +8,7 @@
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ url('/') }}">
-                                    <svg class="stroke-icon">
-                                        <use href="{{ asset('/assets/svg/icon-sprite.svg#stroke-home') }}"></use>
-                                    </svg></a></li>
-                            <li class="breadcrumb-item">Program</li>
-                            <li class="breadcrumb-item">View Program</li>
+                            {!! generateBreadcrumbs(["Program", "View Program"]) !!}
                         </ol>
                     </div>
                 </div>

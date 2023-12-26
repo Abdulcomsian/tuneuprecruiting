@@ -8,12 +8,7 @@
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ url('/') }}">
-                                    <svg class="stroke-icon">
-                                        <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
-                                    </svg></a></li>
-                            <li class="breadcrumb-item">Program</li>
-                            <li class="breadcrumb-item">Apply</li>
+                            {!! generateBreadcrumbs(["Program", "Apply"]) !!}
                         </ol>
                     </div>
                 </div>
@@ -267,6 +262,7 @@
                                                             @endif
                                                             @php $checkForMultiple = ($field->multiple) ? 'multiple' : ''; @endphp
                                                             <select name="{{ $variableName }}" id="" {{ $checkForMultiple  }} {{ $required }} class="form-control">
+                                                                <option value=""></option>
                                                                 @foreach($field->values as $value)
                                                                     <option value="{{ $value->label }}">{{ $value->label }}</option>
                                                                 @endforeach
@@ -298,8 +294,13 @@
                                                         @else
                                                             @php $min = (isset($field->min)) ? "min=".$field->min : ''; @endphp
                                                             @php $max = (isset($field->max)) ? "max=".$field->max : ''; @endphp
+                                                            @php $placeholder = (isset($field->placeholder)) ? "placeholder=".$field->placeholder : ''; @endphp
                                                             @php $maxLength = (isset($field->maxlength)) ? "maxlength=".$field->maxlength : ''; @endphp
-                                                            <input name="answer[]" value="{{ old('answer.'.$inputCounter) }}" {{ $min }} {{ $max }} {{ $maxLength }} {{ $required }} type="{{ $field->type }}" class="form-control">
+                                                            @if($field->type == 'textarea')
+                                                                <textarea name="answer[]" {{ $placeholder }} class="form-control">{{ old('answer.'.$inputCounter) }}</textarea>
+                                                            @else
+                                                                <input name="answer[]" {{ $placeholder }} value="{{ old('answer.'.$inputCounter) }}" {{ $min }} {{ $max }} {{ $maxLength }} {{ $required }} type="{{ $field->type }}" class="form-control">
+                                                            @endif
                                                             @php $inputCounter++; @endphp
                                                         @endif
                                                     </div>
@@ -307,7 +308,7 @@
                                         </div>
                                    @endif
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary float-end" id="btn-from-add" type="submit">Apply</button>
+                                    <button class="btn btn-primary float-end mt-3" id="btn-from-add" type="submit">Submit</button>
                                 </div>
                             </form>
                         </div>

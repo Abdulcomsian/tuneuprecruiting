@@ -11,12 +11,6 @@
         <form class="col-auto form-inline search-full" action="#" method="get">
             <div class="form-group">
                 <div class="Typeahead Typeahead--twitterUsers">
-                    <div class="u-posRelative">
-                        <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Type to Search .." name="q" title="" autofocus>
-                        <svg class="search-bg svg-color">
-                            <use href="{{asset('assets/svg/icon-sprite.svg#Search')}}"></use>
-                        </svg>
-                    </div>
                     <div class="Typeahead-menu"></div>
                 </div>
             </div>
