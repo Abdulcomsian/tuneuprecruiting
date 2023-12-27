@@ -17,6 +17,9 @@ class Coach extends Model
         'website',
         'profile_image',
         'short_video',
+        'gender',
+        'college_or_university',
+        'program_type',
     ];
 
     public function programs()

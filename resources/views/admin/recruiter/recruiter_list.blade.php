@@ -62,8 +62,7 @@
                                             <td>{{ $recruiter->about_me }}</td>
                                             <td>
                                                 <ul class="action">
-                                                    <li class="edit"><a href="{{ route('recuriter.show', $recruiter->id) }}"><i class="icofont icofont-eye-alt"></i></a></li>
-                                                    <li class="edit"><a href="{{ route('recuriter.edit', $recruiter->id) }}"><i class="fa fa-pencil-square-o"></i></a></li>
+                                                    <li class="edit"><a href="{{ route('recuriter.show', encrypt($recruiter->coach_id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
                                                     <li class="delete">
                                                         <form method="POST" action="{{ route('recuriter.destroy', $recruiter->id) }}" onsubmit='return confirm("Are you sure?")'>
                                                             @csrf

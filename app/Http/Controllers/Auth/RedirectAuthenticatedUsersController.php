@@ -9,17 +9,23 @@ class RedirectAuthenticatedUsersController extends Controller
 {
     public function home()
     {
-        if (auth()->user()->role == 'coach') {
-            return redirect('/dashboard');
+        $user = auth()->user();
+
+        if ($user->role == 'coach') {
+            if ($user->is_profile_completed == 'not-completed') {
+                return redirect('/profile');
+            } else {
+                return redirect('/dashboard');
+            }
         }
-        elseif(auth()->user()->role == 'student') {
-            if (auth()->user()->is_profile_completed == 'not-completed') {
+        elseif($user->role == 'student') {
+            if ($user->is_profile_completed == 'not-completed') {
                 return redirect('/profile/student');
             } else {
                 return redirect('/student/dashboard');
             }
         }
-        elseif(auth()->user()->role == 'guest') {
+        elseif($user->role == 'guest') {
             return redirect('/guestDashboard');
         }
         else {

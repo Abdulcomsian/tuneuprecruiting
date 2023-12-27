@@ -46,6 +46,7 @@
                                         id="first-name"
                                         type="text"
                                         name="first_name"
+                                        value="{{ old('first_name') }}"
                                         placeholder="First name"
                                         required>
                                 </div>
@@ -56,6 +57,7 @@
                                         id="last-name"
                                         type="text"
                                         name="last_name"
+                                        value="{{ old('last_name') }}"
                                         placeholder="Last name"
                                         required>
                                 </div>
@@ -65,27 +67,28 @@
                                         class="form-control program-name"
                                         id="college-or-university"
                                         type="text"
-                                        name="college_name"
+                                        name="college_or_university"
+                                        value="{{ old('college_or_university') }}"
                                         placeholder="Enter program name"
                                         required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label> <br />
-                                    <input type="radio" name="gender" class="form-check-input" value="male" id="male">
+                                    <input type="radio" name="gender" class="form-check-input" value="male" id="male" {{ old('gender') == 'male' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="male">Male</label>
-                                    <input type="radio" name="gender" class="form-check-input" value="female" id="female">
+                                    <input type="radio" name="gender" class="form-check-input" value="female" id="female" {{ old('gender') == 'female' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="female">Female</label>
-                                    <input type="radio" name="gender" class="form-check-input" value="other" id="other">
+                                    <input type="radio" name="gender" class="form-check-input" value="other" id="other" {{ old('gender') == 'other' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="other">Other</label>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="program-type">Type of Program <span class="text-danger">*</span></label>
-                                    <select name="program_type" id="program-type" class="form-control">
+                                    <select name="program_type" id="program-type" class="form-control" required>
                                         <option value="">Select Type of Program</option>
-                                        <option value="Golf">Golf</option>
-                                        <option value="Soccer">Soccer</option>
-                                        <option value="Lacrosse">Lacrosse</option>
-                                        <option value="Hockey">Hockey</option>
+                                        <option value="Golf" {{ old('program_type') == 'Golf' ? 'selected' : '' }}>Golf</option>
+                                        <option value="Soccer" {{ old('program_type') == 'Soccer' ? 'selected' : '' }}>Soccer</option>
+                                        <option value="Lacrosse" {{ old('program_type') == 'Lacrosse' ? 'selected' : '' }}>Lacrosse</option>
+                                        <option value="Hockey" {{ old('program_type') == 'Hockey' ? 'selected' : '' }}>Hockey</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -95,6 +98,7 @@
                                         id="email"
                                         type="email"
                                         name="email"
+                                        value="{{ old('email') }}"
                                         placeholder="example@example.com"
                                         required>
                                 </div>

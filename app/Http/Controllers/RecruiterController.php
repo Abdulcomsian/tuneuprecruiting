@@ -8,6 +8,7 @@ use App\Models\Coach;
 use App\Http\Controllers\Controller;
 use App\Models\Program;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,9 +22,12 @@ class RecruiterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $data['recruiters'] = Coach::all();
+    public function index() {
+        $data['recruiters'] = User::select('users.*', 'coaches.first_name', 'coaches.last_name', 'coaches.website', 'coaches.about_me', 'coaches.gender', 'coaches.college_or_university', 'coaches.program_type', 'coaches.id as coach_id')
+            ->join('coaches', 'coaches.user_id', '=', 'users.id')
+            ->where(['users.role' => 'coach', 'coaches.trash' => 'active'])
+            ->get();
+
         return view('admin/recruiter/recruiter_list', $data);
     }
 
@@ -40,11 +44,21 @@ class RecruiterController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'college_or_university' => 'required',
+            'gender' => 'required',
+            'program_type' => 'required',
+        ]);
+
         $password = 'password' . rand(9999, 99999);
         $user = User::create([
             'name' => $request->first_name,
             'email' => $request->email,
             'role' => 'coach',
+            'is_profile_completed' => 'not-completed',
             'password' => Hash::make($password),
         ]);
 
@@ -57,19 +71,34 @@ class RecruiterController extends Controller
             'program_type' => $request->program_type
         ]);
 
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+        $password_broker = app(PasswordBroker::class);
+        $token = $password_broker->createToken($user, [
+            'expires' => Carbon::now()->addWeek(), // Set the expiration to 1 week
+        ]);
 
-        dd($status);
+        $link = "reset-password/" . $token . "?email=" . $request->email;
+        $completeLink = url($link);
+        $mailData = [
+            'title' => 'Mail from demo.com',
+            'body' => 'This is for testing email using smtp.',
+            'link' => $completeLink,
+            'name' => $request->first_name
+        ];
+
+        Mail::to($request->email)->send(new CreateRecruiterAccountMail($mailData));
+
+        return redirect()->route('recuriter.show', encrypt($coach->id));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Coach $coach)
+    public function show(Coach $coach, $id)
     {
-        //
+        $id = decrypt($id);
+        $data['recruiter'] = Coach::find($id);
+
+        return view('admin/recruiter/view_recruiter', $data);
     }
 
     /**
