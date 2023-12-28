@@ -316,13 +316,11 @@
                                     <div class="col-sm-3 col-md-3">
                                         <div class="mb-3">
                                             <label class="form-label" for="registered-with-ncaa">Registered With NCAA <span class="text-danger">*</span></label>
-                                            <input
-                                                id="registered-with-ncaa"
-                                                class="form-control"
-                                                name="registered_with_ncaa"
-                                                value="{{ old('registered_with_ncaa', $user->registered_with_ncaa) }}"
-                                                required
-                                                type="text">
+                                            <select name="registered_with_ncaa" id="registered-with-ncaa" class="form-control" required>
+                                                <option value="">Select</option>
+                                                <option value="Yes" {{ old('registered_with_ncaa', $user->registered_with_ncaa) == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                                <option value="No" {{ old('registered_with_ncaa', $user->registered_with_ncaa) == 'No' ? 'selected' : '' }}>No</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-3 col-md-3">
