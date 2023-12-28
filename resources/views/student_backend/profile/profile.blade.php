@@ -154,10 +154,11 @@
                                                 placeholder="Confirm Password">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label">Graduation Year <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="graduation-year">Graduation Year <span class="text-danger">*</span></label>
                                             <input
+                                                id="graduation-year"
                                                 class="form-control"
                                                 name="graduation_year"
                                                 type="text"
@@ -166,10 +167,11 @@
                                                 placeholder="Graduation Year">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label">Home Town <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="home-town">Home Town <span class="text-danger">*</span></label>
                                             <input
+                                                id="home-town"
                                                 class="form-control"
                                                 name="home_town"
                                                 type="text"
@@ -178,10 +180,11 @@
                                                 placeholder="Home Town">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-6">
+                                    <div class="col-sm-3 col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label">State <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="state">State <span class="text-danger">*</span></label>
                                             <input
+                                                id="state"
                                                 class="form-control"
                                                 name="state"
                                                 value="{{ $user->state }}"
@@ -190,10 +193,10 @@
                                                 placeholder="City">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label">Country <span class="text-danger">*</span></label>
-                                            <select class="form-control btn-square" name="country" required>
+                                            <label class="form-label" for="country">Country <span class="text-danger">*</span></label>
+                                            <select class="form-control btn-square" id="country" name="country" required>
                                                 @if($user->country)
                                                     <option value="{{ $user->country }}">{{ $user->country }}</option>
                                                 @endif
@@ -201,6 +204,242 @@
                                                         <option value="{{$country->name}}">{{$country->name}} - {{$country->code}}</option>
                                                     @endforeach
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="program-type">Program Type <span class="text-danger">*</span></label>
+                                            <select name="program_type" id="program-type" class="form-control" required>
+                                                <option value="">Select</option>
+                                                <option value="Golf" {{ old('program_type', $user->program_type) == 'Golf' ? 'selected' : '' }}>Golf</option>
+                                                <option value="Soccer" {{ old('program_type', $user->program_type) == 'Soccer' ? 'selected' : '' }}>Soccer</option>
+                                                <option value="Lacrosse" {{ old('program_type', $user->program_type) == 'Lacrosse' ? 'selected' : '' }}>Lacrosse</option>
+                                                <option value="Hockey" {{ old('program_type', $user->program_type) == 'Hockey' ? 'selected' : '' }}>Hockey</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="home-phone-number">Home Phone Number <span class="text-danger">*</span></label>
+                                            <input
+                                                id="home-phone-number"
+                                                class="form-control"
+                                                name="home_phone_number"
+                                                value="{{ old('home_phone_number', $user->home_phone_number) }}"
+                                                required
+                                                type="text"
+                                                placeholder="Home phone number">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="mobile-number">Mobile Number <span class="text-danger">*</span></label>
+                                            <input
+                                                id="mobile-number"
+                                                class="form-control"
+                                                name="mobile_number"
+                                                value="{{ old('mobile_number', $user->mobile_number) }}"
+                                                required
+                                                type="text"
+                                                placeholder="Mobile">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="guardian-name">Guardian Name <span class="text-danger">*</span></label>
+                                            <input
+                                                id="guardian-name"
+                                                class="form-control"
+                                                name="guardians_name"
+                                                value="{{ old('guardians_name', $user->guardians_name) }}"
+                                                required
+                                                type="text"
+                                                placeholder="Guardian">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="mb-3">
+                                            <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>  <br />
+                                            <input type="radio" name="gender" {{ old('gender', $user->gender) == 'male' ? 'checked' : '' }} class="form-check-input" value="male" id="male">
+                                            <label class="form-check-label" for="male">Male</label>
+                                            <input type="radio" name="gender" {{ old('gender', $user->gender) == 'female' ? 'checked' : '' }} class="form-check-input" value="female" id="female">
+                                            <label class="form-check-label" for="female">Female</label>
+                                            <input type="radio" name="gender" {{ old('gender', $user->gender) == 'other' ? 'checked' : '' }} class="form-check-input" value="other" id="other">
+                                            <label class="form-check-label" for="other">Other</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-8">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="primary-address">Primary Address <span class="text-danger">*</span></label>
+                                            <input
+                                                id="primary-address"
+                                                class="form-control"
+                                                name="primary_address"
+                                                value="{{ old('primary_address', $user->primary_address) }}"
+                                                required
+                                                type="text"
+                                                placeholder="Primary address...">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="high-school-name">High School Name <span class="text-danger">*</span></label>
+                                            <input
+                                                id="high-school-name"
+                                                class="form-control"
+                                                name="high_school_name"
+                                                value="{{ old('high_school_name', $user->high_school_name) }}"
+                                                required
+                                                type="text"
+                                                placeholder="High school name...">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="transcript">Upload Transcript <span class="text-danger">*</span></label>
+                                            <input type="file" id="transcript" name="transcript" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="intended-major">Intended Major <span class="text-danger">*</span></label>
+                                            <input
+                                                id="intended-major"
+                                                class="form-control"
+                                                name="intended_major"
+                                                value="{{ old('intended_major', $user->intended_major) }}"
+                                                required
+                                                type="text"
+                                                placeholder="Intended Major">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="registered-with-ncaa">Registered With NCAA <span class="text-danger">*</span></label>
+                                            <input
+                                                id="registered-with-ncaa"
+                                                class="form-control"
+                                                name="registered_with_ncaa"
+                                                value="{{ old('registered_with_ncaa', $user->registered_with_ncaa) }}"
+                                                required
+                                                type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="ncaa-id">NCAA ID <span class="text-danger">*</span></label>
+                                            <input
+                                                id="ncaa-id"
+                                                class="form-control"
+                                                name="ncaa_id"
+                                                value="{{ old('ncaa_id', $user->ncaa_id) }}"
+                                                required
+                                                placeholder="NCAA ID"
+                                                type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="sat-math">SAT Math <span class="text-danger">*</span></label>
+                                            <input
+                                                id="sat-math"
+                                                class="form-control"
+                                                name="sat_math"
+                                                value="{{ old('sat_math', $user->sat_math) }}"
+                                                required
+                                                placeholder="SAT Math"
+                                                type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="sat-reading">SAT Reading <span class="text-danger">*</span></label>
+                                            <input
+                                                id="sat-reading"
+                                                class="form-control"
+                                                name="sat_reading"
+                                                value="{{ old('sat_reading', $user->sat_reading) }}"
+                                                required
+                                                placeholder="SAT Reading"
+                                                type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="sat">SAT <span class="text-danger">*</span></label>
+                                            <input
+                                                id="sat"
+                                                class="form-control"
+                                                name="sat"
+                                                value="{{ old('sat', $user->sat) }}"
+                                                required
+                                                placeholder="SAT"
+                                                type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="sat-writing">SAT Writing <span class="text-danger">*</span></label>
+                                            <input
+                                                id="sat-writing"
+                                                class="form-control"
+                                                name="sat_writing"
+                                                value="{{ old('sat_writing', $user->sat_writing) }}"
+                                                required
+                                                placeholder="SAT Writing"
+                                                type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="sat-total">SAT Total <span class="text-danger">*</span></label>
+                                            <input
+                                                id="sat-total"
+                                                class="form-control"
+                                                name="sat_total"
+                                                value="{{ old('sat_total', $user->sat_total) }}"
+                                                required
+                                                placeholder="SAT Total"
+                                                type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="act-total">ACT Total <span class="text-danger">*</span></label>
+                                            <input
+                                                id="act-total"
+                                                class="form-control"
+                                                name="act_total"
+                                                value="{{ old('act_total', $user->act_total) }}"
+                                                required
+                                                placeholder="ACT Total"
+                                                type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="act-total">ACT Total <span class="text-danger">*</span></label>
+                                            <input
+                                                id="act-total"
+                                                class="form-control"
+                                                name="academic_honor"
+                                                value="{{ old('academic_honor', $user->academic_honor) }}"
+                                                required
+                                                placeholder="ACT Total"
+                                                type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="other-interest">Other Interest <span class="text-danger">*</span></label>
+                                            <input
+                                                id="other-interest"
+                                                class="form-control"
+                                                name="other_interest"
+                                                value="{{ old('other_interest', $user->other_interest) }}"
+                                                required
+                                                placeholder="Other Interest"
+                                                type="text">
                                         </div>
                                     </div>
                                 </div>
@@ -240,15 +479,6 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <div class="col-md-4">
-                                            <label for="gender" class="form-label">Gender</label> <br />
-                                            <input type="radio" name="gender" {{ ($user->gender == 'male') ? 'checked' : '' }} class="form-check-input" value="male" id="male">
-                                            <label class="form-check-label" for="male">Male</label>
-                                            <input type="radio" name="gender" {{ ($user->gender == 'female') ? 'checked' : '' }} class="form-check-input" value="female" id="female">
-                                            <label class="form-check-label" for="female">Female</label>
-                                            <input type="radio" name="gender" {{ ($user->gender == 'other') ? 'checked' : '' }} class="form-check-input" value="other" id="other">
-                                            <label class="form-check-label" for="other">Other</label>
-                                        </div>
                                         <div class="col-md-5">
                                             <label for="grad" class="form-label">Grad. Year</label>
                                             <input type="text" name="grad_year" value="{{ $user->grad_year }}" class="form-control" id="grad">
@@ -259,10 +489,6 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label for="home-phone" class="form-label">Home Phone</label>
-                                            <input type="text" name="home_phone" value="{{ $user->home_phone }}" class="form-control" id="home-phone">
-                                        </div>
                                         <div class="col-md-6">
                                             <label for="interest-level" class="form-label">Interests Level</label>
                                             <input type="text" name="interest_level" value="{{ $user->interest_level }}" class="form-control" id="interest-level">

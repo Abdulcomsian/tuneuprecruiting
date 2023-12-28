@@ -39,6 +39,9 @@ class StudentProfileController extends Controller
         // CV upload
         $student = FileUploadHelper::handleFileUpload($request, 'cv', 'uploads/student_cv/', $student);
 
+        // transcript
+        $student = FileUploadHelper::handleFileUpload($request, 'transcript', 'uploads/transcript/', $student);
+
         // Update student data
         $student->fill($request->all());
 

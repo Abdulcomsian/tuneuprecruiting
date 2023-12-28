@@ -36,7 +36,6 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'role' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -56,15 +55,9 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        if ($request->role == 'student') {
-            $student = Student::create(['user_id' => $user->id, 'first_name' => $firstName, 'last_name' => $lastName]);
-            Session::put('studentId', $student->id);
-            Session::put('profileImage', $student->profile_image);
-        } else if ($request->role == 'coach') {
-            $coach = Coach::create(['user_id' => $user->id, 'first_name' => $firstName, 'last_name' => $lastName]);
-            Session::put('coachId', $coach->id);
-            Session::put('profileImage', $coach->profile_image);
-        }
+        $student = Student::create(['user_id' => $user->id, 'first_name' => $firstName, 'last_name' => $lastName]);
+        Session::put('studentId', $student->id);
+        Session::put('profileImage', $student->profile_image);
 
         event(new Registered($user));
 

@@ -15,7 +15,12 @@ use App\Http\Requests\ApplyRequest;
 class StudentApplyController extends Controller
 {
     public function programs() {
-        $data['programs'] = Program::with('coach')->where(['programs.status' => 'public'])->get();
+        $gender = Session::get('gender');
+        $programType = Session::get('programType');
+        $data['programs'] = Program::join('coaches', 'coaches.id', '=', 'programs.coach_id')
+            ->where(['programs.status' => 'public', 'coaches.gender' => $gender, 'coaches.program_type' => $programType])
+            ->get();
+
         return view('student_backend/programs/programs', $data);
     }
 

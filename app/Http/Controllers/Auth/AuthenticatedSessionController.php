@@ -42,6 +42,8 @@ class AuthenticatedSessionController extends Controller
             Session::put('firstName', $profile->first_name);
             Session::put('lastName', $profile->last_name);
             Session::put('profileImage', $profile->profile_image);
+            Session::put('gender', $profile->gender);
+            Session::put('programType', $profile->program_type);
         } elseif ($user->role == 'admin') {
             Session::put('adminId', $user->id);
             Session::put('firstName', $user->first_name);

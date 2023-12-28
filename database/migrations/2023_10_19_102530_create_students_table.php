@@ -32,8 +32,26 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('grad_year')->nullable();
             $table->string('height')->nullable();
-            $table->string('home_phone')->nullable();
             $table->string('interest_level')->nullable();
+
+            $table->string('program_type')->nullable();
+            $table->string('home_phone_number')->nullable();
+            $table->string('mobile_number')->nullable();
+            $table->string('primary_address')->nullable();
+            $table->string('guardians_name')->nullable();
+            $table->string('high_school_name')->nullable();
+            $table->string('transcript')->nullable();
+            $table->string('intended_major')->nullable();
+            $table->string('registered_with_ncaa')->nullable();
+            $table->string('ncaa_id')->nullable();
+            $table->string('sat_math')->nullable();
+            $table->string('sat_reading')->nullable();
+            $table->string('sat')->nullable();
+            $table->string('sat_writing')->nullable();
+            $table->string('sat_total')->nullable();
+            $table->string('act_total')->nullable();
+            $table->string('academic_honor')->nullable();
+            $table->string('other_interest')->nullable();
             $table->string('trash')->default('active');
             $table->timestamps();
         });
