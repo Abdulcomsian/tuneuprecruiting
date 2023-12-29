@@ -29,6 +29,12 @@ class StudentProfileRequest extends FormRequest
             'home_town' => 'required|string',
             'state' => 'required|string',
             'country' => 'required|string',
+            'program_type' => 'required|string',
+            'home_phone_number' => 'required|string',
+            'mobile_number' => 'required|string',
+            'guardians_name' => 'required|string',
+            'gender' => 'required|string',
+            'primary_address' => 'required|string',
         ];
 
         // Add the password rule conditionally

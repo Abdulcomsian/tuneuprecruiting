@@ -75,12 +75,12 @@
                                 <div class="col-md-3">
                                     <label class="form-label" for="program-status">Status <span class="text-danger">*</span></label>
                                     <select name="status" required id="program-status" class="form-control">
-                                        <option value=""></option>
+                                        <option value="">Select</option>
                                         <option value="Public">Public</option>
                                         <option value="Dropped">Dropped</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label class="form-label" for="video">Video</label>
                                     <input
                                         class="form-control video"
@@ -89,7 +89,17 @@
                                         name="video_file"
                                         accept="video/*">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label class="form-label" for="program-type">Program Type <span class="text-danger">*</span></label>
+                                    @component('components.select-type-of-object-array', ['options' => $programTypes, 'selected' => old('program_for', $programType), 'name' => 'program_type', 'id' => 'program-type'])
+                                    @endcomponent
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="gender" class="form-label">Program For <span class="text-danger">*</span></label>  <br />
+                                    @component('components.radio-buttons', ['name' => 'program_for', 'options' => ['Male', 'Female', 'Other'], 'selected' => ucfirst(old('program_for', $gender))])
+                                    @endcomponent
+                                </div>
+                                <div class="col-md-12">
                                     <div class="mb-3">
                                         <label class="form-label" for="details">Details <span class="text-danger">*</span></label>
                                         <textarea class="form-control detail" id="details" required name="details"></textarea>
@@ -117,12 +127,6 @@
 
            // Get the text content of the code element and trim whitespace
            var jsonString = $.trim(codeElement.html());
-
-           // Parse the JSON string to a JavaScript object
-           // var jsonArray = JSON.parse(jsonString);
-
-           // Output the JSON array to the console (you can do whatever you want with it)
-           console.log(jsonString);
        })
     </script>
 </x-app-layout>

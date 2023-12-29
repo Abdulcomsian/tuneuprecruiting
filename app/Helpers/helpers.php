@@ -8,6 +8,13 @@ if (!function_exists('countProgramApply')) {
     }
 }
 
+if (!function_exists('getGenderTypes')) {
+    function getGenderTypes()
+    {
+        return ['Male', 'Female', 'Other'];
+    }
+}
+
 if (!function_exists('generateBreadcrumbs')) {
     function generateBreadcrumbs($items) {
         $breadcrumbs = [];

@@ -7,6 +7,7 @@ use App\Models\ApplyDetail;
 use App\Models\Coach;
 use App\Http\Controllers\Controller;
 use App\Models\Program;
+use App\Models\ProgramType;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Passwords\PasswordBroker;
@@ -36,7 +37,8 @@ class RecruiterController extends Controller
      */
     public function create()
     {
-        return view('admin/recruiter/add_new_recruiter');
+        $data['programTypes'] = ProgramType::all();
+        return view('admin/recruiter/add_new_recruiter', $data);
     }
 
     /**

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->text('custom_fields')->nullable();
             $table->text('video')->nullable();
             $table->string('status')->default('public');
+            $table->string('program_type');
+            $table->string('program_for');
             $table->text('details')->nullable();
             $table->string('trash')->default('active');
             $table->timestamps();

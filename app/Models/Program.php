@@ -17,6 +17,8 @@ class Program extends Model
         'status',
         'details',
         'video',
+        'program_type',
+        'program_for',
         'custom_fields'
     ];
 

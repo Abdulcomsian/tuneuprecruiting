@@ -141,23 +141,14 @@
                                     <div class="col-sm-3 col-md-3">
                                         <div class="mb-3">
                                             <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label> <br />
-                                            <input type="radio" name="gender" class="form-check-input" value="male" id="male" {{ old('gender', $user->gender) == 'male' ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="male">Male</label>
-                                            <input type="radio" name="gender" class="form-check-input" value="female" id="female" {{ old('gender', $user->gender) == 'female' ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="female">Female</label>
-                                            <input type="radio" name="gender" class="form-check-input" value="other" id="other" {{ old('gender', $user->gender) == 'other' ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="other">Other</label>
+                                            @component('components.radio-buttons', ['name' => 'gender', 'options' => getGenderTypes(), 'selected' => ucfirst(old('gender', $user->gender))])
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <label class="form-label" for="program-type">Type of Program <span class="text-danger">*</span></label>
-                                        <select name="program_type" id="program-type" class="form-control" required>
-                                            <option value="">Select Type of Program</option>
-                                            <option value="Golf" {{ old('program_type', $user->program_type) == 'Golf' ? 'selected' : '' }}>Golf</option>
-                                            <option value="Soccer" {{ old('program_type', $user->program_type) == 'Soccer' ? 'selected' : '' }}>Soccer</option>
-                                            <option value="Lacrosse" {{ old('program_type', $user->program_type) == 'Lacrosse' ? 'selected' : '' }}>Lacrosse</option>
-                                            <option value="Hockey" {{ old('program_type', $user->program_type) == 'Hockey' ? 'selected' : '' }}>Hockey</option>
-                                        </select>
+                                        @component('components.select-type-of-object-array', ['options' => $programTypes, 'selected' => old('program_type', $user->program_type), 'name' => 'program_type', 'id' => 'program-type'])
+                                        @endcomponent
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label" for="college-or-university">College/University Name <span class="text-danger">*</span></label>

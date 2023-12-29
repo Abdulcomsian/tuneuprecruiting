@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\ProgramType;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -17,6 +18,7 @@ class StudentProfileController extends Controller
         $data['email'] = $user->email;
 
         $data['countries'] = Country::all();
+        $data['programTypes'] = ProgramType::all();
 
         return view('student_backend/profile/profile', $data);
     }

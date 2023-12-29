@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Apply;
 use App\Models\Program;
+use App\Models\ProgramType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\ProgramRequest;
@@ -25,7 +26,11 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        return view('backend/program/add_new_program');
+        $data['gender'] = Session::get('gender');
+        $data['programType'] = Session::get('programType');
+        $data['programTypes'] = ProgramType::all();
+
+        return view('backend/program/add_new_program', $data);
     }
 
     /**

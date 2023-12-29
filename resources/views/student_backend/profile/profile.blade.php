@@ -196,26 +196,15 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label class="form-label" for="country">Country <span class="text-danger">*</span></label>
-                                            <select class="form-control btn-square" id="country" name="country" required>
-                                                @if($user->country)
-                                                    <option value="{{ $user->country }}">{{ $user->country }}</option>
-                                                @endif
-                                                    @foreach ($countries as $country)
-                                                        <option value="{{$country->name}}">{{$country->name}} - {{$country->code}}</option>
-                                                    @endforeach
-                                            </select>
+                                            @component('components.select-type-of-object-array', ['options' => $countries, 'selected' => old('country', $user->country), 'name' => 'country', 'id' => 'country'])
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label class="form-label" for="program-type">Program Type <span class="text-danger">*</span></label>
-                                            <select name="program_type" id="program-type" class="form-control" required>
-                                                <option value="">Select</option>
-                                                <option value="Golf" {{ old('program_type', $user->program_type) == 'Golf' ? 'selected' : '' }}>Golf</option>
-                                                <option value="Soccer" {{ old('program_type', $user->program_type) == 'Soccer' ? 'selected' : '' }}>Soccer</option>
-                                                <option value="Lacrosse" {{ old('program_type', $user->program_type) == 'Lacrosse' ? 'selected' : '' }}>Lacrosse</option>
-                                                <option value="Hockey" {{ old('program_type', $user->program_type) == 'Hockey' ? 'selected' : '' }}>Hockey</option>
-                                            </select>
+                                            @component('components.select-type-of-object-array', ['options' => $programTypes, 'selected' => old('program_type', $user->program_type), 'name' => 'program_type', 'id' => 'program-type'])
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="col-sm-3 col-md-3">
@@ -257,17 +246,6 @@
                                                 placeholder="Guardian">
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 col-md-4">
-                                        <div class="mb-3">
-                                            <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>  <br />
-                                            <input type="radio" name="gender" {{ old('gender', $user->gender) == 'male' ? 'checked' : '' }} class="form-check-input" value="male" id="male">
-                                            <label class="form-check-label" for="male">Male</label>
-                                            <input type="radio" name="gender" {{ old('gender', $user->gender) == 'female' ? 'checked' : '' }} class="form-check-input" value="female" id="female">
-                                            <label class="form-check-label" for="female">Female</label>
-                                            <input type="radio" name="gender" {{ old('gender', $user->gender) == 'other' ? 'checked' : '' }} class="form-check-input" value="other" id="other">
-                                            <label class="form-check-label" for="other">Other</label>
-                                        </div>
-                                    </div>
                                     <div class="col-sm-12 col-md-8">
                                         <div class="mb-3">
                                             <label class="form-label" for="primary-address">Primary Address <span class="text-danger">*</span></label>
@@ -283,7 +261,14 @@
                                     </div>
                                     <div class="col-sm-4 col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label" for="high-school-name">High School Name <span class="text-danger">*</span></label>
+                                            <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>  <br />
+                                            @component('components.radio-buttons', ['name' => 'gender', 'options' => getGenderTypes(), 'selected' => ucfirst(old('gender', $user->gender))])
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="high-school-name">High School Name</label>
                                             <input
                                                 id="high-school-name"
                                                 class="form-control"
@@ -296,13 +281,13 @@
                                     </div>
                                     <div class="col-sm-4 col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label" for="transcript">Upload Transcript <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="transcript">Upload Transcript</label>
                                             <input type="file" id="transcript" name="transcript" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-sm-4 col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label" for="intended-major">Intended Major <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="intended-major">Intended Major</label>
                                             <input
                                                 id="intended-major"
                                                 class="form-control"
@@ -315,7 +300,7 @@
                                     </div>
                                     <div class="col-sm-3 col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label" for="registered-with-ncaa">Registered With NCAA <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="registered-with-ncaa">Registered With NCAA</label>
                                             <select name="registered_with_ncaa" id="registered-with-ncaa" class="form-control" required>
                                                 <option value="">Select</option>
                                                 <option value="Yes" {{ old('registered_with_ncaa', $user->registered_with_ncaa) == 'Yes' ? 'selected' : '' }}>Yes</option>
@@ -325,7 +310,7 @@
                                     </div>
                                     <div class="col-sm-3 col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label" for="ncaa-id">NCAA ID <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="ncaa-id">NCAA ID</label>
                                             <input
                                                 id="ncaa-id"
                                                 class="form-control"
@@ -338,7 +323,7 @@
                                     </div>
                                     <div class="col-sm-3 col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label" for="sat-math">SAT Math <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="sat-math">SAT Math</label>
                                             <input
                                                 id="sat-math"
                                                 class="form-control"
@@ -351,7 +336,7 @@
                                     </div>
                                     <div class="col-sm-3 col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label" for="sat-reading">SAT Reading <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="sat-reading">SAT Reading</label>
                                             <input
                                                 id="sat-reading"
                                                 class="form-control"
@@ -364,7 +349,7 @@
                                     </div>
                                     <div class="col-sm-3 col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label" for="sat">SAT <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="sat">SAT</label>
                                             <input
                                                 id="sat"
                                                 class="form-control"
@@ -377,7 +362,7 @@
                                     </div>
                                     <div class="col-sm-3 col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label" for="sat-writing">SAT Writing <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="sat-writing">SAT Writing</label>
                                             <input
                                                 id="sat-writing"
                                                 class="form-control"
@@ -390,7 +375,7 @@
                                     </div>
                                     <div class="col-sm-3 col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label" for="sat-total">SAT Total <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="sat-total">SAT Total</label>
                                             <input
                                                 id="sat-total"
                                                 class="form-control"
@@ -403,7 +388,7 @@
                                     </div>
                                     <div class="col-sm-3 col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label" for="act-total">ACT Total <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="act-total">ACT Total</label>
                                             <input
                                                 id="act-total"
                                                 class="form-control"
@@ -416,7 +401,7 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="act-total">ACT Total <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="act-total">ACT Total</label>
                                             <input
                                                 id="act-total"
                                                 class="form-control"
@@ -429,7 +414,7 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="other-interest">Other Interest <span class="text-danger">*</span></label>
+                                            <label class="form-label" for="other-interest">Other Interest</label>
                                             <input
                                                 id="other-interest"
                                                 class="form-control"
