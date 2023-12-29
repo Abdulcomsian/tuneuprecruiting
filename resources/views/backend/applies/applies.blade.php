@@ -25,11 +25,11 @@
                                     <thead>
                                         <tr>
                                             <th>Full Name</th>
-                                            <th>Program</th>
                                             <th>Graduation Year</th>
                                             <th>Country</th>
-                                            <th>Home Town</th>
                                             <th>State</th>
+                                            <th>Program</th>
+                                            <th>Home Town</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -37,13 +37,20 @@
                                         @foreach($applies as $apply)
                                             <tr class="border-bottom-secondary">
                                                 <th scope="row">{{ $apply->first_name . ' ' . $apply->last_name }}</th>
-                                                <td>{{ $apply->program_name }}</td>
                                                 <td>{{ $apply->graduation_year }}</td>
                                                 <td>{{ $apply->country }}</td>
-                                                <td>{{ $apply->home_town }}</td>
                                                 <td>{{ $apply->state }}</td>
+                                                <td>{{ $apply->program_name }}</td>
+                                                <td>{{ $apply->home_town }}</td>
                                                 <td>
+                                                    <div class="half-star-ratings" data-rateyo-half-star="true"></div>
                                                     <ul class="action">
+                                                        <li style="width: 200px">
+                                                            <x-bladewind.rating
+                                                                rating="3"
+                                                                color="gray"
+                                                                name="gray-rating" />
+                                                        </li>
                                                         <li class="edit"> <a href="{{ url('apply/status/'.encrypt($apply->apply_id)) }}">
                                                                 @if($apply->star == 'star')
                                                                     <i class="icofont icofont-heart-alt"></i></a>

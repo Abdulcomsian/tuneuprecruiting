@@ -39,7 +39,7 @@
                                             @php $backgroundColor = ($countApplies > 0) ? 'bg-success' : ''; @endphp
                                             @php $textColor = ($countApplies > 0) ? 'text-white' : ''; @endphp
                                             <tr class="border-bottom-secondary {{ $backgroundColor }}">
-                                                <td>{{ $program->college_or_university }}</td>
+                                                <td class="{{ $backgroundColor }}">{{ $program->college_or_university }}</td>
                                                 <td class="{{ $backgroundColor }}">{{ $program->coach->first_name ?? '' . " " . $program->coach->last_name ?? '' }}</td>
                                                 <td>{{ $program->program_name }}</td>
                                                 <td>{{ $program->session }}</td>

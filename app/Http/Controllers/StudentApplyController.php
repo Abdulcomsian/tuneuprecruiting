@@ -17,8 +17,10 @@ class StudentApplyController extends Controller
     public function programs() {
         $gender = Session::get('gender');
         $programType = Session::get('programType');
-        $data['programs'] = Program::join('coaches', 'coaches.id', '=', 'programs.coach_id')
-            ->where(['programs.status' => 'public', 'coaches.gender' => $gender, 'coaches.program_type' => $programType])
+
+        $data['programs'] = Program::select('programs.*', 'coaches.first_name', 'coaches.last_name', 'coaches.college_or_university')
+            ->join('coaches', 'coaches.id', '=', 'programs.coach_id')
+            ->where(['programs.status' => 'public', 'programs.program_for' => $gender, 'programs.program_type' => $programType])
             ->get();
 
         return view('student_backend/programs/programs', $data);
@@ -26,7 +28,6 @@ class StudentApplyController extends Controller
 
     public function studentApply(Request $request) {
         $programId = $request->id;
-
         $data['program'] = Program::select('programs.*', 'coaches.first_name', 'coaches.last_name')
             ->join('coaches', 'coaches.id', '=', 'programs.coach_id')
             ->where(['programs.id' => $programId])

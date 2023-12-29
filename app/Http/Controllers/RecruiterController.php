@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Apply;
 use App\Models\ApplyDetail;
 use App\Models\Coach;
-use App\Http\Controllers\Controller;
 use App\Models\Program;
 use App\Models\ProgramType;
 use App\Models\User;
@@ -14,7 +13,6 @@ use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
 use Mail;
 use App\Mail\CreateRecruiterAccountMail;
 

@@ -36,36 +36,38 @@ class ApplyRequest extends FormRequest
         $radioCounter = 0;
         $inputCounter = 0;
 
-        foreach ($inputs as $key => $input) {
-            switch ($input->type) {
-                case 'checkbox-group':
-                    if ($input->required) {
-                        $this->rules["checkbox_{$selectListCounter}"] = 'required';
-                        $this->messages["checkbox_{$selectListCounter}.required"] = "The {$input->label} field is required.";
-                    }
-                    $selectListCounter++;
-                    break;
-                case 'file':
-                    if ($input->required) {
-                        $this->rules["files.{$fileCounter}"] = 'required';
-                        $this->messages["files.{$fileCounter}.required"] = "The {$input->label} field is required.";
-                    }
-                    $fileCounter++;
-                    break;
-                case 'radio-group':
-                    if ($input->required) {
-                        $this->rules["radio_{$radioCounter}"] = 'required';
-                        $this->messages["radio_{$radioCounter}.required"] = "The {$input->label} field is required.";
-                    }
-                    $radioCounter++;
-                    break;
-                default:
-                    if ($input->required) {
-                        $this->rules["answer.{$inputCounter}"] = 'required';
-                        $this->messages["answer.{$inputCounter}.required"] = "The {$input->label} field is required.";
-                    }
-                    $inputCounter++;
-                    break;
+        if (!empty($inputs)) {
+            foreach ($inputs as $key => $input) {
+                switch ($input->type) {
+                    case 'checkbox-group':
+                        if ($input->required) {
+                            $this->rules["checkbox_{$selectListCounter}"] = 'required';
+                            $this->messages["checkbox_{$selectListCounter}.required"] = "The {$input->label} field is required.";
+                        }
+                        $selectListCounter++;
+                        break;
+                    case 'file':
+                        if ($input->required) {
+                            $this->rules["files.{$fileCounter}"] = 'required';
+                            $this->messages["files.{$fileCounter}.required"] = "The {$input->label} field is required.";
+                        }
+                        $fileCounter++;
+                        break;
+                    case 'radio-group':
+                        if ($input->required) {
+                            $this->rules["radio_{$radioCounter}"] = 'required';
+                            $this->messages["radio_{$radioCounter}.required"] = "The {$input->label} field is required.";
+                        }
+                        $radioCounter++;
+                        break;
+                    default:
+                        if ($input->required) {
+                            $this->rules["answer.{$inputCounter}"] = 'required';
+                            $this->messages["answer.{$inputCounter}.required"] = "The {$input->label} field is required.";
+                        }
+                        $inputCounter++;
+                        break;
+                }
             }
         }
 

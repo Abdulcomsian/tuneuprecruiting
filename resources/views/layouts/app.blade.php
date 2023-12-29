@@ -52,6 +52,9 @@
 
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/formBuilder/jquerysctipttop.css') }}">
 
+        <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
+
     </head>
     <body>
             <!-- Loader starts-->
@@ -119,6 +122,7 @@
             <script src="{{ asset('assets/js/datatable/datatables/dataTables.select.min.js') }}"></script>
             <script src="{{ asset('assets/js/dashboard/dashboard_2.js') }}"></script>
             <script src="{{ asset('assets/js/animation/wow/wow.min.js') }}"></script>
+            <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
 
             <!-- Plugins JS Ends-->
             <!-- Theme js-->
