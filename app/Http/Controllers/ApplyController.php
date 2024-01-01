@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Apply;
 use App\Models\ApplyDetail;
+use App\Models\Program;
+use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Mail;
+use App\Mail\DefaultMail;
 
 class ApplyController extends Controller
 {
@@ -20,6 +25,14 @@ class ApplyController extends Controller
         return view('backend/applies/applies', $data);
     }
 
+    public function saveApplyRating(Request $request) {
+        $apply = Apply::find($request->applyId);
+        $apply->rating = $request->rating;
+        $apply->save();
+
+        return response(['status' => 200, 'message' => 'success']);
+    }
+
     public function changeStatusToStar(Request $request) {
         $applyId = $request->id;
         $apply = Apply::find($applyId);
@@ -32,10 +45,19 @@ class ApplyController extends Controller
 
     public function destroy(Request $request) {
         $applyId = $request->id;
-
         $apply = Apply::find($applyId);
         $apply->trash = 'trash';
         $apply->save();
+
+        $student = User::join('students', 'students.user_id', '=', 'users.id')->where(['students.id' => $apply->student_id])->first();
+        $program = Program::find($apply->program_id);
+
+        $mailData = [
+            'name' => $student->first_name,
+            'body' => 'The recruiter has rejected your application for the ' . $program->program_name .' program.',
+        ];
+
+        Mail::to($student->email)->send(new DefaultMail($mailData));
 
         return redirect()->back()->with('success', 'Deleted.');
     }

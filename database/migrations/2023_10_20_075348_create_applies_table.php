@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('trash')->default('active');
             $table->string('star')->nullable();
             $table->string('talking')->nullable();
+            $table->string('rating')->default('0');
             $table->string('read')->default('unread');
 
             $table->timestamps();

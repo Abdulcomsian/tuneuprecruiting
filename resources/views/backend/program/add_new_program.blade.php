@@ -42,35 +42,29 @@
                                 <input type="hidden" name="_method" value="POST" id="route-method">
                                 <input type="hidden" name="custom_fields" id="custom-fields">
                                 <input type="hidden" value="{{ route('program.store') }}" id="route-post-method">
-                                <div class="col-md-3">
-                                    <label class="form-label" for="program-name">Program Name  <span class="text-danger">*</span></label>
-                                    <input
-                                        class="form-control program-name"
-                                        id="program-name"
-                                        type="text"
+                                <div class="col-md-4">
+                                    <x-bladewind.input
                                         name="program_name"
-                                        placeholder="Enter program name"
-                                        required>
+                                        required="true"
+                                        id="program-name"
+                                        label="Program Name"
+                                        error_message="You will need to enter program name" />
                                 </div>
-                                <div class="col-md-3">
-                                    <label class="form-label" for="session">Session <span class="text-danger">*</span></label>
-                                    <input
-                                        class="form-control session"
-                                        id="session"
-                                        type="text"
+                                <div class="col-md-4">
+                                    <x-bladewind.input
                                         name="session"
-                                        placeholder="Enter session"
-                                        required>
+                                        required="true"
+                                        id="session"
+                                        label="Session"
+                                        error_message="You will need to enter session" />
                                 </div>
-                                <div class="col-md-3">
-                                    <label class="form-label" for="number-of-students">Number of Students <span class="text-danger">*</span></label>
-                                    <input
-                                        class="form-control number-of-students"
-                                        id="number-of-students"
-                                        type="text"
+                                <div class="col-md-4">
+                                    <x-bladewind.input
                                         name="number_of_students"
-                                        placeholder="Enter number"
-                                        required>
+                                        required="true"
+                                        id="number-of-students"
+                                        label="Number of Students"
+                                        error_message="You will need to enter session" />
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="program-status">Status <span class="text-danger">*</span></label>
@@ -80,7 +74,17 @@
                                         <option value="Dropped">Dropped</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <label class="form-label" for="program-type">Program Type <span class="text-danger">*</span></label>
+                                    @component('components.select-type-of-object-array', ['options' => $programTypes, 'selected' => old('program_for', $programType), 'name' => 'program_type', 'id' => 'program-type'])
+                                    @endcomponent
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="gender" class="form-label">Program For <span class="text-danger">*</span></label>  <br />
+                                    @component('components.radio-buttons', ['name' => 'program_for', 'options' => ['Male', 'Female', 'Other'], 'selected' => ucfirst(old('program_for', $gender))])
+                                    @endcomponent
+                                </div>
+                                <div class="col-md-3">
                                     <label class="form-label" for="video">Video</label>
                                     <input
                                         class="form-control video"
@@ -88,16 +92,6 @@
                                         type="file"
                                         name="video_file"
                                         accept="video/*">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label" for="program-type">Program Type <span class="text-danger">*</span></label>
-                                    @component('components.select-type-of-object-array', ['options' => $programTypes, 'selected' => old('program_for', $programType), 'name' => 'program_type', 'id' => 'program-type'])
-                                    @endcomponent
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="gender" class="form-label">Program For <span class="text-danger">*</span></label>  <br />
-                                    @component('components.radio-buttons', ['name' => 'program_for', 'options' => ['Male', 'Female', 'Other'], 'selected' => ucfirst(old('program_for', $gender))])
-                                    @endcomponent
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">

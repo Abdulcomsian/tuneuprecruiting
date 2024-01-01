@@ -30,6 +30,11 @@ class ProgramController extends Controller
         $data['programType'] = Session::get('programType');
         $data['programTypes'] = ProgramType::all();
 
+        $data['status'] = [
+            [ 'name' => 'Public'],
+            [ 'name' => 'Dropped']
+        ];
+
         return view('backend/program/add_new_program', $data);
     }
 

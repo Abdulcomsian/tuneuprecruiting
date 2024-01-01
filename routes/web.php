@@ -11,6 +11,7 @@ use App\Http\Controllers\StudentApplyController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\RecruiterController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,9 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get("/redirectAuthenticatedUsers", [RedirectAuthenticatedUsersController::class, "home"]);
 
+    // Reports
+    Route::post("/report/recruiter", [ReportController::class, "recruiterReport"])->name('report.recruiter');
+
     Route::resource('program', ProgramController::class);
 
     Route::get("/chat/{id?}", [ChatController::class, "show"])->name('chat');
@@ -58,6 +62,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::get('/notification/messages', [ChatController::class, 'notificationMessages']);
 
     Route::get('/applies', [ApplyController::class, 'applies']);
+    Route::post('/apply/rating', [ApplyController::class, 'saveApplyRating'])->name('apply.rating');
     Route::get('/apply/status/{id}', [ApplyController::class, 'changeStatusToStar']);
     Route::delete('/apply/destroy/{id}', [ApplyController::class, 'destroy'])->name('apply.destroy');
     Route::get('/apply/view/{id}', [ApplyController::class, 'viewApply']);

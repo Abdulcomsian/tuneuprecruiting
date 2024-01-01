@@ -43,15 +43,12 @@
                                                 <td>{{ $apply->program_name }}</td>
                                                 <td>{{ $apply->home_town }}</td>
                                                 <td>
-                                                    <div class="half-star-ratings" data-rateyo-half-star="true"></div>
+                                                    <x-bladewind.rating
+                                                        rating="{{ $apply->rating }}"
+                                                        name="apply_rating"
+                                                        onclick="saveRating('apply_rating', {{ $apply->id }})"/>
                                                     <ul class="action">
-                                                        <li style="width: 200px">
-                                                            <x-bladewind.rating
-                                                                rating="3"
-                                                                color="gray"
-                                                                name="gray-rating" />
-                                                        </li>
-                                                        <li class="edit"> <a href="{{ url('apply/status/'.encrypt($apply->apply_id)) }}">
+                                                        <li class="edit" style="margin-right: 8px"> <a href="{{ url('apply/status/'.encrypt($apply->apply_id)) }}">
                                                                 @if($apply->star == 'star')
                                                                     <i class="icofont icofont-heart-alt"></i></a>
                                                                 @else
@@ -59,14 +56,14 @@
                                                                @endif
 
                                                         </li>
-                                                        <li class="edit"> <a href="{{ route('chat', encrypt($apply->student_id)) }}">
+                                                        <li class="edit" style="margin-right: 8px"> <a href="{{ route('chat', encrypt($apply->student_id)) }}">
                                                                 @if($apply->talking == 'talking')
                                                                     <i class="icofont icofont-ui-text-chat"></i>
                                                                 @else
                                                                     <i class="icofont icofont-chat"></i></a>
                                                             @endif
                                                         </li>
-                                                        <li class="edit"><a href="{{ url('/apply/view/'. encrypt($apply->apply_id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
+                                                        <li class="edit" style="margin-right: 8px"><a href="{{ url('/apply/view/'. encrypt($apply->apply_id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
                                                         <li class="delete">
                                                             <form method="POST" action="{{ route('apply.destroy', ['id' => encrypt($apply->apply_id)]) }}" onsubmit='return confirm("Are you sure?")'>
                                                                 @csrf
@@ -88,4 +85,45 @@
         </div>
         <!-- Container-fluid Ends-->
     </div>
+    <script>
+        saveRating = function(element, applyId) {
+
+            // element here is the corresponding rating component.
+            // dom_el() is a helper function in BladewindUI
+            // access the value of the element
+
+            let element_value = dom_el(`.rating-value-${element}`).value;
+            var baseUrl = "{{ url('/') }}";
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+            var formData = {
+                rating: element_value,
+                applyId: applyId,
+                _token: csrfToken
+            }
+
+            $.ajax({
+                type: "POST",
+                url: baseUrl+"/apply/rating",
+                data: formData,
+                dataType: "json",
+                success: function(response){
+                    // Handle the successful response here
+                    console.log(response);
+                },
+                error: function(error){
+                    // Handle errors here
+                    console.log(error);
+                }
+            });
+
+            // now that you have the rating value you can save it
+            // maybe via an ajax call.. completely up to you
+            // ajaxCall(
+            //     'post',
+            //     '/article/rating/save',
+            //     `rating=${element_value}`
+            // );
+        }
+    </script>
 </x-app-layout>

@@ -55,10 +55,10 @@
                         </li>
                         <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="{{ url('applies') }}">
                                 <svg class="stroke-icon">
-                                    <use href="{{ asset('assets/svg/icon-sprite.svg#Ui-kites') }}"></use>
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#Perk-Ui') }}"></use>
                                 </svg>
                                 <svg class="fill-icon">
-                                    <use href="{{asset('assets/svg/icon-sprite.svg#fill-ui')}}"></use>
+                                    <use href="{{asset('assets/svg/icon-sprite.svg#Perk-Ui')}}"></use>
                                 </svg><span>Applications</span></a>
                         </li>
 
@@ -69,6 +69,30 @@
                                 <svg class="fill-icon">
                                     <use href="{{asset('assets/svg/icon-sprite.svg#Message')}}"></use>
                                 </svg><span>Messages</span></a>
+                        </li>
+                        <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                                <svg class="stroke-icon">
+                                    <use href="{{asset('assets/svg/icon-sprite.svg#Ui-kites')}}"></use>
+                                </svg>
+                                <svg class="fill-icon">
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#Ui-kites') }}"></use>
+                                </svg><span>Reports</span></a>
+                            <ul class="sidebar-submenu custom-scrollbar">
+                                <li class="sidebar-head">Reports</li>
+                                <li class="main-submenu">
+                                    <form method="POST" action="{{ route('report.recruiter') }}">
+                                        @csrf
+                                        <a href="#" onclick="$(this).closest('form').submit();">
+                                            <svg class="stroke-icon">
+                                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-board') }}"></use>
+                                            </svg>
+                                            <svg class="fill-icon">
+                                                <use href="{{ asset('assets/svg/icon-sprite.svg#fill-board') }}"></use>
+                                            </svg>Recruiter Report
+                                        </a>
+                                    </form>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 @php endif; @endphp
