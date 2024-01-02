@@ -4,11 +4,11 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3>Total Applications</h3>
+                        <h3>Recruiter Report</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            {!! generateBreadcrumbs(["Total Applications"]) !!}
+                            {!! generateBreadcrumbs(["Report"]) !!}
                         </ol>
                     </div>
                 </div>
@@ -20,33 +20,78 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <select name="age" class="bw-raw-select">
-                                        <option value="">Select Raging</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                    </select>
+                            <form action="{{ route('report.recruiter') }}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="rating">Rating</label>
+                                        @component('components.select-list', [
+                                            'options' => range(1, 5),
+                                            'selected' => $rating ?? '',
+                                            'name' => 'rating',
+                                            'id' => 'rating',
+                                            'inputClass' => 'bw-raw-select',
+                                            'arrayKey' => false
+                                            ])
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="favourite">Favourite</label>
+                                        @component('components.select-list', ['options' => ['star' => 'Yes', 'null' => 'No'], 'selected' => $favourite ?? '', 'name' => 'favourite', 'id' => 'favourite', 'inputClass' => 'bw-raw-select'])
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="student-session">Session</label>
+                                        @component('components.select-list', [
+                                            'options' => range(2000, 2030),
+                                            'selected' => $student_session ?? '',
+                                            'name' => 'student_session',
+                                            'id' => 'student-session',
+                                            'inputClass' => 'bw-raw-select',
+                                            'arrayKey' => false
+                                            ])
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="graduation-year">Graduation Year</label>
+                                        @component('components.select-list', [
+                                            'options' => range(2000, date('Y')),
+                                            'selected' => $graduation_year ?? '',
+                                            'name' => 'graduation_year',
+                                            'id' => 'graduation-year',
+                                            'inputClass' => 'bw-raw-select',
+                                            'arrayKey' => false
+                                            ])
+                                        @endcomponent
+                                    </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <select name="age" class="bw-raw-select">
-                                        <option value="">Favourite ?</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                    </select>
+                                <div class="row mt-3">
+                                    <div class="col-sm-3">
+                                        <label for="from-date">From Date</label>
+                                        <input type="date" id="from-date" value="{{ $from_date ?? '' }}" name="from_date" class="bw-input">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="to-date">To Date</label>
+                                        <input type="date" id="to-date" value="{{ $to_date ?? '' }}" name="to_date" class="bw-input">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="applications">Applications</label>
+                                        @component('components.select-list', [
+                                            'options' => ['my_application' => 'My application', 'other' => 'Other'],
+                                            'selected' => $applications ?? 'my_application',
+                                            'name' => 'applications',
+                                            'id' => 'applications',
+                                            'inputClass' => 'bw-raw-select'
+                                            ])
+                                        @endcomponent
+                                    </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <select name="age" class="bw-raw-select">
-                                        <option value="">Session</option>
-                                        @for($i = 2000; $i <= 2030; $i++)
-                                            <option value="{{ $i }}">{{ $i }}</option>
-                                        @endfor
-                                    </select>
+                                <div class="row">
+                                    <div class="col-sm-12 mt-4">
+                                        <input type="submit" class="btn btn-success float-end" value="Filter">
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -78,34 +123,38 @@
                                             <td>{{ $apply->program_name }}</td>
                                             <td>{{ $apply->home_town }}</td>
                                             <td>
-                                                <x-bladewind.rating
-                                                    rating="{{ $apply->rating }}"
-                                                    name="apply_rating"
-                                                    onclick="saveRating('apply_rating', {{ $apply->id }})"/>
+                                                @if(isset($applications) && $applications != 'other')
+                                                    <x-bladewind.rating
+                                                        rating="{{ $apply->rating }}"
+                                                        name="apply_rating"
+                                                        onclick="saveRating('apply_rating', {{ $apply->id }})"/>
+                                                @endif
                                                 <ul class="action">
-                                                    <li class="edit" style="margin-right: 8px"> <a href="{{ url('apply/status/'.encrypt($apply->apply_id)) }}">
-                                                            @if($apply->star == 'star')
-                                                                <i class="icofont icofont-heart-alt"></i></a>
-                                                        @else
-                                                            <i class="fa fa-heart-o"></i>
-                                                        @endif
-
-                                                    </li>
-                                                    <li class="edit" style="margin-right: 8px"> <a href="{{ route('chat', encrypt($apply->student_id)) }}">
-                                                            @if($apply->talking == 'talking')
-                                                                <i class="icofont icofont-ui-text-chat"></i>
+                                                    @if(isset($applications) && $applications != 'other')
+                                                        <li class="edit" style="margin-right: 8px"> <a href="{{ url('apply/status/'.encrypt($apply->id)) }}">
+                                                                @if($apply->star == 'star')
+                                                                    <i class="icofont icofont-heart-alt"></i></a>
                                                             @else
-                                                                <i class="icofont icofont-chat"></i></a>
-                                                        @endif
-                                                    </li>
-                                                    <li class="edit" style="margin-right: 8px"><a href="{{ url('/apply/view/'. encrypt($apply->apply_id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
-                                                    <li class="delete">
-                                                        <form method="POST" action="{{ route('apply.destroy', ['id' => encrypt($apply->apply_id)]) }}" onsubmit='return confirm("Are you sure?")'>
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <a href="#" onclick="$(this).closest('form').submit();"><i class="fa fa-trash"></i></a>
-                                                        </form>
-                                                    </li>
+                                                                <i class="fa fa-heart-o"></i>
+                                                            @endif
+
+                                                        </li>
+                                                        <li class="edit" style="margin-right: 8px"> <a href="{{ route('chat', encrypt($apply->student_id)) }}">
+                                                                @if($apply->talking == 'talking')
+                                                                    <i class="icofont icofont-ui-text-chat"></i>
+                                                                @else
+                                                                    <i class="icofont icofont-chat"></i></a>
+                                                            @endif
+                                                        </li>
+                                                        <li class="delete" style="margin-right: 8px">
+                                                            <form method="POST" action="{{ route('apply.destroy', ['id' => encrypt($apply->id)]) }}" onsubmit='return confirm("Are you sure?")'>
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <a href="#" onclick="$(this).closest('form').submit();"><i class="fa fa-trash"></i></a>
+                                                            </form>
+                                                        </li>
+                                                    @endif
+                                                    <li class="edit"><a href="{{ url('/apply/view/'. encrypt($apply->id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>

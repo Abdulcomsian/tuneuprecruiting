@@ -43,10 +43,11 @@
                                                 <td>{{ $apply->program_name }}</td>
                                                 <td>{{ $apply->home_town }}</td>
                                                 <td>
+                                                    @php $ratingName = 'apply_rating_'.date('his').rand(0,99999) @endphp
                                                     <x-bladewind.rating
-                                                        rating="{{ $apply->rating }}"
-                                                        name="apply_rating"
-                                                        onclick="saveRating('apply_rating', {{ $apply->id }})"/>
+                                                        rating="{{ $apply->rating ?? 0 }}"
+                                                        name="{{ $ratingName }}"
+                                                        onclick="saveRating('{{ $ratingName }}', {{ $apply->id }})"/>
                                                     <ul class="action">
                                                         <li class="edit" style="margin-right: 8px"> <a href="{{ url('apply/status/'.encrypt($apply->apply_id)) }}">
                                                                 @if($apply->star == 'star')
@@ -101,7 +102,7 @@
                 applyId: applyId,
                 _token: csrfToken
             }
-
+            console.log(formData);
             $.ajax({
                 type: "POST",
                 url: baseUrl+"/apply/rating",
