@@ -43,60 +43,72 @@
                                 <input type="hidden" name="custom_fields" id="custom-fields">
                                 <input type="hidden" value="{{ route('program.store') }}" id="route-post-method">
                                 <div class="col-md-4">
-                                    <x-bladewind.input
+                                    <x-dynamic-input
+                                        type="text"
+                                        placeholder="Program Name"
                                         name="program_name"
                                         required="true"
-                                        id="program-name"
-                                        label="Program Name"
-                                        error_message="You will need to enter program name" />
+                                        id="program-name" />
                                 </div>
                                 <div class="col-md-4">
-                                    <x-bladewind.input
+                                    <x-dynamic-input
+                                        type="text"
+                                        placeholder="Session"
                                         name="session"
                                         required="true"
-                                        id="session"
-                                        label="Session"
-                                        error_message="You will need to enter session" />
+                                        id="session" />
                                 </div>
                                 <div class="col-md-4">
-                                    <x-bladewind.input
+                                    <x-dynamic-input
+                                        type="text"
+                                        placeholder="Number of Students"
                                         name="number_of_students"
                                         required="true"
-                                        id="number-of-students"
-                                        label="Number of Students"
-                                        error_message="You will need to enter session" />
+                                        id="number-of-students" />
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="program-status">Status <span class="text-danger">*</span></label>
-                                    <select name="status" required id="program-status" class="form-control">
-                                        <option value="">Select</option>
-                                        <option value="Public">Public</option>
-                                        <option value="Dropped">Dropped</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="form-label" for="program-type">Program Type <span class="text-danger">*</span></label>
-                                    @component('components.select-type-of-object-array', ['options' => $programTypes, 'selected' => old('program_for', $programType), 'name' => 'program_type', 'id' => 'program-type'])
+                                    @component('components.select-list', [
+                                        'options' => ['Public', 'Dropped'],
+                                        'selected' => old('status'),
+                                        'name' => 'status',
+                                        'id' => 'program-status',
+                                        'arrayKey' => false,
+                                        'required' => true,
+                                        'label' => 'Status'
+                                        ])
                                     @endcomponent
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="gender" class="form-label">Program For <span class="text-danger">*</span></label>  <br />
-                                    @component('components.radio-buttons', ['name' => 'program_for', 'options' => ['Male', 'Female', 'Other'], 'selected' => ucfirst(old('program_for', $gender))])
+                                    @component('components.select-type-of-object-array', [
+                                        'options' => $programTypes,
+                                        'selected' => old('program_for', $programType),
+                                        'name' => 'program_type',
+                                        'id' => 'program-type',
+                                        'required' => true,
+                                        'label' => 'Program Type'
+                                        ])
                                     @endcomponent
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="video">Video</label>
-                                    <input
-                                        class="form-control video"
-                                        id="video"
+                                    <x-dynamic-input
                                         type="file"
                                         name="video_file"
-                                        accept="video/*">
+                                        accept="video/*"
+                                        placeholder="Video"
+                                        id="video" />
+                                </div>
+                                <div class="col-md-3">
+                                    @component('components.radio-buttons', [
+                                        'name' => 'program_for',
+                                        'options' => ['Male', 'Female', 'Other'],
+                                        'selected' => ucfirst(old('program_for', $gender)),
+                                        'label' => 'Program For'
+                                        ])
+                                    @endcomponent
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label class="form-label" for="details">Details <span class="text-danger">*</span></label>
-                                        <textarea class="form-control detail" id="details" required name="details"></textarea>
+                                        <x-input-textarea name="details" label="Details" required="true" id="details" />
                                     </div>
                                 </div>
                                 <div class="col-md-12">

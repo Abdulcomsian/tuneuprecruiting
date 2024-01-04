@@ -12,11 +12,15 @@ class ReportController extends Controller
     public function recruiterReport(Request $request) {
         $data = $request->all();
 
+        if (!isset($request->applications)) {
+            $data['applications'] = 'my_application';
+        }
+
         $where = array_filter([
             'applies.rating' => $request->rating ?? null,
             'applies.star' => $request->favourite ? 'star' : null,
             'programs.session' => $request->student_session ?? null,
-            'programs.coach_id' => $request->applications == 'my_application' ? Session::get('coachId') : null,
+            'programs.coach_id' => $request->applications == 'other' ? null : Session::get('coachId'),
             'students.graduation_year' => $request->graduation_year ?? null,
         ]);
 

@@ -45,7 +45,7 @@
                                                 <td>
                                                     @php $ratingName = 'apply_rating_'.date('his').rand(0,99999) @endphp
                                                     <x-bladewind.rating
-                                                        rating="{{ $apply->rating ?? 0 }}"
+                                                        rating="{{ $apply->rating ?? 1 }}"
                                                         name="{{ $ratingName }}"
                                                         onclick="saveRating('{{ $ratingName }}', {{ $apply->id }})"/>
                                                     <ul class="action">
@@ -86,45 +86,4 @@
         </div>
         <!-- Container-fluid Ends-->
     </div>
-    <script>
-        saveRating = function(element, applyId) {
-
-            // element here is the corresponding rating component.
-            // dom_el() is a helper function in BladewindUI
-            // access the value of the element
-
-            let element_value = dom_el(`.rating-value-${element}`).value;
-            var baseUrl = "{{ url('/') }}";
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-            var formData = {
-                rating: element_value,
-                applyId: applyId,
-                _token: csrfToken
-            }
-            console.log(formData);
-            $.ajax({
-                type: "POST",
-                url: baseUrl+"/apply/rating",
-                data: formData,
-                dataType: "json",
-                success: function(response){
-                    // Handle the successful response here
-                    console.log(response);
-                },
-                error: function(error){
-                    // Handle errors here
-                    console.log(error);
-                }
-            });
-
-            // now that you have the rating value you can save it
-            // maybe via an ajax call.. completely up to you
-            // ajaxCall(
-            //     'post',
-            //     '/article/rating/save',
-            //     `rating=${element_value}`
-            // );
-        }
-    </script>
 </x-app-layout>

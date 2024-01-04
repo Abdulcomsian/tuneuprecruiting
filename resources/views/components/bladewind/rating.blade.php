@@ -21,7 +21,7 @@
 <div class="h-{{$sizing[$size]+$size_adjustment}} overflow-hidden inline-block">
 @for ($x = 1; $x < 6; $x++)
     <div data-rating="{{$x}}" class="inline bw-rating-{{$x}} {{$name}}@if($rating!= 0 && $x <= $rating*1) rated @endif"
-         @if($clickable) onmouseover="flipStars('{{$name}}', {{$rating}}, {{$x}}, 'on')" onmouseout="flipStars('{{$name}}', {{$rating}}, {{$x}}, 'off')" onclick="setRating('{{$name}}', {{$x}});{!!$onclick!!}" @endif>
+         @if($clickable) onmouseover="flipStars{{ $name }}('{{$name}}', {{$rating}}, {{$x}}, 'on')" onmouseout="flipStars{{ $name }}('{{$name}}', {{$rating}}, {{$x}}, 'off')" onclick="setRating{{ $name }}('{{$name}}', {{$x}});{!!$onclick!!}" @endif>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-{{$sizing[$size]+$size_adjustment}} w-{{$sizing[$size]+$size_adjustment}} filled @if($rating==0 || $x > $rating*1) hidden @endif inline text-{{$color}}-500 @if($clickable) cursor-pointer @else cursor-default @endif @if($size=='big') mx-[-3px] @else mr-[-2px] @endif mt-[-1px]" viewBox="0 0 20 20" fill="currentColor">
         @if($type == 'heart')
             <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
@@ -46,7 +46,7 @@
 </div>
 <span class="hidden w-6 w-7 w-10 w-11 w-14 w-16 h-6 h-7 h-10 h-11 h-14 h-16"></span>
 <script>
-    flipStars = function(name, rating, current, mode) {
+    flipStars{{ $name }} = function(name, rating, current, mode) {
         for(y=rating; y<=current; y++){
             if( dom_el(`.bw-rating-${y}.${name}`) ){
                 if( ! dom_el(`.bw-rating-${y}.${name}`).classList.contains('rated')) {
@@ -62,7 +62,7 @@
         }
     }
 
-    setRating = function(name, rate){
+    setRating{{ $name }} = function(name, rate){
         changeCssForDomArray(`.${name}.rated`, 'rated', 'remove');
         if(rate < 5){
             for(x=rate; x<=6; x++){

@@ -24,43 +24,49 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <label for="rating">Rating</label>
                                         @component('components.select-list', [
                                             'options' => range(1, 5),
                                             'selected' => $rating ?? '',
                                             'name' => 'rating',
                                             'id' => 'rating',
                                             'inputClass' => 'bw-raw-select',
+                                            'label' => 'Rating',
                                             'arrayKey' => false
                                             ])
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="favourite">Favourite</label>
-                                        @component('components.select-list', ['options' => ['star' => 'Yes', 'null' => 'No'], 'selected' => $favourite ?? '', 'name' => 'favourite', 'id' => 'favourite', 'inputClass' => 'bw-raw-select'])
+                                        @component('components.select-list', [
+                                            'options' => ['star' => 'Yes', 'null' => 'No'],
+                                            'selected' => $favourite ?? '',
+                                            'name' => 'favourite',
+                                            'id' => 'favourite',
+                                            'inputClass' => 'bw-raw-select',
+                                            'label' => 'Favourite'
+                                            ])
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="student-session">Session</label>
                                         @component('components.select-list', [
                                             'options' => range(2000, 2030),
                                             'selected' => $student_session ?? '',
                                             'name' => 'student_session',
                                             'id' => 'student-session',
                                             'inputClass' => 'bw-raw-select',
-                                            'arrayKey' => false
+                                            'arrayKey' => false,
+                                            'label' => 'Session'
                                             ])
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="graduation-year">Graduation Year</label>
                                         @component('components.select-list', [
                                             'options' => range(2000, date('Y')),
                                             'selected' => $graduation_year ?? '',
                                             'name' => 'graduation_year',
                                             'id' => 'graduation-year',
                                             'inputClass' => 'bw-raw-select',
-                                            'arrayKey' => false
+                                            'arrayKey' => false,
+                                            'label' => 'Graduation Year'
                                             ])
                                         @endcomponent
                                     </div>
@@ -75,13 +81,13 @@
                                         <input type="date" id="to-date" value="{{ $to_date ?? '' }}" name="to_date" class="bw-input">
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="applications">Applications</label>
                                         @component('components.select-list', [
                                             'options' => ['my_application' => 'My application', 'other' => 'Other'],
                                             'selected' => $applications ?? 'my_application',
                                             'name' => 'applications',
                                             'id' => 'applications',
-                                            'inputClass' => 'bw-raw-select'
+                                            'inputClass' => 'bw-raw-select',
+                                            'label' => 'Applications'
                                             ])
                                         @endcomponent
                                     </div>
@@ -124,10 +130,11 @@
                                             <td>{{ $apply->home_town }}</td>
                                             <td>
                                                 @if(isset($applications) && $applications != 'other')
+                                                    @php $ratingName = 'apply_rating_'.date('his').rand(0,99999) @endphp
                                                     <x-bladewind.rating
-                                                        rating="{{ $apply->rating }}"
-                                                        name="apply_rating"
-                                                        onclick="saveRating('apply_rating', {{ $apply->id }})"/>
+                                                        rating="{{ $apply->rating ?? 1 }}"
+                                                        name="{{ $ratingName }}"
+                                                        onclick="saveRating('{{ $ratingName }}', {{ $apply->id }})"/>
                                                 @endif
                                                 <ul class="action">
                                                     @if(isset($applications) && $applications != 'other')
@@ -153,8 +160,8 @@
                                                                 <a href="#" onclick="$(this).closest('form').submit();"><i class="fa fa-trash"></i></a>
                                                             </form>
                                                         </li>
+                                                        <li class="edit"><a href="{{ url('/apply/view/'. encrypt($apply->id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
                                                     @endif
-                                                    <li class="edit"><a href="{{ url('/apply/view/'. encrypt($apply->id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>

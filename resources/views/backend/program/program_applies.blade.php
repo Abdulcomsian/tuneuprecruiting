@@ -105,6 +105,11 @@
                                             <td>{{ $apply->student->home_town }}</td>
                                             <td>{{ $apply->student->state }}</td>
                                             <td>
+                                                @php $ratingName = 'apply_rating_'.$apply->apply_id @endphp
+                                                <x-bladewind.rating
+                                                    rating="{{ $apply->rating ?? 1 }}"
+                                                    name="{{ $ratingName }}"
+                                                    onclick="saveRating('{{ $ratingName }}', {{ $apply->apply_id }})"/>
                                                 <ul class="action">
                                                     <li class="edit"> <a href="{{ url('apply/status/'.encrypt($apply->apply_id)) }}">
                                                             @if($apply->star == 'star')

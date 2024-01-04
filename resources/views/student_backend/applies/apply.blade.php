@@ -100,104 +100,116 @@
                                 <input type="hidden" name="program_id" value="{{ $program->id }}">
                             <div class="row mb-3">
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom01">First Name</label>
-                                    <input
-                                        class="form-control program-name"
-                                        id="validationCustom01"
+                                    <x-dynamic-input
+                                        id="first-name"
                                         type="text"
-                                        name="program_name"
-                                        disabled
+                                        name="first_name"
+                                        disable="true"
                                         value="{{ $user->first_name }}"
-                                        placeholder="Enter program name"
-                                        required="">
+                                        placeholder="First Name"
+                                        required="true" />
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Last Name</label>
-                                    <input
-                                        class="form-control session"
-                                        id="validationCustom02"
+                                    <x-dynamic-input
+                                        id="last-name"
                                         type="text"
-                                        name="session"
-                                        disabled
+                                        name="last_name"
+                                        disable="true"
                                         value="{{ $user->last_name }}"
-                                        placeholder="Enter session"
-                                        required="">
+                                        placeholder="Last Name"
+                                        required="true" />
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Graduation Year</label>
-                                    <input
-                                        class="form-control number-of-students"
-                                        id="validationCustom02"
+                                    <x-dynamic-input
+                                        id="graduation-year"
                                         type="text"
-                                        name="number_of_students"
-                                        disabled
+                                        name="graduation_year"
+                                        disable="true"
                                         value="{{ $user->graduation_year }}"
-                                        placeholder="Enter number"
-                                        required="">
+                                        placeholder="Graduation Year"
+                                        required="true" />
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Home Town</label>
-                                    <input
-                                        class="form-control number-of-students"
-                                        id="validationCustom02"
+                                    <x-dynamic-input
+                                        id="home-town"
                                         type="text"
-                                        name="number_of_students"
-                                        disabled
+                                        name="home_town"
+                                        disable="true"
                                         value="{{ $user->home_town }}"
-                                        placeholder="Enter number"
-                                        required="">
+                                        placeholder="Home Town"
+                                        required="true" />
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-2">
-                                    <label class="form-label" for="validationCustom02">State</label>
-                                    <input
-                                        class="form-control number-of-students"
-                                        id="validationCustom02"
+                                    <x-dynamic-input
+                                        id="state"
                                         type="text"
-                                        name="number_of_students"
-                                        disabled
+                                        name="state"
+                                        disable="true"
                                         value="{{ $user->state }}"
-                                        placeholder="Enter number"
-                                        required="">
+                                        placeholder="State"
+                                        required="true" />
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label" for="validationCustom02">Country</label>
-                                    <input
-                                        class="form-control number-of-students"
-                                        id="validationCustom02"
+                                    <x-dynamic-input
+                                        id="country"
                                         type="text"
-                                        name="number_of_students"
+                                        name="country"
                                         disabled
                                         value="{{ $user->country }}"
-                                        placeholder="Enter number"
-                                        required="">
+                                        placeholder="Country"
+                                        required="" />
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="academic-honors" class="form-label">Academic Honors</label>
-                                    <input type="text" name="academic_honors" value="{{ $user->academic_honors }}" class="form-control" id="academic-honors">
+                                    <x-dynamic-input
+                                        type="text"
+                                        name="academic_honors"
+                                        value="{{ $user->academic_honors }}"
+                                        placeholder="Academic Honors"
+                                        id="academic-honors" />
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="birth-date" class="form-label">Birth Date</label>
-                                    <input type="date" name="birth_date" value="{{ $user->birth_date }}" class="form-control" id="birth-date">
+                                    <x-dynamic-input
+                                        type="date"
+                                        name="birth_date"
+                                        value="{{ $user->birth_date }}"
+                                        placeholder="Birth Date"
+                                        id="birth-date" />
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="class-rank" class="form-label">Class Rank</label>
-                                    <input type="text" name="class_rank" value="{{ $user->class_rank }}" class="form-control" id="class-rank">
+                                    <x-dynamic-input
+                                        type="text"
+                                        name="class_rank"
+                                        value="{{ $user->class_rank }}"
+                                        placeholder="Class Rank"
+                                        id="class-rank" />
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="college" class="form-label">College</label>
-                                    <input type="text" name="college" value="{{ $user->college }}" class="form-control" id="college">
+                                    <x-dynamic-input
+                                        type="text"
+                                        name="college"
+                                        value="{{ $user->college }}"
+                                        placeholder="College"
+                                        id="college" />
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <label for="core-gpa" class="form-label">Core GPA</label>
-                                    <input type="text" name="core_gpa" value="{{ $user->core_gpa }}" class="form-control" id="core-gpa">
+                                    <x-dynamic-input
+                                        type="text"
+                                        name="core_gpa"
+                                        value="{{ $user->core_gpa }}"
+                                        placeholder="Core GPA"
+                                        id="core-gpa" />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="gpa" class="form-label">GPA</label>
-                                    <input type="text" name="gpa" value="{{ $user->gpa }}" class="form-control" id="gpa">
+                                    <x-dynamic-input
+                                        type="text"
+                                        name="gpa"
+                                        value="{{ $user->gpa }}"
+                                        placeholder="GPA"
+                                        id="gpa" />
                                 </div>
                                 <div class="col-md-4">
                                     <label for="gender" class="form-label">Gender</label> <br />
@@ -211,20 +223,36 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-3">
-                                    <label for="grad" class="form-label">Grad. Year</label>
-                                    <input type="text" name="grad_year" value="{{ $user->grad_year }}" class="form-control" id="grad">
+                                    <x-dynamic-input
+                                        type="text"
+                                        name="grad_year"
+                                        value="{{ $user->grad_year }}"
+                                        placeholder="Grad. Year"
+                                        id="grad" />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="height" class="form-label">Height</label>
-                                    <input type="text" name="height" value="{{ $user->height }}" class="form-control" id="height">
+                                    <x-dynamic-input
+                                        type="text"
+                                        name="height"
+                                        value="{{ $user->height }}"
+                                        placeholder="Grad. Year"
+                                        id="height" />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="home-phone" class="form-label">Home Phone</label>
-                                    <input type="text" name="home_phone" value="{{ $user->home_phone }}" class="form-control" id="home-phone">
+                                    <x-dynamic-input
+                                        type="text"
+                                        name="home_phone"
+                                        value="{{ $user->home_phone }}"
+                                        placeholder="Home Phone"
+                                        id="home-phone" />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="interest-level" class="form-label">Interests Level</label>
-                                    <input type="text" name="interest_level" value="{{ $user->interest_level }}" class="form-control" id="interest-level">
+                                    <x-dynamic-input
+                                        type="text"
+                                        name="interest_level"
+                                        value="{{ $user->interest_level }}"
+                                        placeholder="Interests Level"
+                                        id="interest-level" />
                                 </div>
                             </div>
                         </div>
@@ -246,10 +274,9 @@
                                                         <input type="hidden" name="type[]" value="{{ $field->type }}">
                                                     @endif
                                                 @endif
-                                                @php $required = ($field->required) ? 'required' : ''; @endphp
+                                                @php $required = ($field->required) ? true : ''; @endphp
                                                 @php $requiredLabel = ($field->required) ? "<span class='text-danger'>*</span>" : ''; @endphp
                                                     <div class="col-md-4">
-                                                        <label class="form-label" for="validationCustom02">{{ $field->label }} {!! $requiredLabel !!}</label>
                                                         @if($field->type == 'select')
                                                             @php $variableName = 'answer[]'; @endphp
                                                             @if($field->multiple)
@@ -261,19 +288,25 @@
                                                                 <input type="hidden" name="checkbox_types[]" value="{{ $field->type }}">
                                                             @endif
                                                             @php $checkForMultiple = ($field->multiple) ? 'multiple' : ''; @endphp
-                                                            <select name="{{ $variableName }}" id="" {{ $checkForMultiple  }} {{ $required }} class="form-control">
-                                                                <option value=""></option>
-                                                                @foreach($field->values as $value)
-                                                                    <option value="{{ $value->label }}">{{ $value->label }}</option>
-                                                                @endforeach
-                                                            </select>
+                                                            @component('components.select-type-of-object-array', [
+                                                                'name' => $variableName,
+                                                                'options' => $field->values,
+                                                                'selected' => old($variableName),
+                                                                'label' => $field->label,
+                                                                'id' => $variableName,
+                                                                'required' => $required,
+                                                                'keyName' => 'label',
+                                                                'labelName' => 'label',
+                                                                'valueName' => 'label'
+                                                                ])
+                                                            @endcomponent
                                                         @elseif($field->type == 'file')
                                                             <input type="hidden" name="file_label[]" value="{{ $field->label }}">
                                                             <input type="hidden" name="file_type[]" value="{{ $field->type }}">
-                                                            <input class="form-control" {{ $required }} type="file" name="files[]" accept="image/*,video/*">
+                                                            <x-dynamic-input name="files[]" type="file" placeholder="{{ $field->label }}" required="{{ $required }}" accept="image/*,video/*" />
                                                         @elseif($field->type == 'radio-group')
                                                             <input type="hidden" name="radio_label[]" value="{{ $field->label }}">
-                                                            <br />
+                                                            <x-input-label value="{{ $field->label }}" required="{{ $required }}" labelFor="" />
                                                             @foreach($field->values as $radioKey => $value)
                                                                 <input type="hidden" name="radio_counter" value="{{ $radioCounter }}">
                                                                 <input type="radio" class="form-check-input" id="radio-{{ $key }}-{{ $radioKey }}" name="radio_{{ $radioCounter }}" {{ $required }} value="{{ $value->label }}">
@@ -283,8 +316,8 @@
                                                         @elseif($field->type == 'checkbox-group')
                                                             <input type="hidden" name="checkbox_labels[]" value="{{ $field->label }}">
                                                             <input type="hidden" name="checkbox_types[]" value="{{ $field->type }}">
-                                                            <br />
                                                             <div class="form-group checkbox-group">
+                                                                <x-input-label value="{{ $field->label }}" required="{{ $required }}" labelFor="" />
                                                                 @foreach($field->values as $checkboxKey => $value)
                                                                     <input type="checkbox" id="checkbox-{{$key}}-{{ $checkboxKey }}" class="form-check-input" value="{{ $value->label }}" name="checkbox_{{ $checkboxCounter }}[]" {{ in_array($value->label, old('checkbox_'.$checkboxCounter, [])) ? 'checked' : '' }}>
                                                                     <label class="form-check-label" for="checkbox-{{$key}}-{{ $checkboxKey }}">{{ $value->label }}</label>
@@ -292,14 +325,28 @@
                                                             </div>
                                                             @php $checkboxCounter++; @endphp
                                                         @else
-                                                            @php $min = (isset($field->min)) ? "min=".$field->min : ''; @endphp
-                                                            @php $max = (isset($field->max)) ? "max=".$field->max : ''; @endphp
-                                                            @php $placeholder = (isset($field->placeholder)) ? "placeholder=".$field->placeholder : ''; @endphp
-                                                            @php $maxLength = (isset($field->maxlength)) ? "maxlength=".$field->maxlength : ''; @endphp
+                                                            @php $min = (isset($field->min)) ? "min=".$field->min : "min=0"; @endphp
+                                                            @php $max = (isset($field->max)) ? "max=".$field->max : "max=0"; @endphp
+                                                            @php $placeholder = (isset($field->placeholder)) ? "placeholder=".$field->placeholder : "placeholder=".$field->label; @endphp
+                                                            @php $maxLength = (isset($field->maxlength)) ? "maxlength=".$field->maxlength : "maxlength="; @endphp
                                                             @if($field->type == 'textarea')
-                                                                <textarea name="answer[]" {{ $placeholder }} class="form-control">{{ old('answer.'.$inputCounter) }}</textarea>
+                                                                <x-input-textarea
+                                                                    name="answer[]"
+                                                                    label="{{ $field->label }}"
+                                                                    required="{{ (isset($field->required)) ? true : false }}"
+                                                                    id="{{ str_replace(' ', '-', $field->label) }}"
+                                                                    value="{{ old('answer.'.$inputCounter) }}" />
                                                             @else
-                                                                <input name="answer[]" {{ $placeholder }} value="{{ old('answer.'.$inputCounter) }}" {{ $min }} {{ $max }} {{ $maxLength }} {{ $required }} type="{{ $field->type }}" class="form-control">
+                                                                <x-dynamic-input
+                                                                    type="{{ $field->type }}"
+                                                                    name="answer[]"
+                                                                    value="{{ old('answer.'.$inputCounter) }}"
+                                                                    placeholder="{{ $field->label }}"
+                                                                    id="{{ str_replace(' ', '-', $field->label) }}"
+                                                                    min="{{ (isset($field->min)) ? $field->min : false }}"
+                                                                    max="{{ (isset($field->max)) ? $field->max : false }}"
+                                                                    maxlength="{{ (isset($field->maxlength)) ? $field->maxlength : false }}"
+                                                                    required="{{ (isset($field->$required)) ? true : false }}" />
                                                             @endif
                                                             @php $inputCounter++; @endphp
                                                         @endif

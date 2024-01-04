@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Coach;
+use App\Models\ProgramType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +28,16 @@ class ProfileController extends Controller
 
     public function profile() {
         $user = Auth::user();
-        $data['user'] = Coach::where(['user_id' => $user->id])->first();
+
+        if ($user->role == 'coach') {
+            $data['user'] = Coach::where(['user_id' => $user->id])->first();
+        } else {
+            $data['user'] = $user;
+        }
+
         $data['email'] = $user->email;
+
+        $data['programTypes'] = ProgramType::all();
 
         return view('backend/profile/profile', $data);
     }
