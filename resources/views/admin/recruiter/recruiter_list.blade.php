@@ -18,7 +18,7 @@
         <div class="container-fluid basic_table">
             <div class="row">
                 <div class="col-sm-12">
-                    <a class="btn btn-success mb-2 float-end" type="button" href="{{ route('program.create') }}">Add a Recruiter</a>
+                    <a class="btn btn-success mb-2 float-end" type="button" href="{{ route('recuriter.create') }}">Add a Recruiter</a>
                 </div>
             </div>
             <div class="row">
