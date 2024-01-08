@@ -10,4 +10,4 @@
     ])
 
 <x-input-label value="{{ $label }}" required="{{ $required }}" labelFor="{{ $id }}" />
-<textarea class="{{ $className }}" id="{{ $id }}" name="{{ $name }}" {{ $required ? 'required' : '' }}></textarea>
+<textarea class="{{ $className }}" id="{{ $id }}" name="{{ $name }}" {{ $required ? 'required' : '' }}>{{ $value }}</textarea>

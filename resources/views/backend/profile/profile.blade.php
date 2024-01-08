@@ -90,7 +90,7 @@
                                         <div class="mb-3">
                                             <x-dynamic-input
                                                 type="text"
-                                                value="{{ $user->last_name }}"
+                                                value="{{ $user->first_name }}"
                                                 placeholder="First Name"
                                                 name="first_name"
                                                 required="true"

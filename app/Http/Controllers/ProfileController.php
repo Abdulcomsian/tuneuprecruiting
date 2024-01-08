@@ -50,6 +50,9 @@ class ProfileController extends Controller
         $coach = FileUploadHelper::handleFileUpload($request, 'profile_image', 'uploads/users_image/', $coach);
         Session::put('profileImage', $coach->profile_image);
 
+        Session::put('firstName', $request->first_name);
+        Session::put('lastName', $request->last_name);
+
         // Video upload
         $coach = FileUploadHelper::handleFileUpload($request, 'short_video', 'uploads/users_video/', $coach);
 
