@@ -125,9 +125,20 @@
                             </p>
                         </div>
                     </div>
-                    @php if ($role == 'coach' || $role == 'admin'): @endphp
+                    @php if ($role == 'coach'): @endphp
                     <ul class="profile-dropdown onhover-show-div">
                         <li><a href="{{ url('profile') }}"><i data-feather="user"></i><span>Account </span></a></li>
+                        <li>
+                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="log-in"> </i><span>Logout</span></a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                    @php endif; @endphp
+                    @php if ($role == 'admin'): @endphp
+                    <ul class="profile-dropdown onhover-show-div">
+                        <li><a href="{{ url('profile/admin') }}"><i data-feather="user"></i><span>Account</span></a></li>
                         <li>
                             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="log-in"> </i><span>Logout</span></a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

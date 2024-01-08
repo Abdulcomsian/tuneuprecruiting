@@ -12,6 +12,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\RecruiterController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AdminProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,8 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     // admin
     Route::get('/admin/dashboard', [AdminDashboard::class, 'dashboard']);
     Route::resource('recuriter', RecruiterController::class);
+    Route::get('/profile/admin', [AdminProfileController::class, 'profile']);
+    Route::post('/profile/update/admin', [AdminProfileController::class, 'update'])->name('profile.update.admin');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
