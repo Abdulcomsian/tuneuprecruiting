@@ -9,10 +9,14 @@
     'required' => false,
     'label',
     'labelName' => 'name',
-    'valueName' => 'name'
+    'valueName' => 'name',
+    'inputLabel' => true
     ])
 
-<x-input-label value="{{ $label }}" labelFor="{{ $id }}" required="{{ $required }}" />
+@if($inputLabel)
+    <x-input-label value="{{ $label }}" labelFor="{{ $id }}" required="{{ $required }}" />
+@endif
+
 <select name="{{ $name }}" id="{{ $id }}" {{ $attributes->merge(['class' => $selectClass]) }} {{ $required ? 'required' : '' }}>
     <option value="">Select an option</option>
     @foreach($options as $value => $label)

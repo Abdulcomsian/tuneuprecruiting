@@ -66,20 +66,20 @@
                                         <x-dynamic-input name="profile_image" type="file" placeholder="Choose image" accept=".jpg,.jpeg,png" />
                                     </div>
                                     <div class="mb-3">
-                                        @php $videoUrl = ($user->short_video) ? asset('uploads/students_videos/'.$user->short_video) : asset('assets/images/social-app/timeline-3.png'); @endphp
-                                        <iframe width="100%" class="embed-responsive-item" src="{{ $videoUrl }}" allowfullscreen></iframe>
-                                    </div>
-                                    <div class="mb-3">
-                                        <x-input-label value="Upload a video:" labelFor="fileInput" />
-                                        <x-dynamic-input name="short_video" type="file" />
-                                    </div>
-                                    <div class="mb-3">
                                         @php $videoUrl = ($user->cv) ? asset('uploads/student_cv/'.$user->cv) : asset('assets/images/social-app/timeline-3.png'); @endphp
                                         <iframe width="100%" class="embed-responsive-item" src="{{ $videoUrl }}" allowfullscreen></iframe>
                                     </div>
                                     <div class="mb-3">
                                         <x-input-label value="Upload a CV:" labelFor="fileInput" />
                                         <x-dynamic-input name="cv" type="file" accept=".doc,.ppt,.pdf" />
+                                    </div>
+                                    <div class="mb-3">
+                                        @php $videoUrl = ($user->short_video) ? asset('uploads/students_videos/'.$user->short_video) : asset('assets/images/social-app/timeline-3.png'); @endphp
+                                        <iframe width="100%" class="embed-responsive-item" src="{{ $videoUrl }}" allowfullscreen></iframe>
+                                    </div>
+                                    <div class="mb-3">
+                                        <x-input-label value="Upload a video:" labelFor="fileInput" />
+                                        <x-dynamic-input name="short_video" type="file" />
                                     </div>
                             </div>
                         </div>
@@ -113,261 +113,163 @@
                                                 id="last-name" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-4">
+                                    <div class="col-sm-4 col-md-4">
                                         <div class="mb-3">
                                             <x-dynamic-input
-                                                name="graduation_year"
-                                                value="{{ $email }}"
+                                                name="preferred_name"
+                                                value="{{ old('preferred_name', $user->preferred_name) }}"
                                                 type="text"
+                                                required="true"
+                                                id="preferred-name"
+                                                placeholder="Preferred Name" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="mb-3">
+                                            <x-dynamic-input
+                                                name="email"
+                                                value="{{ $email }}"
+                                                type="email"
                                                 disable="true"
                                                 required="true"
                                                 id="email"
                                                 placeholder="Email" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-6">
+                                    <div class="col-sm-4 col-md-4">
                                         <div class="mb-3">
                                             <x-dynamic-input
-                                                name="password"
+                                                name="home_phone_number"
+                                                value="{{ old('home_phone_number', $user->home_phone_number) }}"
                                                 type="text"
-                                                id="password"
-                                                placeholder="Password" />
+                                                required="true"
+                                                id="home-phone-number"
+                                                placeholder="Home phone number" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-6">
+                                    <div class="col-sm-4 col-md-4">
                                         <div class="mb-3">
                                             <x-dynamic-input
-                                                name="password_confirmation"
+                                                id="mobile-number"
+                                                name="mobile_number"
                                                 type="text"
-                                                id="confirm-password"
-                                                placeholder="Confirm Password" />
+                                                value="{{ old('mobile_number', $user->mobile_number) }}"
+                                                required="true"
+                                                placeholder="Cell Phone Number" />
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="mb-3">
                                             <x-dynamic-input
                                                 id="graduation-year"
                                                 name="graduation_year"
                                                 type="text"
-                                                value="{{ $user->graduation_year }}"
-                                                required
+                                                value="{{ old('graduation_year', $user->graduation_year) }}"
+                                                required={{ true }}
                                                 placeholder="Graduation Year" />
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
+                                        <x-dynamic-input
+                                            type="date"
+                                            name="birth_date"
+                                            placeholder="Date of Birth"
+                                            value="{{ old('birth_date', $user->birth_date) }}"
+                                            id="birth-date" />
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
                                         <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="home-town"
-                                                name="home_town"
-                                                type="text"
-                                                value="{{ $user->home_town }}"
-                                                required
-                                                placeholder="Home Town" />
+                                            @component('components.select-list', [
+                                                    'name' => 'are_u_from_usa',
+                                                    'options' => ['Yes', 'No'],
+                                                    'selected' => ucfirst(old('are_u_from_usa', $user->are_u_from_usa)),
+                                                    'label' => 'Are you from the United State',
+                                                    'id' => 'are-u-from-usa',
+                                                    'required' => true,
+                                                    'arrayKey' => false
+                                                ])
+                                            @endcomponent
                                         </div>
                                     </div>
-                                    <div class="col-sm-3 col-md-3">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            @component('components.select-type-of-object-array', [
+                                                    'options' => $countries,
+                                                    'selected' => old('country', $user->country),
+                                                    'name' => 'country',
+                                                    'id' => 'country',
+                                                    'label' => 'Country'
+                                                ])
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
                                         <div class="mb-3">
                                             <x-dynamic-input
                                                 id="state"
                                                 name="state"
-                                                value="{{ $user->state }}"
-                                                required
+                                                value="{{ old('state', $user->state) }}"
+                                                required={{ true }}
                                                 type="text"
-                                                placeholder="City" />
+                                                placeholder="State/Province" />
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="mb-3">
-                                            @component('components.select-type-of-object-array', ['options' => $countries, 'selected' => old('country', $user->country), 'name' => 'country', 'id' => 'country', 'label' => 'Country'])
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="mb-3">
-                                            @component('components.select-type-of-object-array', ['options' => $programTypes, 'selected' => old('program_type', $user->program_type), 'name' => 'program_type', 'id' => 'program-type', 'label' => 'Program Type'])
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="home-phone-number"
-                                                name="home_phone_number"
-                                                value="{{ old('home_phone_number', $user->home_phone_number) }}"
-                                                required
-                                                type="text"
-                                                placeholder="Home phone number" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="mobile-number"
-                                                name="mobile_number"
-                                                value="{{ old('mobile_number', $user->mobile_number) }}"
-                                                required
-                                                type="text"
-                                                placeholder="Mobile" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="guardian-name"
-                                                name="guardians_name"
-                                                value="{{ old('guardians_name', $user->guardians_name) }}"
-                                                required
-                                                type="text"
-                                                placeholder="Guardian" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-8">
+                                    <div class="col-sm-12 col-md-12">
                                         <div class="mb-3">
                                             <x-dynamic-input
                                                 id="primary-address"
                                                 name="primary_address"
                                                 value="{{ old('primary_address', $user->primary_address) }}"
-                                                required
+                                                required={{ true }}
                                                 type="text"
-                                                placeholder="Primary address..." />
+                                                placeholder="Primary Address" />
                                         </div>
                                     </div>
                                     <div class="col-sm-4 col-md-4">
                                         <div class="mb-3">
-                                            @component('components.radio-buttons', ['name' => 'gender', 'options' => getGenderTypes(), 'selected' => ucfirst(old('gender', $user->gender)), 'label' => 'Gender', 'id' => 'gender', 'required' => true])
+                                            <x-dynamic-input
+                                                id="guardian-name"
+                                                name="guardians_name"
+                                                value="{{ old('guardians_name', $user->guardians_name) }}"
+                                                required={{ true }}
+                                                type="text"
+                                                placeholder="Guardian Name" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="mb-3">
+                                            <x-dynamic-input
+                                                id="guardian-phone-number"
+                                                name="guardians_phone_number"
+                                                value="{{ old('guardians_phone_number', $user->guardians_phone_number) }}"
+                                                required={{ true }}
+                                                type="text"
+                                                placeholder="Guardian Phone Number" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            @component('components.select-type-of-object-array', [
+                                                    'options' => $programTypes,
+                                                    'selected' => old('program_type', $user->program_type),
+                                                    'name' => 'program_type',
+                                                    'id' => 'program-type',
+                                                    'label' => 'Program Type'
+                                                ])
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="col-sm-4 col-md-4">
                                         <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="high-school-name"
-                                                name="high_school_name"
-                                                value="{{ old('high_school_name', $user->high_school_name) }}"
-                                                required
-                                                type="text"
-                                                placeholder="High school name..." />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-md-4">
-                                        <div class="mb-3">
-                                            <x-dynamic-input name="transcript" type="file" placeholder="Transcript" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-md-4">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="intended-major"
-                                                name="intended_major"
-                                                value="{{ old('intended_major', $user->intended_major) }}"
-                                                required
-                                                type="text"
-                                                placeholder="Intended Major" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3">
-                                        <div class="mb-3">
-                                            @component('components.select-list', ['name' => 'registered_with_ncaa', 'options' => ['Yes', 'No'], 'selected' => ucfirst(old('registered_with_ncaa', $user->registered_with_ncaa)), 'label' => 'Registered With NCAA', 'id' => 'registered-with-ncaa', 'required' => true, 'arrayKey' => false])
+                                            @component('components.radio-buttons', [
+                                                    'name' => 'gender',
+                                                    'options' => getGenderTypes(),
+                                                    'selected' => ucfirst(old('gender', $user->gender)),
+                                                    'label' => 'Gender',
+                                                    'id' => 'gender',
+                                                    'required' => true
+                                                ])
                                             @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="ncaa-id"
-                                                name="ncaa_id"
-                                                value="{{ old('ncaa_id', $user->ncaa_id) }}"
-                                                required
-                                                placeholder="NCAA ID"
-                                                type="text" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="sat-math"
-                                                name="sat_math"
-                                                value="{{ old('sat_math', $user->sat_math) }}"
-                                                required
-                                                placeholder="SAT Math"
-                                                type="text" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="sat-reading"
-                                                name="sat_reading"
-                                                value="{{ old('sat_reading', $user->sat_reading) }}"
-                                                required
-                                                placeholder="SAT Reading"
-                                                type="text" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="sat"
-                                                name="sat"
-                                                value="{{ old('sat', $user->sat) }}"
-                                                required
-                                                placeholder="SAT"
-                                                type="text" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="sat-writing"
-                                                name="sat_writing"
-                                                value="{{ old('sat_writing', $user->sat_writing) }}"
-                                                required
-                                                placeholder="SAT Writing"
-                                                type="text" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="sat-total"
-                                                name="sat_total"
-                                                value="{{ old('sat_total', $user->sat_total) }}"
-                                                required
-                                                placeholder="SAT Total"
-                                                type="text" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="act-total"
-                                                name="act_total"
-                                                value="{{ old('act_total', $user->act_total) }}"
-                                                required
-                                                placeholder="ACT Total"
-                                                type="text" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="act-total"
-                                                name="academic_honor"
-                                                value="{{ old('academic_honor', $user->academic_honor) }}"
-                                                required
-                                                placeholder="ACT Total"
-                                                type="text" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                id="other-interest"
-                                                name="other_interest"
-                                                value="{{ old('other_interest', $user->other_interest) }}"
-                                                required
-                                                placeholder="Other Interest"
-                                                type="text" />
                                         </div>
                                     </div>
                                 </div>
@@ -375,53 +277,47 @@
                         </div>
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title mb-0">Additional Information</h3>
+                                    <h3 class="card-title mb-0">Academic Information</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row mb-3">
-                                        <div class="col-md-4">
-                                            <x-dynamic-input
-                                                type="text"
-                                                name="academic_honors"
-                                                placeholder="Academic Honors"
-                                                value="{{ $user->academic_honors }}"
-                                                id="academic-honors" />
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="high-school-name"
+                                                    name="high_school_name"
+                                                    value="{{ old('high_school_name', $user->high_school_name) }}"
+                                                    required
+                                                    type="text"
+                                                    placeholder="High school name..." />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                @component('components.select-list', [
+                                                        'name' => 'registered_with_ncaa',
+                                                        'options' => ['Yes', 'No'],
+                                                        'selected' => ucfirst(old('registered_with_ncaa', $user->registered_with_ncaa)),
+                                                        'label' => 'Registered With NCAA',
+                                                        'id' => 'registered-with-ncaa',
+                                                        'required' => true,
+                                                        'arrayKey' => false
+                                                    ])
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="ncaa-id"
+                                                    name="ncaa_id"
+                                                    value="{{ old('ncaa_id', $user->ncaa_id) }}"
+                                                    required
+                                                    placeholder="NCAA ID"
+                                                    type="text" />
+                                            </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <x-dynamic-input
-                                                type="date"
-                                                name="birth_date"
-                                                placeholder="Date of Birth"
-                                                value="{{ $user->birth_date }}"
-                                                id="birth-date" />
-                                        </div>
-                                        <div class="col-md-4">
-                                            <x-dynamic-input
-                                                type="text"
-                                                name="class_rank"
-                                                placeholder="Class Rank"
-                                                value="{{ $user->class_rank }}"
-                                                id="class-rank" />
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <x-dynamic-input
-                                                type="text"
-                                                name="college"
-                                                placeholder="College"
-                                                value="{{ $user->college }}"
-                                                id="college" />
-                                        </div>
-                                        <div class="col-md-3">
-                                            <x-dynamic-input
-                                                type="text"
-                                                name="core_gpa"
-                                                placeholder="Core GPA"
-                                                value="{{ $user->core_gpa }}"
-                                                id="core-gpa" />
-                                        </div>
-                                        <div class="col-md-3">
                                             <x-dynamic-input
                                                 type="text"
                                                 name="gpa"
@@ -429,35 +325,137 @@
                                                 value="{{ $user->gpa }}"
                                                 id="gpa" />
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-5">
-                                            <x-dynamic-input
-                                                type="text"
-                                                name="grad_year"
-                                                placeholder="Grade Year"
-                                                value="{{ $user->grad_year }}"
-                                                id="grad" />
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="sat-test-date"
+                                                    name="sat_test_date"
+                                                    value="{{ old('sat_test_date', $user->sat_test_date) }}"
+                                                    required
+                                                    placeholder="SAT Test Date"
+                                                    type="date" />
+                                            </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <x-dynamic-input
-                                                type="text"
-                                                name="height"
-                                                placeholder="Height"
-                                                value="{{ $user->height }}"
-                                                id="height" />
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="sat-reading"
+                                                    name="sat_reading"
+                                                    value="{{ old('sat_reading', $user->sat_reading) }}"
+                                                    required
+                                                    placeholder="SAT Reading"
+                                                    type="text" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <x-dynamic-input
-                                                type="text"
-                                                name="interest_level"
-                                                placeholder="Interest Level"
-                                                value="{{ $user->interest_level }}"
-                                                id="interest-level" />
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="sat-writing"
+                                                    name="sat_writing"
+                                                    value="{{ old('sat_writing', $user->sat_writing) }}"
+                                                    required
+                                                    placeholder="SAT Writing"
+                                                    type="text" />
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="sat-math"
+                                                    name="sat_math"
+                                                    value="{{ old('sat_math', $user->sat_math) }}"
+                                                    placeholder="SAT Math"
+                                                    type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="sat-total"
+                                                    name="sat_total"
+                                                    value="{{ old('sat_total', $user->sat_total) }}"
+                                                    placeholder="SAT Total"
+                                                    type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="act-test-date"
+                                                    name="act_test_date"
+                                                    value="{{ old('act_test_date', $user->act_test_date) }}"
+                                                    placeholder="ACT Test Date"
+                                                    type="date" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="act-sum-score"
+                                                    name="act_sum_score"
+                                                    value="{{ old('act_sum_score', $user->act_sum_score) }}"
+                                                    placeholder="ACT SUM Score"
+                                                    type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="act-composite"
+                                                    name="act_composite"
+                                                    value="{{ old('act_composite', $user->act_composite) }}"
+                                                    placeholder="ACT Composite"
+                                                    type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="act-english"
+                                                    name="act_english"
+                                                    value="{{ old('act_english', $user->act_english) }}"
+                                                    placeholder="ACT English"
+                                                    type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="act-math"
+                                                    name="act_math"
+                                                    value="{{ old('act_math', $user->act_math) }}"
+                                                    required
+                                                    placeholder="ACT Math"
+                                                    type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="act-reading"
+                                                    name="act_reading"
+                                                    value="{{ old('act_total', $user->act_total) }}"
+                                                    required
+                                                    placeholder="ACT Reading"
+                                                    type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input
+                                                    id="act-science"
+                                                    name="act_science"
+                                                    value="{{ old('act_total', $user->act_total) }}"
+                                                    required
+                                                    placeholder="ACT Science"
+                                                    type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="mb-3">
+                                                <x-dynamic-input name="transcript" type="file" placeholder="Transcript" />
+                                            </div>
+                                        </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="card-footer text-end">

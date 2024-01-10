@@ -1,7 +1,8 @@
 <!-- resources/views/components/dynamic-input.blade.php -->
 @props([
     'type',
-    'placeholder' => '', 'name',
+    'placeholder' => '',
+    'name',
     'id' => '',
     'class' => 'bw-input',
     'value' => '',
@@ -11,9 +12,13 @@
     'required' => false,
     'min' => false,
     'max' => false,
-    'maxLength' => false
+    'maxLength' => false,
+    'inputLabel' => true,
     ])
-<x-input-label value="{{ $placeholder }}" labelFor="{{ $id }}" required="{{ $required }}" />
+@if($inputLabel)
+    <x-input-label value="{{ $placeholder }}" labelFor="{{ $id }}" required="{{ $required }}" />
+@endif
+
 <input
     type="{{ $type }}"
     value="{{ $value }}"

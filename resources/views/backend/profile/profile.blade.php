@@ -81,98 +81,135 @@
                     </div>
                     <div class="col-xl-8">
                             @csrf
+                        <div class="card">
                             <div class="card-header pb-0">
                                 <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                type="text"
-                                                value="{{ $user->first_name }}"
-                                                placeholder="First Name"
-                                                name="first_name"
-                                                required="true"
-                                                id="first-name" />
+                                    <div class="col">
+                                        <div class="mb-3 row">
+                                            <x-input-label className="col-sm-3" value="First Name" labelFor="first-name" required="true" />
+                                            <div class="col-sm-9">
+                                                <x-dynamic-input
+                                                    type="text"
+                                                    value="{{ $user->first_name }}"
+                                                    placeholder="First Name"
+                                                    name="first_name"
+                                                    required="true"
+                                                    inputLabel="{{ false }}"
+                                                    id="first-name" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                type="text"
-                                                value="{{ $user->last_name }}"
-                                                placeholder="Last Name"
-                                                name="last_name"
-                                                required="true"
-                                                id="last-name" />
+
+                                        <div class="mb-3 row">
+                                            <x-input-label className="col-sm-3" value="Last Name" labelFor="last-name" required="true" />
+                                            <div class="col-sm-9">
+                                                <x-dynamic-input
+                                                    type="text"
+                                                    value="{{ $user->last_name }}"
+                                                    placeholder="Last Name"
+                                                    name="last_name"
+                                                    required="true"
+                                                    inputLabel="{{ false }}"
+                                                    id="last-name" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                type="email"
-                                                value="{{ $email }}"
-                                                placeholder="email@example.com"
-                                                name="email"
-                                                disable="true"
-                                                required="true"
-                                                id="email" />
+
+                                        <div class="mb-3 row">
+                                            <x-input-label className="col-sm-3" value="Email" labelFor="email" required="true" />
+                                            <div class="col-sm-9">
+                                                <x-dynamic-input
+                                                    type="email"
+                                                    value="{{ $email }}"
+                                                    placeholder="email@example.com"
+                                                    name="email"
+                                                    disable="true"
+                                                    required="true"
+                                                    inputLabel="{{ false }}"
+                                                    id="email" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                type="password"
-                                                placeholder="Password"
-                                                name="password"
-                                                id="password" />
+
+                                        <div class="mb-3 row">
+                                            <x-input-label className="col-sm-3" value="Password" labelFor="password" />
+                                            <div class="col-sm-9">
+                                                <x-dynamic-input
+                                                    type="password"
+                                                    placeholder="Password"
+                                                    name="password"
+                                                    inputLabel="{{ false }}"
+                                                    id="password" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="mb-3">
-                                            <x-dynamic-input
-                                                type="password"
-                                                placeholder="Confirm Password"
-                                                name="password_confirmation"
-                                                id="confirm-password" />
+
+                                        <div class="mb-3 row">
+                                            <x-input-label className="col-sm-3" value="Confirm Password" labelFor="confirm-password" />
+                                            <div class="col-sm-9">
+                                                <x-dynamic-input
+                                                    type="password"
+                                                    placeholder="Confirm Password"
+                                                    name="password_confirmation"
+                                                    inputLabel="{{ false }}"
+                                                    id="confirm-password" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-4 col-md-4">
-                                        <div class="mb-3">
-                                            @component('components.radio-buttons', [
-                                                'name' => 'gender',
-                                                'options' => getGenderTypes(),
-                                                'selected' => ucfirst(old('gender', $user->gender)),
-                                                'label' => 'Gender',
-                                                'required' => true
+
+                                        <div class="mb-3 row">
+                                            <x-input-label className="col-sm-3" value="Gender" labelFor="gender" required="true" />
+                                            <div class="col-sm-9">
+                                                @component('components.radio-buttons', [
+                                                    'name' => 'gender',
+                                                    'options' => getGenderTypes(),
+                                                    'selected' => ucfirst(old('gender', $user->gender)),
+                                                    'label' => 'Gender',
+                                                    'required' => true,
+                                                    'inputLabel' => false
                                                 ])
-                                            @endcomponent
+                                                @endcomponent
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        @component('components.select-type-of-object-array', [
-                                            'options' => $programTypes,
-                                            'selected' => old('program_type', $user->program_type),
-                                            'name' => 'program_type',
-                                            'id' => 'program-type',
-                                            'required' => 'true',
-                                            'label' => 'Type of Program'
-                                            ])
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-md-5">
-                                        <x-dynamic-input
-                                            type="text"
-                                            placeholder="College/University Name"
-                                            name="college_or_university"
-                                            value="{{ old('college_or_university', $user->college_or_university) }}"
-                                            required="trur"
-                                            id="college-or-university" />
-                                    </div>
-                                    <div class="col-md-12 mb-5">
-                                        <div>
-                                            <x-input-textarea name="about_me" required="true" id="about-me" value="{{ $user->about_me }}" label="About Me" />
+
+                                        <div class="mb-3 row">
+                                            <x-input-label className="col-sm-3" value="Program Type" labelFor="program-type" required="true" />
+                                            <div class="col-sm-9">
+                                                @component('components.select-type-of-object-array', [
+                                                    'options' => $programTypes,
+                                                    'selected' => old('program_type', $user->program_type),
+                                                    'name' => 'program_type',
+                                                    'id' => 'program-type',
+                                                    'required' => 'true',
+                                                    'inputLabel' => false
+                                                ])
+                                                @endcomponent
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <x-input-label className="col-sm-3" value="College/University Name" labelFor="college-or-university" required="true" />
+                                            <div class="col-sm-9">
+                                                <x-dynamic-input
+                                                    type="text"
+                                                    placeholder="College/University Name"
+                                                    name="college_or_university"
+                                                    value="{{ old('college_or_university', $user->college_or_university) }}"
+                                                    required="true"
+                                                    inputLabel="{{ false }}"
+                                                    id="college-or-university" />
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <x-input-label className="col-sm-3" value="About Me" labelFor="about-me" required="true" />
+                                            <div class="col-sm-9">
+                                                <x-input-textarea
+                                                    name="about_me"
+                                                    required="true"
+                                                    id="about-me"
+                                                    value="{{ $user->about_me }}"
+                                                    inputLabel="{{ false }}"
+                                                    label="About Me" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -181,6 +218,7 @@
                                 <button class="btn btn-primary" type="submit">Update Profile</button>
                             </div>
                         </form>
+                        </div>
                     </div>
                 </div>
             </div>

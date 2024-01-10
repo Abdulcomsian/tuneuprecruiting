@@ -6,8 +6,12 @@
     'disable' => false,
     'style' => '',
     'required' => false,
-    'label'
+    'label',
+    'inputLabel' => true
     ])
 
-<x-input-label value="{{ $label }}" required="{{ $required }}" labelFor="{{ $id }}" />
+@if($inputLabel)
+    <x-input-label value="{{ $label }}" required="{{ $required }}" labelFor="{{ $id }}" />
+@endif
+
 <textarea class="{{ $className }}" id="{{ $id }}" name="{{ $name }}" {{ $required ? 'required' : '' }}>{{ $value }}</textarea>

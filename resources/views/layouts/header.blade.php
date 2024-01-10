@@ -149,7 +149,15 @@
                     @php endif; @endphp
                     @php if (auth()->user()->role == 'student'): @endphp
                         <ul class="profile-dropdown onhover-show-div">
-                            <li><a href="{{ url('profile/student') }}"><i data-feather="user"></i><span>Account</span></a></li>
+                            <li><a href="{{ url('profile/student') }}"><i data-feather="user"></i><span>Profile</span></a></li>
+                            <li>
+                                <a href="#" onclick="event.preventDefault(); document.getElementById('setting-form').submit();">
+                                    <i class="fa fa-wrench"></i><span class="ml-3"> Setting</span>
+                                </a>
+                                <form id="setting-form" action="{{ route('setting.update') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
                             <li>
                                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="log-in"> </i><span>Logout</span></a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

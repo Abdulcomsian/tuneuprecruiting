@@ -25,22 +25,20 @@ class StudentProfileRequest extends FormRequest
         $rules = [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'graduation_year' => 'required|string',
-            'home_town' => 'required|string',
-            'state' => 'required|string',
-            'country' => 'required|string',
-            'program_type' => 'required|string',
+            'preferred_name' => 'required|string',
             'home_phone_number' => 'required|string',
             'mobile_number' => 'required|string',
-            'guardians_name' => 'required|string',
-            'gender' => 'required|string',
+            'graduation_year' => 'required|string',
+            'birth_date' => 'required|string',
+            'are_u_from_usa' => 'required|string',
+            'country' => 'required|string',
             'primary_address' => 'required|string',
+            'guardians_name' => 'required|string',
+            'guardians_phone_number' => 'required|string',
+            'state' => 'required|string',
+            'program_type' => 'required|string',
+            'gender' => 'required|string',
         ];
-
-        // Add the password rule conditionally
-        if (!empty($this->request->get('password'))) {
-            $rules['password'] = 'min:8|confirmed';
-        }
 
         return $rules;
     }

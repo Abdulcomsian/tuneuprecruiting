@@ -16,42 +16,43 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('first_name');
             $table->string('last_name')->nullable();
+            $table->string('preferred_name')->nullable();
+            $table->string('home_phone_number')->nullable();
+            $table->string('mobile_number')->nullable();
             $table->string('graduation_year')->nullable();
-            $table->string('home_town')->nullable();
-            $table->string('state')->nullable();
+            $table->string('birth_date')->nullable();
+            $table->string('are_u_from_usa')->nullable();
             $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('primary_address')->nullable();
+            $table->string('guardians_name')->nullable();
+            $table->string('guardians_phone_number')->nullable();
+            $table->string('program_type')->nullable();
+            $table->string('gender')->nullable();
+
+            // academic information
+            $table->string('high_school_name')->nullable();
+            $table->string('registered_with_ncaa')->nullable();
+            $table->string('ncaa_id')->nullable(); // new
+            $table->string('gpa')->nullable();
+            $table->string('sat_test_date')->nullable(); // new
+            $table->string('sat_reading')->nullable();
+            $table->string('sat_writing')->nullable();
+            $table->string('sat_math')->nullable();
+            $table->string('sat_total')->nullable();
+            $table->string('act_test_date')->nullable(); // new
+            $table->string('act_sum_score')->nullable(); // new
+            $table->string('act_composite')->nullable(); // new
+            $table->string('act_english')->nullable(); // new
+            $table->string('act_math')->nullable(); // new
+            $table->string('act_reading')->nullable(); // new
+            $table->string('act_science')->nullable(); // new
+            $table->string('transcript')->nullable();
+
             $table->string('profile_image')->default('default.jpg');
             $table->string('short_video')->nullable();
             $table->string('cv')->nullable();
-            $table->string('academic_honors')->nullable();
-            $table->string('birth_date')->nullable();
-            $table->string('class_rank')->nullable();
-            $table->string('college')->nullable();
-            $table->string('core_gpa')->nullable();
-            $table->string('gpa')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('grad_year')->nullable();
-            $table->string('height')->nullable();
-            $table->string('interest_level')->nullable();
 
-            $table->string('program_type')->nullable();
-            $table->string('home_phone_number')->nullable();
-            $table->string('mobile_number')->nullable();
-            $table->string('primary_address')->nullable();
-            $table->string('guardians_name')->nullable();
-            $table->string('high_school_name')->nullable();
-            $table->string('transcript')->nullable();
-            $table->string('intended_major')->nullable();
-            $table->string('registered_with_ncaa')->nullable();
-            $table->string('ncaa_id')->nullable();
-            $table->string('sat_math')->nullable();
-            $table->string('sat_reading')->nullable();
-            $table->string('sat')->nullable();
-            $table->string('sat_writing')->nullable();
-            $table->string('sat_total')->nullable();
-            $table->string('act_total')->nullable();
-            $table->string('academic_honor')->nullable();
-            $table->string('other_interest')->nullable();
             $table->string('trash')->default('active');
             $table->timestamps();
         });
