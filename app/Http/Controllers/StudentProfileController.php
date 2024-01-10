@@ -7,8 +7,10 @@ use App\Models\ProgramType;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 use App\Helpers\FileUploadHelper;
 use App\Http\Requests\StudentProfileRequest;
+use Illuminate\Support\Facades\Validator;
 
 class StudentProfileController extends Controller
 {
@@ -21,6 +23,25 @@ class StudentProfileController extends Controller
         $data['programTypes'] = ProgramType::all();
 
         return view('student_backend/profile/profile', $data);
+    }
+
+    public function updateSetting(Request $request) {
+        $user = Auth::user();
+
+        if ($request->has('password') && !empty($request->input('password'))) {
+
+            $rules = [
+                'password' => 'required|min:8|confirmed'
+            ];
+
+            $request->validate($rules);
+
+            $user->password = bcrypt($request->input('password'));
+
+            $user->save();
+        }
+
+        return view('student_backend/profile/setting');
     }
 
     public function updateProfile(StudentProfileRequest $request) {
