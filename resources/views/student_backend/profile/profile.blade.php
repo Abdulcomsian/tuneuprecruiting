@@ -87,7 +87,7 @@
                     <div class="col-xl-8">
                         <div class="card">
                             <div class="card-header pb-0">
-                                <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
+                                <h3 class="card-title mb-0">Personal Information</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -97,7 +97,7 @@
                                                 name="first_name"
                                                 value="{{ $user->first_name }}"
                                                 type="text"
-                                                required="true"
+                                                required="{{ true }}"
                                                 placeholder="First name"
                                                 id="first-name"/>
                                         </div>
@@ -175,6 +175,7 @@
                                             name="birth_date"
                                             placeholder="Date of Birth"
                                             value="{{ old('birth_date', $user->birth_date) }}"
+                                            required="{{ true }}"
                                             id="birth-date" />
                                     </div>
                                     <div class="col-sm-4 col-md-4">
@@ -198,7 +199,8 @@
                                                     'selected' => old('country', $user->country),
                                                     'name' => 'country',
                                                     'id' => 'country',
-                                                    'label' => 'Country'
+                                                    'label' => 'Country',
+                                                    'required' => true
                                                 ])
                                             @endcomponent
                                         </div>
@@ -254,7 +256,8 @@
                                                     'selected' => old('program_type', $user->program_type),
                                                     'name' => 'program_type',
                                                     'id' => 'program-type',
-                                                    'label' => 'Program Type'
+                                                    'label' => 'Program Type',
+                                                    'required' => true
                                                 ])
                                             @endcomponent
                                         </div>
@@ -287,7 +290,6 @@
                                                     id="high-school-name"
                                                     name="high_school_name"
                                                     value="{{ old('high_school_name', $user->high_school_name) }}"
-                                                    required
                                                     type="text"
                                                     placeholder="High school name..." />
                                             </div>
@@ -300,7 +302,6 @@
                                                         'selected' => ucfirst(old('registered_with_ncaa', $user->registered_with_ncaa)),
                                                         'label' => 'Registered With NCAA',
                                                         'id' => 'registered-with-ncaa',
-                                                        'required' => true,
                                                         'arrayKey' => false
                                                     ])
                                                 @endcomponent
@@ -312,7 +313,6 @@
                                                     id="ncaa-id"
                                                     name="ncaa_id"
                                                     value="{{ old('ncaa_id', $user->ncaa_id) }}"
-                                                    required
                                                     placeholder="NCAA ID"
                                                     type="text" />
                                             </div>
@@ -331,7 +331,6 @@
                                                     id="sat-test-date"
                                                     name="sat_test_date"
                                                     value="{{ old('sat_test_date', $user->sat_test_date) }}"
-                                                    required
                                                     placeholder="SAT Test Date"
                                                     type="date" />
                                             </div>
@@ -342,7 +341,6 @@
                                                     id="sat-reading"
                                                     name="sat_reading"
                                                     value="{{ old('sat_reading', $user->sat_reading) }}"
-                                                    required
                                                     placeholder="SAT Reading"
                                                     type="text" />
                                             </div>
@@ -353,7 +351,6 @@
                                                     id="sat-writing"
                                                     name="sat_writing"
                                                     value="{{ old('sat_writing', $user->sat_writing) }}"
-                                                    required
                                                     placeholder="SAT Writing"
                                                     type="text" />
                                             </div>
@@ -424,7 +421,6 @@
                                                     id="act-math"
                                                     name="act_math"
                                                     value="{{ old('act_math', $user->act_math) }}"
-                                                    required
                                                     placeholder="ACT Math"
                                                     type="text" />
                                             </div>
@@ -435,7 +431,6 @@
                                                     id="act-reading"
                                                     name="act_reading"
                                                     value="{{ old('act_total', $user->act_total) }}"
-                                                    required
                                                     placeholder="ACT Reading"
                                                     type="text" />
                                             </div>
@@ -446,7 +441,6 @@
                                                     id="act-science"
                                                     name="act_science"
                                                     value="{{ old('act_total', $user->act_total) }}"
-                                                    required
                                                     placeholder="ACT Science"
                                                     type="text" />
                                             </div>
