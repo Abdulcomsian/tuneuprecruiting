@@ -25,7 +25,6 @@
                                     <tr>
                                         <th>Coach Name</th>
                                         <th>Program Name</th>
-                                        <th>Session</th>
                                         <th>Number of Students</th>
                                     </tr>
                                 </thead>
@@ -33,7 +32,6 @@
                                     <tr>
                                         <td>{{ $program->first_name ?? null }}</td>
                                         <td>{{ $program->program_name ?? null }}</td>
-                                        <td>{{ $program->session ?? null }}</td>
                                         <td>{{ $program->number_of_students ?? null }}</td>
                                     </tr>
                                 </tbody>

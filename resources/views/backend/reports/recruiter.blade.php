@@ -115,8 +115,7 @@
                                         <th>Country</th>
                                         <th>State</th>
                                         <th>Program</th>
-                                        <th>Home Town</th>
-                                        <th>Action</th>
+                                        <th><x-list-view-action-heading /></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -127,7 +126,6 @@
                                             <td>{{ $apply->country }}</td>
                                             <td>{{ $apply->state }}</td>
                                             <td>{{ $apply->program_name }}</td>
-                                            <td>{{ $apply->home_town }}</td>
                                             <td>
                                                 @if(isset($applications) && $applications != 'other')
                                                     @php $ratingName = 'apply_rating_'.date('his').rand(0,99999) @endphp

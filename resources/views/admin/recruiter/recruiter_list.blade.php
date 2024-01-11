@@ -50,7 +50,7 @@
                                         <th scope="col">Last Name</th>
                                         <th scope="col">Website</th>
                                         <th scope="col">About</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><x-list-view-action-heading /></th>
                                     </tr>
                                     </thead>
                                     <tbody>

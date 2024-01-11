@@ -27,10 +27,9 @@
                                         <th>College Name</th>
                                         <th>Coach Name</th>
                                         <th>Program Name</th>
-                                        <th>Session</th>
                                         <th>Number of Students</th>
                                         <th>Detail</th>
-                                        <th>Action</th>
+                                        <th><x-list-view-action-heading /></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -42,7 +41,6 @@
                                                 <td class="{{ $backgroundColor }}">{{ $program->college_or_university }}</td>
                                                 <td class="{{ $backgroundColor }}">{{ $program->coach->first_name ?? '' . " " . $program->coach->last_name ?? '' }}</td>
                                                 <td>{{ $program->program_name }}</td>
-                                                <td>{{ $program->session }}</td>
                                                 <td>{{ $program->number_of_students }}</td>
                                                 <td>{{ $program->details }}</td>
                                                 <td>

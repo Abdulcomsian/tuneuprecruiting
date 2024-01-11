@@ -28,7 +28,7 @@
                                             <th>Last Name</th>
                                             <th>Website</th>
                                             <th>About</th>
-                                            <th>Action</th>
+                                            <th><x-list-view-action-heading /></th>
                                         </tr>
                                     </thead>
                                     <tbody>

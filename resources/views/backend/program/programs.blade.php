@@ -51,7 +51,7 @@
                                             <th scope="col">Number of Students</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Detail</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col"><x-list-view-action-heading /></th>
                                         </tr>
                                     </thead>
                                     <tbody>

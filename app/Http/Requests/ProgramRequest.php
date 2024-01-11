@@ -25,8 +25,7 @@ class ProgramRequest extends FormRequest
         $this->request->add(['coach_id' => Session::get('coachId')]);
         $rules = [
             'program_name' => 'required|string',
-            'number_of_students' => 'required|integer', // Changed type to integer
-            'session' => 'required|string',
+            'number_of_students' => 'required|integer',
             'details' => 'string',
             'custom_fields' => 'string',
             'status' => 'string',

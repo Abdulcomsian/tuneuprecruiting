@@ -248,7 +248,7 @@
                                         $(api.column(colIdx).header()).index()
                                     );
                                     var title = $(cell).text();
-                                    if(title !== 'Action') {
+                                    if(title !== '') {
                                         $(cell).html('<input style="width: 140px;" type="text" placeholder="' + title + '" />');
                                     }
 

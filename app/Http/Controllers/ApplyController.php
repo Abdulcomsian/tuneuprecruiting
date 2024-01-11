@@ -15,7 +15,7 @@ use App\Mail\DefaultMail;
 class ApplyController extends Controller
 {
     public function applies() {
-        $data['applies'] = Apply::select('programs.*', 'applies.*', 'applies.id as apply_id', 'students.first_name', 'students.id as student_id', 'students.last_name', 'students.graduation_year', 'students.country', 'students.home_town', 'students.state')
+        $data['applies'] = Apply::select('programs.*', 'applies.*', 'applies.id as apply_id', 'students.first_name', 'students.id as student_id', 'students.last_name', 'students.graduation_year', 'students.country', 'students.state')
             ->join('programs', 'programs.id', '=', 'applies.program_id')
             ->join('students', 'students.id', '=', 'applies.student_id')
             ->where(['programs.coach_id' => Session::get('coachId'), 'applies.trash' => 'active'])

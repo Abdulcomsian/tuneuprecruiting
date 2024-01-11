@@ -29,7 +29,7 @@
                                             <th>Session</th>
                                             <th>Status</th>
                                             <th>Date</th>
-                                            <th>Action</th>
+                                            <th><x-list-view-action-heading /></th>
                                         </tr>
                                     </thead>
                                     <tbody>

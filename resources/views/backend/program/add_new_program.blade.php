@@ -53,20 +53,12 @@
                                 <div class="col-md-4">
                                     <x-dynamic-input
                                         type="text"
-                                        placeholder="Session"
-                                        name="session"
-                                        required="true"
-                                        id="session" />
-                                </div>
-                                <div class="col-md-4">
-                                    <x-dynamic-input
-                                        type="text"
                                         placeholder="Number of Students"
                                         name="number_of_students"
                                         required="true"
                                         id="number-of-students" />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     @component('components.select-list', [
                                         'options' => ['Public', 'Dropped'],
                                         'selected' => old('status'),
@@ -78,7 +70,7 @@
                                         ])
                                     @endcomponent
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     @component('components.select-type-of-object-array', [
                                         'options' => $programTypes,
                                         'selected' => old('program_for', $programType),
@@ -89,7 +81,7 @@
                                         ])
                                     @endcomponent
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <x-dynamic-input
                                         type="file"
                                         name="video_file"
@@ -97,7 +89,7 @@
                                         placeholder="Video"
                                         id="video" />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     @component('components.radio-buttons', [
                                         'name' => 'program_for',
                                         'options' => ['Male', 'Female', 'Other'],
