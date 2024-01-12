@@ -94,6 +94,31 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                                <svg class="stroke-icon">
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#Grid') }}"></use>
+                                </svg>
+                                <svg class="fill-icon">
+                                    <use href="{{ assert('assets/svg/icon-sprite.svg#fill-Grid') }}"></use>
+                                </svg><span>Setting</span></a>
+                            <ul class="sidebar-submenu custom-scrollbar">
+                                <li class="sidebar-head">Settings</li>
+                                <li class="main-submenu"><a class="d-flex sidebar-menu" href="javascript:void(0)">
+                                        <svg class="stroke-icon">
+                                            <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-email') }}"></use>
+                                        </svg>
+                                        <svg class="fill-icon">
+                                            <use href="{{ asset('assets/svg/icon-sprite.svg#fill-email') }}"></use>
+                                        </svg>Email Template
+                                        <svg class="arrow">
+                                            <use href="{{ asset('assets/svg/icon-sprite.svg#Arrow-right') }}"></use>
+                                        </svg></a>
+                                    <ul class="submenu-wrapper">
+                                        <li><a href="{{ route('template.index') }}">Email Templates</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 @php endif; @endphp
 

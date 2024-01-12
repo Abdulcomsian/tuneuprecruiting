@@ -13,6 +13,7 @@ use App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\RecruiterController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\Recruiter\Settings\Emails\EmailTemplateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,8 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::post("/report/recruiter", [ReportController::class, "recruiterReport"])->name('report.recruiter');
 
     Route::resource('program', ProgramController::class);
+
+    Route::resource('email/template', EmailTemplateController::class);
 
     Route::get("/chat/{id?}", [ChatController::class, "show"])->name('chat');
     Route::get("/chat/new/{id}", [ChatController::class, "getNewMessages"])->name('chat.new');

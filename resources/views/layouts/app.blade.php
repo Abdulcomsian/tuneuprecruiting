@@ -124,6 +124,14 @@
             <script src="{{ asset('assets/js/animation/wow/wow.min.js') }}"></script>
             <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
 
+            <script src="{{ asset('assets/js/editor/ckeditor/ckeditor.js') }}"></script>
+            <script src="{{ asset('assets/js/editor/ckeditor/adapters/jquery.js') }}"></script>
+            <script src="{{ asset('assets/js/editor/ckeditor/styles.js') }}"></script>
+            <script src="{{ asset('assets/js/editor/ckeditor/ckeditor.custom.js') }}"></script>
+
+            <script src="{{ asset('assets/js/clipboard/clipboard.min.js') }}"></script>
+            <script src="{{ asset('assets/js/clipboard/clipboard-script.js') }}"></script>
+
             <!-- Plugins JS Ends-->
             <!-- Theme js-->
             <script src="{{ asset('assets/js/script.js') }}"></script>
