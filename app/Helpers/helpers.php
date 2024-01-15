@@ -15,6 +15,19 @@ if (!function_exists('getGenderTypes')) {
     }
 }
 
+if (!function_exists('getEmailTemplateTypes')) {
+    function getEmailTemplateTypes($typeNumber = null)
+    {
+        $templateTypes = ['Application Delete'];
+
+        if ($typeNumber) {
+            return $templateTypes[$typeNumber];
+        }
+
+        return $templateTypes;
+    }
+}
+
 if (!function_exists('generateBreadcrumbs')) {
     function generateBreadcrumbs($items) {
         $breadcrumbs = [];

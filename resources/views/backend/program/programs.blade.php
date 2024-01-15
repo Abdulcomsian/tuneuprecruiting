@@ -47,7 +47,6 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>
-                                            <th scope="col">Session</th>
                                             <th scope="col">Number of Students</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Detail</th>
@@ -58,7 +57,6 @@
                                         @foreach($programs as $program)
                                             <tr class="border-bottom-secondary">
                                                 <td>{{ $program->program_name }}</td>
-                                                <td>{{ $program->session }}</td>
                                                 <td>{{ $program->number_of_students }}</td>
                                                 <td>{{ $program->status }}</td>
                                                 <td>{{ $program->details }}</td>

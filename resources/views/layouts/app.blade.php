@@ -129,6 +129,12 @@
             <script src="{{ asset('assets/js/editor/ckeditor/styles.js') }}"></script>
             <script src="{{ asset('assets/js/editor/ckeditor/ckeditor.custom.js') }}"></script>
 
+            <script>
+                // var editor = CKEDITOR.instances.editor1;
+                // editor.config.toolbar = [];
+                // editor.removeButtons(['Bold', 'Italic', 'Underline']);
+            </script>
+
             <script src="{{ asset('assets/js/clipboard/clipboard.min.js') }}"></script>
             <script src="{{ asset('assets/js/clipboard/clipboard-script.js') }}"></script>
 

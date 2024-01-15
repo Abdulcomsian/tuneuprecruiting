@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TableColumnReplacementHelper;
 use App\Models\Apply;
 use App\Models\ApplyDetail;
+use App\Models\Coach;
+use App\Models\EmailTemplate;
 use App\Models\Program;
 use App\Models\Student;
 use App\Models\User;
@@ -52,12 +55,20 @@ class ApplyController extends Controller
         $student = User::join('students', 'students.user_id', '=', 'users.id')->where(['students.id' => $apply->student_id])->first();
         $program = Program::find($apply->program_id);
 
-        $mailData = [
-            'name' => $student->first_name,
-            'body' => 'The recruiter has rejected your application for the ' . $program->program_name .' program.',
-        ];
+        $templateData['student'] = Student::find(1);
+        $templateData['recruiter'] = Coach::find(1);
+        $templateData['program'] = $program;
+        $emailTemplate = EmailTemplate::where(['coach_id' => $program->coach_id, 'status' => 'Active', 'template_for' => 'Application Delete'])->first();
 
-        Mail::to($student->email)->send(new DefaultMail($mailData));
+        if (is_null($emailTemplate)) {
+            $emailTemplate = EmailTemplate::where(['coach_id' => 0, 'template_for' => 'Application Delete'])->firstOrFail();
+        }
+
+        $formattedData = TableColumnReplacementHelper::getFormattedArray($templateData);
+
+        $emailTemplate->body = TableColumnReplacementHelper::renderDynamicContent($emailTemplate->body, $formattedData);
+
+        Mail::to($student->email)->send(new DefaultMail($emailTemplate));
 
         return redirect()->back()->with('success', 'Deleted.');
     }

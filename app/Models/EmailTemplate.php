@@ -10,6 +10,7 @@ class EmailTemplate extends Model
     use HasFactory;
 
     protected $fillable = [
+        'coach_id',
         'subject',
         'template_for',
         'status',

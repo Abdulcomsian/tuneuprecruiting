@@ -84,6 +84,9 @@ class StudentProfileController extends Controller
         $user->is_profile_completed = 'completed';
         $user->save();
 
+        Session::put('gender', $student->gender);
+        Session::put('programType', $student->program_type);
+
         return redirect()->back()->with('success', 'Profile updated.');
     }
 }

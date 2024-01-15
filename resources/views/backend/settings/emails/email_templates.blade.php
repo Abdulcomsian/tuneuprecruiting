@@ -43,7 +43,7 @@
                                             <td>{{ $template->status }}</td>
                                             <td>
                                                 <ul class="action">
-                                                    <li class="edit"><a href="{{ route('template.edit', $template->id) }}"><i class="icofont icofont-eye-alt"></i></a></li>
+                                                    <li class="edit"><a href="{{ route('template.show', $template->id) }}"><i class="icofont icofont-eye-alt"></i></a></li>
                                                     <li class="edit"><a href="{{ route('template.edit', $template->id) }}"><i class="fa fa-pencil-square-o"></i></a></li>
                                                 </ul>
                                             </td>

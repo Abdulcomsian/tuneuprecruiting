@@ -32,10 +32,6 @@
                                                 <td>{{ $program->program_name }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Session</td>
-                                                <td>{{ $program->session }}</td>
-                                            </tr>
-                                            <tr>
                                                 <td>Number of Students</td>
                                                 <td>{{ $program->number_of_students }}</td>
                                             </tr>

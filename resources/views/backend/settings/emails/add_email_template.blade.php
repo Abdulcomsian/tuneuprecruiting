@@ -57,7 +57,7 @@
                                     <div class="col-sm-4">
                                         @component('components.select-list', [
                                             'name' => 'template_for',
-                                            'options' => ['Application Delete', 'Favourite'],
+                                            'options' => getEmailTemplateTypes(),
                                             'selected' => ucfirst(old('template_for', $template->template_for ?? '')),
                                             'label' => 'Template For',
                                             'id' => 'template-for',

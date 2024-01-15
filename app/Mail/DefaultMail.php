@@ -29,7 +29,7 @@ class DefaultMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Notification',
+            subject: $this->mailData->subject,
         );
     }
 

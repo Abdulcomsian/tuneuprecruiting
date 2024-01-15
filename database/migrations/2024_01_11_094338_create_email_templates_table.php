@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('email_templates', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('coach_id');
             $table->string('template_for');
             $table->string('subject');
             $table->text('body');
