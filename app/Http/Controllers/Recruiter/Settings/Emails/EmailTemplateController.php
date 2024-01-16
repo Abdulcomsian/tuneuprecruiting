@@ -68,6 +68,8 @@ class EmailTemplateController extends Controller
     {
         $data['template'] = EmailTemplate::find($id);
 
+        view()->share('viewEmailTemplate', true);
+
         $this->authorize('edit', $data['template']);
 
         return view('backend/settings/emails/view_email_template', $data);

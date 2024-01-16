@@ -129,11 +129,21 @@
             <script src="{{ asset('assets/js/editor/ckeditor/styles.js') }}"></script>
             <script src="{{ asset('assets/js/editor/ckeditor/ckeditor.custom.js') }}"></script>
 
-            <script>
-                // var editor = CKEDITOR.instances.editor1;
-                // editor.config.toolbar = [];
-                // editor.removeButtons(['Bold', 'Italic', 'Underline']);
-            </script>
+            @if(isset($viewEmailTemplate))
+                <style>
+                    .cke_inner .cke_top {
+                        display: none;
+                    }
+
+                </style>
+                <script>
+                    //var editor = CKEDITOR.instances.editor1;
+                    // editor.config.removePlugins = 'elementspath,save,image,flash,iframe,link,smiley,tabletools,find,pagebreak,templates,about,maximize,showblocks,newpage,language';
+
+                    // editor.config.toolbar = [];
+                    // editor.removeButtons(['Bold', 'Italic', 'Underline']);
+                </script>
+            @endif
 
             <script src="{{ asset('assets/js/clipboard/clipboard.min.js') }}"></script>
             <script src="{{ asset('assets/js/clipboard/clipboard-script.js') }}"></script>

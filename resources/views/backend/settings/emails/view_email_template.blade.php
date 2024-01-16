@@ -63,7 +63,7 @@
                                 <div class="row mt-4">
                                     <div class="col-sm-12">
                                         <h1>Template:</h1><br>
-                                        {!!  old('body', $template->body ?? '')  !!}
+                                        <textarea id="editor1" name="body" cols="30" rows="10">{{ old('body', $template->body ?? '') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
