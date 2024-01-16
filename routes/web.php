@@ -14,6 +14,7 @@ use App\Http\Controllers\RecruiterController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\Recruiter\Settings\Emails\EmailTemplateController;
+use App\Http\Controllers\Admin\Settings\Emails\AdminSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,10 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::resource('recuriter', RecruiterController::class);
     Route::get('/profile/admin', [AdminProfileController::class, 'profile']);
     Route::post('/profile/update/admin', [AdminProfileController::class, 'update'])->name('profile.update.admin');
+    Route::get('/admin/setting/emails', [AdminSettingController::class, 'emailTemplates']);
+    Route::get('/admin/setting/emails/{id}', [AdminSettingController::class, 'editEmailTemplate'])->name('admin.email.edit');
+    Route::get('/admin/setting/emails/template/show/{id}', [AdminSettingController::class, 'showEmailTemplate'])->name('admin.email.template.show');
+    Route::put('/admin/setting/emails/template/update/{id}', [AdminSettingController::class, 'updateEmailTemplate'])->name('admin.email.template.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

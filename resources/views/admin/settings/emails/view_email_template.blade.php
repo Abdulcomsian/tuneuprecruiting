@@ -4,7 +4,7 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3>Email Template</h3>
+                        <h3>Email Templates</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-sm-12">
-                                        <a href="{{ route('template.edit', $template->id) }}" class="btn btn-primary float-end">Edit</a>
+                                        <a href="{{ route('admin.email.edit', encrypt($template->id)) }}" class="btn btn-primary float-end">Edit</a>
                                     </div>
                                 </div>
                             </form>

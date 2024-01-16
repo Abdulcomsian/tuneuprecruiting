@@ -16,11 +16,6 @@
         </div>
         <!-- Container-fluid starts-->
         <div class="container-fluid basic_table">
-            <div class="row mb-3">
-                <div class="col-sm-12">
-                    <a href="{{ route('template.create') }}" class="btn btn-primary float-end">Add new template</a>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -43,8 +38,8 @@
                                             <td>{{ $template->status }}</td>
                                             <td>
                                                 <ul class="action">
-                                                    <li class="edit"><a href="{{ route('template.show', $template->id) }}"><i class="icofont icofont-eye-alt"></i></a></li>
-                                                    <li class="edit"><a href="{{ route('template.edit', $template->id) }}"><i class="fa fa-pencil-square-o"></i></a></li>
+                                                    <li class="edit"><a href="{{ route('admin.email.template.show', encrypt($template->id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
+                                                    <li class="edit"><a href="{{ route('admin.email.edit', encrypt($template->id)) }}"><i class="fa fa-pencil-square-o"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>

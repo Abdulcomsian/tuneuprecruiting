@@ -4,11 +4,11 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3>Add Template</h3>
+                        <h3>Edit Email Template</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            {!! generateBreadcrumbs(["Add Template"]) !!}
+                            {!! generateBreadcrumbs(["Edit Template"]) !!}
                         </ol>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                                 </div>
                             @endif
                                 @if(isset($template))
-                                    <form action="{{ route('template.update', $template->id) }}" method="post">
+                                    <form action="{{ route('admin.email.template.update', encrypt($template->id)) }}" method="post">
                                     <input type="hidden" name="_method" value="PUT" id="route-method">
                                 @else
                                     <form action="{{ route('template.store') }}" method="post">
