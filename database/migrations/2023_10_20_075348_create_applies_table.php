@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('talking')->nullable();
             $table->string('rating')->default('0');
             $table->string('read')->default('unread');
+            $table->string('status')->default('not-accept');
 
             $table->timestamps();
         });

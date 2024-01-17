@@ -7,7 +7,7 @@
     'type' => 'star',
     'clickable' => true,
     'sizing' => [
-        'small' => 3,
+        'small' => 4,
         'medium' => 10,
         'big' => 14,
     ],

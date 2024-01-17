@@ -8,6 +8,7 @@ use App\Models\ApplyDetail;
 use App\Models\Coach;
 use App\Models\EmailTemplate;
 use App\Models\Program;
+use App\Models\RequestRequirement;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,6 +27,24 @@ class ApplyController extends Controller
             ->get();
 
         return view('backend/applies/applies', $data);
+    }
+
+    public function acceptApplication($applicationId) {
+        $applicationId = decrypt($applicationId);
+
+        $data['apply'] = Apply::join('students', 'students.id', '=', 'applies.student_id')->where(['applies.id' => $applicationId])->first();
+
+        return view('backend/applies/accept', $data);
+    }
+
+    public function requestApplyRequirement(Request $request) {
+        RequestRequirement::create($request->all());
+
+        $apply = Apply::find($request->apply_id);
+        $apply->status = 'accepted';
+        $apply->save();
+
+        return redirect()->back()->with('success', 'Approved. The notification has been dispatched to the student.');
     }
 
     public function saveApplyRating(Request $request) {

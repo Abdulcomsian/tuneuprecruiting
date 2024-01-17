@@ -77,6 +77,8 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::get('/apply/status/{id}', [ApplyController::class, 'changeStatusToStar']);
     Route::delete('/apply/destroy/{id}', [ApplyController::class, 'destroy'])->name('apply.destroy');
     Route::get('/apply/view/{id}', [ApplyController::class, 'viewApply']);
+    Route::get('/program/apply/accept/{id}', [ApplyController::class, 'acceptApplication'])->name('program.apply.accept');
+    Route::post('/program/apply/requirement', [ApplyController::class, 'requestApplyRequirement'])->name('apply.request.requirement');
     Route::get('/profile', [ProfileController::class, 'profile']);
     Route::post('/update/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/update/profile/image', [ProfileController::class, 'updateProfileImage'])->name('profile.image');
