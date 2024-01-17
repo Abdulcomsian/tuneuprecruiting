@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apply;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -11,6 +12,8 @@ class ReportController extends Controller
 {
     public function recruiterReport(Request $request) {
         $data = $request->all();
+
+        $data['countries'] = Country::all();
 
         if (!isset($request->applications)) {
             $data['applications'] = 'my_application';
@@ -22,6 +25,11 @@ class ReportController extends Controller
             'programs.session' => $request->student_session ?? null,
             'programs.coach_id' => $request->applications == 'other' ? null : Session::get('coachId'),
             'students.graduation_year' => $request->graduation_year ?? null,
+            'students.country' => $request->country ?? null,
+            'students.state' => $request->state ?? null,
+            'students.sat_total' => $request->sat_total ?? null,
+            'students.act_reading' => $request->act_reading ?? null,
+            'students.are_u_from_usa' => $request->are_u_from_usa ?? null,
         ]);
 
         $query  = Apply::select('applies.*', 'students.first_name', 'students.last_name', 'students.graduation_year', 'students.country', 'students.state', 'programs.program_name')

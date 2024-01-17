@@ -24,6 +24,14 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-3">
+                                        <label for="from-date">From Date</label>
+                                        <input type="date" id="from-date" value="{{ $from_date ?? '' }}" name="from_date" class="bw-input">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="to-date">To Date</label>
+                                        <input type="date" id="to-date" value="{{ $to_date ?? '' }}" name="to_date" class="bw-input">
+                                    </div>
+                                    <div class="col-sm-3">
                                         @component('components.select-list', [
                                             'options' => range(1, 5),
                                             'selected' => $rating ?? '',
@@ -32,29 +40,6 @@
                                             'inputClass' => 'bw-raw-select',
                                             'label' => 'Rating',
                                             'arrayKey' => false
-                                            ])
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-3">
-                                        @component('components.select-list', [
-                                            'options' => ['star' => 'Yes', 'null' => 'No'],
-                                            'selected' => $favourite ?? '',
-                                            'name' => 'favourite',
-                                            'id' => 'favourite',
-                                            'inputClass' => 'bw-raw-select',
-                                            'label' => 'Favourite'
-                                            ])
-                                        @endcomponent
-                                    </div>
-                                    <div class="col-sm-3">
-                                        @component('components.select-list', [
-                                            'options' => range(2000, 2030),
-                                            'selected' => $student_session ?? '',
-                                            'name' => 'student_session',
-                                            'id' => 'student-session',
-                                            'inputClass' => 'bw-raw-select',
-                                            'arrayKey' => false,
-                                            'label' => 'Session'
                                             ])
                                         @endcomponent
                                     </div>
@@ -70,17 +55,75 @@
                                             ])
                                         @endcomponent
                                     </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-sm-3">
-                                        <label for="from-date">From Date</label>
-                                        <input type="date" id="from-date" value="{{ $from_date ?? '' }}" name="from_date" class="bw-input">
+                                    <div class="col-sm-3 mt-3">
+                                        @component('components.select-type-of-object-array', [
+                                                'options' => $countries,
+                                                'selected' => $country ?? '',
+                                                'name' => 'country',
+                                                'id' => 'country',
+                                                'label' => 'Country',
+                                            ])
+                                        @endcomponent
                                     </div>
-                                    <div class="col-sm-3">
-                                        <label for="to-date">To Date</label>
-                                        <input type="date" id="to-date" value="{{ $to_date ?? '' }}" name="to_date" class="bw-input">
+                                    <div class="col-sm-3 mt-3">
+                                        <x-dynamic-input
+                                            id="state"
+                                            name="state"
+                                            value="{{ $state ?? '' }}"
+                                            type="text"
+                                            placeholder="State/Province" />
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-3 mt-3">
+                                        @component('components.select-list', [
+                                                'name' => 'are_u_from_usa',
+                                                'options' => ['Yes', 'No'],
+                                                'selected' => ucfirst($are_u_from_usa ?? ''),
+                                                'label' => ' Outside of the United States',
+                                                'id' => 'are-u-from-usa',
+                                                'arrayKey' => false
+                                            ])
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-3 mt-3">
+                                        <x-dynamic-input
+                                            id="act-reading"
+                                            name="act_reading"
+                                            value="{{ $act_total ?? '' }}"
+                                            placeholder="ACT Total"
+                                            type="text" />
+                                    </div>
+                                    <div class="col-sm-3 mt-3">
+                                        <x-dynamic-input
+                                            id="sat-total"
+                                            name="sat_total"
+                                            value="{{ $sat_total ?? '' }}"
+                                            placeholder="SAT Total"
+                                            type="text" />
+                                    </div>
+                                    <div class="col-sm-3 mt-3">
+                                        @component('components.select-list', [
+                                            'options' => ['star' => 'Yes', 'null' => 'No'],
+                                            'selected' => $favourite ?? '',
+                                            'name' => 'favourite',
+                                            'id' => 'favourite',
+                                            'inputClass' => 'bw-raw-select',
+                                            'label' => 'Favourite'
+                                            ])
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-3 mt-3">
+                                        @component('components.select-list', [
+                                            'options' => range(2000, 2030),
+                                            'selected' => $student_session ?? '',
+                                            'name' => 'student_session',
+                                            'id' => 'student-session',
+                                            'inputClass' => 'bw-raw-select',
+                                            'arrayKey' => false,
+                                            'label' => 'Session'
+                                            ])
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-3 mt-3">
                                         @component('components.select-list', [
                                             'options' => ['my_application' => 'My application', 'other' => 'Other'],
                                             'selected' => $applications ?? 'my_application',

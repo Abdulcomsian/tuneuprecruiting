@@ -431,7 +431,7 @@
                                                     id="act-reading"
                                                     name="act_reading"
                                                     value="{{ old('act_total', $user->act_total) }}"
-                                                    placeholder="ACT Reading"
+                                                    placeholder="ACT Total"
                                                     type="text" />
                                             </div>
                                         </div>
