@@ -9,6 +9,7 @@ use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\StudentApplyController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\RecruiterController;
 use App\Http\Controllers\ReportController;
@@ -93,6 +94,9 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::post('/update/student/profile', [StudentProfileController::class, 'updateProfile'])->name('student.profile.update');
     Route::get('/program/view/{id}', [StudentApplyController::class, 'viewProgram'])->name('program.view');
     Route::get('/program/apply/view/{id}', [StudentApplyController::class, 'applyView'])->name('program.apply.view');
+    Route::get('/apply/requirements/form/{id}', [StudentApplyController::class, 'requirementForm']);
+
+    Route::get('/notifications', [NotificationController::class, 'getNotifications']);
 
     Route::get('send-mail', [MailController::class, 'index']);
 });

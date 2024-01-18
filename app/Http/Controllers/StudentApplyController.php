@@ -26,6 +26,10 @@ class StudentApplyController extends Controller
         return view('student_backend/programs/programs', $data);
     }
 
+    public function requirementForm($id) {
+        dd($id);
+    }
+
     public function studentApply(Request $request) {
         $programId = $request->id;
         $data['program'] = Program::select('programs.*', 'coaches.first_name', 'coaches.last_name')

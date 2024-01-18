@@ -79,7 +79,7 @@
                                     @csrf
                                     <input type="hidden" name="_method" value="POST" id="route-method">
                                     <input type="hidden" name="custom_fields" id="custom-fields">
-                                    <input type="hidden" name="apply_id" value="{{ $apply->id }}">
+                                    <input type="hidden" name="apply_id" value="{{ $apply->apply_id }}">
                                     <div class="col-md-12">
                                         <div id="requirements-id"></div>
                                         <div id="build-wrap"></div>

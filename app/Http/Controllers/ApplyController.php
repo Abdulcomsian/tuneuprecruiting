@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CommonHelper;
 use App\Helpers\TableColumnReplacementHelper;
 use App\Models\Apply;
 use App\Models\ApplyDetail;
 use App\Models\Coach;
 use App\Models\EmailTemplate;
+use App\Models\Notification;
 use App\Models\Program;
 use App\Models\RequestRequirement;
 use App\Models\Student;
@@ -32,17 +34,29 @@ class ApplyController extends Controller
     public function acceptApplication($applicationId) {
         $applicationId = decrypt($applicationId);
 
-        $data['apply'] = Apply::join('students', 'students.id', '=', 'applies.student_id')->where(['applies.id' => $applicationId])->first();
+        $data['apply'] = Apply::select('applies.*', 'applies.id as apply_id', 'students.*')
+            ->join('students', 'students.id', '=', 'applies.student_id')
+            ->where(['applies.id' => $applicationId])
+            ->first();
 
         return view('backend/applies/accept', $data);
     }
 
     public function requestApplyRequirement(Request $request) {
         RequestRequirement::create($request->all());
-
         $apply = Apply::find($request->apply_id);
         $apply->status = 'accepted';
         $apply->save();
+
+        $user = CommonHelper::getUserData($apply->student_id, Student::class);
+
+        // Notification
+        Notification::create([
+            'notification_for' => 'student',
+            'user_id' => $user->id,
+            'message' => 'Your application has been approved by the coach; kindly submit the required documents.',
+            'route' => 'apply/requirements/form/' . encrypt($apply->id),
+        ]);
 
         return redirect()->back()->with('success', 'Approved. The notification has been dispatched to the student.');
     }
