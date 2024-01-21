@@ -9,7 +9,7 @@ class RequestRequirement extends Model
 {
     protected $fillable = [
         'apply_id',
-        'dynamic_fields'
+        'custom_fields'
     ];
     use HasFactory;
 }

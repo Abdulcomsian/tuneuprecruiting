@@ -206,7 +206,7 @@
 
                         // Create a link element
                         var link = document.createElement('a');
-                        link.href = baseUrl + notification.route;
+                        link.href = notification.route;
 
                         // Create a paragraph element
                         var paragraph = document.createElement('p');

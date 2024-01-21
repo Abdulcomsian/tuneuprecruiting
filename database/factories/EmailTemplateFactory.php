@@ -18,7 +18,7 @@ class EmailTemplateFactory extends Factory
     {
         return [
             'coach_id' => 0,
-            'template_for' => getEmailTemplateTypes(0),
+            'template_for' => 'Application Delete',
             'subject' => 'Notification',
             'body' => '
                 <p>Hello&nbsp;<strong>[student-first_name]</strong>!<br />

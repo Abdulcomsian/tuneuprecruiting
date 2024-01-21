@@ -72,7 +72,7 @@ class StudentProfileController extends Controller
         $student->first_name = $request->input('first_name');
         $student->last_name = $request->input('last_name');
         $student->graduation_year = $request->input('graduation_year');
-        $student->home_town = $request->input('home_town');
+//        $student->home_town = $request->input('home_town');
         $student->state = $request->input('state');
         $student->country = $request->input('country');
         $student->save();

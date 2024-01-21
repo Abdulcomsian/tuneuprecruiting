@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Program;
+use App\Models\RequestRequirement;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ApplyRequest extends FormRequest
@@ -25,10 +26,13 @@ class ApplyRequest extends FormRequest
      */
     public function rules()
     {
+        $requirementId = $this->request->get('requirement_id');
 
-        // Get program and custom fields
-        $program = Program::find($this->request->get('id'));
-        $inputs = json_decode($program->custom_fields);
+        $inputs = $requirementId
+            ? json_decode(RequestRequirement::find($requirementId)->custom_fields)
+            : json_decode(Program::find($this->request->get('id'))->custom_fields);
+
+
 
         // Initialize counters and arrays
         $selectListCounter = 0;

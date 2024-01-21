@@ -6,6 +6,7 @@ use App\Models\Apply;
 use App\Models\ApplyDetail;
 use App\Models\Coach;
 use App\Models\Program;
+use App\Models\RequestRequirement;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -27,7 +28,13 @@ class StudentApplyController extends Controller
     }
 
     public function requirementForm($id) {
-        dd($id);
+        $id = decrypt($id);
+
+        $apply = Apply::find($id);
+        $data['requirements'] = RequestRequirement::where(['apply_id' => $apply->id])->first();
+        $data['customFields'] = json_decode($data['requirements']->custom_fields);
+
+        return view('student_backend.applies.requirements', $data);
     }
 
     public function studentApply(Request $request) {
@@ -43,6 +50,10 @@ class StudentApplyController extends Controller
         $data['user'] = Student::where(['user_id' => $user->id])->first();
 
         return view('student_backend/applies/apply', $data);
+    }
+
+    public function submitRequirements(ApplyRequest $request) {
+        dd($request->all());
     }
 
     public function apply(ApplyRequest $request) {
