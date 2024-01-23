@@ -98,8 +98,8 @@
                             <form method="POST" id="frm-program" action="{{ route('program.apply', encrypt($program->id)) }}" enctype="multipart/form-data" class="row g-3">
                                 @csrf
                                 <input type="hidden" name="program_id" value="{{ $program->id }}">
-                            <div class="row mb-3">
-                                <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-4">
                                     <x-dynamic-input
                                         id="first-name"
                                         type="text"
@@ -109,7 +109,7 @@
                                         placeholder="First Name"
                                         required="true" />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <x-dynamic-input
                                         id="last-name"
                                         type="text"
@@ -119,7 +119,7 @@
                                         placeholder="Last Name"
                                         required="true" />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <x-dynamic-input
                                         id="graduation-year"
                                         type="text"
@@ -129,7 +129,7 @@
                                         placeholder="Graduation Year"
                                         required="true" />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         id="home-town"
                                         type="text"
@@ -139,9 +139,7 @@
                                         placeholder="Home Town"
                                         required="true" />
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         id="state"
                                         type="text"
@@ -151,7 +149,7 @@
                                         placeholder="State"
                                         required="true" />
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         id="country"
                                         type="text"
@@ -161,7 +159,7 @@
                                         placeholder="Country"
                                         required="" />
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         type="text"
                                         name="academic_honors"
@@ -169,7 +167,7 @@
                                         placeholder="Academic Honors"
                                         id="academic-honors" />
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         type="date"
                                         name="birth_date"
@@ -177,7 +175,7 @@
                                         placeholder="Birth Date"
                                         id="birth-date" />
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         type="text"
                                         name="class_rank"
@@ -185,7 +183,7 @@
                                         placeholder="Class Rank"
                                         id="class-rank" />
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         type="text"
                                         name="college"
@@ -193,9 +191,7 @@
                                         placeholder="College"
                                         id="college" />
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-4">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         type="text"
                                         name="core_gpa"
@@ -203,7 +199,7 @@
                                         placeholder="Core GPA"
                                         id="core-gpa" />
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         type="text"
                                         name="gpa"
@@ -211,7 +207,7 @@
                                         placeholder="GPA"
                                         id="gpa" />
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mt-3">
                                     <label for="gender" class="form-label">Gender</label> <br />
                                     <input type="radio" name="gender" {{ ($user->gender == 'male') ? 'checked' : '' }} class="form-check-input" value="male" id="male">
                                     <label class="form-check-label" for="male">Male</label>
@@ -220,9 +216,7 @@
                                     <input type="radio" name="gender" {{ ($user->gender == 'other') ? 'checked' : '' }} class="form-check-input" value="other" id="other">
                                     <label class="form-check-label" for="other">Other</label>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-3">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         type="text"
                                         name="grad_year"
@@ -230,7 +224,7 @@
                                         placeholder="Grad. Year"
                                         id="grad" />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         type="text"
                                         name="height"
@@ -238,7 +232,7 @@
                                         placeholder="Grad. Year"
                                         id="height" />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         type="text"
                                         name="home_phone"
@@ -246,7 +240,7 @@
                                         placeholder="Home Phone"
                                         id="home-phone" />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4 mt-3">
                                     <x-dynamic-input
                                         type="text"
                                         name="interest_level"
