@@ -94,6 +94,8 @@ class ProgramController extends Controller
 
         $this->authorize('edit', $program);
 
+        $data['programTypes'] = ProgramType::all();
+
         if($program->status == 'public') {
             return redirect()->back()->with('danger', 'You are unable to modify the program public status.');
         }

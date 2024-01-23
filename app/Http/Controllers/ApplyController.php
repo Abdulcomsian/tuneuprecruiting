@@ -12,6 +12,7 @@ use App\Models\Notification;
 use App\Models\Program;
 use App\Models\RequestRequirement;
 use App\Models\Student;
+use App\Models\StudentAdditionalRequirement;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -57,6 +58,12 @@ class ApplyController extends Controller
             'message' => 'Your application has been approved by the coach; kindly submit the required documents.',
             'route' => 'apply/requirements/form/' . encrypt($apply->id),
         ]);
+
+        $student = User::join('students', 'students.user_id', '=', 'users.id')->where(['students.id' => $apply->student_id])->first();
+        $formattedData = (object)[];
+        $formattedData->subject = "Notification";
+        $formattedData->body = "<p>Your application has been approved by the coach; kindly submit the required documents.</p>";
+        Mail::to($student->email)->send(new DefaultMail($formattedData));
 
         return redirect()->back()->with('success', 'Approved. The notification has been dispatched to the student.');
     }
@@ -107,9 +114,14 @@ class ApplyController extends Controller
     }
 
     public function viewApply(Request $request) {
+        // update notification status to read
+        CommonHelper::updateNotificationStatus($request->route('notificationId'));
+
         $applyId = $request->id;
         $apply = Apply::find($applyId);
         $data['apply'] = $apply;
+
+        $data['applyRequirements'] = StudentAdditionalRequirement::where(['apply_id' => $applyId])->get();
 
         $data['studentDetail'] = Apply::join('students', 'students.id', '=', 'applies.student_id')->where(['applies.id' => $applyId])->first();
 

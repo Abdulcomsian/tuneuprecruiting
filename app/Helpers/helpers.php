@@ -15,6 +15,14 @@ if (!function_exists('getGenderTypes')) {
     }
 }
 
+if (!function_exists('checkForApplyRequirements')) {
+    function checkForApplyRequirements($applyId)
+    {
+        $count = \Illuminate\Support\Facades\DB::table('request_requirements')->where(['apply_id' => $applyId])->count();
+        return $count;
+    }
+}
+
 if (!function_exists('getEmailTemplateTypes')) {
     function getEmailTemplateTypes($typeNumber = null)
     {

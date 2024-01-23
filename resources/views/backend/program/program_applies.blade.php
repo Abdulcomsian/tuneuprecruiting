@@ -4,11 +4,11 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3></h3>
+                        <h3>{{ $program->program_name }} Applications</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            {!! generateBreadcrumbs(["Applies"]) !!}
+                            {!! generateBreadcrumbs(["Program", "Applications"]) !!}
                         </ol>
                     </div>
                 </div>
@@ -123,6 +123,11 @@
                                                         @endif
                                                     </li>
                                                     <li class="edit"><a href="{{ url('/apply/view/'. encrypt($apply->apply_id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
+                                                    <li class="edit">
+                                                        <a href="{{ route('program.apply.accept', encrypt($apply->apply_id)) }}" title="Accept">
+                                                            <i class="icofont icofont-file-document"></i>
+                                                        </a>
+                                                    </li>
                                                     <li class="delete">
                                                         <form method="POST" action="{{ route('apply.destroy', ['id' => encrypt($apply->apply_id)]) }}" onsubmit='return confirm("Are you sure?")'>
                                                             @csrf

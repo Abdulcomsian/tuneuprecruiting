@@ -17,7 +17,7 @@
             @endif
             @php $required = ($field->required) ? true : ''; @endphp
             @php $requiredLabel = ($field->required) ? "<span class='text-danger'>*</span>" : ''; @endphp
-            <div class="col-md-4">
+            <div class="col-md-4 mt-3">
                 @if($field->type == 'select')
                     @php $variableName = 'answer[]'; @endphp
                     @if($field->multiple)

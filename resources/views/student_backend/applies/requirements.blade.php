@@ -4,11 +4,11 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3></h3>
+                        <h3>Apply Requirements</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            {!! generateBreadcrumbs(["Program", "Apply"]) !!}
+                            {!! generateBreadcrumbs(["Apply", "Apply Requirements"]) !!}
                         </ol>
                     </div>
                 </div>
@@ -20,14 +20,35 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" action="{{ route('requirements.submit') }}">
-                                @csrf
-                                <input type="hidden" name="requirement_id" value="{{ $requirements->id }}">
-                                <x-custom-fields :customFields=$customFields />
-                                <div class="col-md-12">
-                                    <button class="btn btn-primary float-end mt-3" id="btn-from-add" type="submit">Submit</button>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
                                 </div>
-                            </form>
+                            @endif
+                            @if($additionalRequirements > 0)
+                                <div class="alert alert-info">
+                                    Submission of requirements is complete.
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <a href="{{ route('program.apply.view', encrypt($apply_id)) }}" class="btn btn-primary float-end">View</a>
+                                    </div>
+                                </div>
+                            @else
+                                <form method="post" action="{{ route('requirements.submit') }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="requirement_id" value="{{ $requirements->id }}">
+                                    <input type="hidden" name="apply_id" value="{{ $apply_id }}">
+                                    <x-custom-fields :customFields=$customFields />
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary float-end mt-3" id="btn-from-add" type="submit">Submit</button>
+                                    </div>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>

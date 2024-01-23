@@ -4,7 +4,7 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3>Application Details</h3>
+                        <h3>Request Additional Information</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">

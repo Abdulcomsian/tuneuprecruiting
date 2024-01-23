@@ -201,6 +201,11 @@
                                                                 <a href="#" onclick="$(this).closest('form').submit();"><i class="fa fa-trash"></i></a>
                                                             </form>
                                                         </li>
+                                                        <li class="edit">
+                                                            <a href="{{ route('program.apply.accept', encrypt($apply->apply_id)) }}" title="Accept">
+                                                                <i class="icofont icofont-file-document"></i>
+                                                            </a>
+                                                        </li>
                                                         <li class="edit"><a href="{{ url('/apply/view/'. encrypt($apply->id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
                                                     @endif
                                                 </ul>

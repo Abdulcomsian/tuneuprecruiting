@@ -77,7 +77,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::post('/apply/rating', [ApplyController::class, 'saveApplyRating'])->name('apply.rating');
     Route::get('/apply/status/{id}', [ApplyController::class, 'changeStatusToStar']);
     Route::delete('/apply/destroy/{id}', [ApplyController::class, 'destroy'])->name('apply.destroy');
-    Route::get('/apply/view/{id}', [ApplyController::class, 'viewApply']);
+    Route::get('/apply/view/{id}/{notificationId?}', [ApplyController::class, 'viewApply']);
     Route::get('/program/apply/accept/{id}', [ApplyController::class, 'acceptApplication'])->name('program.apply.accept');
     Route::post('/program/apply/requirement', [ApplyController::class, 'requestApplyRequirement'])->name('apply.request.requirement');
     Route::get('/profile', [ProfileController::class, 'profile']);
@@ -94,7 +94,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::post('/update/student/profile', [StudentProfileController::class, 'updateProfile'])->name('student.profile.update');
     Route::get('/program/view/{id}', [StudentApplyController::class, 'viewProgram'])->name('program.view');
     Route::get('/program/apply/view/{id}', [StudentApplyController::class, 'applyView'])->name('program.apply.view');
-    Route::get('/student/apply/requirements/form/{id}', [StudentApplyController::class, 'requirementForm']);
+    Route::get('/student/apply/requirements/form/{id}/{notificationId?}', [StudentApplyController::class, 'requirementForm']);
     Route::post('/apply/requirements/submit/', [StudentApplyController::class, 'submitRequirements'])->name('requirements.submit');
 
     Route::get('/notifications', [NotificationController::class, 'getNotifications']);

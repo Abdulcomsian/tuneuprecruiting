@@ -4,11 +4,11 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3>Add new program</h3>
+                        <h3>Edit Program</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            {!! generateBreadcrumbs(["Program", "Add"]) !!}
+                            {!! generateBreadcrumbs(["Program", "Edit"]) !!}
                         </ol>
                     </div>
                 </div>
@@ -42,64 +42,72 @@
                                 <input type="hidden" name="_method" value="PUT" id="route-method">
                                 <input type="hidden" name="custom_fields" id="custom-fields">
                                 <input type="hidden" value="{{ route('program.store') }}" id="route-post-method">
-                                <div class="col-md-3">
-                                    <label class="form-label" for="program-name">Program Name <span class="text-danger">*</span></label>
-                                    <input
-                                        class="form-control program-name"
-                                        id="program-name"
+                                <div class="col-md-4">
+                                    <x-dynamic-input
                                         type="text"
+                                        placeholder="Program Name"
                                         name="program_name"
-                                        value="{{ $program->program_name }}"
-                                        placeholder="Enter program name"
-                                        required>
+                                        required="true"
+                                        value="{{ old('program_name', $program->program_name) }}"
+                                        id="program-name" />
                                 </div>
-                                <div class="col-md-3">
-                                    <label class="form-label" for="session">Session <span class="text-danger">*</span></label>
-                                    <input
-                                        class="form-control session"
-                                        id="session"
+                                <div class="col-md-4">
+                                    <x-dynamic-input
                                         type="text"
-                                        name="session"
-                                        value="{{ $program->session }}"
-                                        placeholder="Enter session"
-                                        required>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="form-label" for="number-of-students">Number of Students <span class="text-danger">*</span></label>
-                                    <input
-                                        class="form-control number-of-students"
-                                        id="number-of-students"
-                                        type="text"
+                                        placeholder="Number of Students"
                                         name="number_of_students"
-                                        value="{{ $program->number_of_students }}"
-                                        placeholder="Enter number"
-                                        required="">
+                                        required="true"
+                                        value="{{ old('number_of_students', $program->number_of_students) }}"
+                                        id="number-of-students" />
                                 </div>
-                                <div class="col-md-3">
-                                    <label class="form-label" for="program-status">Status <span class="text-danger">*</span></label>
-                                    <select name="status" id="program-status" class="form-control">
-                                        <option value="{{ $program->status }}">{{ ucfirst($program->status) }}</option>
-                                        <option value=""></option>
-                                        <option value="Public">Public</option>
-                                        <option value="Dropped">Dropped</option>
-                                    </select>
+                                <div class="col-md-4">
+                                    @component('components.select-list', [
+                                        'options' => ['Public', 'Dropped'],
+                                        'selected' => old('status', $program->status),
+                                        'name' => 'status',
+                                        'id' => 'program-status',
+                                        'arrayKey' => false,
+                                        'required' => true,
+                                        'label' => 'Status'
+                                        ])
+                                    @endcomponent
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="form-label" for="video">Video</label>
-                                    <input
-                                        class="form-control video"
-                                        id="video"
+                                <div class="col-md-4">
+                                    @component('components.select-type-of-object-array', [
+                                        'options' => $programTypes,
+                                        'selected' => old('program_for', $program->program_type),
+                                        'name' => 'program_type',
+                                        'id' => 'program-type',
+                                        'required' => true,
+                                        'label' => 'Program Type'
+                                        ])
+                                    @endcomponent
+                                </div>
+                                <div class="col-md-4">
+                                    <x-dynamic-input
                                         type="file"
                                         name="video_file"
-                                        accept="video/*">
+                                        accept="video/*"
+                                        placeholder="Video"
+                                        id="video" />
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    @component('components.radio-buttons', [
+                                        'name' => 'program_for',
+                                        'options' => ['Male', 'Female', 'Other'],
+                                        'selected' => ucfirst(old('program_for', $program->program_for)),
+                                        'label' => 'Program For'
+                                        ])
+                                    @endcomponent
+                                </div>
+                                <div class="col-md-12">
                                     <div class="mb-3">
                                         <label class="form-label" for="details">Details <span class="text-danger">*</span></label>
-                                        <textarea class="form-control detail" id="details" required name="details">{{ $program->details }}</textarea>
+                                        <textarea class="form-control detail" id="details" required name="details">{{ old('details', $program->details) }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
+                                    <div id="program-id"></div>
                                     <div id="build-wrap"></div>
                                 </div>
                             </form>

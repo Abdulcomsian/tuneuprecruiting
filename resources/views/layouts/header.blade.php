@@ -31,7 +31,7 @@
                     <div class="notification-box">
                         <svg>
                             <use href="{{asset('assets/svg/icon-sprite.svg#Bell')}}"></use>
-                        </svg>
+                        </svg> <span class="rounded-pill badge-secondary" id="notification-badge" style="display: none;"> </span>
                     </div>
                     <div class="onhover-show-div notification-dropdown">
                         <h6 class="f-18 mb-0 dropdown-title">Notitications</h6>

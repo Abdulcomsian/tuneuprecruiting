@@ -78,6 +78,46 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive theme-scrollbar">
+                                <table class="display" id="basic-2">
+                                    <thead>
+                                    <tr>
+                                        <th>Requirement</th>
+                                        <th>Details</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($applyRequirements ?? [] as $requirement)
+                                        @if($requirement->type == 'checkbox-group')
+                                            @php
+                                                $values = json_decode($requirement->answer);
+                                                $requirement->answer = '';
+                                                foreach ($values as $value) {
+                                                    $requirement->answer .= ucfirst($value) . ", ";
+                                                }
+                                            @endphp
+                                        @endif
+                                        <tr class="border-bottom-secondary">
+                                            <td>{{ $requirement->label }}</td>
+                                            <td>
+                                                @if($requirement->type == 'file')
+                                                    <a href="{{ asset('uploads/apply_data/'.$requirement->answer) }}">{{ $requirement->answer }}</a>
+                                                @else
+                                                    {{ $requirement->answer }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Container-fluid Ends-->

@@ -195,34 +195,44 @@
 
                 checkForNotification();
 
+                // Set an interval to call the function every minute (60,000 milliseconds)
+                setInterval(checkForNotification, 60000);
+
                 function updateNotificationList(notifications) {
                     var notificationList = document.getElementById('notification');
+                    var ul = $('#notification');
+                    ul.empty();
 
-                    // Iterate over each notification in the response
-                    notifications.forEach(function(notification) {
-                        // Create a new list item element
-                        var listItem = document.createElement('li');
-                        listItem.className = 'b-l-primary border-1 mb-3';
+                    if (notifications && notifications.length > 0) {
+                        $('#notification-badge').show();
+                        // Iterate over each notification in the response
+                        notifications.forEach(function(notification) {
+                            // Create a new list item element
+                            var listItem = document.createElement('li');
+                            listItem.className = 'b-l-primary border-1 mb-3';
 
-                        // Create a link element
-                        var link = document.createElement('a');
-                        link.href = notification.route;
+                            // Create a link element
+                            var link = document.createElement('a');
+                            link.href = notification.route + '/' + notification.id;
 
-                        // Create a paragraph element
-                        var paragraph = document.createElement('p');
+                            // Create a paragraph element
+                            var paragraph = document.createElement('p');
 
-                        // Update the paragraph content with the message and date
-                        paragraph.innerHTML = notification.message;
+                            // Update the paragraph content with the message and date
+                            paragraph.innerHTML = notification.message;
 
-                        // Append the paragraph to the link
-                        link.appendChild(paragraph);
+                            // Append the paragraph to the link
+                            link.appendChild(paragraph);
 
-                        // Append the link to the list item
-                        listItem.appendChild(link);
+                            // Append the link to the list item
+                            listItem.appendChild(link);
 
-                        // Append the list item to the notification list
-                        notificationList.appendChild(listItem);
-                    });
+                            // Append the list item to the notification list
+                            notificationList.appendChild(listItem);
+                        });
+                    } else {
+                        $('#notification-badge').hide();
+                    }
                 }
 
                 function makeAjaxCall() {

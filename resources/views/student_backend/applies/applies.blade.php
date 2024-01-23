@@ -48,6 +48,13 @@
                                                         <li class="edit"> <a href="{{ route('program.apply.view', encrypt($apply->apply_id)) }}">
                                                                 <i class="icofont icofont-eye-alt"></i></a>
                                                         </li>
+                                                        @if(checkForApplyRequirements($apply->apply_id)  > 0)
+                                                            <li class="edit">
+                                                                <a href="{{ url('/student/apply/requirements/form/'.encrypt($apply->apply_id)) }}" title="Submit Requirements">
+                                                                    <i class="icofont icofont-file-document"></i>
+                                                                </a>
+                                                            </li>
+                                                        @endif
                                                     </ul>
                                                 </td>
                                             </tr>
