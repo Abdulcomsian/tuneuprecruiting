@@ -29,7 +29,8 @@ class RedirectAuthenticatedUsersController extends Controller
             return redirect('/guestDashboard');
         }
         else {
-            return auth()->logout();
+            auth()->logout();
+            return redirect()->back();
         }
     }
 }
