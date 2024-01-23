@@ -208,13 +208,15 @@
                                         id="gpa" />
                                 </div>
                                 <div class="col-md-4 mt-3">
-                                    <label for="gender" class="form-label">Gender</label> <br />
-                                    <input type="radio" name="gender" {{ ($user->gender == 'male') ? 'checked' : '' }} class="form-check-input" value="male" id="male">
-                                    <label class="form-check-label" for="male">Male</label>
-                                    <input type="radio" name="gender" {{ ($user->gender == 'female') ? 'checked' : '' }} class="form-check-input" value="female" id="female">
-                                    <label class="form-check-label" for="female">Female</label>
-                                    <input type="radio" name="gender" {{ ($user->gender == 'other') ? 'checked' : '' }} class="form-check-input" value="other" id="other">
-                                    <label class="form-check-label" for="other">Other</label>
+                                    @component('components.radio-buttons', [
+                                        'name' => 'gender',
+                                        'options' => getGenderTypes(),
+                                        'selected' => ucfirst(old('gender', $user->gender)),
+                                        'label' => 'Gender',
+                                        'id' => 'gender',
+                                        'required' => true
+                                    ])
+                                    @endcomponent
                                 </div>
                                 <div class="col-md-4 mt-3">
                                     <x-dynamic-input
