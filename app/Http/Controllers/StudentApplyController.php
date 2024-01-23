@@ -89,7 +89,7 @@ class StudentApplyController extends Controller
             'notification_for' => 'student',
             'user_id' => $user->id,
             'message' => $message,
-            'route' => '/apply/view/' . encrypt($request->apply_id),
+            'route' => url('/apply/view/'.encrypt($request->apply_id)),
         ]);
 
         return redirect()->route('program.apply.view', encrypt($request->apply_id));
