@@ -83,6 +83,9 @@ class StudentApplyController extends Controller
             $this->handleSingleInputs($request, $data, StudentAdditionalRequirement::class);
         }
 
+        $apply->status = 'Additional Requirements Submitted';
+        $apply->save();
+
         // Notification
         $message = ucfirst(Session::get('firstName')) . ' has submitted extra requirements; please click here to review them.';
         Notification::create([

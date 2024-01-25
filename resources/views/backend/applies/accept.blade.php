@@ -62,7 +62,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            @if($apply->status == 'accepted')
+                            @if($apply->status == 'Additional Requirements Requested')
                                 <div class="alert alert-success">
                                     Approved. The notification has been dispatched to the student.
                                 </div>
@@ -75,6 +75,7 @@
                                     <div class="col-md-12">
                                         <div id="requirements-id"></div>
                                         <div id="build-wrap"></div>
+                                        <input type="button" class="btn btn-primary float-end mt-4" value="Submit" id="btnSubmit">
                                     </div>
                                 </form>
                             @endif

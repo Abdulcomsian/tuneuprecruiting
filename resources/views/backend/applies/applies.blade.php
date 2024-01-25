@@ -29,6 +29,7 @@
                                             <th>Country</th>
                                             <th>State</th>
                                             <th>Program</th>
+                                            <th>Status</th>
                                             <th><x-list-view-action-heading /></th>
                                         </tr>
                                     </thead>
@@ -40,6 +41,7 @@
                                                 <td>{{ $apply->country }}</td>
                                                 <td>{{ $apply->state }}</td>
                                                 <td>{{ $apply->program_name }}</td>
+                                                <td>{{ $apply->status }}</td>
                                                 <td>
                                                     @php $ratingName = 'apply_rating_'.date('his').rand(0,99999) @endphp
                                                     <x-bladewind.rating

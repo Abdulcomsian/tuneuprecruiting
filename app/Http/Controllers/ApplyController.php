@@ -46,7 +46,7 @@ class ApplyController extends Controller
     public function requestApplyRequirement(Request $request) {
         RequestRequirement::create($request->all());
         $apply = Apply::find($request->apply_id);
-        $apply->status = 'accepted';
+        $apply->status = 'Additional Requirements Requested';
         $apply->save();
 
         $user = CommonHelper::getUserData($apply->student_id, Student::class);
