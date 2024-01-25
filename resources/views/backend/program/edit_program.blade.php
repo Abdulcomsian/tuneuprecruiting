@@ -109,6 +109,7 @@
                                 <div class="col-md-12">
                                     <div id="program-id"></div>
                                     <div id="build-wrap"></div>
+                                    <input type="button" class="btn btn-primary float-end mt-4" value="Submit" id="btnSubmit">
                                 </div>
                             </form>
                         </div>

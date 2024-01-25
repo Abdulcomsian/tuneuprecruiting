@@ -158,12 +158,41 @@
 
 {{--            <script src="{{ asset('assets/formBuilder/jquery.min.js') }}"></script>--}}
             <script src="{{ asset('assets/formBuilder/jquery-ui.min.js') }}"></script>
-            <script src="{{ asset('assets/formBuilder/form-builder.min.js') }}"></script>
+{{--            <script src="{{ asset('assets/formBuilder/form-builderBAKNew.min.js') }}"></script>--}}
 {{--            <script src="https://formbuilder.online/assets/js/form-render.min.js"></script>--}}
+{{--            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>--}}
+{{--            <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>--}}
+            <script src="{{ asset('assets/formBuilder/form-builder.min.js') }}"></script>
             <script>
                 jQuery(function($) {
                     const fbTemplate = document.getElementById('build-wrap');
                     const formBuilder = $(fbTemplate).formBuilder();
+
+                    document.getElementById('btnSubmit').addEventListener('click', function() {
+                        customFields = formBuilder.actions.getData('json');
+
+                        $('#custom-fields').val(customFields);
+
+                        if($('#program-id').length) {
+                            const programName = $('#program-name').val();
+                            const numberOfStudents = $('#number-of-students').val();
+                            const programStatus = $('#program-status').val();
+                            const details = $('#details').val();
+                            const programType = $('#program-type').val();
+                            const programFor = $('#program-for').val();
+
+                            if (programName.trim() == '' || numberOfStudents.trim() == '' || programStatus.trim() == '' || details.trim() == '') {
+                                alert('Kindly complete all the necessary fields.');
+                            } else {
+                                $('form#frm-program').submit();
+                                t.save(), m.a.opts.onSave(e, t.data.formData);
+                            }
+                        }
+                        if($('#requirements-id').length) {
+                            $('form#frm-requirement').submit();
+                            t.save(), m.a.opts.onSave(e, t.data.formData);
+                        }
+                    });
 
                     function renderFormFromJsonArray() {
                         // Code to be executed after 15 seconds

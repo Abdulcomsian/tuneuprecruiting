@@ -106,6 +106,7 @@
                                 <div class="col-md-12">
                                     <div id="program-id"></div>
                                     <div id="build-wrap"></div>
+                                    <input type="button" class="btn btn-primary float-end mt-4" value="Submit" id="btnSubmit">
                                 </div>
                             </form>
                         </div>
@@ -115,17 +116,4 @@
         </div>
         <!-- Container-fluid Ends-->
     </div>
-    <script>
-        jQuery($ => {
-            const fbTemplate = document.getElementById('build-wrap');
-            $(fbTemplate).formBuilder();
-        });
-
-       $('#btn-from-add').click(function () {
-           var codeElement = $('.formData-json');
-
-           // Get the text content of the code element and trim whitespace
-           var jsonString = $.trim(codeElement.html());
-       })
-    </script>
 </x-app-layout>
