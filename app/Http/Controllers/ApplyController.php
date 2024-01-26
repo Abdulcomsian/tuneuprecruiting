@@ -62,7 +62,14 @@ class ApplyController extends Controller
         $student = User::join('students', 'students.user_id', '=', 'users.id')->where(['students.id' => $apply->student_id])->first();
         $formattedData = (object)[];
         $formattedData->subject = "Notification";
-        $formattedData->body = "<p>Your application has been approved by the coach, kindly submit the required documents.</p>";
+
+        $requirementUrl = url('http://localhost/student/apply/requirements/form/' . encrypt($apply->id));
+        $formattedData->body = "
+            <p>Your application has been approved by the coach, kindly submit the required documents.</p>
+            <br>
+            <a href='{$requirementUrl}'>Please proceed to submit the necessary documents by clicking here.</a>
+        ";
+
         Mail::to($student->email)->send(new DefaultMail($formattedData));
 
         return redirect()->back()->with('success', 'Approved. The notification has been dispatched to the student.');
