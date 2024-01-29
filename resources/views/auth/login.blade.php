@@ -43,6 +43,7 @@
                                     <button class="btn btn-primary btn-block w-100" type="submit">Sign in</button>
                                 </div>
                                 <p class="mt-4 mb-0 text-center">Don't have account?<a class="ms-2" href="{{ route('register') }}">Create Account</a></p>
+                                <p class="mt-4 mb-0 text-center"><a class="ms-2" href="{{ url('request/info') }}">Request Info or Demo</a></p>
                             </form>
                         </div>
                     </div>

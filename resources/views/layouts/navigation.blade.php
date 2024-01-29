@@ -161,8 +161,19 @@
                                     </svg>
                                     <svg class="fill-icon">
                                         <use href="{{ asset('assets/svg/icon-sprite.svg#fill-board') }}"></use>
-                                    </svg>Recruiter list</a></li>
+                                    </svg>Recruiter list</a>
+                            </li>
                         </ul>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="{{ url('request/info/all') }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-layout') }}"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-layout') }}"></use>
+                            </svg><span>Demo Requests</span>
+                        </a>
                     </li>
                     <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
                             <svg class="stroke-icon">

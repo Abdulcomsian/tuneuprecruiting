@@ -16,6 +16,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\Recruiter\Settings\Emails\EmailTemplateController;
 use App\Http\Controllers\Admin\Settings\Emails\AdminSettingController;
+use App\Http\Controllers\RequestInfoOrDemoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,9 @@ Route::get('/dashboard', function () {
 
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/request/info', [RequestInfoOrDemoController::class, 'requestForm']);
+Route::post('/request/info/submit', [RequestInfoOrDemoController::class, 'sendInfoRequest']);
+
 Route::middleware(['auth', 'decrypt.id'])->group(function () {
     // admin
     Route::get('/admin/dashboard', [AdminDashboard::class, 'dashboard']);
@@ -55,6 +59,10 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::get('/admin/setting/emails/{id}', [AdminSettingController::class, 'editEmailTemplate'])->name('admin.email.edit');
     Route::get('/admin/setting/emails/template/show/{id}', [AdminSettingController::class, 'showEmailTemplate'])->name('admin.email.template.show');
     Route::put('/admin/setting/emails/template/update/{id}', [AdminSettingController::class, 'updateEmailTemplate'])->name('admin.email.template.update');
+    // request demo
+    Route::get('/request/info/view/{id}/{notificationId?}', [RequestInfoOrDemoController::class, 'viewInfoRequest']);
+    Route::get('/request/info/all', [RequestInfoOrDemoController::class, 'allRequests']);
+    Route::delete('/request/info/destroy/{id}', [RequestInfoOrDemoController::class, 'destroy']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

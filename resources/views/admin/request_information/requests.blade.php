@@ -4,11 +4,11 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3>Total Recruiter</h3>
+                        <h3>Demo Requests</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            {!! generateBreadcrumbs(["Recruiters"]) !!}
+                            {!! generateBreadcrumbs(["Requests"]) !!}
                         </ol>
                     </div>
                 </div>
@@ -16,11 +16,6 @@
         </div>
         <!-- Container-fluid starts-->
         <div class="container-fluid basic_table">
-            <div class="row">
-                <div class="col-sm-12">
-                    <a class="btn btn-success mb-2 float-end" type="button" href="{{ route('recuriter.create') }}">Add a Recruiter</a>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -46,31 +41,23 @@
                                 <table class="display" id="data-table">
                                     <thead>
                                     <tr>
-                                        <th scope="col">University/College Name</th>
-                                        <th scope="col">Program Type</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Website</th>
-                                        <th scope="col">About</th>
+                                        <th scope="col">College/University</th>
+                                        <th scope="col">College/University Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col"><x-list-view-action-heading /></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($recruiters as $recruiter)
+                                    @foreach($requests as $request)
                                         <tr class="border-bottom-secondary">
-                                            <td>{{ $recruiter->college_or_university }}</td>
-                                            <td>{{ $recruiter->program_type }}</td>
-                                            <td>{{ $recruiter->first_name }}</td>
-                                            <td>{{ $recruiter->last_name }}</td>
-                                            <td>{{ $recruiter->website }}</td>
-                                            <td>{{ $recruiter->about_me }}</td>
-                                            <td>{{ $recruiter->email }}</td>
+                                            <td>{{ $request->college_or_university }}</td>
+                                            <td>{{ $request->university_name }}</td>
+                                            <td>{{ $request->email }}</td>
                                             <td>
                                                 <ul class="action">
-                                                    <li class="edit"><a href="{{ route('recuriter.show', encrypt($recruiter->coach_id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
+                                                    <li class="edit"><a href="{{ url('request/info/view/'. encrypt($request->id)) }}"><i class="icofont icofont-eye-alt"></i></a></li>
                                                     <li class="delete">
-                                                        <form method="POST" action="{{ route('recuriter.destroy', $recruiter->id) }}" onsubmit='return confirm("Are you sure?")'>
+                                                        <form method="POST" action="{{ url('request/info/destroy/'. encrypt($request->id)) }}" onsubmit='return confirm("Are you sure?")'>
                                                             @csrf
                                                             @method('DELETE')
                                                             <a href="#" onclick="$(this).closest('form').submit();"><i class="fa fa-trash"></i></a>
