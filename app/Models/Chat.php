@@ -13,18 +13,9 @@ class Chat extends Model
         'message',
         'coach_id',
         'student_id',
-        'sender'
+        'sender',
+        'admin_id'
     ];
-
-    public function student()
-    {
-        return $this->belongsTo(Student::class);
-    }
-
-    public function coach()
-    {
-        return $this->belongsTo(Coach::class);
-    }
 
     public function apply()
     {

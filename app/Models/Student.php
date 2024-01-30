@@ -62,9 +62,4 @@ class Student extends Model
     {
         return $this->hasMany(Apply::class);
     }
-
-    public function chats()
-    {
-        return $this->hasMany(Chat::class);
-    }
 }

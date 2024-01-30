@@ -282,6 +282,10 @@
                                        .attr('data-role', message.role)
                                        .attr('class', 'li-notification')
                                        .attr('data-student', message.student_id);
+                                   if (message.student_id === null) {
+                                       // Set data-admin attribute when student_id is null
+                                       li.attr('data-admin', message.admin_id);
+                                   }
                                    var div = $('<div class="d-flex align-items-start">');
 
                                    var imgSrc = baseUrl + '/uploads/users_image/'+message.profile_image; // Use profile image if available, else a default
@@ -323,10 +327,13 @@
                     const coachId = $(this).data('coach');
                     const role = $(this).data('role');
                     const studentId = $(this).data('student');
-                    console.log(role, coachId, studentId);
+                    const adminId = $(this).data('admin');
 
-                    if (role == 'Coach') {
-                        var url = baseUrl + '/chat/' + studentId;
+                    if (role == 'coach') {
+                        var url = (!studentId || studentId === null)
+                            ? baseUrl + '/chat/' + adminId + '?type=Admin'
+                            : baseUrl + '/chat/' + studentId;
+                        console.log(url);
                     } else {
                         var url = baseUrl + '/chat/' + coachId;
                     }

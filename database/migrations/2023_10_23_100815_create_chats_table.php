@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('admin_id');
             $table->unsignedBigInteger('coach_id');
-            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('student_id')->nullable();
             $table->text('message');
             $table->string('status')->default('unread');
             $table->string('sender');
             $table->timestamps();
-
-//            $table->foreign('coach_id')->references('id')->on('coaches')->onDelete('cascade');
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
     }
 
