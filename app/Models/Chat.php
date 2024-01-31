@@ -11,10 +11,10 @@ class Chat extends Model
 
     protected $fillable = [
         'message',
-        'coach_id',
-        'student_id',
-        'sender',
-        'admin_id'
+        'sender_id',
+        'receiver_id',
+        'sender_type',
+        'status'
     ];
 
     public function apply()

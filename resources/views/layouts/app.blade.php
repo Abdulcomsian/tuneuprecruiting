@@ -278,14 +278,11 @@
 
                                response.forEach(function(message) {
                                    var li = $('<li>').attr('data-id', message.id)
-                                       .attr('data-coach', message.coach_id)
+                                       .attr('data-sender', message.receiver_id)
                                        .attr('data-role', message.role)
                                        .attr('class', 'li-notification')
-                                       .attr('data-student', message.student_id);
-                                   if (message.student_id === null) {
-                                       // Set data-admin attribute when student_id is null
-                                       li.attr('data-admin', message.admin_id);
-                                   }
+                                       .attr('data-receiver', message.sender_id);
+
                                    var div = $('<div class="d-flex align-items-start">');
 
                                    var imgSrc = baseUrl + '/uploads/users_image/'+message.profile_image; // Use profile image if available, else a default
@@ -294,7 +291,7 @@
                                    var imgDiv = $('<div class="message-img bg-light-primary">').append(img);
 
                                    var flexDiv = $('<div class="flex-grow-1">');
-                                   var h5 = $('<h5 class="mb-1">').html('<a>' + message.first_name + '</a>');
+                                   var h5 = $('<h5 class="mb-1">').html('<a>' + message.receiver_name + '</a>');
                                    var p = $('<p>').text(message.message);
                                    var notificationRight = $('<div class="notification-right">').html('<i data-feather="x"></i>');
 
@@ -323,22 +320,9 @@
                 setInterval(makeAjaxCall, 60000);
 
                 $(document).on('click', '.li-notification', function() {
-                    // const id = $(this).data('id');
-                    const coachId = $(this).data('coach');
-                    const role = $(this).data('role');
-                    const studentId = $(this).data('student');
-                    const adminId = $(this).data('admin');
-
-                    if (role == 'coach') {
-                        var url = (!studentId || studentId === null)
-                            ? baseUrl + '/chat/' + adminId + '?type=Admin'
-                            : baseUrl + '/chat/' + studentId;
-                        console.log(url);
-                    } else {
-                        var url = baseUrl + '/chat/' + coachId;
-                    }
-
-                    window.location.href = url;
+                    const sender = $(this).data('sender');
+                    const receiver = $(this).data('receiver');
+                    window.location.href = baseUrl + '/chat/' + receiver;
                 });
 
                 $(document).ready(function () {

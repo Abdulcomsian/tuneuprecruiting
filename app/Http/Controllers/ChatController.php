@@ -11,135 +11,80 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use function PHPUnit\Framework\isEmpty;
 
 class ChatController extends Controller
 {
-//    public function getMessagesOfAUser($where, $type)
-//    {
-//        return Chat::select('chats.*', 'students.profile_image as student_image', 'coaches.profile_image as coach_image')
-//            ->join('students', 'students.id', '=', 'chats.student_id')
-//            ->join('coaches', 'coaches.id', '=', 'chats.coach_id')
-//            ->where($where)->get();
-//    }
-
-    public function getMessagesOfAUser($where, $type)
-    {
-        $baseColumns = ['chats.*', 'coaches.profile_image as coach_image'];
-        $additionalColumns = $type === 'Admin' ? [] : ['students.profile_image as student_image'];
-
-        return Chat::select(array_merge($baseColumns, $additionalColumns))
-            ->join('coaches', 'coaches.id', '=', 'chats.coach_id')
-            ->when($type === 'Admin', function ($query) {
-                $query->join('users', 'users.id', '=', 'chats.admin_id');
-            })
-            ->when($type !== 'Admin', function ($query) {
-                $query->join('students', 'students.id', '=', 'chats.student_id');
-            })
-            ->where($where)->get();
+    public function getMessagesOfAUser($sender, $receiver) {
+        return Chat::where(function ($query) use ($sender, $receiver) {
+            $query->where(function ($query) use ($sender, $receiver) {
+                $query->where('sender_id', $sender->id)
+                    ->where('receiver_id', $receiver->id);
+            })->orWhere(function ($query) use ($sender, $receiver) {
+                $query->where('sender_id', $receiver->id)
+                    ->where('receiver_id', $sender->id);
+            });
+        })->get();
     }
 
-    public function show(Request $request)
-    {
-        $user = Auth::user();
-        $type = ucfirst($user->role);
-        $id = $request->id;
-
-        switch ($type) {
-            case 'Admin':
-                $adminId = Session::get('adminId');
-                $users = Coach::join('chats', 'chats.coach_id', '=', 'coaches.id')
-                    ->where('chats.admin_id', $adminId)
-                    ->select('coaches.*')
-                    ->distinct()
-                    ->get();
-                break;
-            case 'Coach':
-                $coachId = Session::get('coachId');
-                $coach = Coach::find($coachId);
-                $users = Student::join('chats', 'chats.student_id', '=', 'students.id')
-                    ->where('chats.coach_id', $coachId)
-                    ->select('students.*')
-                    ->distinct()
-                    ->get();
-                $admin = User::where(['role' => 'admin'])->first();
-                $users = $users->merge([$admin]);
-                break;
-            case 'Student':
-                $studentId = Session::get('studentId');
-                $student = Student::find($studentId);
-                $users = Coach::join('chats', 'chats.coach_id', '=', 'coaches.id')
-                    ->where('chats.student_id', $studentId)
-                    ->select('coaches.*')
-                    ->distinct()
-                    ->get();
-                break;
+    public function getUserList($user) {
+        $users = User::select('users.*')
+            ->join('chats', function ($join) use ($user) {
+                $join->on('chats.receiver_id', '=', 'users.id')
+                    ->orOn('chats.sender_id', '=', 'users.id');
+            })
+            ->where(function ($query) use ($user) {
+                $query->where('chats.sender_id', '=', $user->id)
+                    ->orWhere('chats.receiver_id', '=', $user->id);
+            })
+            ->where('users.id', '<>', $user->id) // Exclude the current user
+            ->distinct()
+            ->get();
+        if ($user->role === 'coach' && $users->isEmpty()) {
+            $users->push(User::whereRole('admin')->first());
         }
+
+        return $users;
+    }
+
+    public function setProfileImage(&$user, $roleModel) {
+        $user->profile_image = $roleModel::find($user->id)->profile_image ?? 'default.jpg';
+    }
+
+    public function show(Request $request) {
+        $id = $request->id;
+        $sender = Auth::user();
+
+
+        $users = $this->getUserList($sender);
 
         if (!$users->isEmpty() && $id === null) {
             $id = $users[0]->id;
         }
+        $receiver = User::find($id);
 
-        $receiver = $this->findReceiver($request->type, $id);
-        $sender = $this->findSender($request->type, $id);
+        $this->setProfileImage($sender, $sender->role === 'coach' ? Coach::class : Student::class);
+        $this->setProfileImage($receiver, $receiver->role === 'coach' ? Coach::class : Student::class);
+
 
         $data = [
-            'type' => $type,
+            'type' => $sender->role,
             'users' => $users,
             'receiver' => $receiver,
             'sender' => $sender,
-            'studentId' => $id,
-            'userId' => $user->id,
         ];
 
         if ($receiver && $data['users']->isNotEmpty()) {
-            $fieldMap = [
-                'Coach' => 'student_id',
-                'Student' => 'coach_id',
-                'Admin' => 'admin_id',
-            ];
-
-            $field = $fieldMap[$request->type] ?? $fieldMap['Coach']; // Default to 'Coach' if $type is unexpected
-
-            $data['messages'] = $this->getMessagesOfAUser([
-                "chats.{$field}" => $receiver->id
-            ], $request->type);
+            $data['messages'] = $this->getMessagesOfAUser($sender, $receiver);
 
             if ($data['messages']) {
-                $where = match ($type) {
-                    'Coach' => ['coach_id' => $sender->id, 'student_id' => $receiver->id, 'sender' => 'Student'],
-                    'Admin' => ['coach_id' => $sender->id, 'admin_id' => $receiver->id, 'sender' => 'Coach'],
-                    default => ['student_id' => $sender->id, 'coach_id' => $receiver->id, 'sender' => 'Coach'], // Default to 'Student' case for other types
-                };
-
-                Chat::where($where)->update(['status' => 'read']);
+                Chat::where(['sender_id' => $receiver->id, 'receiver_id' => $sender->id])->update(['status' => 'read']);
             }
         } else {
             $data['messages'] = [];
         }
 
         return view('common/chat/chat', $data);
-    }
-
-    public function findSender($type, $id)
-    {
-        $model = match ($type) {
-            'Coach' => Coach::class,
-            'Student' => Student::class,
-            default => User::class,
-        };
-
-        return $model::find($id);
-    }
-    public function findReceiver($type, $id)
-    {
-        $model = match ($type) {
-            'Coach' => Student::class,
-            'Student' => Coach::class,
-            'Admin' => Coach::class,
-            default => User::class,
-        };
-
-        return $model::find($id);
     }
 
     public function getNewMessages(Request $request)
@@ -181,84 +126,54 @@ class ChatController extends Controller
 
         $tableData = [
             'message' => $request->message,
+            'sender_id' => $user->id,
+            'receiver_id' => $request->receiverId,
+            'sender_type' => $user->role
         ];
 
-        // Determine participants based on user roles
-        // $participant1Id = $user->role === 'coach' ? Session::get('coachId') : Session::get('studentId');
-        $participant1Id = match ($user->role) {
-            'coach' => Session::get('coachId'),
-            'student' => Session::get('studentId'),
-            'admin' => Session::get('adminId'),
-        };
-        $participant2Id = $request->userType === 'Admin' ? $request->receiverId : $request->receiverId;  // Same value in both cases, but kept for clarity
-        $tableData['sender'] = ucfirst($user->role);
-
-        // Set common fields
-        $tableData['coach_id'] = $participant1Id === Session::get('coachId') ? $participant1Id : $participant2Id;
-        $tableData[strtolower($request->userType).'_id'] = $participant1Id === Session::get(strtolower($request->userType).'Id') ? $participant1Id : $participant2Id;
-
-        // Handle admin-specific field
-        if ($request->userType === 'Admin') {
-            $tableData['admin_id'] = $participant2Id;
-        }
-
         // Update apply status if student is involved
-        if ($participant2Id === Session::get('studentId')) {
-            Apply::where('student_id', $participant2Id)->update(['talking' => 'talking']);
+        if ($user->role == 'student') {
+            $student = Student::where(['user_id' => $user->id])->first();
+            Apply::where('student_id', $student->id)->update(['talking' => 'talking']);
         }
 
         Chat::create($tableData);
         return response(['status' => 'success']);
     }
 
-    public function notificationMessages()
-    {
-        $user = auth()->user();
-        $role = $user->role;
-        $userId = Session::get(strtolower($user->role) . 'Id');
+    public function notificationMessages() {
+        $sender = auth()->user();
+        $role = $sender->role;
 
-        // $tableName = ($role === 'Student') ? 'students' : 'coaches';
-        $tableName = match ($role) {
-            'student' => 'students',
-            'admin' => 'users',
-            'coach' => 'coaches',
-        };
-
-        $baseColumns = ['chats.*'];
-        $additionalColumns = $user->role === 'admin' ? ['users.name as first_name'] : ["{$tableName}.profile_image", "{$tableName}.first_name"];
-
-        $newMessages = Chat::select(array_merge($baseColumns, $additionalColumns))
-            ->join($tableName, "{$tableName}.id", '=', "chats.{$role}_id")
-            ->whereIn('chats.id', function ($query) use ($userId, $role) {
-                $query->select(DB::raw('MAX(id)'))
-                    ->from('chats')
-                    ->where("{$role}_id", $userId)
-                    ->where('status', 'unread')
-                    ->where(function ($query) use ($role) {
-                        $query->when($role === 'student', function ($query) {
-                            $query->where('sender', 'Coach');
-                        })
-                            ->when($role === 'admin', function ($query) {
-                                $query->where('sender', 'Coach');
-                            })
-                            ->when($role == 'coach', function ($query) {
-                                $query->whereIn('sender', ['Student', 'Admin']);
-                            });
-                    })
-                    ->groupBy("{$role}_id");
-            })
+        $newMessages = Chat::select('chats.*', 'users.name as receiver_name')
+            ->join('users', 'users.id', '=', 'chats.sender_id')
+            ->where('receiver_id', $sender->id)
+            ->where('chats.status', 'unread')
+            ->groupBy('chats.sender_id')
+            ->latest('chats.created_at')
             ->get();
 
-        $newMessages->each(function ($message) use ($role) {
-            $message->coach_id = encrypt($message->coach_id);
-            if ($message->student_id)
-                $message->student_id = encrypt($message->student_id);
-            else
-                $message->admin_id = encrypt($message->admin_id);
+        $groupedMessages = $newMessages->groupBy('sender_id');
+
+        // If you want to get the last message for each sender
+        $latestMessages = $groupedMessages->map(function ($messages) {
+            return $messages->first();
+        });
+
+        $latestMessages->map(function ($message) use ($role) {
+            $message->profile_image = $this->getProfileImage($message->sender_type, $message->sender_id) ?? 'default.jpg';
+            $message->sender_id = encrypt($message->sender_id);
+            $message->receiver_id = encrypt($message->receiver_id);
             $message->role = $role;
         });
 
         return response($newMessages);
 
+    }
+
+    public function getProfileImage($senderType, $senderId) {
+        return $senderType === 'coach'
+            ? Coach::find($senderId, ['profile_image'])
+            : Student::find($senderId, ['profile_image']);
     }
 }

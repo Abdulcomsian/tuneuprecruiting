@@ -175,6 +175,14 @@
                             </svg><span>Demo Requests</span>
                         </a>
                     </li>
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="{{ url('/chat/'.encrypt(null)) }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#Message') }}"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{asset('assets/svg/icon-sprite.svg#Message')}}"></use>
+                            </svg><span>Messages</span></a>
+                    </li>
                     <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#Grid') }}"></use>

@@ -71,13 +71,14 @@
                                             <div class="chat-history chat-msg-box custom-scrollbar"  id="chat-container">
                                                 <ul id="chatUl">
                                                     @forelse($messages as $message)
-                                                        @php $className = ($message->sender == $type) ? 'my-message' : 'other-message pull-right'; @endphp
-                                                        @php $float = ($message->sender == $type) ? 'float-start' : 'float-end'; @endphp
-                                                        @php $textEnd = ($message->sender == $type) ? 'text-end' : ''; @endphp
-                                                        @php $clearFix = ($message->sender == $type) ? '' : 'clearfix'; @endphp
-                                                        @php $profileImage = ($message->sender == 'Coach') ? $message->coach_image : $message->student_image; @endphp
+                                                        @php $className = ($message->sender_type == $sender->role) ? 'my-message' : 'other-message pull-right'; @endphp
+                                                        @php $float = ($message->sender_type == $sender->role) ? 'float-start' : 'float-end'; @endphp
+                                                        @php $textEnd = ($message->sender_type == $sender->role) ? 'text-end' : ''; @endphp
+                                                        @php $clearFix = ($message->sender_type == $sender->role) ? '' : 'clearfix'; @endphp
+                                                        @php $profileImage = ($message->sender_type == $sender->role) ? $sender->profile_image : $receiver->profile_image; @endphp
                                                         <li class="{{ $clearFix }}">
-                                                            <div class="message {{ $className }}"><img class="rounded-circle {{ $float }} chat-user-img img-30" src="{{ asset('uploads/users_image/'.$profileImage) }}" alt="">
+                                                            <div class="message {{ $className }}">
+                                                                <img class="rounded-circle {{ $float }} chat-user-img img-30" src="{{ asset('uploads/users_image/'.$profileImage) }}" alt="">
                                                                 <div class="message-data {{ $textEnd }}"><span class="message-data-time">{{ $message->created_at }}</span></div>
                                                                 {{ $message->message }}
                                                             </div>
@@ -98,7 +99,7 @@
                                                             <input type="hidden" id="url" value="{{ route('chat.store') }}">
                                                             <input type="hidden" id="user-type" value="{{ $type }}">
                                                             <input type="hidden" id="receiver-id" value="{{ encrypt($receiver->id) }}">
-                                                            <input type="hidden" id="user-id" value="{{ $userId }}">
+                                                            <input type="hidden" id="user-id" value="{{ $sender->id }}">
                                                             <input type="hidden" id="user-image-link" value="{{ asset('uploads/users_image/'.$sender->profile_image) }}">
                                                             <input class="form-control input-txt-bx" id="message-to-send" type="text" name="message-to-send" placeholder="Type a message......">
                                                             <button class="input-group-text btn btn-primary" id="btn-send" type="button">SEND</button>
