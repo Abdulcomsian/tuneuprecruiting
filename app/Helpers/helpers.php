@@ -36,6 +36,13 @@ if (!function_exists('getEmailTemplateTypes')) {
     }
 }
 
+if (!function_exists('getCountryList')) {
+    function getCountryList()
+    {
+        return \Illuminate\Support\Facades\DB::table('countries')->get();
+    }
+}
+
 if (!function_exists('generateBreadcrumbs')) {
     function generateBreadcrumbs($items) {
         $breadcrumbs = [];

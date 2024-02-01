@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\Notification;
 use App\Models\Student;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class CommonHelper
 {
@@ -20,5 +21,13 @@ class CommonHelper
             $notification->status = 'read';
             $notification->save();
         }
+    }
+
+    public static function getStudentDetails() {
+        $user = Auth::user();
+        $student = Student::where(['user_id' => $user->id])->first();
+        $student->email = $user->email;
+
+        return $student;
     }
 }

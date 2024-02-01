@@ -36,12 +36,12 @@
                                                 <td>{{ $program->program_name }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Session</td>
-                                                <td>{{ $program->session }}</td>
-                                            </tr>
-                                            <tr>
                                                 <td>Number of Students</td>
                                                 <td>{{ $program->number_of_students }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Details</td>
+                                                <td>{{ $program->details }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -76,7 +76,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title mb-0">Basic Information</h3>
+                            <h3 class="card-title mb-0">Personal Information</h3>
                         </div>
                         <div class="card-body">
                             @if ($errors->any())
@@ -98,159 +98,15 @@
                             <form method="POST" id="frm-program" action="{{ route('program.apply', encrypt($program->id)) }}" enctype="multipart/form-data" class="row g-3">
                                 @csrf
                                 <input type="hidden" name="program_id" value="{{ $program->id }}">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <x-dynamic-input
-                                        id="first-name"
-                                        type="text"
-                                        name="first_name"
-                                        disable="true"
-                                        value="{{ $user->first_name }}"
-                                        placeholder="First Name"
-                                        required="true" />
-                                </div>
-                                <div class="col-md-4">
-                                    <x-dynamic-input
-                                        id="last-name"
-                                        type="text"
-                                        name="last_name"
-                                        disable="true"
-                                        value="{{ $user->last_name }}"
-                                        placeholder="Last Name"
-                                        required="true" />
-                                </div>
-                                <div class="col-md-4">
-                                    <x-dynamic-input
-                                        id="graduation-year"
-                                        type="text"
-                                        name="graduation_year"
-                                        disable="true"
-                                        value="{{ $user->graduation_year }}"
-                                        placeholder="Graduation Year"
-                                        required="true" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        id="home-town"
-                                        type="text"
-                                        name="home_town"
-                                        disable="true"
-                                        value="{{ $user->home_town }}"
-                                        placeholder="Home Town"
-                                        required="true" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        id="state"
-                                        type="text"
-                                        name="state"
-                                        disable="true"
-                                        value="{{ $user->state }}"
-                                        placeholder="State"
-                                        required="true" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        id="country"
-                                        type="text"
-                                        name="country"
-                                        disabled
-                                        value="{{ $user->country }}"
-                                        placeholder="Country"
-                                        required="" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        type="text"
-                                        name="academic_honors"
-                                        value="{{ $user->academic_honors }}"
-                                        placeholder="Academic Honors"
-                                        id="academic-honors" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        type="date"
-                                        name="birth_date"
-                                        value="{{ $user->birth_date }}"
-                                        placeholder="Birth Date"
-                                        id="birth-date" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        type="text"
-                                        name="class_rank"
-                                        value="{{ $user->class_rank }}"
-                                        placeholder="Class Rank"
-                                        id="class-rank" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        type="text"
-                                        name="college"
-                                        value="{{ $user->college }}"
-                                        placeholder="College"
-                                        id="college" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        type="text"
-                                        name="core_gpa"
-                                        value="{{ $user->core_gpa }}"
-                                        placeholder="Core GPA"
-                                        id="core-gpa" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        type="text"
-                                        name="gpa"
-                                        value="{{ $user->gpa }}"
-                                        placeholder="GPA"
-                                        id="gpa" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    @component('components.radio-buttons', [
-                                        'name' => 'gender',
-                                        'options' => getGenderTypes(),
-                                        'selected' => ucfirst(old('gender', $user->gender)),
-                                        'label' => 'Gender',
-                                        'id' => 'gender',
-                                        'required' => true
-                                    ])
-                                    @endcomponent
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        type="text"
-                                        name="grad_year"
-                                        value="{{ $user->grad_year }}"
-                                        placeholder="Grad. Year"
-                                        id="grad" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        type="text"
-                                        name="height"
-                                        value="{{ $user->height }}"
-                                        placeholder="Grad. Year"
-                                        id="height" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        type="text"
-                                        name="home_phone"
-                                        value="{{ $user->home_phone }}"
-                                        placeholder="Home Phone"
-                                        id="home-phone" />
-                                </div>
-                                <div class="col-md-4 mt-3">
-                                    <x-dynamic-input
-                                        type="text"
-                                        name="interest_level"
-                                        value="{{ $user->interest_level }}"
-                                        placeholder="Interests Level"
-                                        id="interest-level" />
-                                </div>
-                            </div>
+                                <x-student-profile-basic-information />
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title mb-0">Academic Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <x-student-profile-academic-information />
                         </div>
                     </div>
                     <div class="card">

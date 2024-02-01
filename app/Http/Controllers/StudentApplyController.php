@@ -6,8 +6,10 @@ use App\Helpers\CommonHelper;
 use App\Models\Apply;
 use App\Models\ApplyDetail;
 use App\Models\Coach;
+use App\Models\Country;
 use App\Models\Notification;
 use App\Models\Program;
+use App\Models\ProgramType;
 use App\Models\RequestRequirement;
 use App\Models\Student;
 use App\Models\StudentAdditionalRequirement;
@@ -22,7 +24,7 @@ class StudentApplyController extends Controller
         $gender = Session::get('gender');
         $programType = Session::get('programType');
 
-        $data['programs'] = Program::select('programs.*', 'coaches.first_name', 'coaches.last_name', 'coaches.college_or_university')
+        $data['programs'] = Program::select('programs.*', 'coaches.first_name', 'coaches.last_name', 'coaches.college_or_university', 'coaches.user_id')
             ->join('coaches', 'coaches.id', '=', 'programs.coach_id')
             ->where(['programs.status' => 'public', 'programs.program_for' => $gender, 'programs.program_type' => $programType])
             ->get();
@@ -54,9 +56,6 @@ class StudentApplyController extends Controller
             ->first();
 
         $data['customFields'] = json_decode($data['program']->custom_fields);
-
-        $user = auth()->user();
-        $data['user'] = Student::where(['user_id' => $user->id])->first();
 
         return view('student_backend/applies/apply', $data);
     }

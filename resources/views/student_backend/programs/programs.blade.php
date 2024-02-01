@@ -52,7 +52,7 @@
                                                                 </a>
                                                             </li>
                                                         @endif
-                                                        <li> <a class="{{ $textColor }}" href="{{ route('chat', encrypt($program->coach_id)) }}">
+                                                        <li> <a class="{{ $textColor }}" href="{{ route('chat', encrypt($program->user_id)) }}">
                                                                 <i class="icofont icofont-chat"></i></a>
                                                         </li>
                                                         <li> <a class="{{ $textColor }}" href="{{ route('program.view', encrypt($program->id)) }}">

@@ -17,10 +17,7 @@ class StudentProfileController extends Controller
     public function profile() {
         $user = Auth::user();
         $data['user'] = Student::where(['user_id' => $user->id])->first();
-        $data['email'] = $user->email;
-
-        $data['countries'] = Country::all();
-        $data['programTypes'] = ProgramType::all();
+        $data['user']->email = $user->email;
 
         return view('student_backend/profile/profile', $data);
     }

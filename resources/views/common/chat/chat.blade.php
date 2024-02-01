@@ -31,7 +31,7 @@
                                                         @php $image = ($user->role == 'admin') ? 'default.jpg' : $user->profile_image; @endphp
                                                         <img class="rounded-circle user-image" src="{{ asset('uploads/users_image/'.$image ?? '') }}" alt="">
                                                         <div class="about">
-                                                            <div class="name">{{ $user->role == 'admin' ? $user->name : $user->first_name }}</div>
+                                                            <div class="name">{{ $user->name }}</div>
                                                             <div class="status">{{ $user->role == 'admin' ? 'Admin' : $user->last_name }}</div>
                                                         </div>
                                                     </a>
@@ -60,7 +60,7 @@
                                             @php $receiverImage = ($receiver->profile_image) ? $receiver->profile_image : 'default.jpg' @endphp
                                             <div class="chat-header clearfix"><img class="rounded-circle" src="{{ asset('uploads/users_image/'.$receiverImage ?? '') }}" alt="">
                                                 <div class="about">
-                                                    <div class="name">{{ ($receiver->first_name) ? $receiver->first_name : $receiver->name }}</div>
+                                                    <div class="name">{{ $receiver->name }}</div>
                                                     <div class="status">{{ $receiver->last_name }}</div>
                                                 </div>
                                                 <ul class="list-inline float-start float-sm-end chat-menu-icons">

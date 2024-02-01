@@ -55,7 +55,6 @@ class ChatController extends Controller
         $id = $request->id;
         $sender = Auth::user();
 
-
         $users = $this->getUserList($sender);
 
         if (!$users->isEmpty() && $id === null) {
@@ -64,13 +63,14 @@ class ChatController extends Controller
         $receiver = User::find($id);
 
         $this->setProfileImage($sender, $sender->role === 'coach' ? Coach::class : Student::class);
-        $this->setProfileImage($receiver, $receiver->role === 'coach' ? Coach::class : Student::class);
 
+        if (!isEmpty($receiver))
+            $this->setProfileImage($receiver, $receiver->role === 'coach' ? Coach::class : Student::class);
 
         $data = [
             'type' => $sender->role,
             'users' => $users,
-            'receiver' => $receiver,
+            'receiver' => !isEmpty($receiver) ? [] : $receiver,
             'sender' => $sender,
         ];
 
