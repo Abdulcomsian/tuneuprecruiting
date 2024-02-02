@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('coach_id');
             $table->string('program_name')->nullable();
-            $table->string('session')->nullable();
             $table->string('number_of_students')->nullable();
             $table->text('custom_fields')->nullable();
             $table->text('video')->nullable();

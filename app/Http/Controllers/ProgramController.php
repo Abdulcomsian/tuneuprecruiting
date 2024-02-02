@@ -38,6 +38,21 @@ class ProgramController extends Controller
         return view('backend/program/add_new_program', $data);
     }
 
+    public function programDetails($programId) {
+        $programId = decrypt($programId);
+        $program = Program::select('programs.video', 'programs.program_name', 'programs.program_type', 'programs.program_for', 'programs.details')
+            ->where(['id' => $programId])
+            ->first();
+
+        $programApply = getProgramApply($programId);
+
+        $program->apply = (!empty($programApply)) ? 'Applied' : 'Not Applied';
+
+        $program->apply_route = url('/program/apply/'. encrypt($programId));
+
+        return response()->json(['program' => $program]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

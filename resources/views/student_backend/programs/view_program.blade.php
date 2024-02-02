@@ -42,8 +42,8 @@
                                             <tr>
                                                 <td></td>
                                                 <td>
-                                                    @php $countApplies = countProgramApply($program->id); @endphp
-                                                    @if($countApplies > 0)
+                                                    @php $countApplies = getProgramApply($program->id); @endphp
+                                                    @if(!empty($countApplies))
                                                         <p class="float-end">Already applied.</p>
                                                     @else
                                                         <a class="btn btn-success float-end" href="{{ url('/program/apply/'. encrypt($program->id)) }}">Apply</a>

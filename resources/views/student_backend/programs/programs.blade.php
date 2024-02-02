@@ -34,9 +34,9 @@
                                     </thead>
                                     <tbody>
                                         @foreach($programs as $program)
-                                            @php $countApplies = countProgramApply($program->id); @endphp
-                                            @php $backgroundColor = ($countApplies > 0) ? 'bg-success' : ''; @endphp
-                                            @php $textColor = ($countApplies > 0) ? 'text-white' : ''; @endphp
+                                            @php $countApplies = getProgramApply($program->id); @endphp
+                                            @php $backgroundColor = (!empty($countApplies) && $countApplies->status == 'Additional Requirements Requested') ? 'bg-success' : ''; @endphp
+                                            @php $textColor = (!empty($countApplies) && $countApplies->status == 'Additional Requirements Requested') ? 'text-white' : ''; @endphp
                                             <tr class="border-bottom-secondary {{ $backgroundColor }}">
                                                 <td class="{{ $backgroundColor }}">{{ $program->college_or_university }}</td>
                                                 <td class="{{ $backgroundColor }}">{{ $program->coach->first_name ?? '' . " " . $program->coach->last_name ?? '' }}</td>
@@ -45,18 +45,32 @@
                                                 <td>{{ $program->details }}</td>
                                                 <td>
                                                     <ul class="action">
-                                                        @if($countApplies == 0)
-                                                            <li>
+                                                        @if(empty($countApplies))
+                                                            <li class="edit">
                                                                 <a class="{{ $textColor }}" title="Apply to this Program" href="{{ url('/program/apply/'. encrypt($program->id)) }}">
-                                                                    <i class="icofont icofont-law-document"></i>
+                                                                    <i class="icofont icofont-law-document {{ $textColor }}"></i>
                                                                 </a>
                                                             </li>
                                                         @endif
-                                                        <li> <a class="{{ $textColor }}" href="{{ route('chat', encrypt($program->user_id)) }}">
-                                                                <i class="icofont icofont-chat"></i></a>
-                                                        </li>
-                                                        <li> <a class="{{ $textColor }}" href="{{ route('program.view', encrypt($program->id)) }}">
-                                                                <i class="icofont icofont-eye-alt"></i></a>
+                                                        @if(!empty($countApplies) && $countApplies->status == 'Additional Requirements Requested')
+                                                            @if(checkForApplyRequirements($countApplies->id))
+                                                                <li class="edit">
+                                                                    <a href="{{ url('/student/apply/requirements/form/'.encrypt($countApplies->id)) }}" title="Submit Requirements">
+                                                                        <i class="icofont icofont-file-document {{ $textColor }}"></i>
+                                                                    </a>
+                                                                </li>
+                                                            @endif
+                                                            <li class="edit">
+                                                                <a class="{{ $textColor }}" title="Chat" href="{{ route('chat', encrypt($program->user_id)) }}">
+                                                                <i class="icofont icofont-chat {{ $textColor }}"></i></a>
+                                                            </li>
+                                                        @endif
+                                                        <li class="edit">
+                                                            <a
+                                                                class="{{ $textColor }} btn-view"
+                                                                title="View"
+                                                                data-route="{{ url('program/details/'.encrypt($program->id)) }}">
+                                                            <i class="icofont icofont-eye-alt {{ $textColor }}"></i></a>
                                                         </li>
                                                     </ul>
                                                 </td>
@@ -155,8 +169,64 @@
             </div>
         </div>
         <!-- End full screen modal -->
+        <!-- Modal -->
+        <x-modal-small idName="program-details" />
     </div>
     <script>
+        $(document).ready(function() {
+            $('.btn-view').on('click', function () {
+                const route = $(this).data('route');
+                $.ajax({
+                    url: route,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(programData) {
+                        var programHTML = createProgramHTML(programData);
+                        console.log(programData);
+                        $('#data-container').html(programHTML);
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here
+                        console.error("Error: " + error);
+                    }
+                });
+                $('#program-details').modal('show');
+            });
+        });
+
+        function createProgramHTML(data) {
+            var htmlContent = '<h3 class="text-lg">Program Details</h3>';
+
+            // Add video if available
+            if (data.program.video) {
+                const videoLink = "{{ asset('uploads/program_videos/') }}/" + data.program.video;
+                htmlContent += '<video controls>';
+                htmlContent += '<source src="' + videoLink + '" type="video/mp4">';
+                htmlContent += 'Your browser does not support the video tag.';
+                htmlContent += '</video>';
+            }
+
+            // Create a table for other fields
+            htmlContent += '<table class="table">';
+            for (var key in data.program) {
+                if (key !== 'video' && key !== 'apply_route') {
+                    var headerText = key.replace(/_/g, ' '); // Replace underscores with spaces for headers
+                    htmlContent += '<tr>';
+                    htmlContent += '<td>' + headerText + '</td>';
+                    htmlContent += '<td>' + data.program[key] + '</td>';
+                    htmlContent += '</tr>';
+                }
+            }
+            htmlContent += '</table>';
+
+            if(data.program.apply == 'Applied') {
+                htmlContent += '<p class="mt-4 float-end">Applied</p>';
+            } else {
+                htmlContent += '<a href="'+ data.program.apply_route +'" class="btn bg-primary mt-4 float-end" type="button">Apply</a>'
+            }
+            return htmlContent;
+        }
+
         $('#btn-add').click(function () {
             // empty inputs
             resetFormInputs();
