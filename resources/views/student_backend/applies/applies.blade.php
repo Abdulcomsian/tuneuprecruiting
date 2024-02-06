@@ -24,9 +24,11 @@
                                 <table class="display" id="data-table">
                                     <thead>
                                         <tr>
-                                            <th>Coach Name</th>
+                                            <th>College Name</th>
                                             <th>Program Name</th>
-                                            <th>Session</th>
+                                            <th>Coach Name</th>
+                                            <th>Number of Students</th>
+                                            <th>Detail</th>
                                             <th>Status</th>
                                             <th>Date</th>
                                             <th><x-list-view-action-heading /></th>
@@ -34,27 +36,36 @@
                                     </thead>
                                     <tbody>
                                         @foreach($applies as $apply)
-                                            <tr class="border-bottom-secondary">
-                                                <td>{{ $apply->first_name . " " . $apply->last_name }}</td>
+                                            @php $formatting = getApplyRowColor($apply) @endphp
+                                            <tr class="border-bottom-secondary {{ $formatting['bgColor'] }}">
+                                                <td class="{{ $formatting['bgColor'] }}">{{ $apply->college_or_university }}</td>
                                                 <td>{{ $apply->program_name }}</td>
-                                                <td>{{ $apply->session }}</td>
+                                                <td>{{ $apply->first_name . " " . $apply->last_name }}</td>
+                                                <td>{{ $apply->number_of_students }}</td>
+                                                <td>{{ $apply->details }}</td>
                                                 <td>{{ $apply->status }}</td>
                                                 <td>{{ $apply->created_at }}</td>
                                                 <td>
                                                     <ul class="action">
-                                                        <li class="edit"> <a href="{{ route('chat', encrypt($apply->coach_id)) }}">
-                                                                <i class="icofont icofont-chat"></i></a>
-                                                        </li>
-                                                        <li class="edit"> <a href="{{ route('program.apply.view', encrypt($apply->apply_id)) }}">
-                                                                <i class="icofont icofont-eye-alt"></i></a>
-                                                        </li>
-                                                        @if(checkForApplyRequirements($apply->apply_id)  > 0)
+                                                        @if(isAccepted($apply))
+                                                            @if(checkForApplyRequirements($apply->id))
+                                                                <li class="edit">
+                                                                    <a href="{{ url('/student/apply/requirements/form/'.encrypt($apply->apply_id)) }}"
+                                                                       title="Submit Requirements">
+                                                                        <i class="icofont icofont-file-document {{ $formatting['textColor'] }}"></i>
+                                                                    </a>
+                                                                </li>
+                                                            @endif
                                                             <li class="edit">
-                                                                <a href="{{ url('/student/apply/requirements/form/'.encrypt($apply->apply_id)) }}" title="Submit Requirements">
-                                                                    <i class="icofont icofont-file-document"></i>
-                                                                </a>
+                                                                <a class="{{ $formatting['textColor'] }}" title="Chat"
+                                                                   href="{{ route('chat', encrypt($userId)) }}">
+                                                                    <i class="icofont icofont-chat {{ $formatting['textColor'] }}"></i></a>
                                                             </li>
                                                         @endif
+                                                        <li class="edit">
+                                                            <a href="{{ route('program.apply.view', encrypt($apply->apply_id)) }}">
+                                                            <i class="icofont icofont-eye-alt {{ $formatting['textColor'] }}"></i></a>
+                                                        </li>
                                                     </ul>
                                                 </td>
                                             </tr>

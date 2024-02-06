@@ -14,6 +14,7 @@ use App\Models\RequestRequirement;
 use App\Models\Student;
 use App\Models\StudentAdditionalRequirement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\ApplyRequest;
 
@@ -215,10 +216,12 @@ class StudentApplyController extends Controller
 
     public function applies() {
         $studentId = Session::get('studentId');
-        $data['applies'] = Apply::select('applies.*', 'applies.id as apply_id', 'programs.*', 'coaches.*')
+        $data['applies'] = Apply::select('applies.*', 'applies.id as apply_id', 'programs.program_name', 'coaches.first_name', 'coaches.last_name')
             ->join('programs', 'programs.id', '=', 'applies.program_id')
             ->join('coaches', 'coaches.id', '=', 'programs.coach_id')
             ->where(['applies.student_id' => $studentId])->get();
+
+        $data['userId'] = Auth::user()->id;
 
         return view('student_backend/applies/applies', $data);
     }

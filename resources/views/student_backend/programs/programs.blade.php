@@ -29,53 +29,58 @@
                                         <th>Program Name</th>
                                         <th>Number of Students</th>
                                         <th>Detail</th>
-                                        <th><x-list-view-action-heading /></th>
+                                        <th>
+                                            <x-list-view-action-heading/>
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($programs as $program)
-                                            @php $countApplies = getProgramApply($program->id); @endphp
-                                            @php $backgroundColor = (!empty($countApplies) && $countApplies->status == 'Additional Requirements Requested') ? 'bg-success' : ''; @endphp
-                                            @php $textColor = (!empty($countApplies) && $countApplies->status == 'Additional Requirements Requested') ? 'text-white' : ''; @endphp
-                                            <tr class="border-bottom-secondary {{ $backgroundColor }}">
-                                                <td class="{{ $backgroundColor }}">{{ $program->college_or_university }}</td>
-                                                <td class="{{ $backgroundColor }}">{{ $program->coach->first_name ?? '' . " " . $program->coach->last_name ?? '' }}</td>
-                                                <td>{{ $program->program_name }}</td>
-                                                <td>{{ $program->number_of_students }}</td>
-                                                <td>{{ $program->details }}</td>
-                                                <td>
-                                                    <ul class="action">
-                                                        @if(empty($countApplies))
+                                    @foreach($programs as $program)
+                                        @php $applyDetails = getProgramApply($program->id) @endphp
+                                        @php $formatting = getApplyRowColor($applyDetails) @endphp
+                                        <tr class="border-bottom-secondary {{ $formatting['bgColor'] }}">
+                                            <td class="{{ $formatting['bgColor'] }}">{{ $program->college_or_university }}</td>
+                                            <td class="{{ $formatting['bgColor'] }}">{{ $program->coach->first_name ?? '' . " " . $program->coach->last_name ?? '' }}</td>
+                                            <td>{{ $program->program_name }}</td>
+                                            <td>{{ $program->number_of_students }}</td>
+                                            <td>{{ $program->details }}</td>
+                                            <td>
+                                                <ul class="action">
+                                                    @if(isAccepted($applyDetails))
+                                                        @if(checkForApplyRequirements($applyDetails->id))
                                                             <li class="edit">
-                                                                <a class="{{ $textColor }}" title="Apply to this Program" href="{{ url('/program/apply/'. encrypt($program->id)) }}">
-                                                                    <i class="icofont icofont-law-document {{ $textColor }}"></i>
+                                                                <a href="{{ url('/student/apply/requirements/form/'.encrypt($applyDetails->id)) }}"
+                                                                   title="Submit Requirements">
+                                                                    <i class="icofont icofont-file-document {{ $formatting['textColor'] }}"></i>
                                                                 </a>
                                                             </li>
                                                         @endif
-                                                        @if(!empty($countApplies) && $countApplies->status == 'Additional Requirements Requested')
-                                                            @if(checkForApplyRequirements($countApplies->id))
-                                                                <li class="edit">
-                                                                    <a href="{{ url('/student/apply/requirements/form/'.encrypt($countApplies->id)) }}" title="Submit Requirements">
-                                                                        <i class="icofont icofont-file-document {{ $textColor }}"></i>
-                                                                    </a>
-                                                                </li>
-                                                            @endif
-                                                            <li class="edit">
-                                                                <a class="{{ $textColor }}" title="Chat" href="{{ route('chat', encrypt($program->user_id)) }}">
-                                                                <i class="icofont icofont-chat {{ $textColor }}"></i></a>
-                                                            </li>
-                                                        @endif
                                                         <li class="edit">
-                                                            <a
-                                                                class="{{ $textColor }} btn-view"
-                                                                title="View"
-                                                                data-route="{{ url('program/details/'.encrypt($program->id)) }}">
-                                                            <i class="icofont icofont-eye-alt {{ $textColor }}"></i></a>
+                                                            <a class="{{ $formatting['textColor'] }}" title="Chat"
+                                                               href="{{ route('chat', encrypt($program->user_id)) }}">
+                                                                <i class="icofont icofont-chat {{ $formatting['textColor'] }}"></i></a>
                                                         </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                                    @endif
+                                                    <li class="edit">
+                                                        <a
+                                                            class="{{ $formatting['textColor'] }} btn-view"
+                                                            title="View"
+                                                            data-route="{{ url('program/details/'.encrypt($program->id)) }}">
+                                                            <i class="icofont icofont-eye-alt {{ $formatting['textColor'] }}"></i></a>
+                                                    </li>
+                                                    @if(empty($applyDetails))
+                                                        <li class="edit">
+                                                            <a class="{{ $formatting['textColor'] }}"
+                                                               title="Apply"
+                                                               href="{{ url('/program/apply/'. encrypt($program->id)) }}">
+                                                                <i class="icofont icofont-law-document {{ $formatting['textColor'] }}"></i>
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -86,17 +91,19 @@
         </div>
         <!-- Container-fluid Ends-->
         <!-- Full screen modal -->
-        <div class="modal fade" id="exampleModalfullscreen" tabindex="-1" aria-labelledby="fullScreenModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModalfullscreen" tabindex="-1" aria-labelledby="fullScreenModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="fullScreenModalLabel">Program Apply</h1>
-                        <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button class="btn-close py-0" type="button" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                     </div>
                     <div class="modal-body dark-modal">
                         @if ($errors->any())
                             <script>
-                                $(document).ready(function() {
+                                $(document).ready(function () {
                                     // When the document is ready, show the modal if it has the "show" class
                                     $('#exampleModalfullscreen').modal('show');
                                 });
@@ -117,7 +124,8 @@
                                 {{ $message }}
                             </div>
                         @endif
-                        <form method="POST" id="frm-program" action="{{ route('program.store') }}" class="row g-3 needs-validation" novalidate="">
+                        <form method="POST" id="frm-program" action="{{ route('program.store') }}"
+                              class="row g-3 needs-validation" novalidate="">
                             @csrf
                             <input type="hidden" name="_method" value="POST" id="route-method">
                             <input type="hidden" value="{{ route('program.store') }}" id="route-post-method">
@@ -170,22 +178,22 @@
         </div>
         <!-- End full screen modal -->
         <!-- Modal -->
-        <x-modal-small idName="program-details" />
+        <x-modal-small idName="program-details"/>
     </div>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.btn-view').on('click', function () {
                 const route = $(this).data('route');
                 $.ajax({
                     url: route,
                     type: 'GET',
                     dataType: 'json',
-                    success: function(programData) {
+                    success: function (programData) {
                         var programHTML = createProgramHTML(programData);
                         console.log(programData);
                         $('#data-container').html(programHTML);
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         // Handle errors here
                         console.error("Error: " + error);
                     }
@@ -219,10 +227,10 @@
             }
             htmlContent += '</table>';
 
-            if(data.program.apply == 'Applied') {
+            if (data.program.apply == 'Applied') {
                 htmlContent += '<p class="mt-4 float-end">Applied</p>';
             } else {
-                htmlContent += '<a href="'+ data.program.apply_route +'" class="btn bg-primary mt-4 float-end" type="button">Apply</a>'
+                htmlContent += '<a href="' + data.program.apply_route + '" class="btn bg-primary mt-4 float-end" type="button">Apply</a>'
             }
             return htmlContent;
         }
@@ -262,7 +270,7 @@
                 url: getDataRoute,
                 type: 'GET',
                 dataType: 'json',
-                success: function(data) {
+                success: function (data) {
                     $('.program-name').val(data.program_name);
                     $('.session').val(data.session);
                     $('.number-of-students').val(data.number_of_students);
@@ -270,7 +278,7 @@
 
                     $('#exampleModalfullscreen').modal('show');
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     // Handle errors here
                     console.error("Error: " + error);
                 }

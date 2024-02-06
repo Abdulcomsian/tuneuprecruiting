@@ -17,61 +17,107 @@
         <!-- Container-fluid starts-->
         <div class="container-fluid basic_table">
             <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Personal Information
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive theme-scrollbar">
+                                <table class="table mb-5">
+                                    @foreach ($studentDetail->getAttributes() as $key => $detail)
+                                        @php
+                                            $columnName = getColumnNameOfBasicInformation($key);
+                                        @endphp
+
+                                        @if ($columnName)
+                                            <tr>
+                                                <td>{{ $columnName }}</td>
+                                                <td>
+                                                    @if($key == 'cv')
+                                                        <a href="{{ url('uploads/student_cv/'.$detail) }}">{{ $detail }}</a>
+                                                    @elseif($key == 'short_video')
+                                                        <a href="{{ url('uploads/students_videos/'.$detail) }}">{{ $detail }}</a>
+                                                    @elseif($key == 'profile_image')
+                                                        <a href="{{ url('uploads/users_image/'.$detail) }}">{{ $detail }}</a>
+                                                    @else
+                                                        {{ $detail }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Academic Information
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive theme-scrollbar">
+                                <table class="table mb-5">
+                                    @foreach ($studentDetail->getAttributes() as $key => $detail)
+                                        @php
+                                            $columnName = getColumnNameOfAcademicInformation($key);
+                                        @endphp
+
+                                        @if ($columnName)
+                                            <tr>
+                                                <td>{{ $columnName }}</td>
+                                                <td>
+                                                    @if($key == 'transcript')
+                                                        <a href="{{ url('uploads/transcript/'.$detail) }}">{{ $detail }}</a>
+                                                    @else
+                                                        {{ $detail }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive theme-scrollbar">
-                                <table class="table mb-5">
-                                    <thead>
-                                        <tr>
-                                            <th>Complete Name</th>
-                                            <th>Graduation Year</th>
-                                            <th>Country</th>
-                                            <th>Home Town</th>
-                                            <th>State</th>
-                                            <th>CV</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ $studentDetail->first_name . ' ' . $studentDetail->last_name }}</td>
-                                            <td>{{ $studentDetail->graduation_year }}</td>
-                                            <td>{{ $studentDetail->country }}</td>
-                                            <td>{{ $studentDetail->home_town }}</td>
-                                            <td>{{ $studentDetail->state }}</td>
-                                            <td><a href="{{ asset('uploads/student_cv/'.$studentDetail->cv) }}">{{ $studentDetail->cv }}</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
                                 <table class="display" id="basic-1">
                                     <thead>
-                                        <tr>
-                                            <th>Question</th>
-                                            <th>Answer</th>
-                                        </tr>
+                                    <tr>
+                                        <th>Question</th>
+                                        <th>Answer</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($applyDetails as $detail)
-                                            @if($detail->type == 'checkbox-group')
-                                                @php
-                                                    $values = json_decode($detail->answer);
-                                                    $detail->answer = '';
-                                                    foreach ($values as $value) {
-                                                        $detail->answer .= ucfirst($value) . ", ";
-                                                    }
-                                                @endphp
-                                            @endif
-                                            <tr class="border-bottom-secondary">
-                                                <td>{{ $detail->label }}</td>
-                                                <td>
-                                                    @if($detail->type == 'file')
-                                                        <a href="{{ asset('uploads/apply_data/'.$detail->answer) }}">{{ $detail->answer }}</a>
-                                                    @else
-                                                        {{ $detail->answer }}
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                    @foreach($applyDetails as $detail)
+                                        @if($detail->type == 'checkbox-group')
+                                            @php
+                                                $values = json_decode($detail->answer);
+                                                $detail->answer = '';
+                                                foreach ($values as $value) {
+                                                    $detail->answer .= ucfirst($value) . ", ";
+                                                }
+                                            @endphp
+                                        @endif
+                                        <tr class="border-bottom-secondary">
+                                            <td>{{ $detail->label }}</td>
+                                            <td>
+                                                @if($detail->type == 'file')
+                                                    <a href="{{ asset('uploads/apply_data/'.$detail->answer) }}">{{ $detail->answer }}</a>
+                                                @else
+                                                    {{ $detail->answer }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
