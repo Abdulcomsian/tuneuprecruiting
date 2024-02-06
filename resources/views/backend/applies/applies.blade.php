@@ -24,6 +24,7 @@
                                 <table class="display" id="data-table">
                                     <thead>
                                         <tr>
+                                            <th>Submission Date</th>
                                             <th>Full Name</th>
                                             <th>Graduation Year</th>
                                             <th>Country</th>
@@ -36,6 +37,7 @@
                                     <tbody>
                                         @foreach($applies as $apply)
                                             <tr class="border-bottom-secondary">
+                                                <td>{{ \Carbon\Carbon::parse($apply->created_at)->format('d-m-Y') }}</td>
                                                 <th scope="row">{{ $apply->first_name . ' ' . $apply->last_name }}</th>
                                                 <td>{{ $apply->graduation_year }}</td>
                                                 <td>{{ $apply->country }}</td>
