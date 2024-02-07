@@ -22,6 +22,13 @@ class StudentProfileController extends Controller
         return view('student_backend/profile/profile', $data);
     }
 
+    public function profileDetails($studentId) {
+        $id = decrypt($studentId);
+        $data['studentDetail'] = Student::where(['user_id' => $id])->first();
+
+        return view('backend/profile/student_profile_details', $data);
+    }
+
     public function updateSetting(Request $request) {
         $user = Auth::user();
 

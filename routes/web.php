@@ -64,6 +64,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::get('/request/info/all', [RequestInfoOrDemoController::class, 'allRequests']);
     Route::delete('/request/info/destroy/{id}', [RequestInfoOrDemoController::class, 'destroy']);
 
+    Route::get('/student/profile/details/{id}', [StudentProfileController::class, 'profileDetails']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -71,12 +72,14 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
 
     // Reports
     Route::post("/report/recruiter", [ReportController::class, "recruiterReport"])->name('report.recruiter');
+    Route::post("/report/applications", [ReportController::class, "applicationReport"])->name('report.application');
 
     Route::resource('program', ProgramController::class);
 
     Route::resource('email/template', EmailTemplateController::class);
 
     Route::get("/chat/{id?}", [ChatController::class, "show"])->name('chat');
+    Route::get("/chat/delete/{id?}", [ChatController::class, "delete"]);
     Route::get("/chat/new/{id}", [ChatController::class, "getNewMessages"])->name('chat.new');
     Route::post("/chat/store", [ChatController::class, "store"])->name('chat.store');
     Route::get('/notification/messages', [ChatController::class, 'notificationMessages']);

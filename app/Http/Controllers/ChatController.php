@@ -171,6 +171,20 @@ class ChatController extends Controller
 
     }
 
+    public function delete($userId) {
+        $userId = decrypt($userId);
+        $receiver = User::find($userId);
+
+        $user = Auth::user();
+
+        $messages = $this->getMessagesOfAUser($receiver, $user);
+        foreach ($messages as $message) {
+            Chat::find($message->id)->delete();
+        }
+
+        return redirect()->back();
+    }
+
     public function getProfileImage($senderType, $senderId) {
         return $senderType === 'coach'
             ? Coach::find($senderId, ['profile_image'])

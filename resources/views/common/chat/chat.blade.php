@@ -35,6 +35,13 @@
                                                             <div class="status">{{ $user->role == 'admin' ? 'Admin' : $user->last_name }}</div>
                                                         </div>
                                                     </a>
+                                                    @if($user->role != 'admin')
+                                                        <div class="float-end">
+                                                            <a href="{{ url('/chat/delete/'.encrypt($user->id)) }}">
+                                                                <i class="fa fa-trash text-danger"></i>
+                                                            </a>
+                                                        </div>
+                                                    @endif
                                                 </li>
                                             @empty
                                                 <li>No user found.</li>
@@ -60,8 +67,9 @@
                                             @php $receiverImage = ($receiver->profile_image) ? $receiver->profile_image : 'default.jpg' @endphp
                                             <div class="chat-header clearfix"><img class="rounded-circle" src="{{ asset('uploads/users_image/'.$receiverImage ?? '') }}" alt="">
                                                 <div class="about">
-                                                    <div class="name">{{ $receiver->name }}</div>
-                                                    <div class="status">{{ $receiver->last_name }}</div>
+                                                    @if($receiver->role == 'student')
+                                                        <a href="{{ url('/student/profile/details/'.encrypt($receiver->id)) }}"><div class="name">{{ $receiver->name }} {{ $receiver->last_name }}</div></a>
+                                                    @endif
                                                 </div>
                                                 <ul class="list-inline float-start float-sm-end chat-menu-icons">
 

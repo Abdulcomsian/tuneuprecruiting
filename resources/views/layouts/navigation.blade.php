@@ -92,6 +92,19 @@
                                         </a>
                                     </form>
                                 </li>
+                                <li class="main-submenu">
+                                    <form method="POST" action="{{ route('report.application') }}">
+                                        @csrf
+                                        <a href="#" onclick="$(this).closest('form').submit();">
+                                            <svg class="stroke-icon">
+                                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-board') }}"></use>
+                                            </svg>
+                                            <svg class="fill-icon">
+                                                <use href="{{ asset('assets/svg/icon-sprite.svg#fill-board') }}"></use>
+                                            </svg>Applications Report
+                                        </a>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
                         <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">

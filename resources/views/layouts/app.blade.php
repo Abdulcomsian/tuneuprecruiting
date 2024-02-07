@@ -54,6 +54,7 @@
 
         <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/dateRange/daterangepicker-bs3.css') }}" rel="stylesheet" />
 
     </head>
     <body>
@@ -128,6 +129,8 @@
             <script src="{{ asset('assets/js/editor/ckeditor/adapters/jquery.js') }}"></script>
             <script src="{{ asset('assets/js/editor/ckeditor/styles.js') }}"></script>
             <script src="{{ asset('assets/js/editor/ckeditor/ckeditor.custom.js') }}"></script>
+            <script src="{{ asset('assets/dateRange/moment.js') }}"></script>
+            <script src="{{ asset('assets/dateRange/daterangepicker.js') }}"></script>
 
             @if(isset($viewEmailTemplate))
                 <style>

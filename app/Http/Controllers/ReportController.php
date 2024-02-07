@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Apply;
 use App\Models\Country;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -43,5 +44,43 @@ class ReportController extends Controller
         $data['applies'] = $query->get();
 
         return view('backend.reports.recruiter', $data);
+    }
+
+    public function applicationReport(Request $request) {
+        // Define default date range if none provided
+        $fromDate = Carbon::parse('01/01/2024');
+        $toDate = Carbon::today();
+
+        if ($request->has('date_range')) {
+            try {
+                // Split the date range string into separate dates
+                [$fromDate, $toDate] = explode(" - ", $request->date_range);
+
+                // Validate date format using Carbon's built-in parsing
+                $fromDate = Carbon::parse($fromDate);
+                $toDate = Carbon::parse($toDate);
+            } catch (Exception $e) {
+                // Handle invalid date format gracefully (e.g., display an error message)
+                return back()->withErrors(['date_range' => 'Invalid date range format.']);
+            }
+        }
+
+        // Update data array with extracted dates
+        $data = [
+            'fromDate' => $fromDate->format('d/m/Y'),
+            'toDate' => $toDate->format('d/m/Y'),
+        ];
+
+        $data['numberOfApplies'] = Apply::whereBetween('created_at', [$fromDate, $toDate])->count();
+        $data['numberOfUSAApplies'] = Apply::join('students', 'applies.student_id', '=', 'students.id')
+            ->whereBetween('applies.created_at', [$fromDate, $toDate])
+            ->where('are_u_from_usa', 'Yes')
+            ->count();
+        $data['numberOfOutOfUSAApplies'] = Apply::join('students', 'applies.student_id', '=', 'students.id')
+            ->whereBetween('applies.created_at', [$fromDate, $toDate])
+            ->where('are_u_from_usa', 'No')
+            ->count();
+
+        return view('backend.reports.applications', $data);
     }
 }
