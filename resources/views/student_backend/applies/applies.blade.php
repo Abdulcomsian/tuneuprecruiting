@@ -63,6 +63,11 @@
                                                             </li>
                                                         @endif
                                                         <li class="edit">
+                                                            <a href="{{ route('apply.edit', encrypt($apply->apply_id)) }}">
+                                                                <i class="fa fa-pencil-square-o {{ $formatting['textColor'] }}"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="edit">
                                                             <a href="{{ route('program.apply.view', encrypt($apply->apply_id)) }}">
                                                             <i class="icofont icofont-eye-alt {{ $formatting['textColor'] }}"></i></a>
                                                         </li>

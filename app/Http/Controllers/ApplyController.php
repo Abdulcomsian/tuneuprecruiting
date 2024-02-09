@@ -22,16 +22,25 @@ use App\Mail\DefaultMail;
 class ApplyController extends Controller
 {
     public function applies() {
-        $data['applies'] = Apply::select('programs.*', 'applies.*', 'applies.id as apply_id', 'students.first_name', 'students.id as student_id', 'students.last_name', 'students.graduation_year', 'students.country', 'students.state')
-            ->join('programs', 'programs.id', '=', 'applies.program_id')
-            ->join('students', 'students.id', '=', 'applies.student_id')
-            ->where(['programs.coach_id' => Session::get('coachId'), 'applies.trash' => 'active'])
-            ->orderBy('applies.id', 'desc')
-            ->get();
+        $data['applies'] = $this->getAppliesOfCoach(['programs.coach_id' => Session::get('coachId'), 'applies.trash' => 'active']);
 
         return view('backend/applies/applies', $data);
     }
 
+    public function getAppliesOfCoach($where) {
+        return Apply::select('programs.*', 'applies.*', 'applies.id as apply_id', 'students.first_name', 'students.id as student_id', 'students.last_name', 'students.graduation_year', 'students.country', 'students.state')
+            ->join('programs', 'programs.id', '=', 'applies.program_id')
+            ->join('students', 'students.id', '=', 'applies.student_id')
+            ->where($where)
+            ->orderBy('applies.id', 'desc')
+            ->get();
+    }
+
+    public function trashedApplies() {
+        $data['applies'] = $this->getAppliesOfCoach(['applies.trash' => 'trash']);
+
+        return view('backend/applies/trashed_applies', $data);
+    }
     public function acceptApplication($applicationId) {
         $applicationId = decrypt($applicationId);
 

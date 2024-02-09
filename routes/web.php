@@ -63,6 +63,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::get('/request/info/view/{id}/{notificationId?}', [RequestInfoOrDemoController::class, 'viewInfoRequest']);
     Route::get('/request/info/all', [RequestInfoOrDemoController::class, 'allRequests']);
     Route::delete('/request/info/destroy/{id}', [RequestInfoOrDemoController::class, 'destroy']);
+    Route::get('/applies/trash', [ApplyController::class, 'trashedApplies']);
 
     Route::get('/student/profile/details/{id}', [StudentProfileController::class, 'profileDetails']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -108,6 +109,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::get('/program/apply/view/{id}', [StudentApplyController::class, 'applyView'])->name('program.apply.view');
     Route::get('/student/apply/requirements/form/{id}/{notificationId?}', [StudentApplyController::class, 'requirementForm']);
     Route::post('/apply/requirements/submit/', [StudentApplyController::class, 'submitRequirements'])->name('requirements.submit');
+    Route::get('/apply/edit/{id}', [StudentApplyController::class, 'editApply'])->name('apply.edit');
 
     Route::get('/notifications', [NotificationController::class, 'getNotifications']);
 

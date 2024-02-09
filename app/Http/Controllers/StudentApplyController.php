@@ -33,6 +33,18 @@ class StudentApplyController extends Controller
         return view('student_backend/programs/programs', $data);
     }
 
+    public function editApply($applyId) {
+        $applyId = decrypt($applyId);
+        $apply = Apply::find($applyId);
+        $data['program'] = Program::find($apply->program_id);
+        $data['applyDetails'] = ApplyDetail::where(['apply_id' => $apply->id])->get();
+        $data['studentDetails'] = Student::find(Session::get('studentId'));
+        $data['customFields'] = json_decode($data['program']->custom_fields);
+        dd($data['customFields']);
+
+        return view('student_backend.applies.edit', $data);
+    }
+
     public function requirementForm(Request $request) {
         // update notification status to read
         CommonHelper::updateNotificationStatus($request->route('notificationId'));
