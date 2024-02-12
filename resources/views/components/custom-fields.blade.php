@@ -32,7 +32,7 @@
                     @component('components.select-type-of-object-array', [
                         'name' => $variableName,
                         'options' => $field->values,
-                        'selected' => old($variableName),
+                        'selected' => old($variableName, $field->answer ?? ''),
                         'label' => $field->label,
                         'id' => $variableName,
                         'required' => $required,
@@ -44,13 +44,26 @@
                 @elseif($field->type == 'file')
                     <input type="hidden" name="file_label[]" value="{{ $field->label }}">
                     <input type="hidden" name="file_type[]" value="{{ $field->type }}">
-                    <x-dynamic-input name="files[]" type="file" placeholder="{{ $field->label }}" required="{{ $required }}" accept="image/*,video/*" />
+                    <x-dynamic-input
+                        name="files[]"
+                        type="file"
+                        placeholder="{{ $field->label }}"
+                        required="{{ isset($field->answer) ? '' : $required }}"
+                        value="{{ $field->answer ?? '' }}"
+                        accept="image/*,video/*" />
                 @elseif($field->type == 'radio-group')
                     <input type="hidden" name="radio_label[]" value="{{ $field->label }}">
                     <x-input-label value="{{ $field->label }}" required="{{ $required }}" labelFor="" />
                     @foreach($field->values as $radioKey => $value)
                         <input type="hidden" name="radio_counter" value="{{ $radioCounter }}">
-                        <input type="radio" class="form-check-input" id="radio-{{ $key }}-{{ $radioKey }}" name="radio_{{ $radioCounter }}" {{ $required }} value="{{ $value->label }}">
+                        <input
+                            type="radio"
+                            class="form-check-input"
+                            id="radio-{{ $key }}-{{ $radioKey }}"
+                            name="radio_{{ $radioCounter }}"
+                            {{ $required }}
+                            {{ (isset($field->answer) && $value->label == $field->answer) ? 'checked' : '' }}
+                            value="{{ $field->answer ?? '' }}">
                         <label class="form-check-label" for="radio-{{ $key }}-{{ $radioKey }}">{{ $value->label }}</label>
                     @endforeach
                     @php $radioCounter++ @endphp
@@ -60,7 +73,14 @@
                     <div class="form-group checkbox-group">
                         <x-input-label value="{{ $field->label }}" required="{{ $required }}" labelFor="" />
                         @foreach($field->values as $checkboxKey => $value)
-                            <input type="checkbox" id="checkbox-{{$key}}-{{ $checkboxKey }}" class="form-check-input" value="{{ $value->label }}" name="checkbox_{{ $checkboxCounter }}[]" {{ in_array($value->label, old('checkbox_'.$checkboxCounter, [])) ? 'checked' : '' }}>
+                            @php $options = isset($field->answer) ? json_decode($field->answer) : [] @endphp
+                            <input
+                                type="checkbox"
+                                id="checkbox-{{$key}}-{{ $checkboxKey }}"
+                                class="form-check-input"
+                                value="{{ $value->label }}"
+                                name="checkbox_{{ $checkboxCounter }}[]"
+                                {{ in_array($value->label, old('checkbox_'.$checkboxCounter, $options)) ? 'checked' : '' }}>
                             <label class="form-check-label" for="checkbox-{{$key}}-{{ $checkboxKey }}">{{ $value->label }}</label>
                         @endforeach
                     </div>
@@ -76,12 +96,12 @@
                             label="{{ $field->label }}"
                             required="{{ (isset($field->required)) ? true : false }}"
                             id="{{ str_replace(' ', '-', $field->label) }}"
-                            value="{{ old('answer.'.$inputCounter) }}" />
+                            value="{{ old('answer.'.$inputCounter, $field->answer ?? '') }}" />
                     @else
                         <x-dynamic-input
                             type="{{ $field->type }}"
                             name="answer[]"
-                            value="{{ old('answer.'.$inputCounter) }}"
+                            value="{{ old('answer.'.$inputCounter, $field->answer ?? '') }}"
                             placeholder="{{ $field->label }}"
                             id="{{ str_replace(' ', '-', $field->label) }}"
                             min="{{ (isset($field->min)) ? $field->min : false }}"

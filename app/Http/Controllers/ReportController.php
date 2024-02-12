@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Apply;
 use App\Models\Country;
+use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -70,6 +71,15 @@ class ReportController extends Controller
             'fromDate' => $fromDate->format('d/m/Y'),
             'toDate' => $toDate->format('d/m/Y'),
         ];
+
+        $students = Student::select('graduation_year')
+            ->withCount(['applies' => function ($query) use ($fromDate, $toDate) {
+                $query->whereBetween('created_at', [$fromDate, $toDate]);
+            }])
+            ->where('are_u_from_usa', 'Yes')
+            ->get();
+
+//        dd($students);
 
         $data['numberOfApplies'] = Apply::whereBetween('created_at', [$fromDate, $toDate])->count();
         $data['numberOfUSAApplies'] = Apply::join('students', 'applies.student_id', '=', 'students.id')

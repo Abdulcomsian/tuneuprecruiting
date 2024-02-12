@@ -95,9 +95,10 @@
                                         {{ $message }}
                                     </div>
                                 @endif
-                            <form method="POST" id="frm-program" action="{{ route('program.apply', encrypt($program->id)) }}" enctype="multipart/form-data" class="row g-3">
+                            <form method="POST" id="frm-program" action="{{ route('apply.update', encrypt($program->id)) }}" enctype="multipart/form-data" class="row g-3">
                                 @csrf
                                 <input type="hidden" name="program_id" value="{{ $program->id }}">
+                                <input type="hidden" name="apply_id" value="{{ $applyId }}">
                                 <x-student-profile-basic-information />
                         </div>
                     </div>
@@ -111,11 +112,12 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <x-custom-fields :customFields=$customFields :applyDetails="$applyDetails" />
+                            <x-custom-fields :customFields="$customFields" />
                             <div class="col-md-12">
-                                <button class="btn btn-primary float-end mt-3" id="btn-from-add" type="submit">Submit</button>
+                                <button class="btn btn-primary float-end mt-3" id="btn-from-add" type="submit">Update</button>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
