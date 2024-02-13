@@ -87,7 +87,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
 
     Route::get('/applies', [ApplyController::class, 'applies']);
     Route::post('/apply/rating', [ApplyController::class, 'saveApplyRating'])->name('apply.rating');
-    Route::get('/apply/status/{id}', [ApplyController::class, 'changeStatusToStar']);
+    Route::get('/apply/status/{id}/{status}', [ApplyController::class, 'changeApplyStatus']);
     Route::delete('/apply/destroy/{id}', [ApplyController::class, 'destroy'])->name('apply.destroy');
     Route::get('/apply/view/{id}/{notificationId?}', [ApplyController::class, 'viewApply']);
     Route::get('/program/apply/accept/{id}', [ApplyController::class, 'acceptApplication'])->name('program.apply.accept');
