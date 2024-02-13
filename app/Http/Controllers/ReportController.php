@@ -10,8 +10,52 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class ReportController extends Controller
-{
+class ReportController extends Controller {
+    public function applicationReport(Request $request) {
+        // Define default date range if none provided
+        $fromDate = Carbon::parse('01/01/2024');
+        $toDate = Carbon::today();
+
+        if ($request->has('date_range')) {
+            try {
+                // Split the date range string into separate dates
+                [$fromDate, $toDate] = explode(" - ", $request->date_range);
+
+                // Validate date format using Carbon's built-in parsing
+                $fromDate = Carbon::parse($fromDate);
+                $toDate = Carbon::parse($toDate);
+            } catch (Exception $e) {
+                // Handle invalid date format gracefully (e.g., display an error message)
+                return back()->withErrors(['date_range' => 'Invalid date range format.']);
+            }
+        }
+
+        // Update data array with extracted dates
+        $data = [
+            'fromDate' => $fromDate->format('d/m/Y'),
+            'toDate' => $toDate->format('d/m/Y'),
+        ];
+
+        $data['applies'] = Student::select('graduation_year')
+            ->withCount([
+                'applies',
+                'applies as applies_from_usa' => function ($query) use ($fromDate, $toDate) {
+                    $query->whereBetween('applies.created_at', [$fromDate, $toDate])
+                        ->join('programs', 'applies.program_id', '=', 'programs.id')
+                        ->where('programs.coach_id', Session::get('coachId'))
+                        ->where('are_u_from_usa', 'Yes');
+                },
+                'applies as applies_from_out_of_usa' => function ($query) use ($fromDate, $toDate) {
+                    $query->whereBetween('applies.created_at', [$fromDate, $toDate])
+                        ->join('programs', 'applies.program_id', '=', 'programs.id')
+                        ->where('programs.coach_id', Session::get('coachId'))
+                        ->where('are_u_from_usa', 'No');
+                }
+            ])
+            ->get();
+
+        return view('backend.reports.applications', $data);
+    }
     public function recruiterReport(Request $request) {
         $data = $request->all();
 
@@ -45,52 +89,5 @@ class ReportController extends Controller
         $data['applies'] = $query->get();
 
         return view('backend.reports.recruiter', $data);
-    }
-
-    public function applicationReport(Request $request) {
-        // Define default date range if none provided
-        $fromDate = Carbon::parse('01/01/2024');
-        $toDate = Carbon::today();
-
-        if ($request->has('date_range')) {
-            try {
-                // Split the date range string into separate dates
-                [$fromDate, $toDate] = explode(" - ", $request->date_range);
-
-                // Validate date format using Carbon's built-in parsing
-                $fromDate = Carbon::parse($fromDate);
-                $toDate = Carbon::parse($toDate);
-            } catch (Exception $e) {
-                // Handle invalid date format gracefully (e.g., display an error message)
-                return back()->withErrors(['date_range' => 'Invalid date range format.']);
-            }
-        }
-
-        // Update data array with extracted dates
-        $data = [
-            'fromDate' => $fromDate->format('d/m/Y'),
-            'toDate' => $toDate->format('d/m/Y'),
-        ];
-
-        $students = Student::select('graduation_year')
-            ->withCount(['applies' => function ($query) use ($fromDate, $toDate) {
-                $query->whereBetween('created_at', [$fromDate, $toDate]);
-            }])
-            ->where('are_u_from_usa', 'Yes')
-            ->get();
-
-//        dd($students);
-
-        $data['numberOfApplies'] = Apply::whereBetween('created_at', [$fromDate, $toDate])->count();
-        $data['numberOfUSAApplies'] = Apply::join('students', 'applies.student_id', '=', 'students.id')
-            ->whereBetween('applies.created_at', [$fromDate, $toDate])
-            ->where('are_u_from_usa', 'Yes')
-            ->count();
-        $data['numberOfOutOfUSAApplies'] = Apply::join('students', 'applies.student_id', '=', 'students.id')
-            ->whereBetween('applies.created_at', [$fromDate, $toDate])
-            ->where('are_u_from_usa', 'No')
-            ->count();
-
-        return view('backend.reports.applications', $data);
     }
 }

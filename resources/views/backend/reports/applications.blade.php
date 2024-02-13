@@ -46,17 +46,21 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>Total applications Submitted</th>
+                                        <th>Graduation Year</th>
+                                        <th>Total Applies</th>
                                         <th>Submissions within the United States</th>
                                         <th>Submissions outside of the United States</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>{{ $numberOfApplies }}</td>
-                                            <td>{{ $numberOfUSAApplies }}</td>
-                                            <td>{{ $numberOfOutOfUSAApplies }}</td>
-                                        </tr>
+                                        @foreach($applies as $key => $apply)
+                                            <tr>
+                                                <td>{{ $apply->graduation_year }}</td>
+                                                <td>{{ $apply->applies_count }}</td>
+                                                <td>{{ $apply->applies_from_usa }}</td>
+                                                <td>{{ $apply->applies_from_out_of_usa }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
