@@ -32,7 +32,8 @@ if (!function_exists('getApplyRowColor')) {
         return match ($apply->trash) {
             'trash' => ['bgColor' => 'bg-danger', 'textColor' => 'text-white'],
             default => match ($apply->status) {
-                'Additional Requirements Requested' => ['bgColor' => 'bg-success', 'textColor' => 'text-white'],
+                'Additional Requirements Requested' => ['bgColor' => 'bg-warning', 'textColor' => 'text-white'],
+                'Accept' => ['bgColor' => 'bg-success', 'textColor' => 'text-white'],
                 default => ['bgColor' => '', 'textColor' => ''],
             }
         };

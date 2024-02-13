@@ -43,7 +43,7 @@
                                                 <td>{{ $apply->first_name . " " . $apply->last_name }}</td>
                                                 <td>{{ $apply->number_of_students }}</td>
                                                 <td>{{ $apply->details }}</td>
-                                                <td>{{ $apply->status }}</td>
+                                                <td>{{ $apply->trash == 'trash' ? 'Trashed' : $apply->status }}</td>
                                                 <td>{{ $apply->created_at }}</td>
                                                 <td>
                                                     <ul class="action">
