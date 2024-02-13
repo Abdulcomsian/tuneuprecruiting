@@ -47,9 +47,6 @@ class RequestInfoOrDemoController extends Controller
     }
 
     public function viewInfoRequest(Request $request) {
-        // update notification status to read
-        CommonHelper::updateNotificationStatus($request->route('notificationId'));
-
         $id = decrypt($request->route('id'));
         $data['information'] = RequestInfoOrDemo::find($id);
 

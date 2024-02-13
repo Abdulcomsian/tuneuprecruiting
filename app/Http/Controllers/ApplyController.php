@@ -20,18 +20,7 @@ use Illuminate\Support\Facades\Session;
 use Mail;
 use App\Mail\DefaultMail;
 
-class ApplyController extends Controller
-{
-    public function acceptApplication($applicationId) {
-        $applicationId = decrypt($applicationId);
-
-        $data['apply'] = Apply::select('applies.*', 'applies.id as apply_id', 'students.*')
-            ->join('students', 'students.id', '=', 'applies.student_id')
-            ->where(['applies.id' => $applicationId])
-            ->first();
-
-        return view('backend/applies/accept', $data);
-    }
+class ApplyController extends Controller {
     public function applies() {
         $data['applies'] = $this->getAppliesOfCoach(['programs.coach_id' => Session::get('coachId'), 'applies.trash' => 'active']);
 
@@ -45,6 +34,16 @@ class ApplyController extends Controller
             'accept' => $apply->status = 'Accept',
             default => throw new InvalidArgumentException("Invalid status: $request->route('status')"),
         };
+
+        // get user
+        $user = CommonHelper::getUserDetailsFromId($apply->student_id, Student::class);
+        // Notification
+        Notification::create([
+            'notification_for' => 'student',
+            'user_id' => $user->id,
+            'message' => 'Your application has been accepted by the coach.',
+            'route' => route('program.apply.view', encrypt($apply->id)),
+        ]);
 
         $apply->save();
 
@@ -85,35 +84,44 @@ class ApplyController extends Controller
             ->get();
     }
     public function requestApplyRequirement(Request $request) {
-        RequestRequirement::create($request->all());
-        $apply = Apply::find($request->apply_id);
-        $apply->status = 'Additional Requirements Requested';
-        $apply->save();
+        if ($request->custom_fields) {
+            RequestRequirement::create($request->all());
+            $apply = Apply::find($request->apply_id);
+            $apply->status = 'Additional Requirements Requested';
+            $apply->save();
 
-        $user = CommonHelper::getUserData($apply->student_id, Student::class);
+            $user = CommonHelper::getUserData($apply->student_id, Student::class);
 
-        // Notification
-        Notification::create([
-            'notification_for' => 'student',
-            'user_id' => $user->id,
-            'message' => 'Your application has been approved by the coach; kindly submit the required documents.',
-            'route' => 'apply/requirements/form/' . encrypt($apply->id),
-        ]);
+            // Notification
+            Notification::create([
+                'notification_for' => 'student',
+                'user_id' => $user->id,
+                'message' => 'Your application has been approved by the coach; kindly submit the required documents.',
+                'route' => 'apply/requirements/form/' . encrypt($apply->id),
+            ]);
 
-        $student = User::join('students', 'students.user_id', '=', 'users.id')->where(['students.id' => $apply->student_id])->first();
-        $formattedData = (object)[];
-        $formattedData->subject = "Notification";
+            $student = User::join('students', 'students.user_id', '=', 'users.id')->where(['students.id' => $apply->student_id])->first();
+            $formattedData = (object)[];
+            $formattedData->subject = "Notification";
 
-        $requirementUrl = url('http://localhost/student/apply/requirements/form/' . encrypt($apply->id));
-        $formattedData->body = "
-            <p>Your application has been approved by the coach, kindly submit the required documents.</p>
-            <br>
-            <a href='{$requirementUrl}'>Please proceed to submit the necessary documents by clicking here.</a>
-        ";
+            $requirementUrl = url('http://localhost/student/apply/requirements/form/' . encrypt($apply->id));
+            $formattedData->body = "
+                <p>Your application has been approved by the coach, kindly submit the required documents.</p>
+                <br>
+                <a href='{$requirementUrl}'>Please proceed to submit the necessary documents by clicking here.</a>
+            ";
 
-        Mail::to($student->email)->send(new DefaultMail($formattedData));
+            Mail::to($student->email)->send(new DefaultMail($formattedData));
 
-        return redirect()->back()->with('success', 'Approved. The notification has been dispatched to the student.');
+            return redirect()->back()->with('success', 'Approved. The notification has been dispatched to the student.');
+        } else {
+            $data['apply'] = Apply::select('applies.*', 'applies.id as apply_id', 'students.*')
+                ->join('students', 'students.id', '=', 'applies.student_id')
+                ->where(['applies.id' => decrypt($request->route('apply_id'))])
+                ->first();
+
+            return view('backend/applies/accept', $data);
+        }
     }
     public function saveApplyRating(Request $request) {
         $apply = Apply::find($request->applyId);
@@ -128,9 +136,6 @@ class ApplyController extends Controller
         return view('backend/applies/trashed_applies', $data);
     }
     public function viewApply(Request $request) {
-        // update notification status to read
-        CommonHelper::updateNotificationStatus($request->route('notificationId'));
-
         $applyId = $request->id;
         $apply = Apply::find($applyId);
         $data['apply'] = $apply;

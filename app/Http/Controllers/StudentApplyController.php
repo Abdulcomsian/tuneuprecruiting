@@ -192,9 +192,6 @@ class StudentApplyController extends Controller
     }
 
     public function requirementForm(Request $request) {
-        // update notification status to read
-        CommonHelper::updateNotificationStatus($request->route('notificationId'));
-
         $id = decrypt($request->route('id'));
 
         $apply = Apply::find($id);

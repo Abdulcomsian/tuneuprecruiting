@@ -16,4 +16,15 @@ class NotificationController extends Controller
 
         return response($data);
     }
+
+    public function viewNotification($notificationId) {
+        $notification = Notification::findOrFail($notificationId);
+
+        $this->authorize('view', $notification);
+
+        $notification->status = 'read';
+        $notification->save();
+
+        return redirect($notification->route);
+    }
 }

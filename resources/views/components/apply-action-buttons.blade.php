@@ -32,7 +32,7 @@
     </li>
 @else
     <li class="edit">
-        <a href="{{ route('program.apply.accept', encrypt($apply->apply_id)) }}" title="Request Additional Requirements">
+        <a href="{{ route('apply.request.requirement', encrypt($apply->apply_id)) }}" title="Request Additional Requirements">
             <i class="icofont icofont-file-document"></i>
         </a>
     </li>

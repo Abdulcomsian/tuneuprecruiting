@@ -30,4 +30,9 @@ class CommonHelper
 
         return $student;
     }
+
+    public static function getUserDetailsFromId($id, $model) {
+        $studentOrCoach = $model::find($id);
+        return User::find($studentOrCoach->user_id);
+    }
 }

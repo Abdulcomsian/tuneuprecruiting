@@ -16,6 +16,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Program' => 'App\Policies\EditProgramPolicy',
         'App\Models\Coach' => 'App\Policies\RecruiterPolicy',
         'App\Models\EmailTemplate' => 'App\Policies\EditEmailTemplatePolicy',
+        'App\Models\Notification' => 'App\Policies\NotificationPolicy',
     ];
 
     /**
