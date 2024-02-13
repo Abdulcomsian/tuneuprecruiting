@@ -20,6 +20,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
+                            <x-alert />
                             <div class="table-responsive theme-scrollbar">
                                 <table class="display" id="data-table">
                                     <thead>
@@ -46,6 +47,11 @@
                                                 <td>{{ $apply->status }}</td>
                                                 <td>
                                                     <ul class="action">
+                                                        <li class="edit" style="margin-right: 8px">
+                                                            <a href="{{ url('/apply/restore/'. encrypt($apply->apply_id)) }}" title="Restore from trash">
+                                                                <i class="icofont icofont-redo"></i>
+                                                            </a>
+                                                        </li>
                                                         <li class="edit" style="margin-right: 8px">
                                                             <a href="{{ url('/apply/view/'. encrypt($apply->apply_id)) }}" title="View">
                                                                 <i class="icofont icofont-eye-alt"></i>

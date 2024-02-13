@@ -86,6 +86,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::get('/notification/messages', [ChatController::class, 'notificationMessages']);
 
     Route::get('/applies', [ApplyController::class, 'applies']);
+    Route::get('/apply/restore/{id}', [ApplyController::class, 'restoreFromTrash']);
     Route::post('/apply/rating', [ApplyController::class, 'saveApplyRating'])->name('apply.rating');
     Route::get('/apply/status/{id}/{status}', [ApplyController::class, 'changeApplyStatus']);
     Route::delete('/apply/destroy/{id}', [ApplyController::class, 'destroy'])->name('apply.destroy');

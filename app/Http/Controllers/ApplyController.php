@@ -97,7 +97,7 @@ class ApplyController extends Controller {
                 'notification_for' => 'student',
                 'user_id' => $user->id,
                 'message' => 'Your application has been approved by the coach; kindly submit the required documents.',
-                'route' => 'apply/requirements/form/' . encrypt($apply->id),
+                'route' => 'student/apply/requirements/form/' . encrypt($apply->id),
             ]);
 
             $student = User::join('students', 'students.user_id', '=', 'users.id')->where(['students.id' => $apply->student_id])->first();
@@ -122,6 +122,15 @@ class ApplyController extends Controller {
 
             return view('backend/applies/accept', $data);
         }
+    }
+    public function restoreFromTrash($applyId) {
+        $applyId = decrypt($applyId);
+
+        $apply = Apply::findOrFail($applyId);
+        $apply->trash = '';
+        $apply->save();
+
+        return redirect()->back()->with('success', 'The record has been successfully restored.');
     }
     public function saveApplyRating(Request $request) {
         $apply = Apply::find($request->applyId);

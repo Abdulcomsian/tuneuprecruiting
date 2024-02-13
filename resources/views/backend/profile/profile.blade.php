@@ -25,23 +25,8 @@
                                 <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
                             </div>
                             <div class="card-body">
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-
-                                @if(session('success') || session('danger'))
-                                    @php $className = (session('success')) ? 'success' : 'danger'; @endphp
-                                    @php $message = (session('success')) ? session('success') : session('danger'); @endphp
-                                    <div class="alert alert-{{ $className }}">
-                                        {{ $message }}
-                                    </div>
-                                @endif
+                                <x-form-errors-alert :errors="$errors" />
+                                <x-alert />
                                 <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-2">

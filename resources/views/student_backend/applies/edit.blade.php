@@ -79,22 +79,8 @@
                             <h3 class="card-title mb-0">Personal Information</h3>
                         </div>
                         <div class="card-body">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                                @if(session('success') || session('danger'))
-                                    @php $className = (session('success')) ? 'success' : 'danger'; @endphp
-                                    @php $message = (session('success')) ? session('success') : session('danger'); @endphp
-                                    <div class="alert alert-{{ $className }}">
-                                        {{ $message }}
-                                    </div>
-                                @endif
+                            <x-form-errors-alert :errors="$errors" />
+                            <x-alert />
                             <form method="POST" id="frm-program" action="{{ route('apply.update', encrypt($program->id)) }}" enctype="multipart/form-data" class="row g-3">
                                 @csrf
                                 <input type="hidden" name="program_id" value="{{ $program->id }}">

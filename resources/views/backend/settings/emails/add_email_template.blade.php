@@ -20,23 +20,8 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
-                            @if(session('success') || session('danger'))
-                                @php $className = (session('success')) ? 'success' : 'danger'; @endphp
-                                @php $message = (session('success')) ? session('success') : session('danger'); @endphp
-                                <div class="alert alert-{{ $className }}">
-                                    {{ $message }}
-                                </div>
-                            @endif
+                            <x-form-errors-alert :errors="$errors" />
+                            <x-alert />
                                 @if(isset($template))
                                     <form action="{{ route('template.update', $template->id) }}" method="post">
                                     <input type="hidden" name="_method" value="PUT" id="route-method">

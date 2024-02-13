@@ -26,6 +26,7 @@
                                         <th>Coach Name</th>
                                         <th>Program Name</th>
                                         <th>Number of Students</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -33,6 +34,7 @@
                                         <td>{{ $program->first_name ?? null }}</td>
                                         <td>{{ $program->program_name ?? null }}</td>
                                         <td>{{ $program->number_of_students ?? null }}</td>
+                                        <td>{{ $program->status }}</td>
                                     </tr>
                                 </tbody>
                             </table>
