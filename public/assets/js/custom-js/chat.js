@@ -10,11 +10,20 @@ $(document).ready(function() {
 
     $("#message-to-send").keydown(function(event) {
         if (event.which == 13) {
+            removeNoMessageLi();
             sendMessage();
         }
     });
 
+    function removeNoMessageLi() {
+        const liId = $("#no-message");
+        if (liId.length) {
+            liId.remove();
+        }
+    }
+
     $('#btn-send').click(function () {
+        removeNoMessageLi();
         sendMessage();
     })
 

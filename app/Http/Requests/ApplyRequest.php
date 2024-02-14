@@ -58,8 +58,11 @@ class ApplyRequest extends FormRequest
                         $fileCounter++;
                         break;
                     case 'radio-group':
+                        // Extract labels and join them with commas
+                        $option_labels = implode(", ", array_column($input->values, 'label'));
+
                         if ($input->required) {
-                            $this->rules["radio_{$radioCounter}"] = 'required';
+                            $this->rules["radio_{$radioCounter}"] = 'required|in:'.$option_labels;
                             $this->messages["radio_{$radioCounter}.required"] = "The {$input->label} field is required.";
                         }
                         $radioCounter++;

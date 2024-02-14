@@ -85,6 +85,7 @@
             placeholder="Date of Birth"
             value="{{ old('birth_date', $user->birth_date) }}"
             required="{{ true }}"
+            max="{{ date('Y-m-d', strtotime('-10 years')) }}"
             id="birth-date" />
     </div>
     <div class="col-sm-4 col-md-4">

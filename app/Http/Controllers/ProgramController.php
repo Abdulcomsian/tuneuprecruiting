@@ -48,7 +48,10 @@ class ProgramController extends Controller
 
         $program->apply = (!empty($programApply)) ? 'Applied' : 'Not Applied';
 
-        $program->apply_route = url('/program/apply/'. encrypt($programId));
+        $program->applyRoute = url('/program/apply/'. encrypt($programId));
+
+        $apply = Apply::where(['program_id' => $programId])->first();
+        $program->applyDetailRoute = route('program.apply.view', encrypt($apply->id));
 
         return response()->json(['program' => $program]);
     }

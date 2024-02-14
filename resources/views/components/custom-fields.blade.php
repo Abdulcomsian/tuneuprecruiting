@@ -15,7 +15,7 @@
                     <input type="hidden" name="type[]" value="{{ $field->type }}">
                 @endif
             @endif
-            @php $required = ($field->required) ? true : ''; @endphp
+            @php $required = ($field->required) ? 'required' : ''; @endphp
             @php $requiredLabel = ($field->required) ? "<span class='text-danger'>*</span>" : ''; @endphp
             <div class="col-md-4 mt-3">
                 @if($field->type == 'select')
@@ -63,7 +63,7 @@
                             name="radio_{{ $radioCounter }}"
                             {{ $required }}
                             {{ (isset($field->answer) && $value->label == $field->answer) ? 'checked' : '' }}
-                            value="{{ $field->answer ?? '' }}">
+                            value="{{ $value->label ?? '' }}">
                         <label class="form-check-label" for="radio-{{ $key }}-{{ $radioKey }}">{{ $value->label }}</label>
                     @endforeach
                     @php $radioCounter++ @endphp

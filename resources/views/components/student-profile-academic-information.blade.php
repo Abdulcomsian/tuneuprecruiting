@@ -146,8 +146,8 @@
             <x-dynamic-input
                 id="act-reading"
                 name="act_reading"
-                value="{{ old('act_total', $user->act_total) }}"
-                placeholder="ACT Total"
+                value="{{ old('act_reading', $user->act_reading) }}"
+                placeholder="ACT Reading"
                 type="text" />
         </div>
     </div>
@@ -156,7 +156,7 @@
             <x-dynamic-input
                 id="act-science"
                 name="act_science"
-                value="{{ old('act_total', $user->act_total) }}"
+                value="{{ old('act_science', $user->act_science) }}"
                 placeholder="ACT Science"
                 type="text" />
         </div>

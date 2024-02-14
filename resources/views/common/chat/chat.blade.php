@@ -35,7 +35,7 @@
                                                             <div class="status">{{ $user->role == 'admin' ? 'Admin' : $user->last_name }}</div>
                                                         </div>
                                                     </a>
-                                                    @if($user->role != 'admin')
+                                                    @if($user->role != 'admin' && $user->role != 'coach')
                                                         <div class="float-end">
                                                             <a href="{{ url('/chat/delete/'.encrypt($user->id)) }}">
                                                                 <i class="fa fa-trash text-danger"></i>
@@ -92,7 +92,7 @@
                                                             </div>
                                                         </li>
                                                     @empty
-                                                        <li>No message found.</li>
+                                                        <li id="no-message">No message found.</li>
                                                     @endforelse
                                                 </ul>
                                             </div>

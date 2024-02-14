@@ -59,6 +59,8 @@ class StudentProfileController extends Controller
         // Image upload
         $student = FileUploadHelper::handleFileUpload($request, 'profile_image', 'uploads/users_image/', $student);
         Session::put('profileImage', $student->profile_image);
+        Session::put('firstName', $student->first_name);
+        Session::put('lastName', $student->last_name);
 
         // Video upload
         $student = FileUploadHelper::handleFileUpload($request, 'short_video', 'uploads/students_videos/', $student);

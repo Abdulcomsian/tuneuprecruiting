@@ -43,6 +43,8 @@ class Student extends Model
         'act_total',
         'act_total',
         'home_town',
+        'act_reading',
+        'act_science'
     ];
 
     /**

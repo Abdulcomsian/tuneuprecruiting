@@ -217,7 +217,7 @@
             // Create a table for other fields
             htmlContent += '<table class="table">';
             for (var key in data.program) {
-                if (key !== 'video' && key !== 'apply_route') {
+                if (key !== 'video' && key !== 'applyDetailRoute' && key !== 'applyRoute') {
                     var headerText = key.replace(/_/g, ' '); // Replace underscores with spaces for headers
                     htmlContent += '<tr>';
                     htmlContent += '<td>' + headerText + '</td>';
@@ -228,9 +228,10 @@
             htmlContent += '</table>';
 
             if (data.program.apply == 'Applied') {
-                htmlContent += '<p class="mt-4 float-end">Applied</p>';
+                htmlContent += '<a href="' + data.program.applyDetailRoute + '" class="btn bg-info mt-4 float-end ml-3" type="button">Apply Details</a>'
+                htmlContent += '<a href="#"  class="btn btn-default mt-4 float-end disabled" disabled type="button">Applied</a>'
             } else {
-                htmlContent += '<a href="' + data.program.apply_route + '" class="btn bg-primary mt-4 float-end" type="button">Apply</a>'
+                htmlContent += '<a href="' + data.program.applyRoute + '" class="btn bg-primary mt-4 float-end" type="button">Apply</a>'
             }
             return htmlContent;
         }
