@@ -40,6 +40,7 @@ class ProgramController extends Controller
 
     public function programDetails($programId) {
         $programId = decrypt($programId);
+
         $program = Program::select('programs.video', 'programs.program_name', 'programs.program_type', 'programs.program_for', 'programs.details')
             ->where(['id' => $programId])
             ->first();
@@ -50,8 +51,10 @@ class ProgramController extends Controller
 
         $program->applyRoute = url('/program/apply/'. encrypt($programId));
 
-        $apply = Apply::where(['program_id' => $programId])->first();
-        $program->applyDetailRoute = route('program.apply.view', encrypt($apply->id));
+        $apply = Apply::where(['program_id' => $programId, 'student_id' => Session::get('studentId')])->first();
+        if ($apply) {
+            $program->applyDetailRoute = route('program.apply.view', encrypt($apply->id));
+        }
 
         return response()->json(['program' => $program]);
     }
