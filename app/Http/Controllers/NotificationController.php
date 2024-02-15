@@ -25,6 +25,6 @@ class NotificationController extends Controller
         $notification->status = 'read';
         $notification->save();
 
-        return redirect($notification->route);
+        return redirect()->to($notification->route);
     }
 }
