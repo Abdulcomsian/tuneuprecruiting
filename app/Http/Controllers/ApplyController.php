@@ -127,7 +127,7 @@ class ApplyController extends Controller {
         $applyId = decrypt($applyId);
 
         $apply = Apply::findOrFail($applyId);
-        $apply->trash = '';
+        $apply->trash = 'active';
         $apply->save();
 
         return redirect()->back()->with('success', 'The record has been successfully restored.');

@@ -113,7 +113,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::post('/apply/update/{id}', [StudentApplyController::class, 'updateApply'])->name('apply.update');
 
     Route::get('/notifications', [NotificationController::class, 'getNotifications']);
-    Route::get('/notification/view/{notificatonId}', [NotificationController::class, 'viewNotification']);
+    Route::get('/notification/view/{notificationId}', [NotificationController::class, 'viewNotification']);
 
     Route::get('send-mail', [MailController::class, 'index']);
 });
