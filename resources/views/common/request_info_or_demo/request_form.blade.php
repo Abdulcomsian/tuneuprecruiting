@@ -28,23 +28,29 @@
                                         </ul>
                                     </div>
                                 @endif
+
                                 <div class="form-group">
                                     <div class="row g-2">
                                         <div class="col-12">
                                             <x-dynamic-input
                                                 type="text"
-                                                placeholder="University Name"
+                                                placeholder="College/University Name"
                                                 name="university_name"
                                                 required="true"
                                                 value="{{ old('university_name') }}"
                                                 class="form-control"
                                                 id="university-name" />
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row g-2">
+                                        <div class="col-12">
+                                            <x-dynamic-input
+                                                type="text"
+                                                placeholder="Contact Name"
+                                                name="contact_name"
+                                                required="true"
+                                                value="{{ old('contact_name') }}"
+                                                class="form-control"
+                                                id="text" />
+                                        </div>
                                         <div class="col-12">
                                             <x-dynamic-input
                                                 type="text"
@@ -54,6 +60,16 @@
                                                 value="{{ old('email') }}"
                                                 class="form-control"
                                                 id="email" />
+                                        </div>
+                                        <div class="col-12">
+                                            <x-dynamic-input
+                                                type="text"
+                                                placeholder="Phone Number"
+                                                name="phone_number"
+                                                required="true"
+                                                value="{{ old('phone_number') }}"
+                                                class="form-control"
+                                                id="text" />
                                         </div>
                                         <div class="col-12">
                                             @component('components.select-list', [

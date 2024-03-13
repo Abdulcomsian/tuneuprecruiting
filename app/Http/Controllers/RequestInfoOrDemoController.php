@@ -37,7 +37,9 @@ class RequestInfoOrDemoController extends Controller
             <p>A {$request->college_or_university} has sought a demonstration, and the following information provides the details.</p>
             <br />
             <p>{$request->college_or_university}: {$request->university_name}</p>
+            <p>Contact Name: {$request->contact_name}</p>
             <p>Email: {$request->email}</p>
+            <p>Phone Number: {$request->phone_number}</p>
             <p>Info: {$request->info}</p>
         ";
 
