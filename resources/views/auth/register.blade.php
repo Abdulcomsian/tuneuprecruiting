@@ -24,10 +24,14 @@
                                 <div class="form-group">
                                     <div class="row g-2">
                                         <div class="col-6">
-                                            <label class="col-form-label pt-0">Your Name</label>
-                                            <input class="form-control" name="name" value="{{ old('name') }}" type="text" required="" placeholder="name">
+                                            <label class="col-form-label pt-0">First Name</label>
+                                            <input class="form-control" name="name" value="{{ old('name') }}" type="text" required="" placeholder="first name">
                                         </div>
                                         <div class="col-6">
+                                            <label class="col-form-label pt-0">Last Name</label>
+                                            <input class="form-control" name="last_name" value="{{ old('last_name') }}" type="text" required="" placeholder="last name">
+                                        </div>
+                                        <div class="col-12">
                                             <label class="col-form-label pt-0">Email</label>
                                             <input class="form-control" name="email" value="{{ old('email') }}" type="email" required="" placeholder="Test@gmail.com">
                                         </div>

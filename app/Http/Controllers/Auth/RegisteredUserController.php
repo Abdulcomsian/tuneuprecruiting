@@ -39,14 +39,9 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // Split the string into parts based on the first space
-        $nameAndRest = explode(' ', $request->name, 2);
+        $firstName = $request->name;
 
-        // The first part is the name
-        $firstName = $nameAndRest[0];
-
-        // The second part is the rest of the string
-        $lastName = isset($nameAndRest[1]) ? $nameAndRest[1] : '';
+        $lastName = $request->last_name;
 
         $user = User::create([
             'name' => $firstName,
