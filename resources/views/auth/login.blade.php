@@ -26,12 +26,24 @@
 
                                 <div class="form-group">
                                     <label class="col-form-label">Email Address</label>
-                                    <input class="form-control" name="email" type="email" value="{{ old('email') }}" placeholder="Test@gmail.com">
+                                    <input
+                                        class="form-control"
+                                        name="email"
+                                        type="email"
+                                        value="{{ old('email') }}"
+                                        placeholder="Test@gmail.com"
+                                        autocomplete="email">
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label">Password</label>
                                     <div class="form-input position-relative">
-                                        <input class="form-control" type="password" name="password" required="" placeholder="*********">
+                                        <input
+                                            class="form-control"
+                                            type="password"
+                                            name="password"
+                                            required=""
+                                            placeholder="*********"
+                                            autocomplete="current-password">
                                     </div>
                                 </div>
                                 <div class="form-group mb-0">
