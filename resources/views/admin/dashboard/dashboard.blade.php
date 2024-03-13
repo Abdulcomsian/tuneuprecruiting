@@ -24,20 +24,26 @@
                                 <table class="display" id="data-table">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Last Name</th>
-                                            <th>Website</th>
-                                            <th>About</th>
-                                            <th><x-list-view-action-heading /></th>
+                                            <th scope="col">University/College Name</th>
+                                            <th scope="col">Program Type</th>
+                                            <th scope="col">First Name</th>
+                                            <th scope="col">Last Name</th>
+                                            <th scope="col">Website</th>
+                                            <th scope="col">About</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col"><x-list-view-action-heading /></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($users as $user)
                                             <tr class="border-bottom-secondary">
-                                                <th scope="row">{{ $user->first_name }}</th>
+                                                <td>{{ $user->college_or_university }}</td>
+                                                <td>{{ $user->program_type }}</td>
+                                                <td>{{ $user->first_name }}</td>
                                                 <td>{{ $user->last_name }}</td>
                                                 <td>{{ $user->website }}</td>
                                                 <td>{{ $user->about_me }}</td>
+                                                <td>{{ $user->email }}</td>
                                                 <td>
                                                     <ul class="action">
                                                         <li class="delete">
