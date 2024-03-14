@@ -94,19 +94,16 @@ class ChatController extends Controller
         $user = Auth::user();
         $role = $user->role;
 
-        $userId = Session::get(strtolower($role) . 'Id');
-
         if ($role === 'coach') {
-            $where = ['student_id' => $id, 'status' => 'unread', 'chats.sender' => 'Student', 'chats.coach_id' => $userId];
+            $where = ['chats.sender_id' => $id, 'status' => 'unread', 'chats.sender_type' => 'student', 'chats.receiver_id' => $user->id];
             $profileFields = ['students.profile_image', 'students.first_name'];
         } else {
-            $where = ['coach_id' => $id, 'status' => 'unread', 'chats.sender' => 'Coach', 'chats.student_id' => $userId];
+            $where = ['chats.sender_id' => $id, 'status' => 'unread', 'chats.sender_type' => 'coach', 'chats.receiver_id' => $user->id];
             $profileFields = ['coaches.profile_image', 'coaches.first_name'];
         }
 
-        $receiver = $role == 'coach' ? 'student' : 'coach';
         $newMessages = Chat::select('chats.*', ...$profileFields)
-            ->join($role === 'coach' ? 'students' : 'coaches', $role === 'coach' ? 'students.id' : 'coaches.id', '=', "chats.{$receiver}_id")
+            ->join($role === 'coach' ? 'students' : 'coaches', $role === 'coach' ? 'students.user_id' : 'coaches.user_id', '=', "chats.sender_id")
             ->where($where)
             ->get();
 

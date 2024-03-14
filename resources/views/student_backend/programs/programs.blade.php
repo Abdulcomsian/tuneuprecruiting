@@ -46,21 +46,9 @@
                                             <td>{{ $program->details }}</td>
                                             <td>
                                                 <ul class="action">
-                                                    @if(isAccepted($applyDetails))
-                                                        @if(checkForApplyRequirements($applyDetails->id))
-                                                            <li class="edit">
-                                                                <a href="{{ url('/student/apply/requirements/form/'.encrypt($applyDetails->id)) }}"
-                                                                   title="Submit Requirements">
-                                                                    <i class="icofont icofont-file-document {{ $formatting['textColor'] }}"></i>
-                                                                </a>
-                                                            </li>
-                                                        @endif
-                                                        <li class="edit">
-                                                            <a class="{{ $formatting['textColor'] }}" title="Chat"
-                                                               href="{{ route('chat', encrypt($program->user_id)) }}">
-                                                                <i class="icofont icofont-chat {{ $formatting['textColor'] }}"></i></a>
-                                                        </li>
-                                                    @endif
+                                                    <x-student-additional-requirement-button :apply="$applyDetails" :formatting="$formatting" :userId="$program->user_id" />
+                                                    <x-student-chat-button :apply="$applyDetails" :formatting="$formatting" :userId="$program->user_id" />
+
                                                     <li class="edit">
                                                         <a
                                                             class="{{ $formatting['textColor'] }} btn-view"
@@ -231,7 +219,7 @@
                 htmlContent += '<a href="' + data.program.applyDetailRoute + '" class="btn bg-info mt-4 float-end ml-3" type="button">Apply Details</a>'
                 htmlContent += '<a href="#"  class="btn btn-default mt-4 float-end disabled" disabled type="button">Applied</a>'
             } else {
-                htmlContent += '<a href="' + data.program.applyRoute + '" class="btn bg-primary mt-4 float-end" type="button">Apply</a>'
+                htmlContent += '<a href="' + data.program.applyRoute + '" class="btn bg-primary mt-4 float-end" type="button">Apply Now</a>'
             }
             return htmlContent;
         }

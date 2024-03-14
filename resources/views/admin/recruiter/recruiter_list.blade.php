@@ -45,16 +45,16 @@
                             <div class="table-responsive theme-scrollbar">
                                 <table class="display" id="data-table">
                                     <thead>
-                                    <tr>
-                                        <th scope="col">University/College Name</th>
-                                        <th scope="col">Program Type</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Website</th>
-                                        <th scope="col">About</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col"><x-list-view-action-heading /></th>
-                                    </tr>
+                                        <tr>
+                                            <th scope="col">University/College Name</th>
+                                            <th scope="col">Program Type</th>
+                                            <th scope="col">First Name</th>
+                                            <th scope="col">Last Name</th>
+                                            <th scope="col">Website</th>
+                                            <th scope="col">About</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col"><x-list-view-action-heading /></th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($recruiters as $recruiter)

@@ -30,6 +30,7 @@
                                             <th>Country</th>
                                             <th>State</th>
                                             <th>Program</th>
+                                            <th>Program Type</th>
                                             <th>Status</th>
                                             <th><x-list-view-action-heading /></th>
                                         </tr>
@@ -43,6 +44,7 @@
                                                 <td>{{ $apply->country }}</td>
                                                 <td>{{ $apply->state }}</td>
                                                 <td>{{ $apply->program_name }}</td>
+                                                <td>{{ $apply->program_type }}</td>
                                                 <td>{{ $apply->status }}</td>
                                                 <td>
                                                     @php $ratingName = 'apply_rating_'.date('his').rand(0,99999) @endphp

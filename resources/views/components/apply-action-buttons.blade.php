@@ -11,7 +11,7 @@
 
 </li>
 <li class="edit" style="margin-right: 8px">
-    <a href="{{ route('chat', encrypt($apply->student_id)) }}" title="Chat">
+    <a href="{{ route('chat', encrypt($apply->user_id)) }}" title="Chat">
         @if($apply->talking == 'talking')
             <i class="icofont icofont-ui-text-chat"></i>
         @else

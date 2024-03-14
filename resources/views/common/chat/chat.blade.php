@@ -87,7 +87,7 @@
                                                         <li class="{{ $clearFix }}">
                                                             <div class="message {{ $className }}">
                                                                 <img class="rounded-circle {{ $float }} chat-user-img img-30" src="{{ asset('uploads/users_image/'.$profileImage) }}" alt="">
-                                                                <div class="message-data {{ $textEnd }}"><span class="message-data-time">{{ $message->created_at }}</span></div>
+                                                                <div class="message-data {{ $textEnd }}"><span class="message-data-time">{{ $message->created_at->diffForHumans() }}</span></div>
                                                                 {{ $message->message }}
                                                             </div>
                                                         </li>

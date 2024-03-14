@@ -55,7 +55,7 @@
                                         <iframe width="100%" class="embed-responsive-item" src="{{ $videoUrl }}" allowfullscreen></iframe>
                                     </div>
                                     <div class="mb-3">
-                                        <x-input-label value="Upload a CV:" labelFor="fileInput" />
+                                        <x-input-label value="Upload your CV / Resume" labelFor="fileInput" />
                                         <x-dynamic-input name="cv" type="file" accept=".doc,.ppt,.pdf" />
                                     </div>
                                     <div class="mb-3">
@@ -63,7 +63,7 @@
                                         <iframe width="100%" class="embed-responsive-item" src="{{ $videoUrl }}" allowfullscreen></iframe>
                                     </div>
                                     <div class="mb-3">
-                                        <x-input-label value="Upload a video:" labelFor="fileInput" />
+                                        <x-input-label value="Upload Recruitment Video Highlights" labelFor="fileInput" />
                                         <x-dynamic-input name="short_video" type="file" />
                                     </div>
                             </div>

@@ -47,21 +47,8 @@
                                                 <td>{{ $apply->created_at }}</td>
                                                 <td>
                                                     <ul class="action">
-                                                        @if(isAccepted($apply))
-                                                            @if(checkForApplyRequirements($apply->id))
-                                                                <li class="edit">
-                                                                    <a href="{{ url('/student/apply/requirements/form/'.encrypt($apply->apply_id)) }}"
-                                                                       title="Submit Requirements">
-                                                                        <i class="icofont icofont-file-document {{ $formatting['textColor'] }}"></i>
-                                                                    </a>
-                                                                </li>
-                                                            @endif
-                                                            <li class="edit">
-                                                                <a class="{{ $formatting['textColor'] }}" title="Chat"
-                                                                   href="{{ route('chat', encrypt($userId)) }}">
-                                                                    <i class="icofont icofont-chat {{ $formatting['textColor'] }}"></i></a>
-                                                            </li>
-                                                        @endif
+                                                        <x-student-additional-requirement-button :apply="$apply" :formatting="$formatting" :userId="$userId" />
+                                                        <x-student-chat-button :apply="$apply" :formatting="$formatting" :userId="$userId" />
                                                         <li class="edit">
                                                             <a href="{{ route('apply.edit', encrypt($apply->apply_id)) }}">
                                                                 <i class="fa fa-pencil-square-o {{ $formatting['textColor'] }}"></i>

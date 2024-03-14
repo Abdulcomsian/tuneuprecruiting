@@ -7,6 +7,9 @@
 @if(!empty($customFields))
     <div class="row">
         @foreach($customFields as $key => $field)
+            @php
+                $field->label = trim(str_replace('&nbsp;', '', html_entity_decode($field->label)));
+            @endphp
             @if($field->type !== 'file' && $field->type !== 'checkbox-group' && $field->type !== 'radio-group')
                 @if($field->type == 'select' && $field->multiple)
 

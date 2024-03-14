@@ -76,9 +76,10 @@ class ApplyController extends Controller {
         return redirect()->back()->with('success', 'Deleted.');
     }
     public function getAppliesOfCoach($where) {
-        return Apply::select('programs.*', 'applies.*', 'applies.id as apply_id', 'students.first_name', 'students.id as student_id', 'students.last_name', 'students.graduation_year', 'students.country', 'students.state')
+        return Apply::select('programs.*', 'applies.*', 'applies.id as apply_id', 'students.first_name', 'students.id as student_id', 'students.last_name', 'students.graduation_year', 'students.country', 'students.state', 'users.id as user_id')
             ->join('programs', 'programs.id', '=', 'applies.program_id')
             ->join('students', 'students.id', '=', 'applies.student_id')
+            ->join('users', 'students.user_id', '=', 'users.id')
             ->where($where)
             ->orderBy('applies.id', 'desc')
             ->get();

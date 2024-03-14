@@ -125,6 +125,7 @@ class StudentApplyController extends Controller
     }
 
     private function handleFileInputs($request, $data, $module) {
+
         $file_label = $request->file_label;
         $file_type = $request->file_type;
 
@@ -206,6 +207,10 @@ class StudentApplyController extends Controller
 
     private function saveInput($type, $label, $answer, $data, $module, $updateApplyId = false)
     {
+        if ($module == 'App\Models\StudentAdditionalRequirement') {
+            $updateApplyId = false;
+        }
+
         $tableData = array_merge($data, [
             'label' => $label,
             'type' => $type,
@@ -232,6 +237,7 @@ class StudentApplyController extends Controller
     }
 
     public function submitRequirements(ApplyRequest $request) {
+
         $data = ['apply_id' => $request->apply_id, 'request_requirement_id' => $request->requirement_id];
 
         $apply = Apply::join('programs', 'programs.id', '=', 'applies.program_id')->first();

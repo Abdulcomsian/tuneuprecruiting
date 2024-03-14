@@ -53,7 +53,7 @@
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Video</h3>
+                            <h3>Coaches / Program Video</h3>
                         </div>
                         <div class="card-block row">
                             <div class="col-sm-12 col-lg-12 col-xl-12">
@@ -64,7 +64,7 @@
                                             Your browser does not support the video tag.
                                         </video>
                                     @else
-                                        <p class="text-center">No video found.</p>
+                                        <p class="text-center">No Coach Video Or Program Video Found.</p>
                                     @endif
                                 </div>
                             </div>
@@ -110,6 +110,9 @@
                         </div>
                     </div>
                     <div class="card">
+                        <div class="card-header">
+                            <h3>Please complete Coaches Required Fields.</h3>
+                        </div>
                         <div class="card-body">
                             <x-custom-fields :customFields=$customFields />
                             <div class="col-md-12">
