@@ -30,8 +30,8 @@ use App\Http\Controllers\RequestInfoOrDemoController;
 */
 
 Route::get('/', function () {
-    return redirect('/dashboard');
-    //return view('frontend/index');
+    //return redirect('/dashboard');
+    return view('frontend/index');
 });
 
 Route::get('/dashboard', function () {

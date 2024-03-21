@@ -11,9 +11,21 @@
                         <div class="login-main">
                             <form class="theme-form"  method="POST" action="{{ route('login') }}">
                                 @csrf
-                                <h3>Sign in to account</h3>
-                                <p>Enter your email & password to login</p>
+                                @if($userType == 'student')
+                                    <h3>Prospective Student Athletes</h3>
+                                @elseif($userType == 'recruiter')
+                                    <h3>University/College Coaches</h3>
+                                @else
+                                    <h3>Sign in to account</h3>
+                                @endif
 
+                                @if($userType == 'student')
+                                    <p>Sign in or create account</p>
+                                @elseif($userType == 'recruiter')
+                                    <p>Sign in or Request Login Information</p>
+                                @else
+                                    <p>Enter your email & password to login</p>
+                                @endif
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
@@ -54,8 +66,12 @@
                                     <a class="link" href="{{ route('password.request') }}">Forgot password?</a>
                                     <button class="btn btn-primary btn-block w-100" type="submit">Sign in</button>
                                 </div>
-                                <p class="mt-4 mb-0 text-center">Don't have account?<a class="ms-2" href="{{ route('register') }}">Create Account</a></p>
-                                <p class="mt-4 mb-0 text-center"><a class="ms-2" href="{{ url('request/info') }}">Request Info or Demo</a></p>
+                                @if($userType == 'student')
+                                    <p class="mt-4 mb-0 text-center">Don't have a student account?<a class="ms-2" href="{{ route('register') }}">Create an Account</a></p>
+                                @endif
+                                @if($userType == 'recruiter')
+                                    <p class="mt-4 mb-0 text-center"><a class="ms-2" href="{{ url('request/info') }}">Click here to request a demo or to receive login information</a></p>
+                                @endif
                             </form>
                         </div>
                     </div>

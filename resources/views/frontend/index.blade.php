@@ -11,13 +11,24 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <nav class="navbar navbar-light p-0" id="navbar-example2"><a class="navbar-brand" href="javascript:void(0)"> <img class="img-fluid img-90" src="{{ asset('assets/images/logo/logo-3.png') }}" alt=""></a>
+                        <nav class="navbar navbar-light p-0" id="navbar-example2"><a class="navbar-brand" href="javascript:void(0)"> <img class="img-fluid img-90" src="{{ asset('assets/images/logo/logo-1.png') }}" alt=""></a>
                             <ul class="landing-menu nav nav-pills">
                                 <li class="nav-item menu-back">back<i class="fa fa-angle-right"></i></li>
                                 <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#demo">Layout</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#Applications">Applications</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#core-feature">Core Feature </a></li>
                             </ul>
-                            <div class="buy-block"><a class="btn-landing btn-white" href="{{ route('login') }}">Login</a>
-                                <div class="toggle-menu"><i class="fa fa-bars"></i></div>
+                            <div class="buy-block">
+                                <div class="dropdown">
+                                    <button class="btn-landing btn-white dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Login
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+                                        <li><a class="dropdown-item" href="{{ url('/login?user=student') }}">Student Login</a></li>
+                                        <li><a class="dropdown-item" href="{{ url('/login?user=recruiter') }}">Recruiter Login</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </nav>
                     </div>
@@ -29,30 +40,12 @@
         <section class="landing-home" id="home"><img class="img-fluid bg-img-cover" src="{{ asset('assets/images/landing/landing-home/home-bg.jpg') }}" alt="">
             <div class="container-fluid">
                 <div class="row align-items-center">
-                    <ul class="shape">
-                        <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-1.png') }}" alt=""></li>
-                        <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-2.png') }}" alt=""></li>
-                        <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-3.png') }}" alt=""></li>
-                    </ul>
-                    <div class="col-lg-7 animat-block">
-                        <figure class="cd-image-container"><img src="{{ asset('assets/images/landing/landing-home/03.png') }}" alt="Original Image"><span class="cd-image-label" data-type="original"> </span>
-                            <div class="cd-resize-img"><img src="{{ asset('assets/images/landing/landing-home/02.png') }}" alt="Modified Image"><span class="cd-image-label" data-type="modified"> </span></div><span class="cd-handle"></span>
-                        </figure>
-                        <ul>
-                            <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/01.png') }}" alt=""></li>
-                            <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/05.png') }}" alt=""></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="landing-home-contain">
+                    <div class="col-lg-12 animat-block">
+                        <div class="landing-home-contain container-fluid">
                             <div>
-                                <div><img class="img-fluid" src="{{ asset('assets/images/logo/logo-3.png') }}" alt=""></div>
                                 <h2>Bootstrap Admin Template</h2>
                                 <h3>Faster, Lighter & Dev. Friendly</h3>
                                 <p> When it comes to dashboard or web apps. One of the first impression you consider is the design. It needs to be high quality enough otherwise you will lose potential users due to bad design.</p>
-                                <ul class="btn-home-list">
-                                    <li><a class="btn btn-primary" href="index.html" target="_blank"><span>View Demo</span></a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -77,21 +70,21 @@
                             <div class="tab-pane fade show active" id="light-links" role="tabpanel" aria-labelledby="light-link">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="layout-box"><a href="index.html" target="_blank"> <img class="img-fluid" src="{{ asset('assets/images/landing/layout/1.jpg') }}" alt=""></a>
+                                        <div class="layout-box"><a href="index.html" target="_blank"> <img class="img-fluid" src="../assets/images/landing/layout/1.jpg" alt=""></a>
                                             <ul class="d-flex">
                                                 <li><a class="light-layouts" href="index.html" target="_blank"> <span>View Demo</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="layout-box"><a href="dashboard-02.html" target="_blank"><img class="img-fluid" src="{{ asset('assets/images/landing/layout/2.jpg') }}" alt=""></a>
+                                        <div class="layout-box"><a href="dashboard-02.html" target="_blank"><img class="img-fluid" src="../assets/images/landing/layout/2.jpg" alt=""></a>
                                             <ul class="d-flex">
                                                 <li><a class="light-layouts" href="dashboard-02.html" target="_blank" data-attr="box-layout"> <span>View Demo</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="layout-box"><a href="general-widget.html" target="_blank"><img class="img-fluid" src="{{ asset('assets/images/landing/layout/3.jpg') }}" alt=""></a>
+                                        <div class="layout-box"><a href="general-widget.html" target="_blank"><img class="img-fluid" src="../assets/images/landing/layout/3.jpg" alt=""></a>
                                             <ul class="d-flex">
                                                 <li><a class="light-layouts" href="general-widget.html" target="_blank"> <span>View Demo</span></a></li>
                                             </ul>
@@ -102,21 +95,21 @@
                             <div class="tab-pane fade" id="dark-links" role="tabpanel" aria-labelledby="dark-link">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="layout-box"><a href="index.html" target="_blank"><img class="img-fluid" src="{{ asset('assets/images/landing/layout/4.jpg') }}" alt=""></a>
+                                        <div class="layout-box"><a href="index.html" target="_blank"><img class="img-fluid" src="../assets/images/landing/layout/4.jpg" alt=""></a>
                                             <ul class="d-flex">
                                                 <li><a class="dark-layouts" href="index.html" target="_blank"> <span>View Demo</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="layout-box"><a href="dashboard-02.html" target="_blank"><img class="img-fluid" src="{{ asset('assets/images/landing/layout/5.jpg') }}" alt=""></a>
+                                        <div class="layout-box"><a href="dashboard-02.html" target="_blank"><img class="img-fluid" src="../assets/images/landing/layout/5.jpg" alt=""></a>
                                             <ul class="d-flex">
                                                 <li><a class="dark-layouts" href="dashboard-02.html" target="_blank"> <span>View Demo</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="layout-box"><a href="general-widget.html" target="_blank"><img class="img-fluid" src="{{ asset('assets/images/landing/layout/6.jpg') }}" alt=""></a>
+                                        <div class="layout-box"><a href="general-widget.html" target="_blank"><img class="img-fluid" src="../assets/images/landing/layout/6.jpg" alt=""></a>
                                             <ul class="d-flex">
                                                 <li><a class="dark-layouts" href="general-widget.html" target="_blank"> <span>View Demo</span></a></li>
                                             </ul>
@@ -127,21 +120,21 @@
                             <div class="tab-pane fade" id="box-links" role="tabpanel" aria-labelledby="box-link">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="layout-box"><a href="index.html" target="_blank"><img class="img-fluid" src="{{ asset('assets/images/landing/layout/7.jpg') }}" alt=""></a>
+                                        <div class="layout-box"><a href="index.html" target="_blank"><img class="img-fluid" src="../assets/images/landing/layout/7.jpg" alt=""></a>
                                             <ul class="d-flex">
                                                 <li><a class="box-layouts" href="index.html" target="_blank"> <span>View Demo</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="layout-box"><a href="dashboard-02.html" target="_blank"><img class="img-fluid" src="{{ asset('assets/images/landing/layout/8.jpg') }}" alt=""></a>
+                                        <div class="layout-box"><a href="dashboard-02.html" target="_blank"><img class="img-fluid" src="../assets/images/landing/layout/8.jpg" alt=""></a>
                                             <ul class="d-flex">
                                                 <li><a class="box-layouts" href="dashboard-02.html" target="_blank"> <span>View Demo</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="layout-box"><a href="general-widget.html" target="_blank"><img class="img-fluid" src="{{ asset('assets/images/landing/layout/9.jpg') }}" alt=""></a>
+                                        <div class="layout-box"><a href="general-widget.html" target="_blank"><img class="img-fluid" src="../assets/images/landing/layout/9.jpg" alt=""></a>
                                             <ul class="d-flex">
                                                 <li><a class="box-layouts" href="general-widget.html" target="_blank"> <span>View Demo</span></a></li>
                                             </ul>
@@ -166,13 +159,13 @@
                 <div class="row demo-block">
                     <div class="col-md-6 wow pulse" style="visibility: visible; animation-name: pulse;">
                         <div class="demo-box">
-                            <div class="img-wrraper"><img class="img-fluid" src="{{ asset('assets/images/landing/demo/1.jpg') }}" alt=""></div>
+                            <div class="img-wrraper"><img class="img-fluid" src="../assets/images/landing/demo/1.jpg" alt=""></div>
                             <div class="demo-title"><a class="btn" href="index.html" data-bs-original-title="" title="" target="_blank">Vertical Sidebar</a></div>
                         </div>
                     </div>
                     <div class="col-md-6 wow pulse" style="visibility: visible; animation-name: pulse;">
                         <div class="demo-box">
-                            <div class="img-wrraper"><img class="img-fluid" src="{{ asset('assets/images/landing/demo/2.jpg') }}" alt=""></div>
+                            <div class="img-wrraper"><img class="img-fluid" src="../assets/images/landing/demo/2.jpg" alt=""></div>
                             <div class="demo-title"><a class="btn" href="dashboard-02.html" data-bs-original-title="" title="" target="_blank">Horizontal Sidebar</a></div>
                         </div>
                     </div>
@@ -192,59 +185,59 @@
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                 <ul class="framworks-list">
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/bootstrap.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/bootstrap.png" alt=""></div>
                                         <h6>Bootstrap 5</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/css.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/css.png" alt=""></div>
                                         <h6>CSS 3</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/sass.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/sass.png" alt=""></div>
                                         <h6>Sass</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/pug.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/pug.png" alt=""></div>
                                         <h6>Pug</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/npm.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/npm.png" alt=""></div>
                                         <h6>NPM</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/gulp.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/gulp.png" alt=""></div>
                                         <h6>Gulp</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/kit.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/kit.png" alt=""></div>
                                         <h6>Starter Kit</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/uikits.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/uikits.png" alt=""></div>
                                         <h6>40+ UI Kits</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/layout.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/layout.png" alt=""></div>
                                         <h6>8+ Layout</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/builders.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/builders.png" alt=""></div>
                                         <h6>Builders</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/iconset.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/iconset.png" alt=""></div>
                                         <h6>11 Icon Sets</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/forms.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/forms.png" alt=""></div>
                                         <h6>Forms</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/table.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/table.png" alt=""></div>
                                         <h6>Tables</h6>
                                     </li>
                                     <li class="bounceIn wow">
-                                        <div> <img src="{{ asset('assets/images/landing/icon/html/apps.png') }}" alt=""></div>
+                                        <div> <img src="../assets/images/landing/icon/html/apps.png" alt=""></div>
                                         <h6>17+ Apps</h6>
                                     </li>
                                 </ul>
@@ -540,20 +533,20 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="screenshot-contain"><img class="mobile-light-left" src="{{ asset('assets/images/landing/responsive-card/light.png') }}" alt="light"><img class="mob-mocup img-fluid" src="{{ asset('assets/images/landing/responsive-card/screenshot-mob.png') }}" alt="screenshot-mob"><img class="mobile-light-right" src="{{ asset('assets/images/landing/responsive-card/light-right.png') }}" alt="light-right">
+                        <div class="screenshot-contain"><img class="mobile-light-left" src="../assets/images/landing/responsive-card/light.png" alt="light"><img class="mob-mocup img-fluid" src="../assets/images/landing/responsive-card/screenshot-mob.png" alt="screenshot-mob"><img class="mobile-light-right" src="../assets/images/landing/responsive-card/light-right.png" alt="light-right">
                             <div class="screenshot-carousel owl-carousel owl-theme">
-                                <div class="screenshot-item"><img src="{{ asset('assets/images/landing/responsive-card/12.jpg') }}" alt="app"></div>
-                                <div class="screenshot-item"><img src="{{ asset('assets/images/landing/responsive-card/2.jpg') }}" alt="app"></div>
-                                <div class="screenshot-item"><img src="{{ asset('assets/images/landing/responsive-card/3.jpg') }}" alt="app"></div>
-                                <div class="screenshot-item"><img src="{{ asset('assets/images/landing/responsive-card/4.jpg') }}" alt="app"></div>
-                                <div class="screenshot-item"><img src="{{ asset('assets/images/landing/responsive-card/5.jpg') }}" alt="app"></div>
-                                <div class="screenshot-item"><img src="{{ asset('assets/images/landing/responsive-card/6.jpg') }}" alt="app"></div>
-                                <div class="screenshot-item"><img src="{{ asset('assets/images/landing/responsive-card/7.jpg') }}" alt="app"></div>
-                                <div class="screenshot-item"><img src="{{ asset('assets/images/landing/responsive-card/8.jpg') }}" alt="app"></div>
-                                <div class="screenshot-item"><img src="{{ asset('assets/images/landing/responsive-card/9.jpg') }}" alt="app"></div>
-                                <div class="screenshot-item"><img src="{{ asset('assets/images/landing/responsive-card/10.jpg') }}" alt="app"></div>
-                                <div class="screenshot-item"><img src="{{ asset('assets/images/landing/responsive-card/11.jpg') }}" alt="app"></div>
-                                <div class="screenshot-item"><img src="{{ asset('assets/images/landing/responsive-card/1.jpg') }}" alt="app"></div>
+                                <div class="screenshot-item"><img src="../assets/images/landing/responsive-card/12.jpg" alt="app"></div>
+                                <div class="screenshot-item"><img src="../assets/images/landing/responsive-card/2.jpg" alt="app"></div>
+                                <div class="screenshot-item"><img src="../assets/images/landing/responsive-card/3.jpg" alt="app"></div>
+                                <div class="screenshot-item"><img src="../assets/images/landing/responsive-card/4.jpg" alt="app"></div>
+                                <div class="screenshot-item"><img src="../assets/images/landing/responsive-card/5.jpg" alt="app"></div>
+                                <div class="screenshot-item"><img src="../assets/images/landing/responsive-card/6.jpg" alt="app"></div>
+                                <div class="screenshot-item"><img src="../assets/images/landing/responsive-card/7.jpg" alt="app"></div>
+                                <div class="screenshot-item"><img src="../assets/images/landing/responsive-card/8.jpg" alt="app"></div>
+                                <div class="screenshot-item"><img src="../assets/images/landing/responsive-card/9.jpg" alt="app"></div>
+                                <div class="screenshot-item"><img src="../assets/images/landing/responsive-card/10.jpg" alt="app"></div>
+                                <div class="screenshot-item"><img src="../assets/images/landing/responsive-card/11.jpg" alt="app"></div>
+                                <div class="screenshot-item"><img src="../assets/images/landing/responsive-card/1.jpg" alt="app"></div>
                             </div>
                         </div>
                     </div>
@@ -643,5 +636,4 @@
         </section>
         <!--footer end-->
     </div>
-    <!-- latest jquery-->
 </x-guest-layout>

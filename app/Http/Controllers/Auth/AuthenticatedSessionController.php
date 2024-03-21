@@ -20,7 +20,9 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        $data['userType'] = $_GET['user'] ?? 'admin';
+
+        return view('auth.login', $data);
     }
 
     /**

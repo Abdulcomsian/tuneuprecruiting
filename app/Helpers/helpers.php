@@ -66,23 +66,6 @@ if (!function_exists('getColumnNameOfBasicInformation')) {
             'guardians_phone_number' => 'Guardians Phone Number',
             'program_type' => 'Program Type',
             'gender' => 'Gender',
-            'high_school_name' => 'High School Name',
-            'registered_with_ncaa' => 'Registered With Ncaa',
-            'ncaa_id' => 'Ncaa ID',
-            'gpa' => 'GPA',
-            'sat_test_date' => 'Sat Test Date',
-            'sat_reading' => 'Sat Reading',
-            'sat_writing' => 'Sat Writing',
-            'sat_math' => 'Sat Math',
-            'sat_total' => 'Sat Total',
-            'act_test_date' => 'ACT Test Date',
-            'act_sum_score' => 'ACT Sum Score',
-            'act_composite' => 'ACT Composite',
-            'act_english' => 'ACT English',
-            'act_math' => 'ACT math',
-            'act_reading' => 'ACT Reading',
-            'act_science' => 'ACT Science',
-            'transcript' => 'Transcript',
             'profile_image' => 'Profile Image',
             'short_video' => 'Short Video',
             'cv' => 'CV',
@@ -129,6 +112,14 @@ if (!function_exists('getColumnNameOfAcademicInformation')) {
 
 if (!function_exists('checkForApplyRequirements')) {
     function checkForApplyRequirements($applyId)
+    {
+        $count = \Illuminate\Support\Facades\DB::table('request_requirements')->where(['apply_id' => $applyId])->count();
+        return $count;
+    }
+}
+
+if (!function_exists('preLoginUserCheck')) {
+    function preLoginUserCheck($applyId)
     {
         $count = \Illuminate\Support\Facades\DB::table('request_requirements')->where(['apply_id' => $applyId])->count();
         return $count;
