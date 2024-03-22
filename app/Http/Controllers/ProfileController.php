@@ -57,7 +57,7 @@ class ProfileController extends Controller
         $coach = FileUploadHelper::handleFileUpload($request, 'short_video', 'uploads/users_video/', $coach);
 
         // Update user data
-        $coach->fill($request->only(['first_name', 'last_name', 'about_me', 'website']));
+        $coach->fill($request->only(['first_name', 'last_name', 'about_me', 'website', 'program_type', 'college_or_university', 'gender']));
         $coach->save();
 
         if ($request->has('password') && !empty($request->input('password'))) {
