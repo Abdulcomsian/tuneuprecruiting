@@ -25,8 +25,8 @@ class RedirectAuthenticatedUsersController extends Controller
                 return redirect('/student/dashboard');
             }
         }
-        elseif($user->role == 'guest') {
-            return redirect('/guestDashboard');
+        elseif($user->role == 'admin') {
+            return redirect('/admin/dashboard');
         }
         else {
             auth()->logout();
