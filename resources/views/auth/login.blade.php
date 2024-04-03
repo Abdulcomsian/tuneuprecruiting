@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             @if($userType == 'student' || $userType == 'recruiter')
-                <div class="col-xl-7" style="background: url('assets/images/login/login_bg.jpg');">
+                <div class="col-xl-7" style="background: url('{{ asset('assets/images/login/login_bg.jpg') }}');">
                     <div class=" h-100 d-flex justify-content-center align-items-center">
                         <div class="container">
                             @if($userType == 'student')
@@ -28,7 +28,7 @@
                                     What sets us apart? The simplicity of it all. By simply inputting your desired criteria such as SAT Scores, ACT Scores, GPA, Location, Graduation year, athletic information, and more, and watch as a tailored selection of athletes who match your needs materialize before your eyes. Once they appear, the ball is in your court to delve into their profiles and monitor their journey towards collegiate athletic success.
                                 </p>
                             @else
-                                <img class="bg-img-cover bg-center" src="http://127.0.0.1:8000/assets/images/login/1.jpg" alt="looginpagesss" style="">
+                                <img class="bg-img-cover bg-center" src="{{ asset('assets/images/login/1.jpg') }}" alt="looginpagesss" style="">
                             @endif
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                 $columnSize = ($userType == 'student' || $userType == 'recruiter') ? '5' : '12';
             @endphp
             <div class="col-xl-{{ $columnSize }} p-0">
-                <div class="login-card login-dark" style="background: url('assets/images/login/login_bg.jpg');">
+                <div class="login-card login-dark" style="background: url('{{ asset('assets/images/login/login_bg.jpg') }}');">
                     <div>
                         <div><a class="logo text-start" href="{{ url('/') }}"><img class="img-fluid for-light" src="{{ asset('assets/images/logo/logo-1.png') }}" alt="looginpage"><img class="img-fluid for-dark" src="../assets/images/logo/logo.png" alt="looginpage"></a></div>
                         <div class="login-main">
