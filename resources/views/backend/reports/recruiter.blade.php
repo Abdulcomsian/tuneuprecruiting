@@ -113,7 +113,7 @@
                                     </div>
                                     <div class="col-sm-3 mt-3">
                                         @component('components.select-list', [
-                                            'options' => range(2000, 2030),
+                                            'options' => range(2024, date('Y')),
                                             'selected' => $student_session ?? '',
                                             'name' => 'student_session',
                                             'id' => 'student-session',
@@ -164,7 +164,11 @@
                                     <tbody>
                                     @foreach($applies as $apply)
                                         <tr class="border-bottom-secondary">
-                                            <th scope="row">{{ $apply->first_name . ' ' . $apply->last_name }}</th>
+                                            <th scope="row">
+                                                <a href="{{ url('/apply/view/'. encrypt($apply->apply_id)) }}" title="View">
+                                                    {{ $apply->first_name . ' ' . $apply->last_name }}
+                                                </a>
+                                            </th>
                                             <td>{{ $apply->graduation_year }}</td>
                                             <td>{{ $apply->country }}</td>
                                             <td>{{ $apply->state }}</td>

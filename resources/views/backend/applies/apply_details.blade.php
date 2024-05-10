@@ -85,85 +85,89 @@
                     </div>
                 </div>
 
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive theme-scrollbar">
-                                <table class="display" id="basic-1">
-                                    <thead>
-                                    <tr>
-                                        <th>Question</th>
-                                        <th>Answer</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($applyDetails as $detail)
-                                        @if($detail->type == 'checkbox-group')
-                                            @php
-                                                $values = json_decode($detail->answer);
-                                                $detail->answer = '';
-                                                foreach ($values as $value) {
-                                                    $detail->answer .= ucfirst($value) . ", ";
-                                                }
-                                            @endphp
-                                        @endif
-                                        <tr class="border-bottom-secondary">
-                                            <td>{{ $detail->label }}</td>
-                                            <td>
-                                                @if($detail->type == 'file')
-                                                    <a href="{{ asset('uploads/apply_data/'.$detail->answer) }}">{{ $detail->answer }}</a>
-                                                @else
-                                                    {{ $detail->answer }}
-                                                @endif
-                                            </td>
+                @if(!$applyDetails->isEmpty())
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive theme-scrollbar">
+                                    <table class="display" id="basic-1">
+                                        <thead>
+                                        <tr>
+                                            <th>Question</th>
+                                            <th>Answer</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($applyDetails as $detail)
+                                            @if($detail->type == 'checkbox-group')
+                                                @php
+                                                    $values = json_decode($detail->answer);
+                                                    $detail->answer = '';
+                                                    foreach ($values as $value) {
+                                                        $detail->answer .= ucfirst($value) . ", ";
+                                                    }
+                                                @endphp
+                                            @endif
+                                            <tr class="border-bottom-secondary">
+                                                <td>{{ $detail->label }}</td>
+                                                <td>
+                                                    @if($detail->type == 'file')
+                                                        <a href="{{ asset('uploads/apply_data/'.$detail->answer) }}">{{ $detail->answer }}</a>
+                                                    @else
+                                                        {{ $detail->answer }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
 
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive theme-scrollbar">
-                                <table class="display" id="basic-2">
-                                    <thead>
-                                    <tr>
-                                        <th>Requirement</th>
-                                        <th>Details</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($applyRequirements ?? [] as $requirement)
-                                        @if($requirement->type == 'checkbox-group')
-                                            @php
-                                                $values = json_decode($requirement->answer);
-                                                $requirement->answer = '';
-                                                foreach ($values as $value) {
-                                                    $requirement->answer .= ucfirst($value) . ", ";
-                                                }
-                                            @endphp
-                                        @endif
-                                        <tr class="border-bottom-secondary">
-                                            <td>{{ $requirement->label }}</td>
-                                            <td>
-                                                @if($requirement->type == 'file')
-                                                    <a href="{{ asset('uploads/apply_data/'.$requirement->answer) }}">{{ $requirement->answer }}</a>
-                                                @else
-                                                    {{ $requirement->answer }}
-                                                @endif
-                                            </td>
+                @if (!$applyRequirements->isEmpty()) ?>
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive theme-scrollbar">
+                                    <table class="display" id="basic-2">
+                                        <thead>
+                                        <tr>
+                                            <th>Requirement</th>
+                                            <th>Details</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($applyRequirements ?? [] as $requirement)
+                                            @if($requirement->type == 'checkbox-group')
+                                                @php
+                                                    $values = json_decode($requirement->answer);
+                                                    $requirement->answer = '';
+                                                    foreach ($values as $value) {
+                                                        $requirement->answer .= ucfirst($value) . ", ";
+                                                    }
+                                                @endphp
+                                            @endif
+                                            <tr class="border-bottom-secondary">
+                                                <td>{{ $requirement->label }}</td>
+                                                <td>
+                                                    @if($requirement->type == 'file')
+                                                        <a href="{{ asset('uploads/apply_data/'.$requirement->answer) }}">{{ $requirement->answer }}</a>
+                                                    @else
+                                                        {{ $requirement->answer }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
         <!-- Container-fluid Ends-->

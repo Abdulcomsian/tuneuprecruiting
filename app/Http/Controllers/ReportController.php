@@ -78,7 +78,7 @@ class ReportController extends Controller {
             'students.are_u_from_usa' => $request->are_u_from_usa ?? null,
         ]);
 
-        $query  = Apply::select('applies.*', 'students.first_name', 'students.last_name', 'students.graduation_year', 'students.country', 'students.state', 'programs.program_name')
+        $query  = Apply::select('applies.*', 'applies.id as apply_id', 'students.first_name', 'students.last_name', 'students.graduation_year', 'students.country', 'students.state', 'programs.program_name')
             ->join('programs', 'programs.id', '=', 'applies.program_id')
             ->join('students', 'students.id', '=', 'applies.student_id')
             ->where($where);

@@ -39,7 +39,11 @@
                                         @foreach($applies as $apply)
                                             <tr class="border-bottom-secondary">
                                                 <td>{{ \Carbon\Carbon::parse($apply->created_at)->format('d-m-Y') }}</td>
-                                                <th scope="row">{{ $apply->first_name . ' ' . $apply->last_name }}</th>
+                                                <th scope="row">
+                                                    <a href="{{ url('/apply/view/'. encrypt($apply->apply_id)) }}" title="View">
+                                                        {{ $apply->first_name . ' ' . $apply->last_name }}
+                                                    </a>
+                                                </th>
                                                 <td>{{ $apply->graduation_year }}</td>
                                                 <td>{{ $apply->country }}</td>
                                                 <td>{{ $apply->state }}</td>
