@@ -37,21 +37,14 @@ class ReportController extends Controller {
         ];
 
         $data['applies'] = Student::select('graduation_year')
-            ->withCount([
-                'applies',
-                'applies as applies_from_usa' => function ($query) use ($fromDate, $toDate) {
-                    $query->whereBetween('applies.created_at', [$fromDate, $toDate])
-                        ->join('programs', 'applies.program_id', '=', 'programs.id')
-                        ->where('programs.coach_id', Session::get('coachId'))
-                        ->where('are_u_from_usa', 'Yes');
-                },
-                'applies as applies_from_out_of_usa' => function ($query) use ($fromDate, $toDate) {
-                    $query->whereBetween('applies.created_at', [$fromDate, $toDate])
-                        ->join('programs', 'applies.program_id', '=', 'programs.id')
-                        ->where('programs.coach_id', Session::get('coachId'))
-                        ->where('are_u_from_usa', 'No');
-                }
-            ])
+            ->selectRaw('COUNT(applies.id) as total_applies')
+            ->selectRaw('SUM(CASE WHEN are_u_from_usa = "Yes" THEN 1 ELSE 0 END) as applies_from_usa')
+            ->selectRaw('SUM(CASE WHEN are_u_from_usa = "No" THEN 1 ELSE 0 END) as applies_from_out_of_usa')
+            ->leftJoin('applies', 'students.id', '=', 'applies.student_id')
+            ->leftJoin('programs', 'applies.program_id', '=', 'programs.id')
+            ->where('programs.coach_id', Session::get('coachId'))
+            ->whereBetween('applies.created_at', [$fromDate, $toDate])
+            ->groupBy('graduation_year')
             ->get();
 
         return view('backend.reports.applications', $data);

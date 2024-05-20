@@ -58,7 +58,7 @@ if (!function_exists('getColumnNameOfBasicInformation')) {
             'mobile_number' => 'Mobile Number',
             'graduation_year' => 'Graduation Year',
             'birth_date' => 'Birth Date',
-            'are_u_from_usa' => 'Are you from the United State',
+            'are_u_from_usa' => 'Are you from the United States',
             'country' => 'Country',
             'state' => 'State',
             'primary_address' => 'Primary Address',
