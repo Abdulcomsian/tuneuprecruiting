@@ -19,7 +19,11 @@ class ReportController extends Controller {
         if ($request->has('date_range')) {
             try {
                 // Split the date range string into separate dates
-                [$fromDate, $toDate] = explode(" - ", $request->date_range);
+                [$fromDateString, $toDateString] = explode(" - ", $request->date_range);
+
+                // Validate date format using Carbon's built-in parsing with specified format
+                $fromDate = Carbon::createFromFormat('d/m/Y', $fromDateString);
+                $toDate = Carbon::createFromFormat('d/m/Y', $toDateString);
 
                 // Validate date format using Carbon's built-in parsing
                 $fromDate = Carbon::parse($fromDate);
