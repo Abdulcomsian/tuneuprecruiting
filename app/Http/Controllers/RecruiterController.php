@@ -21,7 +21,8 @@ class RecruiterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {
+    public function index()
+    {
         $data['recruiters'] = User::select('users.*', 'coaches.first_name', 'coaches.last_name', 'coaches.website', 'coaches.about_me', 'coaches.gender', 'coaches.college_or_university', 'coaches.program_type', 'coaches.id as coach_id')
             ->join('coaches', 'coaches.user_id', '=', 'users.id')
             ->where(['users.role' => 'coach', 'coaches.trash' => 'active'])

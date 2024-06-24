@@ -16,7 +16,9 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\Recruiter\Settings\Emails\EmailTemplateController;
 use App\Http\Controllers\Admin\Settings\Emails\AdminSettingController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\RequestInfoOrDemoController;
+use App\Http\Controllers\VideosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +37,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-//    return view('backend/dashboard/dashboard');
+    //    return view('backend/dashboard/dashboard');
     if (auth()->user()->role == 'coach') {
         return redirect('/applies');
     } elseif (auth()->user()->role == 'admin') {
@@ -43,7 +45,6 @@ Route::get('/dashboard', function () {
     }
 
     return redirect('/student/dashboard');
-
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/request/info', [RequestInfoOrDemoController::class, 'requestForm']);
@@ -53,6 +54,17 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     // admin
     Route::get('/admin/dashboard', [AdminDashboard::class, 'dashboard']);
     Route::resource('recuriter', RecruiterController::class);
+    Route::controller(MediaController::class)
+        ->prefix('medias')
+        ->as('medias.')
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::delete('destroy/{media}', 'destroy')->name('destroy');
+            Route::get('show/{media}', 'show')->name('show');
+            Route::put('update/{media}', 'update')->name('update');
+        });
     Route::get('/profile/admin', [AdminProfileController::class, 'profile']);
     Route::post('/profile/update/admin', [AdminProfileController::class, 'update'])->name('profile.update.admin');
     Route::get('/admin/setting/emails', [AdminSettingController::class, 'emailTemplates']);
@@ -91,7 +103,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::get('/apply/status/{id}/{status}', [ApplyController::class, 'changeApplyStatus']);
     Route::delete('/apply/destroy/{id}', [ApplyController::class, 'destroy'])->name('apply.destroy');
     Route::get('/apply/view/{id}', [ApplyController::class, 'viewApply']);
-    Route::match(['get', 'post'],'/program/apply/requirement/{apply_id?}', [ApplyController::class, 'requestApplyRequirement'])->name('apply.request.requirement');
+    Route::match(['get', 'post'], '/program/apply/requirement/{apply_id?}', [ApplyController::class, 'requestApplyRequirement'])->name('apply.request.requirement');
     Route::get('/profile', [ProfileController::class, 'profile']);
     Route::post('/update/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/update/profile/image', [ProfileController::class, 'updateProfileImage'])->name('profile.image');
@@ -103,6 +115,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::post('/program/apply/{id}', [StudentApplyController::class, 'apply'])->name('program.apply');
     Route::get('/student/applies', [StudentApplyController::class, 'applies']);
     Route::get('/profile/student', [StudentProfileController::class, 'profile']);
+    Route::get('/student/videos', [StudentProfileController::class, 'videos']);
     Route::match(['get', 'post'], '/setting/update', [StudentProfileController::class, 'updateSetting'])->name('setting.update');
     Route::post('/update/student/profile', [StudentProfileController::class, 'updateProfile'])->name('student.profile.update');
     Route::get('/program/view/{id}', [StudentApplyController::class, 'viewProgram'])->name('program.view');
@@ -118,4 +131,4 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::get('send-mail', [MailController::class, 'index']);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

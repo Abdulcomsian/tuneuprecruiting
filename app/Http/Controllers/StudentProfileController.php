@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Helpers\FileUploadHelper;
 use App\Http\Requests\StudentProfileRequest;
+use App\Models\Media;
 use Illuminate\Support\Facades\Validator;
 
 class StudentProfileController extends Controller
 {
-    public function profile() {
+    public function profile()
+    {
         $user = Auth::user();
         $data['user'] = Student::where(['user_id' => $user->id])->first();
         $data['user']->email = $user->email;
@@ -22,14 +24,16 @@ class StudentProfileController extends Controller
         return view('student_backend/profile/profile', $data);
     }
 
-    public function profileDetails($studentId) {
+    public function profileDetails($studentId)
+    {
         $id = decrypt($studentId);
         $data['studentDetail'] = Student::where(['user_id' => $id])->first();
 
         return view('backend/profile/student_profile_details', $data);
     }
 
-    public function updateSetting(Request $request) {
+    public function updateSetting(Request $request)
+    {
         $user = Auth::user();
 
         if ($request->has('password') && !empty($request->input('password'))) {
@@ -48,7 +52,8 @@ class StudentProfileController extends Controller
         return view('student_backend/profile/setting');
     }
 
-    public function updateProfile(StudentProfileRequest $request) {
+    public function updateProfile(StudentProfileRequest $request)
+    {
         $user = Auth::user();
         $student = Student::where(['user_id' => $user->id])->first();
 
@@ -78,7 +83,7 @@ class StudentProfileController extends Controller
         $student->first_name = $request->input('first_name');
         $student->last_name = $request->input('last_name');
         $student->graduation_year = $request->input('graduation_year');
-//        $student->home_town = $request->input('home_town');
+        //        $student->home_town = $request->input('home_town');
         $student->state = $request->input('state');
         $student->country = $request->input('country');
         $student->save();
@@ -94,5 +99,11 @@ class StudentProfileController extends Controller
         Session::put('programType', $student->program_type);
 
         return redirect()->back()->with('success', 'Profile updated.');
+    }
+
+    public function videos()
+    {
+        $medias = Media::latest()->get();
+        return view('student_backend/media/list', compact('medias'));
     }
 }
