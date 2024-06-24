@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreMediaRequest;
 use App\Http\Requests\UpdateMediaRequest;
+use Illuminate\Support\Facades\File;
+
 
 class MediaController extends Controller
 {
@@ -16,6 +18,7 @@ class MediaController extends Controller
      */
     public function index()
     {
+
         $medias = Media::latest()->get();
         return view('admin.media.index', compact('medias'));
     }
@@ -33,15 +36,27 @@ class MediaController extends Controller
      */
     public function store(StoreMediaRequest $request)
     {
+        // Generate a unique filename
         $filename = uniqid('media_') . '.' . $request->video->getClientOriginalExtension();
 
-        $request->video->storeAs('medias', $filename);
+        // Define the path to the public/medias directory
+        $destinationPath = public_path('medias');
 
+        // Check if the directory exists, if not, create it
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0755, true);
+        }
+
+        // Move the uploaded file to the public/medias directory
+        $request->video->move($destinationPath, $filename);
+
+        // Save the media information to the database
         $media = Media::create([
             'title' => $request->title,
-            'path' => 'medias/' . $filename,
+            'path' => 'medias/' . $filename, // Relative path to the file in the public directory
         ]);
 
+        // Redirect to the medias index with a success message
         return redirect()->route('medias.index')->with('success', 'Media Stored successfully.');
     }
 

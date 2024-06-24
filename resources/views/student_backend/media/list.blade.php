@@ -23,12 +23,12 @@
                                 <h5 class="card-title">{{ $media->title }}</h5>
                                 <td>
                                     <video width="100%" controls preload="metadata" controlsList="nodownload">
-                                        @if (Storage::exists($media->path))
-                                            <source src="{{ asset('storage/' . $media->path) }}" type="video/mp4">
-                                            Your browser does not support the video tag.
+                                        {{-- @if (Storage::exists($media->path)) --}}
+                                        <source src="{{ asset($media->path) }}" type="video/mp4">
+                                        {{-- Your browser does not support the video tag.
                                         @else
                                             <p>Video not found.</p>
-                                        @endif
+                                        @endif --}}
                                     </video>
                                     <div
                                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">

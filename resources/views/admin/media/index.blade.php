@@ -57,16 +57,14 @@
                                                 <td>{{ $media->title }}</td>
                                                 <td>
                                                     <video width="200" height="100" controls preload="none">
-                                                        @if (Storage::exists($media->path))
-                                                            <source src="{{ asset('storage/' . $media->path) }}"
-                                                                type="video/mp4">
-                                                            <p>Your browser does not support the video element.</p>
+                                                        {{-- @if (Storage::exists($media->path)) --}}
+                                                        <source src="{{ asset($media->path) }}" type="video/mp4">
+                                                        {{-- <p>Your browser does not support the video element.</p>
                                                         @else
                                                             <p>Video not found.</p>
-                                                        @endif
+                                                        @endif --}}
                                                     </video>
-                                                    <a href="{{ asset('storage/' . $media->path) }}"
-                                                        download>Download</a>
+                                                    <a href="{{ asset($media->path) }}" download>Download</a>
                                                 </td>
                                                 <td>
                                                     <ul class="action">
