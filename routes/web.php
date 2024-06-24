@@ -55,7 +55,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboard::class, 'dashboard']);
     Route::resource('recuriter', RecruiterController::class);
     Route::controller(MediaController::class)
-        ->prefix('medias')
+        ->prefix('tune_media')
         ->as('medias.')
         ->group(function () {
             Route::get('', 'index')->name('index');
