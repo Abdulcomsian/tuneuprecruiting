@@ -227,6 +227,27 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                        <svg class="stroke-icon">
+                            <use href="{{asset('assets/svg/icon-sprite.svg#stroke-user')}}"></use>
+                        </svg>
+                        <svg class="fill-icon">
+                            <use href="../assets/svg/icon-sprite.svg#fill-user"></use>
+                        </svg><span>Videos</span></a>
+                    <ul class="sidebar-submenu custom-scrollbar">
+                        <li class="sidebar-head">Videos</li>
+                        <li class="main-submenu">
+                            <a class="d-flex" href="{{ route('medias.create') }}">
+                                <i class="fa fa-plus-circle" style="margin-right: 8px;"></i> Add new Video
+                            </a>
+                        </li>
+                        <li class="main-submenu">
+                            <a class="d-flex" href="{{ route('medias.index') }}">
+                                <i class="fa fa-list" style="margin-right: 8px;"></i> Video List
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 </ul>
                 @php endif; @endphp
 
@@ -266,6 +287,18 @@
                                 <svg class="fill-icon">
                                     <use href="{{asset('assets/svg/icon-sprite.svg#Message')}}"></use>
                                 </svg><span>Messages</span></a>
+                        </li>
+
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title" href="{{ url('student/videos') }}">
+                                <svg class="stroke-icon">
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#Perk-Ui') }}"></use>
+                                </svg>
+                                <svg class="fill-icon">
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#fill-videos') }}"></use>
+                                </svg>
+                                <span>Videos</span>
+                            </a>
                         </li>
                     </ul>
                 @php endif; @endphp

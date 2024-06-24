@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            {!! generateBreadcrumbs(["Total Recruiters"]) !!}
+                            {!! generateBreadcrumbs(['Total Recruiters']) !!}
                         </ol>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($users as $user)
+                                        @foreach ($users as $user)
                                             <tr class="border-bottom-secondary">
                                                 <td>{{ $user->college_or_university }}</td>
                                                 <td>{{ $user->program_type }}</td>
@@ -47,10 +47,14 @@
                                                 <td>
                                                     <ul class="action">
                                                         <li class="delete">
-                                                            <form method="POST" action="{{ route('recuriter.destroy', $user->id) }}" onsubmit='return confirm("Are you sure?")'>
+                                                            <form method="POST"
+                                                                action="{{ route('recuriter.destroy', $user->id) }}"
+                                                                onsubmit='return confirm("Are you sure?")'>
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <a href="#" onclick="$(this).closest('form').submit();"><i class="fa fa-trash"></i></a>
+                                                                <a href="#"
+                                                                    onclick="$(this).closest('form').submit();"><i
+                                                                        class="fa fa-trash"></i></a>
                                                             </form>
                                                         </li>
                                                     </ul>
