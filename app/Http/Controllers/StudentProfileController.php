@@ -103,7 +103,7 @@ class StudentProfileController extends Controller
 
     public function videos()
     {
-        $medias = Media::latest()->get();
+        $medias = Media::latest()->orderBy('id', 'asc')->get();
         return view('student_backend/media/list', compact('medias'));
     }
 }
