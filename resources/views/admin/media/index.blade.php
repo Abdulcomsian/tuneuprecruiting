@@ -63,8 +63,9 @@
                                                         @else
                                                             <p>Video not found.</p>
                                                         @endif --}}
-                                                    </video>
-                                                    <a href="{{ asset($media->path) }}" download>Download</a>
+                                                    </video><br>
+                                                    <a href="{{ asset($media->path) }}" download>Download Video</a><br>
+                                                    <a href="{{ asset($media->document) }}" download>Download Document</a>
                                                 </td>
                                                 <td>
                                                     <ul class="action">

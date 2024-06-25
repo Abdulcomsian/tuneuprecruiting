@@ -38,22 +38,27 @@ class MediaController extends Controller
     {
         // Generate a unique filename
         $filename = uniqid('media_') . '.' . $request->video->getClientOriginalExtension();
+        $documentname = uniqid('document_') . '.' . $request->document->getClientOriginalExtension();
 
         // Define the path to the public/medias directory
         $destinationPath = public_path('medias');
+        $destinationPath_document = public_path('document');
 
         // Check if the directory exists, if not, create it
         if (!File::exists($destinationPath)) {
             File::makeDirectory($destinationPath, 0755, true);
         }
-
+        if (!File::exists($destinationPath_document)) {
+            File::makeDirectory($destinationPath_document, 0755, true);
+        }
         // Move the uploaded file to the public/medias directory
         $request->video->move($destinationPath, $filename);
-
+        $request->document->move($destinationPath_document, $documentname);
         // Save the media information to the database
         $media = Media::create([
             'title' => $request->title,
             'path' => 'medias/' . $filename, // Relative path to the file in the public directory
+            'document' => 'document/' . $documentname, // Relative path to the file in the public directory
         ]);
 
         // Redirect to the medias index with a success message
@@ -88,21 +93,34 @@ class MediaController extends Controller
         ]);
 
         if ($request->hasFile('video')) {
-            Storage::delete($media->path);
+            // Storage::delete($media->path);
 
-            $video = $request->file('video');
-            $filename = uniqid('media_') . '.' . $video->getClientOriginalExtension();
-            $video->storeAs('medias', $filename);
-
+            // $video = $request->file('video');
+            // $filename = uniqid('media_') . '.' . $video->getClientOriginalExtension();
+            // $video->storeAs('medias', $filename);
+            $destinationPath = public_path('medias');
+            $filename = uniqid('media_') . '.' . $request->video->getClientOriginalExtension();
+            $request->video->move($destinationPath, $filename);
             $media->update([
                 'title' => $request->title,
                 'path' => 'medias/' . $filename,
             ]);
-        } else {
+        }
+        if ($request->hasFile('document')) {
+            $destinationPath_document = public_path('document');
+            $documentname = uniqid('document_') . '.' . $request->document->getClientOriginalExtension();
+
+            $request->document->move($destinationPath_document, $documentname);
+            
+
             $media->update([
                 'title' => $request->title,
+                'document' => 'document/' . $documentname,
             ]);
         }
+        $media->update([
+            'title' => $request->title,
+        ]);
 
         return redirect()->route('medias.index')->with('success', 'Media updated successfully.');
     }

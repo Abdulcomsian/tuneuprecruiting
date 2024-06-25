@@ -17,11 +17,11 @@
         <div class="container-fluid">
             <div class="row">
                 @foreach ($medias as $media)
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-6 mb-4">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $media->title }}</h5>
-                                <td>
+                                <h5 style="font-weight:bold;text-transform: capitalize;" class="card-title">{{ $media->title }}</h5>
+                                <div>
                                     <video width="100%" controls preload="metadata" controlsList="nodownload">
                                         {{-- @if (Storage::exists($media->path)) --}}
                                         <source src="{{ asset($media->path) }}" type="video/mp4">
@@ -29,11 +29,12 @@
                                         @else
                                             <p>Video not found.</p>
                                         @endif --}}
-                                    </video>
+                                    </video><br>
+                                    <a style="font-weight:bold;text-transform: capitalize;" href="{{ asset($media->document) }}" download>Download Document</a>
                                     <div
                                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
                                     </div>
-                                </td>
+                                </div>
                             </div>
                         </div>
                     </div>

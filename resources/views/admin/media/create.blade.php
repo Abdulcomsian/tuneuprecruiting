@@ -41,14 +41,18 @@
                                 @csrf
                                 <div class="col-md-6">
                                     <x-dynamic-input id="videoTitle" type="text" name="title"
-                                        value="{{ old('title') }}" placeholder="Video Title" required="true" />
+                                        value="{{ old('title') }}" placeholder="Add Title" required="true" />
                                 </div>
 
                                 <div class="col-md-6">
                                     <x-dynamic-input id="video" type="file" name="video"
-                                        value="{{ old('video') }}" placeholder="Video" required="true" />
+                                        value="{{ old('video') }}" placeholder="Upload Video" required="true" />
                                 </div>
 
+                                <div class="col-md-6">
+                                    <x-dynamic-input id="document" type="file" name="document"
+                                        value="{{ old('document') }}" placeholder="Upload Document" required="true" />
+                                </div>
                                 <!-- Video Preview -->
                                 {{-- <div class="col-md-4">
                                     <video id="video-preview" width="320" height="240" controls

@@ -13,6 +13,7 @@ class Media extends Model
 
     protected $fillable = [
         'title',
-        'path'
+        'path',
+        'document'
     ];
 }

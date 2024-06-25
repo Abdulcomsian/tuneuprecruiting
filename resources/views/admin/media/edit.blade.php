@@ -52,18 +52,23 @@
                                         onchange="previewVideo(event)" />
                                     <small class="text-muted">Leave empty if you don't want to change the video</small>
                                 </div>
-
-                                <div class="col-md-12 mt-3">
+                                <div class="col-md-6">
+                                    <x-dynamic-input id="document" type="file" name="document"
+                                        value="{{ old('document') }}" placeholder="Upload Document"  />
+                                </div>
+                                <small class="text-muted" style="margin-top:0px;">Leave empty if you don't want to change the video</small>
+                                <div class="col-md-6 mt-3">
                                     <video id="videoPreview" width="450" height="240" controls preload="metadata">
-                                        @if (Storage::exists($media->path))
-                                            <source src="{{ asset('storage/' . $media->path) }}" type="video/mp4">
+                                        @if ($media->path))
+                                            <source src="{{ asset($media->path) }}" type="video/mp4">
                                             Your browser does not support the video tag.
                                         @else
                                             <p>Video not found.</p>
                                         @endif
-                                    </video>
+                                    </video><br>
+                                    <a style="font-weight:bold;" href="{{ asset($media->document) }}" download>Download Document</a>
                                 </div>
-
+                                
                                 <div class="col-md-12">
                                     <button class="btn btn-primary float-end mt-3" type="submit">Update</button>
                                     <a href="{{ route('medias.show', $media->id) }}"
