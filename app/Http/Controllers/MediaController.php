@@ -19,7 +19,7 @@ class MediaController extends Controller
     public function index()
     {
 
-        $medias = Media::latest()->orderBy('id', 'asc')->get();
+        $medias = Media::get();
         return view('admin.media.index', compact('medias'));
     }
 
