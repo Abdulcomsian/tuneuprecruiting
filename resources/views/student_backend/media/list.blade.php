@@ -27,8 +27,7 @@
                                         <source src="{{ asset($media->path) }}" type="video/mp4">
                                     </video><br>
                                     <div class="mt-2">
-                                        <h5><a href="#" class="link-light"
-                                                style="font-weight:bold;text-transform: capitalize;"
+                                        <h5><a href="#" style="font-weight:bold;text-transform: capitalize;"
                                                 onclick="openModal('{{ $media->id }}')">View Description</a></h5>
                                     </div>
 
