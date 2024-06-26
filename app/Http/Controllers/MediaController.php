@@ -140,10 +140,11 @@ class MediaController extends Controller
                 'path' => 'medias/images/' . $filename,
                 'link' => $link,
             ]);
-
+            dd($mediaImage, $request->all());
 
             return redirect()->back()->with('success', 'Image stored successfully.');
         } catch (\Exception $e) {
+            dd($e);
             return redirect()->back()->with('error', 'Failed to store image: ' . $e->getMessage())->withInput();
         }
     }
