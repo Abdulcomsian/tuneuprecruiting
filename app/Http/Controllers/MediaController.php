@@ -63,6 +63,14 @@ class MediaController extends Controller
             // $video = $request->file('video');
             // $filename = uniqid('media_') . '.' . $video->getClientOriginalExtension();
             // $video->storeAs('medias', $filename);
+
+            if ($media->path) {
+                $oldImagePath = public_path($media->path);
+                if (File::exists($oldImagePath)) {
+                    File::delete($oldImagePath);
+                }
+            }
+
             $destinationPath = public_path('medias');
             $filename = uniqid('media_') . '.' . $request->video->getClientOriginalExtension();
             $request->video->move($destinationPath, $filename);
@@ -83,9 +91,11 @@ class MediaController extends Controller
     public function destroy(Media $media)
     {
         try {
-            $filePath = $media->path;
+            $filePath = public_path($media->path);
 
-            Storage::delete($filePath);
+            if (File::exists($filePath)) {
+                File::delete($filePath);
+            }
 
             $media->delete();
 
