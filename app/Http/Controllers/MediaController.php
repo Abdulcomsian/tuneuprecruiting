@@ -115,7 +115,6 @@ class MediaController extends Controller
 
     public function storeImage(Request $request)
     {
-        dd($request->all());
         try {
             // $validator = Validator::make($request->all(), [
             //     'media_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -142,7 +141,6 @@ class MediaController extends Controller
                 'link' => $link,
             ]);
 
-            dd($mediaImage, $request->all());
 
             return redirect()->back()->with('success', 'Image stored successfully.');
         } catch (\Exception $e) {
