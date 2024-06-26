@@ -117,14 +117,14 @@ class MediaController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'media_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
-            $filename = uniqid('image_') . '.' . $request->image->getClientOriginalExtension();
+            $filename = uniqid('image_') . '.' . $request->media_image->getClientOriginalExtension();
 
             $destinationPath = public_path('medias/images');
 
@@ -132,14 +132,16 @@ class MediaController extends Controller
                 File::makeDirectory($destinationPath, 0755, true);
             }
 
-            $request->image->move($destinationPath, $filename);
+            $request->media_image->move($destinationPath, $filename);
 
             $link = asset('medias/images/' . $filename);
 
-            MediaImage::create([
+            $mediaImage =  MediaImage::create([
                 'path' => 'medias/images/' . $filename,
                 'link' => $link,
             ]);
+
+            dd($mediaImage);
 
             return redirect()->back()->with('success', 'Image stored successfully.');
         } catch (\Exception $e) {

@@ -40,7 +40,7 @@
                                 class="row g-3" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-md-12">
-                                    <x-dynamic-input id="image" type="file" name="image"
+                                    <x-dynamic-input id="image" type="file" name="media_image"
                                         value="{{ old('image') }}" placeholder="Upload Image" required="true" />
                                 </div>
                                 <div class="col-md-12">
