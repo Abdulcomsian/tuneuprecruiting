@@ -4,11 +4,11 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3>Add new Video</h3>
+                        <h3>Update Image</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            {!! generateBreadcrumbs(['Add new Video']) !!}
+                            {!! generateBreadcrumbs(['Update Image']) !!}
                         </ol>
                     </div>
                 </div>
@@ -36,33 +36,20 @@
                                     {{ $message }}
                                 </div>
                             @endif
-                            <form method="POST" id="frm-media" action="{{ route('medias.store') }}" class="row g-3"
+                            <form method="POST" id="frm-media"
+                                action="{{ route('medias.images-update', $mediaImage->id) }}" class="row g-3"
                                 enctype="multipart/form-data">
                                 @csrf
-                                <div class="col-md-6">
-                                    <x-dynamic-input id="videoTitle" type="text" name="title"
-                                        value="{{ old('title') }}" placeholder="Add Title" required="true" />
+                                <div class="col-md-8">
+                                    <x-dynamic-input id="image" type="file" name="image"
+                                        value="{{ old('image') }}" placeholder="Upload Image" required="true" />
                                 </div>
-
-                                <div class="col-md-6">
-                                    <x-dynamic-input id="video" type="file" name="video"
-                                        value="{{ old('video') }}" placeholder="Upload Video" required="true" />
+                                <div class="col-md-4">
+                                    <a href="{{ asset($mediaImage->path) }}" target="_blank">
+                                        <img src="{{ asset($mediaImage->path) }}" alt="Image URL" width="200"
+                                            height="100">
+                                    </a>
                                 </div>
-
-                                <div class="col-md-12">
-                                    @component('components.input-textarea', [
-                                        'name' => 'description',
-                                        'id' => 'description',
-                                        'className' => 'bw-textarea',
-                                        'value' => old('description'),
-                                        'required' => true,
-                                        'label' => 'Description',
-                                        'inputLabel' => true,
-                                    ])
-                                    @endcomponent
-                                    {{-- <textarea name="description" id="description" cols="100" rows="10"></textarea> --}}
-                                </div>
-
                                 <div class="col-md-12">
                                     <button class="btn btn-primary float-end mt-3" id="btn-form-add"
                                         type="submit">Submit</button>

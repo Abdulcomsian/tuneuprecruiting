@@ -4,23 +4,17 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6 ps-0">
-                        <h3>Total Videos</h3>
+                        <h3>Add new Image</h3>
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            {!! generateBreadcrumbs(['Videos']) !!}
+                            {!! generateBreadcrumbs(['Add new Image']) !!}
                         </ol>
                     </div>
                 </div>
             </div>
         </div>
         <div class="container-fluid basic_table">
-            <div class="row">
-                <div class="col-sm-12">
-                    <a class="btn btn-success mb-2 float-end" type="button" href="{{ route('medias.create') }}">Add
-                        a Video</a>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -42,35 +36,57 @@
                                     {{ $message }}
                                 </div>
                             @endif
+                            <form method="POST" id="frm-media" action="{{ route('medias.images-store') }}"
+                                class="row g-3" enctype="multipart/form-data">
+                                @csrf
+                                <div class="col-md-12">
+                                    <x-dynamic-input id="image" type="file" name="image"
+                                        value="{{ old('image') }}" placeholder="Upload Image" required="true" />
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary float-end mt-3" id="btn-form-add"
+                                        type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
                             <div class="table-responsive theme-scrollbar">
                                 <table class="display" id="data-table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Title</th>
-                                            <th scope="col">Video</th>
+                                            <th scope="col">image</th>
+                                            <th scope="col">URL</th>
                                             <th scope="col"><x-list-view-action-heading /></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($medias as $media)
+                                        @foreach ($images as $image)
                                             <tr class="border-bottom-secondary">
-                                                <td>{{ $media->title }}</td>
                                                 <td>
-                                                    <video width="200" height="100" controls>
-                                                        <source src="{{ asset($media->path) }}" type="video/mp4">
-                                                    </video><br>
-                                                    <a href="{{ asset($media->path) }}" class="link-warning mt-1"
-                                                        download>Download
-                                                        Video</a><br>
+                                                    <a href="{{ asset($image->path) }}" target="_blank">
+                                                        <img src="{{ asset($image->path) }}" alt="Image URL"
+                                                            width="300" height="300">
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="javascript:void(0);" onclick="copyToClipboard(this)"
+                                                        data-link="{{ $image->link }}"
+                                                        style="font-weight:bold; text-transform: capitalize;">Copy
+                                                        Link</a>
+                                                    <span class="copy-notification"
+                                                        style="display: none; color: green; margin-left: 10px;">Copied</span>
                                                 </td>
                                                 <td>
                                                     <ul class="action">
                                                         <li class="edit"><a
-                                                                href="{{ route('medias.show', $media->id) }}"><i
+                                                                href="{{ route('medias.images-show', $image->id) }}"><i
                                                                     class="icofont icofont-eye-alt"></i></a></li>
                                                         <li class="delete">
                                                             <form method="POST"
-                                                                action="{{ route('medias.destroy', $media->id) }}"
+                                                                action="{{ route('medias.images-destroy', $image->id) }}"
                                                                 onsubmit='return confirm("Are you sure?")'>
                                                                 @csrf
                                                                 @method('DELETE')
