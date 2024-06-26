@@ -64,6 +64,11 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
             Route::delete('destroy/{media}', 'destroy')->name('destroy');
             Route::get('show/{media}', 'show')->name('show');
             Route::put('update/{media}', 'update')->name('update');
+            Route::get('images-create', 'createImages')->name('images-create');
+            Route::post('image-store', 'storeImage')->name('images-store');
+            Route::delete('image-destroy/{mediaImage}', 'Imagedestroy')->name('images-destroy');
+            Route::get('image-show/{mediaImage}', 'imageShow')->name('images-show');
+            Route::post('imageUpdate/{mediaImage}', 'imageUpdate')->name('images-update');
         });
     Route::get('/profile/admin', [AdminProfileController::class, 'profile']);
     Route::post('/profile/update/admin', [AdminProfileController::class, 'update'])->name('profile.update.admin');

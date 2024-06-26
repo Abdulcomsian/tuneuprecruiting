@@ -11,7 +11,7 @@ class UpdateMediaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,23 @@ class UpdateMediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'video' => 'nullable',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'The title field is required.',
+            'title.string' => 'The title must be a string.',
+            'title.max' => 'The title may not be greater than 255 characters.',
+            'description.required' => 'The description field is required.',
+            'description.string' => 'The description must be a string.',
+            'video.nullable' => 'The video field is nullable.',
+            'video.mimes' => 'The video must be a file of type: mp4, avi, mov, wmv.',
+            'video.max' => 'The video may not be greater than 20MB.',
         ];
     }
 }

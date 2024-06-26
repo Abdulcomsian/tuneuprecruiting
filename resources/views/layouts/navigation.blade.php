@@ -246,6 +246,11 @@
                                 <i class="fa fa-list" style="margin-right: 8px;"></i> Video List
                             </a>
                         </li>
+                        <li class="main-submenu">
+                            <a class="d-flex" href="{{ route('medias.images-create') }}">
+                                <i class="fa fa-plus-circle" style="margin-right: 8px;"></i> Manage Images
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 </ul>

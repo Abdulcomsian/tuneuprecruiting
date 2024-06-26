@@ -41,34 +41,43 @@
                                 @csrf
                                 @method('PUT')
 
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <x-dynamic-input id="videoTitle" type="text" name="title"
                                         value="{{ old('title', $media->title) }}" placeholder="Video Title"
                                         required="true" />
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <x-dynamic-input id="video" type="file" name="video" placeholder="Video"
                                         onchange="previewVideo(event)" />
                                     <small class="text-muted">Leave empty if you don't want to change the video</small>
                                 </div>
-                                <div class="col-md-6">
-                                    <x-dynamic-input id="document" type="file" name="document"
-                                        value="{{ old('document') }}" placeholder="Upload Document"  />
-                                </div>
-                                <small class="text-muted" style="margin-top:0px;">Leave empty if you don't want to change the video</small>
-                                <div class="col-md-6 mt-3">
-                                    <video id="videoPreview" width="450" height="240" controls preload="metadata">
-                                        @if ($media->path))
+                                <div class="col-md-2">
+                                    <video id="videoPreview" width="250" height="100" controls preload="metadata">
+                                        @if ($media->path)
                                             <source src="{{ asset($media->path) }}" type="video/mp4">
                                             Your browser does not support the video tag.
                                         @else
                                             <p>Video not found.</p>
                                         @endif
-                                    </video><br>
-                                    <a style="font-weight:bold;" href="{{ asset($media->document) }}" download>Download Document</a>
+                                    </video>
                                 </div>
-                                
+                                {{-- <div class="col-md-12">
+                                    <label for="description">Description</label>
+                                    <textarea name="description" id="description" rows="10" cols="80">{{ old('description', $media->description) }}</textarea>
+                                </div> --}}
+                                <div class="col-md-12">
+                                    @component('components.input-textarea', [
+                                        'name' => 'description',
+                                        'id' => 'description',
+                                        'className' => 'bw-textarea',
+                                        'value' => old('description', $media->description),
+                                        'required' => true,
+                                        'label' => 'Description',
+                                        'inputLabel' => true,
+                                    ])
+                                    @endcomponent
+                                </div>
                                 <div class="col-md-12">
                                     <button class="btn btn-primary float-end mt-3" type="submit">Update</button>
                                     <a href="{{ route('medias.show', $media->id) }}"
