@@ -115,6 +115,7 @@ class MediaController extends Controller
 
     public function storeImage(Request $request)
     {
+        dd($request->all());
         try {
             // $validator = Validator::make($request->all(), [
             //     'media_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
