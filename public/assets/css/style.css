@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+
 /*! -----------------------------------------------------------------------------------
 
     Template Name: Cion Admin
@@ -173,6 +175,108 @@ body[class=dark-only] {
 ==========================**/
 .font-nunito {
   font-family: "Nunito Sans", sans-serif, sans-serif;
+}
+.font-fraunces{
+  font-family: "Fraunces", serif;
+}
+@media (max-width: 767.98px) {
+  .mb-md-2 {
+      margin-bottom: 1rem; /* Adjust margin bottom as needed */
+  }
+}
+@media (max-width: 767.98px) {
+  .text-align-center-md-left {
+      text-align: center;
+  }
+}
+@media (max-width: 767.98px) {
+  .width-full {
+      width: 100%; /* Width for screens below medium (max-width: 991.98px) */
+     
+  }
+}
+/**
+Girl Section CSS on Homepage Start
+**/
+.font-normal{
+  font-weight: 400;
+}
+.text-sm {
+  font-size: 0.875rem /* 14px */;
+  line-height: 1.25rem /* 20px */;
+}
+.text-base {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+}
+.text-lg{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-2xl {
+  font-size: 3.5rem; /* 56px */
+  line-height: 3.75rem; /* 60px */
+}
+.text-blue{
+  color:#0071BA;
+}
+.text-gray{
+  color: #A4A3A8;
+}
+.text-darkGray{
+  color: #727378;
+
+}
+.text-lightGray{
+  color: #969696;
+}
+.text-lightBlack{
+  color:#2C2925;
+}
+.list-style {
+  list-style: none;
+  padding-left: 1.2em; /* Adjust the padding as needed */
+}
+
+.list-style li {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.list-style li::before {
+  content: "\2022"; /* Unicode for bullet */
+  position: absolute;
+  left: -1.2em; /* Adjust this value to align the bullet properly */
+  color: black; /* Default bullet color */
+}
+
+.list-style li:first-child::before,
+.list-style li:last-child::before {
+  color: #0071BA; /* Bullet color for the first and last items */
+}
+.underline{
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+
+.bg-blue-500{
+  background-color:#0071BA;
+}
+.bg-blue-700{
+  background-color: #16478E;
+  
+}
+
+/**
+Girl Section CSS on Homepage End
+**/
+.bg-lightblue{
+  background-color:  #F2F2FF;
+}
+
+.text-dark-indigo{
+  color: #0C0047;
 }
 
 .f-light {
