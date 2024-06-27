@@ -88,7 +88,7 @@
                 "order": [[0, "desc"]],
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('manage.coach') }}",
+                ajax: "{{ route('manage.university') }}",
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
