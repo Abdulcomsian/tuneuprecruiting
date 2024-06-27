@@ -202,6 +202,35 @@
                                 <use href="{{asset('assets/svg/icon-sprite.svg#Message')}}"></use>
                             </svg><span>Messages</span></a>
                     </li>
+
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                        <svg class="stroke-icon">
+                            <use href="{{ asset('assets/svg/icon-sprite.svg#Message') }}"></use>
+                        </svg>
+                        <svg class="fill-icon">
+                            <use href="{{asset('assets/svg/icon-sprite.svg#Message')}}"></use>
+                        </svg><span>Coaches</span></a>
+
+                        <ul class="sidebar-submenu custom-scrollbar">
+                            <li class="sidebar-head">Coaches</li>
+
+                            <li class="main-submenu">
+                                <a class="d-flex" href="{{ route('manage.coach') }}">
+                                    <i data-feather="user-plus"></i> Manage Coaches
+                                </a>
+                            </li>
+
+                            <li class="main-submenu"><a class="d-flex" href="{{ route('manage.university') }}">
+                                <svg class="stroke-icon">
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-board') }}"></use>
+                                </svg>
+                                <svg class="fill-icon">
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#fill-board') }}"></use>
+                                </svg>Manage Universities</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#Grid') }}"></use>
@@ -303,6 +332,18 @@
                                     <use href="{{ asset('assets/svg/icon-sprite.svg#fill-videos') }}"></use>
                                 </svg>
                                 <span>Videos</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title" href="{{ route('coach.list') }}">
+                                <svg class="stroke-icon">
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#Perk-Ui') }}"></use>
+                                </svg>
+                                <svg class="fill-icon">
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#fill-videos') }}"></use>
+                                </svg>
+                                <span>Coaches</span>
                             </a>
                         </li>
                     </ul>

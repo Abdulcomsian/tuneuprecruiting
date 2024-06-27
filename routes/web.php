@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin\Settings\Emails\AdminSettingController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\RequestInfoOrDemoController;
 use App\Http\Controllers\VideosController;
+use App\Http\Controllers\CoachController;
+use App\Http\Controllers\UniversityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +104,16 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::post("/chat/store", [ChatController::class, "store"])->name('chat.store');
     Route::get('/notification/messages', [ChatController::class, 'notificationMessages']);
 
+    // coaches
+    Route::get('manage-coaches', [CoachController::class, 'manageCoaches'])->name("manage.coach");
+    Route::post('store-coach', [CoachController::class, 'storeCoach'])->name('store.coach');
+    Route::post('delete-coach', [CoachController::class, 'deleteCoach'])->name('delete.coach');
+
+    // University
+    Route::get('manage_university', [UniversityController::class, 'manageUniversity'])->name("manage.university");
+    Route::post('store_university', [UniversityController::class, 'storeUniversity'])->name("store.university");
+    Route::post('delete_university', [UniversityController::class, 'deleteUniversity'])->name("delete.university");
+
     Route::get('/applies', [ApplyController::class, 'applies']);
     Route::get('/apply/restore/{id}', [ApplyController::class, 'restoreFromTrash']);
     Route::post('/apply/rating', [ApplyController::class, 'saveApplyRating'])->name('apply.rating');
@@ -129,6 +141,8 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::post('/apply/requirements/submit/', [StudentApplyController::class, 'submitRequirements'])->name('requirements.submit');
     Route::get('/apply/edit/{id}', [StudentApplyController::class, 'editApply'])->name('apply.edit');
     Route::post('/apply/update/{id}', [StudentApplyController::class, 'updateApply'])->name('apply.update');
+
+    Route::get('coaches_list', [CoachController::class, 'coachList'])->name('coach.list');
 
     Route::get('/notifications', [NotificationController::class, 'getNotifications']);
     Route::get('/notification/view/{notificationId}', [NotificationController::class, 'viewNotification']);
