@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            {!! generateBreadcrumbs(["Add new Coach"]) !!}
+                            {!! generateBreadcrumbs(['Add new Coach']) !!}
                         </ol>
                     </div>
                 </div>
@@ -30,43 +30,39 @@
                                 </div>
                             @endif
 
-                            @if(session('success') || session('danger'))
+                            @if (session('success') || session('danger'))
                                 @php $className = (session('success')) ? 'success' : 'danger'; @endphp
                                 @php $message = (session('success')) ? session('success') : session('danger'); @endphp
                                 <div class="alert alert-{{ $className }}">
                                     {{ $message }}
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('store.coach') }}" class="row g-3" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('store.coach') }}" class="row g-3"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-md-3">
-                                    <x-dynamic-input
-                                        id="name"
-                                        type="text"
-                                        name="name"
-                                        value="{{ old('name') }}"
-                                        placeholder="Coach Name"
-                                        required="true" />
+                                    <x-dynamic-input id="name" type="text" name="name"
+                                        value="{{ old('name') }}" placeholder="Coach Name" required="true" />
                                 </div>
                                 <div class="col-md-3">
-                                    <x-dynamic-input
-                                        id="email"
-                                        type="email"
-                                        name="email"
-                                        value="{{ old('email') }}"
-                                        placeholder="Coach Email"
-                                        required="true" />
+                                    <x-dynamic-input id="email" type="email" name="email"
+                                        value="{{ old('email') }}" placeholder="Coach Email" required="true" />
                                 </div>
-                                <div class="col-md-3">
+                                {{-- <div class="col-md-3">
                                     <label>Select University</label>
                                     <select name="university" class="bw-raw-select" required>
-                                        @foreach($universities as $university)
+                                        @foreach ($universities as $university)
                                             <option value="{{$university->id}}">{{$university->name}}</option>
                                         @endforeach
                                     </select>
+                                </div> --}}
+                                <div class="col-md-3">
+                                    <x-dynamic-input id="university" type="university" name="university"
+                                        value="{{ old('university') }}" placeholder="University" required="true" />
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary float-end mt-3" id="btn-from-add" type="submit">Submit</button>
+                                    <button class="btn btn-primary float-end mt-3" id="btn-from-add"
+                                        type="submit">Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -104,24 +100,42 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-        $(function () {
+        $(function() {
             var table = $('.data-table').DataTable({
-                "order": [[0, "desc"]],
+                "order": [
+                    [0, "desc"]
+                ],
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('manage.coach') }}",
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'university', name: 'university'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'university',
+                        name: 'university'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
                 ]
             });
         });
 
 
-        $(document).on("click", ".delete", function(){
+        $(document).on("click", ".delete", function() {
             let id = $(this).data('id');
             Swal.fire({
                 title: "Are you sure?",
@@ -134,32 +148,35 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{route('delete.coach')}}",
+                        url: "{{ route('delete.coach') }}",
                         type: 'post',
-                        data: {_token: "{{csrf_token()}}", id: id},
-                        success:function(res){
-                            if(res.success == true){
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: id
+                        },
+                        success: function(res) {
+                            if (res.success == true) {
                                 Swal.fire({
                                     title: "Deleted!",
                                     text: res.msg,
                                     icon: "success"
-                                }).then((result)=>{
-                                    if(result.isConfirmed){
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
                                         location.reload();
                                     }
                                 });
-                            }else{
+                            } else {
                                 Swal.fire({
                                     title: "Not Deleted!",
                                     text: res.msg,
                                     icon: "error"
-                                }).then((result)=>{
-                                    if(result.isConfirmed){
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
                                         location.reload();
                                     }
                                 });
                             }
-                            
+
                         },
                     })
                 }

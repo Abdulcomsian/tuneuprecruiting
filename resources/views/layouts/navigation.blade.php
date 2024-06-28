@@ -203,7 +203,7 @@
                             </svg><span>Messages</span></a>
                     </li>
 
-                    <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                    {{-- <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">
                         <svg class="stroke-icon">
                             <use href="{{ asset('assets/svg/icon-sprite.svg#Message') }}"></use>
                         </svg>
@@ -229,6 +229,18 @@
                                 </svg>Manage Universities</a>
                             </li>
                         </ul>
+                    </li> --}}
+
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="{{ route('manage.coach') }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#Perk-Ui') }}"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#fill-videos') }}"></use>
+                            </svg>
+                            <span>Coaches</span>
+                        </a>
                     </li>
 
                     <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)">

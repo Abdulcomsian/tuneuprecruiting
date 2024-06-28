@@ -11,8 +11,8 @@ class CoachFinal extends Model
 
     protected $table = "coaches_final";
 
-
-    public function university(){
-        return $this->belongsTo(University::class, 'university_id');
+    public function university()
+    {
+        return $this->hasOne(University::class, 'coach_id');
     }
 }
