@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('universities', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('coach_id')->nullable();
             $table->string("name")->nullable();
+            $table->foreign("coach_id")->on("coaches_final")->references("id");
             $table->timestamps();
         });
     }

@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('coaches_final', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("university_id");
             $table->string("name")->nullable();
             $table->string("email")->unique()->nullable();
-            $table->foreign("university_id")->on("universities")->references("id");
             $table->timestamps();
         });
     }

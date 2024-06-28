@@ -143,6 +143,7 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::post('/apply/update/{id}', [StudentApplyController::class, 'updateApply'])->name('apply.update');
 
     Route::get('coaches_list', [CoachController::class, 'coachList'])->name('coach.list');
+    Route::get('universities_list', [CoachController::class, 'universitiesList'])->name('universities.list');
 
     Route::get('/notifications', [NotificationController::class, 'getNotifications']);
     Route::get('/notification/view/{notificationId}', [NotificationController::class, 'viewNotification']);
