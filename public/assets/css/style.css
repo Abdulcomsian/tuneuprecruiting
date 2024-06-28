@@ -173,11 +173,24 @@ body[class=dark-only] {
 /**=====================
     1.1 Reset CSS start
 ==========================**/
+/* .row {
+
+  display: flex;
+  flex-wrap: wrap;
+ margin:0px !important;
+} */
 .font-nunito {
   font-family: "Nunito Sans", sans-serif, sans-serif;
 }
 .font-fraunces{
   font-family: "Fraunces", serif;
+}
+.text-align-center-md-left {
+  text-align: center;
+}
+.header-margin{
+  margin-top: 6rem;
+  margin-bottom: 4rem;
 }
 @media (max-width: 767.98px) {
   .mb-md-2 {
@@ -195,6 +208,32 @@ body[class=dark-only] {
      
   }
 }
+
+@media (min-width: 768px) {
+  .text-align-center-md-left {
+      text-align: left;
+  }
+}
+
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 767.98px) {
+  .img-container {
+      margin-bottom: 1rem;
+  }
+}
+
 /**
 Girl Section CSS on Homepage Start
 **/
@@ -220,9 +259,18 @@ Girl Section CSS on Homepage Start
 .text-blue{
   color:#0071BA;
 }
+.login-btn{
+  background-color:#0071BA !important; 
+  color:white !important;
+  border-radius: 2px !important;
+  outline: none;
+  border: none;
+
+}
 .text-gray{
   color: #A4A3A8;
 }
+
 .text-darkGray{
   color: #727378;
 
@@ -265,9 +313,41 @@ Girl Section CSS on Homepage Start
 }
 .bg-blue-700{
   background-color: #16478E;
-  
 }
+.bg-black-700{
+  background-color: #2C2925;
+}
+.form-input-control {
+  display: flex;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+  padding: 0.8rem 0.6rem;
+  border-radius: 5px 0px 0px 5px;
+  margin-right:0px ;
 
+ flex-grow: 1;
+ 
+  color:rgba(255, 255, 255, 0.5);
+}
+.form-input-control:hover{
+  outline: none;
+}
+.form-input-btn{
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 0px !important;
+  background-color: transparent;
+  padding: 0.8rem 0.6rem;
+  border-radius: 0px 5px 5px 0px;
+  color:white;
+}
+.youtube-icon{
+
+  width: 25px;
+  height: 25px;
+}
+.footer-bottom{
+  border-top: 1px solid #ECECEF;
+}
 /**
 Girl Section CSS on Homepage End
 **/
@@ -278,6 +358,38 @@ Girl Section CSS on Homepage End
 .text-dark-indigo{
   color: #0C0047;
 }
+
+
+
+
+@media (max-width: 767.98px) {
+ 
+  .header-margin{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+}
+@media (max-width: 992px) {
+
+  .responsive-content{
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .responsive-header {
+    margin-bottom: 1.5rem; /* Width for screens below medium (max-width: 991.98px) */
+   
+}
+}
+
+
+
+
+
+
+
+/**My CSS Ends**/
+
 
 .f-light {
   color: rgba(132, 135, 137, 0.8);
@@ -23585,7 +23697,7 @@ footer {
   color: #33BFBF;
 }
 .landing-page .landing-header {
-  padding: 15px 120px;
+  padding: 15px 80px;
   position: fixed;
   top: 0;
   left: 0;
@@ -23602,7 +23714,7 @@ footer {
 }
 .landing-page .landing-header ul.landing-menu li.nav-item.menu-back {
   border-bottom: 1px solid #EDEDED;
-  padding: 22px 20px;
+  /* padding: 22px 20px; */
   text-align: right;
   text-transform: uppercase;
   font-weight: 700;
@@ -24671,7 +24783,7 @@ footer {
     width: unset;
   }
   .landing-page .landing-header {
-    padding: 15px 40px;
+    padding: 15px 25px;
   }
   .landing-page .section-pt-space {
     padding-top: 60px;
