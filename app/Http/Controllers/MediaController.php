@@ -116,13 +116,13 @@ class MediaController extends Controller
     public function storeImage(Request $request)
     {
         try {
-            // $validator = Validator::make($request->all(), [
-            //     'media_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            // ]);
+            $validator = Validator::make($request->all(), [
+                'media_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-            // if ($validator->fails()) {
-            //     return redirect()->back()->withErrors($validator)->withInput();
-            // }
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
 
             $filename = uniqid('image_') . '.' . $request->media_image->getClientOriginalExtension();
 
@@ -136,12 +136,10 @@ class MediaController extends Controller
 
             $link = asset('medias/images/' . $filename);
 
-            $mediaImage =  MediaImage::create([
+            MediaImage::create([
                 'path' => 'medias/images/' . $filename,
                 'link' => $link,
             ]);
-
-            dd($mediaImage, $request->all());
 
             return redirect()->back()->with('success', 'Image stored successfully.');
         } catch (\Exception $e) {

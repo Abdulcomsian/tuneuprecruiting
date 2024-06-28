@@ -57,7 +57,7 @@
                                 <table class="display" id="data-table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">image</th>
+                                            <th scope="col">Images</th>
                                             <th scope="col">URL</th>
                                             <th scope="col"><x-list-view-action-heading /></th>
                                         </tr>
