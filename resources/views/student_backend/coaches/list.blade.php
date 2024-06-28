@@ -35,9 +35,9 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
+                                        <th scope="col">University/College Name</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">University/College Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,6 +74,10 @@
                         name: 'id'
                     },
                     {
+                        data: 'university',
+                        name: 'university'
+                    },
+                    {
                         data: 'name',
                         name: 'name'
                     },
@@ -81,10 +85,7 @@
                         data: 'email',
                         name: 'email'
                     },
-                    {
-                        data: 'university',
-                        name: 'university'
-                    },
+                   
                 ]
             });
 

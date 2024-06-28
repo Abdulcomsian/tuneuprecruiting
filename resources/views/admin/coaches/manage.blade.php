@@ -41,12 +41,16 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-md-3">
+                                    <x-dynamic-input id="university" type="university" name="university"
+                                        value="{{ old('university') }}" placeholder="Enter University Name" required="true" />
+                                </div>
+                                <div class="col-md-3">
                                     <x-dynamic-input id="name" type="text" name="name"
-                                        value="{{ old('name') }}" placeholder="Coach Name" required="true" />
+                                        value="{{ old('name') }}" placeholder="Enter Coach Name" required="true" />
                                 </div>
                                 <div class="col-md-3">
                                     <x-dynamic-input id="email" type="email" name="email"
-                                        value="{{ old('email') }}" placeholder="Coach Email" required="true" />
+                                        value="{{ old('email') }}" placeholder="Enter Coach Email" required="true" />
                                 </div>
                                 {{-- <div class="col-md-3">
                                     <label>Select University</label>
@@ -56,10 +60,7 @@
                                         @endforeach
                                     </select>
                                 </div> --}}
-                                <div class="col-md-3">
-                                    <x-dynamic-input id="university" type="university" name="university"
-                                        value="{{ old('university') }}" placeholder="University" required="true" />
-                                </div>
+                               
                                 <div class="col-md-12">
                                     <button class="btn btn-primary float-end mt-3" id="btn-from-add"
                                         type="submit">Submit</button>
@@ -81,9 +82,9 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">id</th>
+                                        <th scope="col">University/College Name</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">University/College Name</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -113,6 +114,10 @@
                         name: 'id'
                     },
                     {
+                        data: 'university',
+                        name: 'university'
+                    },
+                    {
                         data: 'name',
                         name: 'name'
                     },
@@ -120,10 +125,7 @@
                         data: 'email',
                         name: 'email'
                     },
-                    {
-                        data: 'university',
-                        name: 'university'
-                    },
+                   
                     {
                         data: 'action',
                         name: 'action',

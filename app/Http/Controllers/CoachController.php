@@ -18,22 +18,23 @@ class CoachController extends Controller
             $coaches = CoachFinal::with('university')->get();
             return DataTables::of($coaches)
                 ->addIndexColumn()
+                ->addColumn('university', function ($coach) {
+                    return $coach->university ? $coach->university->name : 'N/A';
+                })
                 ->addColumn('name', function ($coach) {
                     return $coach->name;
                 })
                 ->addColumn('email', function ($coach) {
                     return $coach->email;
                 })
-                ->addColumn('university', function ($coach) {
-                    return $coach->university ? $coach->university->name : 'N/A';
-                })
+              
                 ->addColumn('action', function ($coach) {
                     $btns = '
                     <a href="javascript:void(0)" data-id="' . $coach->id . '" class="delete"><i class="fa fa-trash"></i></a>
                     ';
                     return $btns;
                 })
-                ->rawColumns(['name', 'email', 'university', 'action'])
+                ->rawColumns(['university', 'name', 'email', 'action'])
                 ->make(true);
         }
         return view('admin.coaches.manage', compact("universities"));
@@ -103,16 +104,17 @@ class CoachController extends Controller
 
             return DataTables::of($coaches)
                 ->addIndexColumn()
+                ->addColumn('university', function ($coach) {
+                    return $coach->university ? $coach->university->name : 'N/A';
+                })
                 ->addColumn('name', function ($coach) {
                     return $coach->name;
                 })
                 ->addColumn('email', function ($coach) {
                     return $coach->email;
                 })
-                ->addColumn('university', function ($coach) {
-                    return $coach->university ? $coach->university->name : 'N/A';
-                })
-                ->rawColumns(['name', 'email', 'university'])
+               
+                ->rawColumns(['university', 'name', 'email'])
                 ->make(true);
         }
 
