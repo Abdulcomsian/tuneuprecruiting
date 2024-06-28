@@ -50,16 +50,16 @@
                 alt="">
             <div class="container">
                 <div class="row g-0">
-                    <!-- <ul class="shape">
-                        <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-1.png') }}"
-                                alt=""></li>
+                     <ul class="shape">
+                        <!-- <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-1.png') }}"
+                                alt=""></li> -->
                         <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-2.png') }}"
                                 alt=""></li>
                         <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-3.png') }}"
                                 alt=""></li>
-                    </ul> -->
+                    </ul> 
                     <div class="row g-0 header-margin">
-                        <h1 class="font-fraunces text-center fs-2 text-white mb-5">College Golf <span class="text-blue underline">Recruitment</span> Agency</h1>
+                        <h1 class="font-fraunces font-normal text-center fs-2 text-white mb-5">College Golf <span class="text-blue underline">Recruitment</span> Agency</h1>
                         <div class="col-lg-6 responsive-header">
                             <figure class="cd-image-container"><img
                                     src="{{ asset('assets/images/landing/landing-home/03.png') }}"
@@ -91,18 +91,18 @@
         <!--Agency Info Section-->
     </div>
     <!--Girls Section Start-->
-    <section class="container my-5 px-4">
+    <div class="bg-white py-5">
+    <section class="container bg-white px-4">
         <div class="row align-items-center">
-            <div class="col-md-4 mb-4 mb-md-0 img-container">
+            <div class="col-md-5 mb-4 mb-md-0 img-container">
                 <img src="{{ asset('assets/images/girl.png') }}" alt="girl image" class="img-fluid img-responsive">
             </div>
             <div class="col-md-1 d-none d-md-block"></div>
             <div class="col-md-6">
-                <p class="font-fraunces fw-normal fs-2 text-wrap">College <span
-                        class="text-blue text-decoration-underline">Golf
-                        Recruiting Agency</span> helps <span class="text-gray">Student Athletes</span> achieve their
-                    dreams of achieving an athletic scholarship to <span class="text-blue">play collegiate golf</span>.
-                </p>
+            <p class="font-fraunces font-normal fs-md-5">
+    College <span class="text-blue text-decoration-underline">Golf Recruiting Agency</span> helps <span class="text-gray">Student Athletes</span> achieve their
+    dreams of achieving an athletic scholarship to <span class="text-blue">play collegiate golf</span>.
+</p>
                 <ul class="list-style">
                     <li>A sincere and devoted approach, centered entirely on championing the athlete.</li>
                     <li>Run by experienced coaches and former Division 1 athletes.</li>
@@ -112,22 +112,23 @@
             </div>
         </div>
     </section>
+    </div>
     <!--Girls Section End-->
     <!--Revolutionized Section Starts-->
     <section class="bg-lightblue">
         <div class="container py-5">
             <div class="row align-items-center">
-                <div class="col-md-6 mb-4 mb-md-0">
-                    <h2 class="font-fraunces fs-2 mb-2 text-align-center-md-left">Revolutionize Your</h2>
-                    <h3 class="text-blue font-fraunces fs-2 underline mb-2 text-align-center-md-left">Recruitment
+                <div class="col-md-4 mb-4 mb-md-0 px-4">
+                    <h2 class="font-fraunces fs-2 font-normal mb-2 text-align-center-md-left">Revolutionize Your</h2>
+                    <h3 class="text-blue font-fraunces fs-2 font-normal underline mb-3 text-align-center-md-left">Recruitment
                         Process</h3>
-                    <p class="font-nunito text-lg font-normal text-align-center-md-left">At RecruitU, we simplify
+                    <p class="font-nunito text-lg font-normal">At RecruitU, we simplify
                         college recruitment. Our mission? To connect coaches with the ideal athletes and vice versa.
                         With our technology, coaches can easily filter applications, sparing them from sifting through
                         countless submissions. As for aspiring athletes, forget about hunting down programs and filling
                         out multiple forms. With us, one click applies you to programs of your choice.</p>
                 </div>
-                <div class="col-md-6 d-flex justify-content-center">
+                <div class="col-md-8 d-flex justify-content-center">
                     <div class="animat-block">
                         <figure class="cd-image-container is-visible"><img
                                 src="http://127.0.0.1:8000/assets/images/landing/landing-home/03.png"
@@ -230,11 +231,11 @@
 
                         <div class="col-md-6">
                             <div class="card bg-blue-700 px-3 py-4">
-                                <h3 class="text-white fs-3 fw-bold text-center font-nunito">Essential</h3>
+                                <h3 class="text-white fs-3 fw-bold text-center font-nunito">Exclusive</h3>
                                 <p class="font-nunito text-base font-normal text-white text-center">The national
                                     average cost of buying coin easy.</p>
                                 <p class="text-white font-nunito text-center"><span
-                                        class="text-2xl fw-bold">$5</span><span class="text-base">/month</span></p>
+                                        class="text-2xl fw-bold">$12</span><span class="text-base">/month</span></p>
                                 <button
                                     class="bg-blue-500 rounded text-lightBlack border border-0 bg-white py-2 fw-bold mb-3 w-100">Select
                                     Plan</button>
@@ -301,25 +302,26 @@
     <!--Athelete Package Section Starts-->
     <!--Footer Starts-->
     <div class="bg-black-700">
-        <div class="container d-flex flex-column align-items-center justify-content-center py-5">
-            <div class="row">
-                <div class="col-lg-6 mx-auto d-flex flex-column align-items-center justify-content-center">
-                <img class="img-fluid img-90 mb-2" src="{{ asset('assets/images/white-logo.png') }}"
+        <!-- <div class="d-flex flex-column align-items-center justify-content-center py-5"> -->
+            <div class="row py-5 px-4">
+                <div class="col-lg-4 mx-auto d-flex flex-column align-items-center justify-content-center">
+                <img class="img-fluid img-90 mb-3" src="{{ asset('assets/images/white-logo.png') }}"
                 alt="" >
-                    <p class="text-white text-opacity-50 text-center font-nunito text-base w-100 mb-3">Lorem ipsum
+                    <p class="text-white text-opacity-50 text-center font-nunito text-base mb-3">Lorem ipsum
                         dolor sit amet
-                        consectetur adipisicing elit. Ex facilis accusamus architecto iusto ad temporibus.</p>
+                        consectetur adipisicing elit. Lorem ipsum
+                        dolor sit amet</p>
                     <h2 class="text-white text-center font-nunito fs-3">Subscribe to our Newsletter</h2>
                     <p class="text-white text-opacity-50 text-center font-nunito text-base">Lorem ipsum dolor sit amet.
                     </p>
                     <form class="mb-4 w-100">
                         <div class="d-inline-flex w-100">
                             <input type="text" class="form-input-control" placeholder="Enter your mail">
-                            <button class="form-input-btn">Subscribe</button>
+                            <button class="form-input-btn fw-bold">Subscribe</button>
                         </div>
                     </form>
 
-                    <div class="d-flex justify-content-between text-white w-100">
+                    <div class="d-flex justify-content-between text-white social-icons">
                         <div class="font-fraunces text-lg fw-bold">Facebook</div>
                         <div class="font-fraunces text-lg fw-bold">Instagram</div>
                         <div class="d-flex align-items-center">
@@ -334,7 +336,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
 
 
@@ -344,6 +346,7 @@
             </div>
             <div class="col-md-6 d-flex flex-column flex-md-row justify-content-md-end align-items-center">
                 <div class="mb-2 mb-md-0 me-md-3">Privacy Policy</div>
+              
                 <div>Terms of Conditions</div>
             </div>
         </div>

@@ -192,14 +192,26 @@ body[class=dark-only] {
   margin-top: 6rem;
   margin-bottom: 4rem;
 }
+.fs-md-5{
+  font-size: 2.125rem;
+}
+.social-icons{
+  width: 75%;
+}
 @media (max-width: 767.98px) {
   .mb-md-2 {
       margin-bottom: 1rem; /* Adjust margin bottom as needed */
+  }
+  .fs-md-5{
+    font-size: 1.125rem;
   }
 }
 @media (max-width: 767.98px) {
   .text-align-center-md-left {
       text-align: center;
+  }
+  .social-icons{
+    width: 100%;
   }
 }
 @media (max-width: 767.98px) {
@@ -321,12 +333,13 @@ Girl Section CSS on Homepage Start
   display: flex;
   border: 1px solid rgba(255, 255, 255, 0.5);
   background-color: transparent;
-  padding: 0.8rem 0.6rem;
-  border-radius: 5px 0px 0px 5px;
+  padding: 1rem 0.8rem;
+  border-radius: 6px 0px 0px 6px;
   margin-right:0px ;
+  color:rgba(255, 255, 255, 0.5);
 
  flex-grow: 1;
- 
+ outline: none;
   color:rgba(255, 255, 255, 0.5);
 }
 .form-input-control:hover{
@@ -336,7 +349,7 @@ Girl Section CSS on Homepage Start
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-left: 0px !important;
   background-color: transparent;
-  padding: 0.8rem 0.6rem;
+  padding: 1rem 1rem;
   border-radius: 0px 5px 5px 0px;
   color:white;
 }
@@ -346,7 +359,10 @@ Girl Section CSS on Homepage Start
   height: 25px;
 }
 .footer-bottom{
-  border-top: 1px solid #ECECEF;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+.privary-border{
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
 }
 /**
 Girl Section CSS on Homepage End
@@ -23817,21 +23833,21 @@ footer {
 .landing-page .landing-home .landing-home-contain .btn-home-list li:nth-child(n+2) {
   margin-left: 10px;
 }
-.landing-page .landing-home ul.shape li {
+/* .landing-page .landing-home ul.shape li {
   position: absolute;
   top: 10%;
   left: 5%;
   -webkit-animation: move2 1.2s infinite alternate;
           animation: move2 1.2s infinite alternate;
-}
-.landing-page .landing-home ul.shape li:nth-child(2) {
+} */
+.landing-page .landing-home ul.shape li:nth-child(1) {
   position: absolute;
   top: 15%;
   left: 85%;
   -webkit-animation: move2 1.2s infinite alternate;
           animation: move2 1.2s infinite alternate;
 }
-.landing-page .landing-home ul.shape li:nth-child(3) {
+.landing-page .landing-home ul.shape li:nth-child(2) {
   position: absolute;
   top: 80%;
   left: 55%;
