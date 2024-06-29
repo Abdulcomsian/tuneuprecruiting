@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+
 /*! -----------------------------------------------------------------------------------
 
     Template Name: Cion Admin
@@ -171,9 +173,239 @@ body[class=dark-only] {
 /**=====================
     1.1 Reset CSS start
 ==========================**/
+/* .row {
+
+  display: flex;
+  flex-wrap: wrap;
+ margin:0px !important;
+} */
 .font-nunito {
   font-family: "Nunito Sans", sans-serif, sans-serif;
 }
+.font-fraunces{
+  font-family: "Fraunces", serif;
+}
+.text-align-center-md-left {
+  text-align: center;
+}
+.header-margin{
+  margin-top: 6rem;
+  margin-bottom: 4rem;
+}
+.fs-md-5{
+  font-size: 2.125rem;
+}
+.social-icons{
+  width: 75%;
+}
+@media (max-width: 767.98px) {
+  .mb-md-2 {
+      margin-bottom: 1rem; /* Adjust margin bottom as needed */
+  }
+  .fs-md-5{
+    font-size: 1.125rem;
+  }
+}
+@media (max-width: 767.98px) {
+  .text-align-center-md-left {
+      text-align: center;
+  }
+  .social-icons{
+    width: 100%;
+  }
+}
+@media (max-width: 767.98px) {
+  .width-full {
+      width: 100%; /* Width for screens below medium (max-width: 991.98px) */
+     
+  }
+}
+
+@media (min-width: 768px) {
+  .text-align-center-md-left {
+      text-align: left;
+  }
+}
+
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 767.98px) {
+  .img-container {
+      margin-bottom: 1rem;
+  }
+}
+
+/**
+Girl Section CSS on Homepage Start
+**/
+.font-normal{
+  font-weight: 400;
+}
+.text-sm {
+  font-size: 0.875rem /* 14px */;
+  line-height: 1.25rem /* 20px */;
+}
+.text-base {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+}
+.text-lg{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-2xl {
+  font-size: 3.5rem; /* 56px */
+  line-height: 3.75rem; /* 60px */
+}
+.text-blue{
+  color:#0071BA;
+}
+.login-btn{
+  background-color:#0071BA !important; 
+  color:white !important;
+  border-radius: 2px !important;
+  outline: none;
+  border: none;
+
+}
+.text-gray{
+  color: #A4A3A8;
+}
+
+.text-darkGray{
+  color: #727378;
+
+}
+.text-lightGray{
+  color: #969696;
+}
+.text-lightBlack{
+  color:#2C2925;
+}
+.list-style {
+  list-style: none;
+  padding-left: 1.2em; /* Adjust the padding as needed */
+}
+
+.list-style li {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.list-style li::before {
+  content: "\2022"; /* Unicode for bullet */
+  position: absolute;
+  left: -1.2em; /* Adjust this value to align the bullet properly */
+  color: black; /* Default bullet color */
+}
+
+.list-style li:first-child::before,
+.list-style li:last-child::before {
+  color: #0071BA; /* Bullet color for the first and last items */
+}
+.underline{
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+
+.bg-blue-500{
+  background-color:#0071BA;
+}
+.bg-blue-700{
+  background-color: #16478E;
+}
+.bg-black-700{
+  background-color: #2C2925;
+}
+.form-input-control {
+  display: flex;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+  padding: 1rem 0.8rem;
+  border-radius: 6px 0px 0px 6px;
+  margin-right:0px ;
+  color:rgba(255, 255, 255, 0.5);
+
+ flex-grow: 1;
+ outline: none;
+  color:rgba(255, 255, 255, 0.5);
+}
+.form-input-control:hover{
+  outline: none;
+}
+.form-input-btn{
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 0px !important;
+  background-color: transparent;
+  padding: 1rem 1rem;
+  border-radius: 0px 5px 5px 0px;
+  color:white;
+}
+.youtube-icon{
+
+  width: 25px;
+  height: 25px;
+}
+.footer-bottom{
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+.privary-border{
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+/**
+Girl Section CSS on Homepage End
+**/
+.bg-lightblue{
+  background-color:  #F2F2FF;
+}
+
+.text-dark-indigo{
+  color: #0C0047;
+}
+
+
+
+
+@media (max-width: 767.98px) {
+ 
+  .header-margin{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+}
+@media (max-width: 992px) {
+
+  .responsive-content{
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .responsive-header {
+    margin-bottom: 1.5rem; /* Width for screens below medium (max-width: 991.98px) */
+   
+}
+}
+
+
+
+
+
+
+
+/**My CSS Ends**/
+
 
 .f-light {
   color: rgba(132, 135, 137, 0.8);
@@ -23481,7 +23713,7 @@ footer {
   color: #33BFBF;
 }
 .landing-page .landing-header {
-  padding: 15px 120px;
+  padding: 15px 80px;
   position: fixed;
   top: 0;
   left: 0;
@@ -23498,7 +23730,7 @@ footer {
 }
 .landing-page .landing-header ul.landing-menu li.nav-item.menu-back {
   border-bottom: 1px solid #EDEDED;
-  padding: 22px 20px;
+  /* padding: 22px 20px; */
   text-align: right;
   text-transform: uppercase;
   font-weight: 700;
@@ -23601,21 +23833,21 @@ footer {
 .landing-page .landing-home .landing-home-contain .btn-home-list li:nth-child(n+2) {
   margin-left: 10px;
 }
-.landing-page .landing-home ul.shape li {
+/* .landing-page .landing-home ul.shape li {
   position: absolute;
   top: 10%;
   left: 5%;
   -webkit-animation: move2 1.2s infinite alternate;
           animation: move2 1.2s infinite alternate;
-}
-.landing-page .landing-home ul.shape li:nth-child(2) {
+} */
+.landing-page .landing-home ul.shape li:nth-child(1) {
   position: absolute;
   top: 15%;
   left: 85%;
   -webkit-animation: move2 1.2s infinite alternate;
           animation: move2 1.2s infinite alternate;
 }
-.landing-page .landing-home ul.shape li:nth-child(3) {
+.landing-page .landing-home ul.shape li:nth-child(2) {
   position: absolute;
   top: 80%;
   left: 55%;
@@ -24567,7 +24799,7 @@ footer {
     width: unset;
   }
   .landing-page .landing-header {
-    padding: 15px 40px;
+    padding: 15px 25px;
   }
   .landing-page .section-pt-space {
     padding-top: 60px;
