@@ -36,6 +36,7 @@
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">University/College Name</th>
+                                        <th scope="col">Division</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                     </tr>
@@ -76,6 +77,10 @@
                     {
                         data: 'university',
                         name: 'university'
+                    },
+                    {
+                        data: 'division',
+                        name: 'division'
                     },
                     {
                         data: 'name',

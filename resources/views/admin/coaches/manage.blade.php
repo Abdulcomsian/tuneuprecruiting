@@ -45,6 +45,10 @@
                                         value="{{ old('university') }}" placeholder="Enter University Name" required="true" />
                                 </div>
                                 <div class="col-md-3">
+                                    <x-dynamic-input id="division" type="text" name="division"
+                                        value="{{ old('division') }}" placeholder="Enter Division" required="true" />
+                                </div>
+                                <div class="col-md-3">
                                     <x-dynamic-input id="name" type="text" name="name"
                                         value="{{ old('name') }}" placeholder="Enter Coach Name" required="true" />
                                 </div>
@@ -83,6 +87,7 @@
                                     <tr>
                                         <th scope="col">id</th>
                                         <th scope="col">University/College Name</th>
+                                        <th scope="col">Division</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Action</th>
@@ -116,6 +121,10 @@
                     {
                         data: 'university',
                         name: 'university'
+                    },
+                    {
+                        data: 'division',
+                        name: 'division'
                     },
                     {
                         data: 'name',

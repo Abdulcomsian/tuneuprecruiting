@@ -21,6 +21,9 @@ class CoachController extends Controller
                 ->addColumn('university', function ($coach) {
                     return $coach->university ? $coach->university->name : 'N/A';
                 })
+                ->addColumn('division', function ($coach) {
+                    return $coach->division ?? '';
+                })
                 ->addColumn('name', function ($coach) {
                     return $coach->name;
                 })
@@ -34,7 +37,7 @@ class CoachController extends Controller
                     ';
                     return $btns;
                 })
-                ->rawColumns(['university', 'name', 'email', 'action'])
+                ->rawColumns(['university', 'division', 'name', 'email', 'action'])
                 ->make(true);
         }
         return view('admin.coaches.manage', compact("universities"));
@@ -57,9 +60,9 @@ class CoachController extends Controller
         try {
             $coach = new CoachFinal();
             $coach->name = $request->name;
+            $coach->division = $request->division;
             $coach->email = $request->email;
             $coach->save();
-
             if ($coach) {
                 $saveUniversity = new University();
                 $saveUniversity->coach_id = $coach->id;
@@ -107,6 +110,9 @@ class CoachController extends Controller
                 ->addColumn('university', function ($coach) {
                     return $coach->university ? $coach->university->name : 'N/A';
                 })
+                ->addColumn('division', function ($coach) {
+                    return $coach->division ?? '';
+                })
                 ->addColumn('name', function ($coach) {
                     return $coach->name;
                 })
@@ -114,7 +120,7 @@ class CoachController extends Controller
                     return $coach->email;
                 })
                
-                ->rawColumns(['university', 'name', 'email'])
+                ->rawColumns(['university', 'division', 'name', 'email'])
                 ->make(true);
         }
 
