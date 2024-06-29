@@ -1,0 +1,133 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\CoachFinal;
+use App\Models\University;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+
+class CoachController extends Controller
+{
+    public function manageCoaches(Request $request)
+    {
+        $universities = University::get();
+
+        if ($request->ajax()) {
+            $coaches = CoachFinal::with('university')->get();
+            return DataTables::of($coaches)
+                ->addIndexColumn()
+                ->addColumn('university', function ($coach) {
+                    return $coach->university ? $coach->university->name : 'N/A';
+                })
+                ->addColumn('name', function ($coach) {
+                    return $coach->name;
+                })
+                ->addColumn('email', function ($coach) {
+                    return $coach->email;
+                })
+              
+                ->addColumn('action', function ($coach) {
+                    $btns = '
+                    <a href="javascript:void(0)" data-id="' . $coach->id . '" class="delete"><i class="fa fa-trash"></i></a>
+                    ';
+                    return $btns;
+                })
+                ->rawColumns(['university', 'name', 'email', 'action'])
+                ->make(true);
+        }
+        return view('admin.coaches.manage', compact("universities"));
+    }
+
+    public function storeCoach(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:coaches_final,email',
+            'university' => 'required',
+        ], [
+            'name.required' => "Name is required",
+            'email.required' => "Email is required",
+            'university.required' => "University is required",
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $coach = new CoachFinal();
+            $coach->name = $request->name;
+            $coach->email = $request->email;
+            $coach->save();
+
+            if ($coach) {
+                $saveUniversity = new University();
+                $saveUniversity->coach_id = $coach->id;
+                $saveUniversity->name = $request->university;
+                $saveUniversity->save();
+            }
+            DB::commit();
+
+            return redirect()->back()->with(['success' => 'Coach added successfully']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with(['error' => 'Something went wrong: ' . $e->getMessage()]);
+        }
+    }
+
+    public function deleteCoach(Request $request)
+    {
+        try {
+            CoachFinal::where('id', $request->id)->delete();
+            return response()->json(["success" => true, "msg" => "University Deleted Successfully"]);
+        } catch (\Exception $e) {
+            return response()->json(["success" => false, "msg" => "Something Went wrong"]);
+        }
+    }
+
+
+    public function coachList(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = CoachFinal::query();
+
+            if ($request->has('university_id')) {
+                $university = University::findOrFail($request->university_id);
+                $universityName = $university->name;
+
+                $query->whereHas('university', function ($query) use ($universityName) {
+                    $query->where('name', $universityName);
+                });
+            }
+
+            $coaches = $query->with('university')->get();
+
+            return DataTables::of($coaches)
+                ->addIndexColumn()
+                ->addColumn('university', function ($coach) {
+                    return $coach->university ? $coach->university->name : 'N/A';
+                })
+                ->addColumn('name', function ($coach) {
+                    return $coach->name;
+                })
+                ->addColumn('email', function ($coach) {
+                    return $coach->email;
+                })
+               
+                ->rawColumns(['university', 'name', 'email'])
+                ->make(true);
+        }
+
+        return view('student_backend.coaches.list');
+    }
+
+
+    public function universitiesList()
+    {
+        $universities = University::select('id', 'name')
+            ->groupBy('name')
+            ->orderBy('name')
+            ->get();
+        return response()->json(['status' => true, 'data' => $universities]);
+    }
+}

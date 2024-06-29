@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/chartist.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/datatables.css') }}">
+
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/css/vendors/datatable/select.dataTables.min.css') }}">
     <!-- Plugins css Ends-->
@@ -136,6 +137,8 @@
     <script src="{{ asset('assets/js/editor/ckeditor/ckeditor.custom.js') }}"></script> --}}
     <script src="{{ asset('assets/dateRange/moment.js') }}"></script>
     <script src="{{ asset('assets/dateRange/daterangepicker.js') }}"></script>
+
+
 
     @if (isset($viewEmailTemplate))
         <style>
