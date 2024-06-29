@@ -131,10 +131,10 @@
                 <div class="col-md-8 d-flex justify-content-center">
                     <div class="animat-block">
                         <figure class="cd-image-container is-visible"><img
-                                src="http://127.0.0.1:8000/assets/images/landing/landing-home/03.png"
+                                src="{{ asset('assets/images/landing/landing-home/03.png') }}"
                                 alt="Original Image"><span class="cd-image-label" data-type="original"> </span>
                             <div class="cd-resize-img" style="width: 56.353%;"><img
-                                    src="http://127.0.0.1:8000/assets/images/landing/landing-home/02.png"
+                                    src="{{ asset('assets/images/landing/landing-home/02.png') }}"
                                     alt="Modified Image"><span class="cd-image-label" data-type="modified"> </span>
                             </div><span class="cd-handle" style="left: 56.353%;"></span>
                         </figure>
