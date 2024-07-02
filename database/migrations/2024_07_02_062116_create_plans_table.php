@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('universities');
-
-        Schema::create('universities', function (Blueprint $table) {
+        Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('coach_id')->nullable();
-            $table->string('name')->nullable();
-            $table->foreign('coach_id')->references('id')->on('coaches_final');
+            $table->string('name');
+            $table->string('slug');
+            $table->string('stripe_plan');
+            $table->integer('price');
+            $table->longText('description');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('universities');
+        Schema::dropIfExists('plans');
     }
 };
