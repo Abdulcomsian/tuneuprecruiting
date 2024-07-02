@@ -1,26 +1,28 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
-use App\Http\Controllers\ChatController;
-use App\Http\Controllers\ApplyController;
-use App\Http\Controllers\StudentProfileController;
-use App\Http\Controllers\ProgramController;
-use App\Http\Controllers\StudentApplyController;
-use App\Http\Controllers\MailController;
-use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\AdminDashboard;
-use App\Http\Controllers\RecruiterController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\AdminProfileController;
-use App\Http\Controllers\Recruiter\Settings\Emails\EmailTemplateController;
-use App\Http\Controllers\Admin\Settings\Emails\AdminSettingController;
-use App\Http\Controllers\MediaController;
-use App\Http\Controllers\RequestInfoOrDemoController;
-use App\Http\Controllers\VideosController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\CoachController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\VideosController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\RecruiterController;
 use App\Http\Controllers\UniversityController;
+use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\StudentApplyController;
+use App\Http\Controllers\StudentProfileController;
+use App\Http\Controllers\RequestInfoOrDemoController;
+use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
+use App\Http\Controllers\Admin\Settings\Emails\AdminSettingController;
+use App\Http\Controllers\Recruiter\Settings\Emails\EmailTemplateController;
+use App\Http\Controllers\StripeWebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,22 @@ Route::get('/', function () {
     //return redirect('/dashboard');
     return view('frontend/index');
 });
+
+// Route::middleware("auth")->group(function () {
+
+Route::get('plans', [PlanController::class, 'index'])->name('plans.index');
+
+Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
+
+Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
+Route::post('checkout', [PlanController::class, 'checkout'])->name('checkout.create');
+
+Route::get('checkout/success', [PlanController::class, 'success'])->name('checkout.success');
+Route::get('checkout/cancel', [PlanController::class, 'cancel'])->name('checkout.cancel');
+
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handleWebhook'])->name('cashier.webhook');
+
+// });
 
 Route::get('/dashboard', function () {
     //    return view('backend/dashboard/dashboard');
