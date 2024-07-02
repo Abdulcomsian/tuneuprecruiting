@@ -15,7 +15,6 @@ class StripeWebhookController extends Controller
     {
         $payload = $request->all();
         $eventType = $payload['type'];
-
         // Handle the event
         switch ($eventType) {
             case 'invoice.payment_succeeded':
