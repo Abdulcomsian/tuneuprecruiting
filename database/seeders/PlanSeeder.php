@@ -17,7 +17,7 @@ class PlanSeeder extends Seeder
 
             [
                 'name' => 'Basic/Daily',
-                'slug' => 'basic',
+                'slug' => 'basic-daily',
                 'stripe_plan' => 'price_1PY6l6GvKD8UhlGp312Hobzl',
                 'price' => 10,
                 'description' => 'Basic'
@@ -25,7 +25,7 @@ class PlanSeeder extends Seeder
 
             [
                 'name' => 'Basic/Monthly',
-                'slug' => 'basic',
+                'slug' => 'basic-monthly',
                 'stripe_plan' => 'price_1PXzpMGvKD8UhlGpWlOaF5hN',
                 'price' => 200,
                 'description' => 'Basic'
@@ -33,7 +33,7 @@ class PlanSeeder extends Seeder
 
             [
                 'name' => 'Premium/Yearly',
-                'slug' => 'premium',
+                'slug' => 'premium-yearly',
                 'stripe_plan' => 'price_1PXzpuGvKD8UhlGpTVslkIVh',
                 'price' => 400,
                 'description' => 'Premium'

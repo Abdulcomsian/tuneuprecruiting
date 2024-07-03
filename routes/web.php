@@ -21,6 +21,7 @@ use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\RequestInfoOrDemoController;
 use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
 use App\Http\Controllers\Admin\Settings\Emails\AdminSettingController;
+use App\Http\Controllers\ManagePlanController;
 use App\Http\Controllers\Recruiter\Settings\Emails\EmailTemplateController;
 use App\Http\Controllers\StripeWebhookController;
 
@@ -90,6 +91,14 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
             Route::get('image-show/{mediaImage}', 'imageShow')->name('images-show');
             Route::post('imageUpdate/{mediaImage}', 'imageUpdate')->name('images-update');
         });
+
+    Route::controller(ManagePlanController::class)
+        ->prefix('plan')
+        ->as('plan.')
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+        });
+
     Route::get('/profile/admin', [AdminProfileController::class, 'profile']);
     Route::post('/profile/update/admin', [AdminProfileController::class, 'update'])->name('profile.update.admin');
     Route::get('/admin/setting/emails', [AdminSettingController::class, 'emailTemplates']);
