@@ -15,15 +15,7 @@
                                 <img class="img-fluid img-90" src="{{ asset('assets/images/white-logo.png') }}"
                                     alt="">
                             </a>
-                            <!-- {{--                            <ul class="landing-menu nav nav-pills"> --}}
-                            {{--                                <li class="nav-item menu-back">back<i class="fa fa-angle-right"></i></li> --}}
-                            {{--                                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li> --}}
-                            {{--                                <li class="nav-item"><a class="nav-link" href="#demo">Layout</a></li> --}}
-                            {{--                                <li class="nav-item"><a class="nav-link" href="#Applications">Applications</a></li> --}}
-                            {{--                                <li class="nav-item"><a class="nav-link" href="#core-feature">Core Feature </a></li> --}}
-                            {{--                                <li class="nav-item"><a class="nav-link" href="https://docs.pixelstrap.com/cion/document/" target="_blank">Documentation</a></li> --}}
-                            {{--                                <li class="nav-item"><a class="nav-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe6hKUXw_By-pg7yabL0FxoTM02ZPTxoXy8PE3yboRuUCuyeA/viewform" target="_blank">Hire us</a></li> --}}
-                            {{--                            </ul> --}} -->
+                          
                             <div class="buy-block">
                                 <div class="dropdown d-flex justify-content-between">
                                     <button class="px-3 py-2 bg-blue-500 text-white login-button" type="button"
@@ -101,12 +93,12 @@
     <div class="bg-white py-5">
         <div class="container px-4">
             <div class="row align-items-center">
-                <div class="col-lg-5 mb-4 mb-md-0 img-container">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0 img-container">
                     <img src="{{ asset('assets/images/girl.png') }}" alt="girl image" class="img-fluid img-responsive">
                 </div>
-                <div class="col-md-1 d-none d-md-block"></div>
-                <div class="col-lg-6">
-                    <p class="font-fraunces font-normal fs-md-5">
+                <div class="col-lg-1 d-none d-lg-block"></div>
+                <div class="col-lg-6 col-md-6 ps-md-3">
+                    <p class="font-fraunces font-normal text-3xl">
                         College <span class="text-blue text-decoration-underline">Golf Recruiting Agency</span> helps
                         <span class="text-gray">Student Athletes</span> achieve their
                         dreams of achieving an athletic scholarship to <span class="text-blue">play collegiate
@@ -142,8 +134,8 @@
                         out multiple forms. With us, one click applies you to programs of your choice.</p>
                 </div>
 
-                <div class="col-lg-6 d-flex justify-content-center position-relative">
-                    <div class="background-circle d-none d-md-block"></div>
+                <div class="col-lg-6  d-flex justify-content-center position-relative">
+                    <div class="background-circle d-none d-lg-block"></div>
                     <div class="animat-block w-100 d-flex justify-content-center">
                         <figure class="cd-image-container is-visible">
                             <img src="{{ asset('assets/images/landing/landing-home/03.png') }}" alt="Original Image">
@@ -169,7 +161,7 @@
             <div class="row justify-content-center">
                 <h2 class="font-fraunces text-center fw-normal text-4xl mb-2">Student Athlete Packages - <span
                         class="text-blue">Our Services</span></h2>
-                <div class="col-lg-8 col-md-10 col-12">
+                <div class="col-lg-8 col-md-10 col-12 px-4 px-md-0">
                     <p class="text-darkGray text-center text-lg w-100 w-md-75 mx-auto">Lorem ipsum dolor sit amet
                         consectetur
                         adipisicing

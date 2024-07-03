@@ -257,39 +257,6 @@ body[class=dark-only] {
 .py-10{
   padding: 3.5rem 0;
 }
-@media (max-width: 767.98px) {
-  .mb-md-2 {
-      margin-bottom: 1rem; /* Adjust margin bottom as needed */
-  }
-  .text-4xl{
-    font-size: 1.5rem;
-  }
-  .fs-md-5{
-    font-size: 1.125rem;
-  }
-}
-@media (max-width: 767.98px) {
-  .text-align-center-md-left {
-      text-align: center;
-  }
-  .social-icons{
-    width: 100%;
-  }
-}
-@media (max-width: 767.98px) {
-  .width-full {
-      width: 100%; /* Width for screens below medium (max-width: 991.98px) */
-     
-  }
-}
-
-@media (min-width: 768px) {
-  .text-align-center-md-left {
-      text-align: left;
-  }
-}
-
-
 .img-container {
   display: flex;
   justify-content: center;
@@ -300,12 +267,6 @@ body[class=dark-only] {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-@media (max-width: 767.98px) {
-  .img-container {
-      margin-bottom: 1rem;
-  }
 }
 
 /**
@@ -437,7 +398,55 @@ Girl Section CSS on Homepage End
   color: #0C0047;
 }
 
+.text-3xl {
+  font-size: 1.3rem;
+}
 
+@media (max-width: 767.98px) {
+  .mb-md-2 {
+      margin-bottom: 1rem; /* Adjust margin bottom as needed */
+  }
+  .text-4xl{
+    font-size: 1.5rem;
+  }
+
+
+}
+@media (max-width: 767.98px) {
+  .text-align-center-md-left {
+      text-align: center;
+  }
+  .social-icons{
+    width: 100%;
+  }
+}
+@media (max-width: 767.98px) {
+  .width-full {
+      width: 100%; /* Width for screens below medium (max-width: 991.98px) */
+     
+  }
+}
+
+@media (min-width: 768px) {
+  .text-align-center-md-left {
+      text-align: left;
+  }
+
+}
+
+/* Font size for medium screens and above */
+@media (min-width: 768px) {
+  .text-3xl {
+    font-size: 1.2rem;
+  }
+}
+
+/* Font size for large screens and above */
+@media (min-width: 1024px) {
+  .text-3xl {
+    font-size: 1.7rem;
+  }
+}
 
 
 @media (max-width: 767.98px) {
@@ -446,8 +455,13 @@ Girl Section CSS on Homepage End
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-
+  .img-container {
+    margin-bottom: 1rem;
 }
+}
+
+
+
 @media (max-width: 992px) {
 
   .responsive-content{
@@ -456,9 +470,10 @@ Girl Section CSS on Homepage End
   }
   .responsive-header {
     margin-bottom: 1.5rem; /* Width for screens below medium (max-width: 991.98px) */
-   
 }
+
 }
+
 
 
 
