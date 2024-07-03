@@ -69,7 +69,7 @@ class StripeWebhookController extends Controller
     protected function handleTrialWillEnd($payload)
     {
         $subscription = $payload['data']['object'];
-        $user = User::where('stripe_id', $subscription['customer'])->first();
+        $user = Subscription::where('stripe_id', $subscription['customer'])->first();
 
         if ($user) {
             // Send an email to remind the user

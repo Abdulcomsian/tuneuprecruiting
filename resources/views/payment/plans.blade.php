@@ -74,39 +74,63 @@
             padding: 1rem;
             border-radius: 0 0 4px 4px;
         }
+
+        .spinner-grow {
+            display: none;
+        }
+
+        .pricing-plan .pricing-header.secondary {
+            background-image: linear-gradient(120deg, #c0d64a 0%, #35690f 100%);
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="row">
-            @foreach ($plans as $plan)
-                <div class="col-lg-6 mb-4">
-                    <div class="pricing-plan">
-                        <div class="pricing-header {{ $plan->slug === 'basic' ? '' : 'red' }}">
-                            <h4 class="pricing-title">{{ $plan->name }}</h4>
-                            <div class="pricing-cost">${{ $plan->price }}</div>
+        <div>
+            <div class="text-center">
+                <h1 class="display-4 text-white mb-5">Our Pricing Plans</h1>
+                <div class="row">
+                    @foreach ($plans as $plan)
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="pricing-plan">
+                                <div
+                                    class="pricing-header {{ $plan->slug === 'basic-monthly' ? '' : ($plan->slug === 'basic-daily' ? 'secondary' : 'red') }}">
+                                    <h4 class="pricing-title">{{ $plan->name }}</h4>
+                                    <div class="pricing-cost">${{ $plan->price }} only</div>
+                                </div>
+
+                                <p class="text-center text-white mb-4">{{ $plan->description }}</p>
+                                <div class="pricing-footer">
+                                    <form action="{{ route('checkout.create') }}" method="POST"
+                                        onsubmit="showSpinner(this)">
+                                        @csrf
+                                        <input type="hidden" name="plan_id" value="{{ $plan->id }}">
+                                        <button type="submit"
+                                            class="btn {{ $plan->slug === 'basic-monthly' ? 'btn-primary' : ($plan->slug === 'basic-daily' ? 'btn-success' : 'btn-danger') }}">
+                                            Subscribe
+                                            <span class="spinner-grow spinner-grow-sm" role="status"
+                                                aria-hidden="true"></span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <p class="text-center text-white mb-4">{{ $plan->description }}</p>
-                        <div class="pricing-footer">
-                            <a href="{{ route('plans.show', $plan->slug) }}"
-                                class="{{ $plan->slug === 'basic' ? 'btn btn-primary' : 'btn btn-danger' }} pull-right">Select
-                                Plan</a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
-            @endforeach
+            </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
-        integrity="sha384-GJ/fWC4G8LY3rL/9czeC9TG0D5JzIuWNVbTwPz0ZwNGLoZ2Nixt0TJvhFVlE/N+F" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Vy053a7BSfF7Y3GEx+1iKGj5It8vCUh7D2" crossorigin="anonymous">
+    <script>
+        function showSpinner(form) {
+            var button = form.querySelector('button[type="submit"]');
+            button.disabled = true;
+            var spinner = button.querySelector('.spinner-grow');
+            spinner.style.display = 'inline-block';
+
+            form.submit();
+        }
     </script>
 </body>
 

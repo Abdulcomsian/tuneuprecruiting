@@ -294,6 +294,17 @@
                         </li>
                     </ul>
                 </li>
+                <li class="sidebar-list">
+                    <a class="sidebar-link sidebar-title" href="{{ route('plan.index') }}">
+                        <svg class="stroke-icon">
+                            <use href="{{ asset('assets/svg/icon-sprite.svg#Perk-Ui') }}"></use>
+                        </svg>
+                        <svg class="fill-icon">
+                            <use href="{{ asset('assets/svg/icon-sprite.svg#fill-videos') }}"></use>
+                        </svg>
+                        <span>Plans</span>
+                    </a>
+                </li>
                 </ul>
                 @php endif; @endphp
 

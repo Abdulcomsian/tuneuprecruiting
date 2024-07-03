@@ -14,7 +14,7 @@ class PlanController extends Controller
 {
     public function index()
     {
-        $plans = Plan::whereIn('slug', ['basic', 'premium'])->get();
+        $plans = Plan::latest()->get();
         return view("payment.plans", compact("plans"));
     }
 
