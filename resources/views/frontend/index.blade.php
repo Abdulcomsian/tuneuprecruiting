@@ -167,7 +167,7 @@
                         adipisicing
                         elit. Magni cum enim itaque, velit eos voluptatem.</p>
 
-                    <div class="d-flex justify-content-center align-items-center mb-2 mb-md-4">
+                    <div class="d-flex justify-content-center align-items-center mb-3 mb-md-4">
                         <label for="flexSwitchCheckChecked"
                             class="fw-semibold text-lg mx-2 mb-0 text-lightBlack">Monthly</label>
                         <div class="form-check form-switch">
