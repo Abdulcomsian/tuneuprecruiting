@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plans', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->string('stripe_plan');
-            $table->integer('price');
-            $table->timestamps();
+        Schema::table('subscriptions', function (Blueprint $table) {
+            $table->unsignedBigInteger('plan_id')->after('stripe_status')->nullable();
+            $table->foreign('plan_id')->references('id')->on('plans');
         });
     }
 
@@ -26,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plans');
+        Schema::table('subscriptions', function (Blueprint $table) {
+            //
+        });
     }
 };

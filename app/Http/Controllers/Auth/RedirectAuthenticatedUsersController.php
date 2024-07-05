@@ -10,7 +10,7 @@ class RedirectAuthenticatedUsersController extends Controller
     public function home()
     {
         $userId = auth()->user()->id;
-        $user = User::findOrFail($userId);
+        $user = User::with('payments', 'subscriptions')->findOrFail($userId);
         if ($user->role == 'coach') {
             if ($user->is_profile_completed == 'not-completed') {
                 return redirect('/profile');
@@ -18,10 +18,17 @@ class RedirectAuthenticatedUsersController extends Controller
                 return redirect('/dashboard');
             }
         } elseif ($user->role == 'student') {
-            if (!$user->subscriptions()->exists()) {
+            // dd($user->subscriptions->first());
+            $endsAt = optional($user->subscriptions->first() ? $user->subscriptions->first()->ends_at : null);
+            $oneTimePayEndsAt = optional($user->payments->first())->ends_at;
+            if (
+                (!$user->subscriptions()->exists() || ($endsAt && $endsAt->format('Y-m-d H:i:s') <= now())) &&
+                (!$user->payments()->exists() || ($oneTimePayEndsAt && $oneTimePayEndsAt <= now()))
+            ) {
                 auth()->logout();
                 return redirect()->route('plans.index');
             }
+
             if ($user->is_profile_completed == 'not-completed') {
                 return redirect('/profile/student');
             } else {

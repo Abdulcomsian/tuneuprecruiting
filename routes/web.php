@@ -36,6 +36,7 @@ use App\Http\Controllers\StripeWebhookController;
 |
 */
 
+
 Route::get('/', function () {
     //return redirect('/dashboard');
     return view('frontend/index');
@@ -43,16 +44,13 @@ Route::get('/', function () {
 
 // Route::middleware("auth")->group(function () {
 
+// Subscription
 Route::get('plans', [PlanController::class, 'index'])->name('plans.index');
-
 Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
-
-Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
 Route::post('checkout', [PlanController::class, 'checkout'])->name('checkout.create');
-
+Route::post('onetimePay', [PlanController::class, 'onetimePay'])->name('onetimePay.create');
 Route::get('checkout/success', [PlanController::class, 'success'])->name('checkout.success');
 Route::get('checkout/cancel', [PlanController::class, 'cancel'])->name('checkout.cancel');
-
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handleWebhook'])->name('cashier.webhook');
 
 // });
@@ -70,6 +68,18 @@ Route::get('/dashboard', function () {
 
 Route::get('/request/info', [RequestInfoOrDemoController::class, 'requestForm']);
 Route::post('/request/info/submit', [RequestInfoOrDemoController::class, 'sendInfoRequest']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::controller(ManagePlanController::class)
+        ->prefix('manage-plan')
+        ->as('manage-plan.')
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::put('update/{id}', 'update')->name('update');
+            Route::delete('destroy/{id}', 'destroy')->name('destroy');
+        });
+});
 
 Route::middleware(['auth', 'decrypt.id'])->group(function () {
     // admin
@@ -90,13 +100,6 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
             Route::delete('image-destroy/{mediaImage}', 'Imagedestroy')->name('images-destroy');
             Route::get('image-show/{mediaImage}', 'imageShow')->name('images-show');
             Route::post('imageUpdate/{mediaImage}', 'imageUpdate')->name('images-update');
-        });
-
-    Route::controller(ManagePlanController::class)
-        ->prefix('plan')
-        ->as('plan.')
-        ->group(function () {
-            Route::get('', 'index')->name('index');
         });
 
     Route::get('/profile/admin', [AdminProfileController::class, 'profile']);

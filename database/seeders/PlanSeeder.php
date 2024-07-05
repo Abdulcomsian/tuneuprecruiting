@@ -14,29 +14,25 @@ class PlanSeeder extends Seeder
     public function run()
     {
         $plans = [
-
             [
-                'name' => 'Basic/Daily',
-                'slug' => 'basic-daily',
-                'stripe_plan' => 'price_1PY6l6GvKD8UhlGp312Hobzl',
-                'price' => 10,
-                'description' => 'Basic'
-            ],
-
-            [
-                'name' => 'Basic/Monthly',
-                'slug' => 'basic-monthly',
+                'name' => 'Essential/Monthly',
+                'slug' => 'essential-monthly',
                 'stripe_plan' => 'price_1PXzpMGvKD8UhlGpWlOaF5hN',
                 'price' => 200,
-                'description' => 'Basic'
             ],
 
             [
-                'name' => 'Premium/Yearly',
-                'slug' => 'premium-yearly',
+                'name' => 'Essential/Yearly',
+                'slug' => 'essential-yearly',
                 'stripe_plan' => 'price_1PXzpuGvKD8UhlGpTVslkIVh',
                 'price' => 400,
-                'description' => 'Premium'
+            ],
+
+            [
+                'name' => 'Exclusive/Annual',
+                'slug' => 'exclusive-annual',
+                'stripe_plan' => 'price_1PZ6XnGvKD8UhlGpEoGYaK2D',
+                'price' => 1000,
             ]
         ];
 

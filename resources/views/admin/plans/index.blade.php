@@ -28,7 +28,6 @@
                                             <th scope="col">Slug</th>
                                             <th scope="col">Stripe Plan</th>
                                             <th scope="col">Price</th>
-                                            <th scope="col">Description</th>
                                             <th scope="col"><x-list-view-action-heading /></th>
                                         </tr>
                                     </thead>
@@ -38,19 +37,22 @@
                                                 <td>{{ $plan->name }}</td>
                                                 <td>{{ $plan->slug }}</td>
                                                 <td>{{ $plan->stripe_plan }}</td>
-                                                <td>{{ $plan->peice }}</td>
-                                                <td>{{ $plan->description }}</td>
+                                                <td>{{ $plan->price }}</td>
                                                 <td>
                                                     <ul class="action">
+                                                        <li class="edit">
+                                                            <a href="{{ route('manage-plan.edit', $plan->id) }}"><i
+                                                                    class="fa fa-edit"></i></a>
+                                                        </li>
                                                         <li class="delete">
                                                             <form method="POST"
-                                                                action="{{ route('recuriter.destroy', $plan->id) }}"
+                                                                action="{{ route('manage-plan.destroy', $plan->id) }}"
                                                                 onsubmit='return confirm("Are you sure?")'>
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <a href="#"
-                                                                    onclick="$(this).closest('form').submit();"><i
-                                                                        class="fa fa-trash"></i></a>
+                                                                <button type="submit"
+                                                                    style="border: none; background-color: transparent; cursor: pointer;"><i
+                                                                        class="fa fa-trash"></i></button>
                                                             </form>
                                                         </li>
                                                     </ul>
