@@ -295,7 +295,7 @@
                     </ul>
                 </li>
                 <li class="sidebar-list">
-                    <a class="sidebar-link sidebar-title" href="{{ route('plan.index') }}">
+                    <a class="sidebar-link sidebar-title" href="{{ route('manage-plan.index') }}">
                         <svg class="stroke-icon">
                             <use href="{{ asset('assets/svg/icon-sprite.svg#Perk-Ui') }}"></use>
                         </svg>
