@@ -37,18 +37,29 @@
         }
 
         .custom-hr {
-            width: 100%;
-            background: #000000;
-            margin-top: 20px;
-            border-radius: 10px;
+            width: 80%;
+            background: black;
+            margin-top: 5px;
+            border-radius: 1px;
             height: 2px;
             border: none;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         @media(max-width: 990px) {
             .card {
                 margin: 20px 0;
             }
+        }
+
+        .list-styles {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .text-black {
+            color: #000;
         }
     </style>
     <!-- tap on top starts-->
@@ -66,15 +77,15 @@
                                 <img class="img-fluid img-90" src="{{ asset('assets/images/white-logo.png') }}"
                                     alt="">
                             </a>
-                            <!-- {{--                            <ul class="landing-menu nav nav-pills"> --}}
-                            {{--                                <li class="nav-item menu-back">back<i class="fa fa-angle-right"></i></li> --}}
-                            {{--                                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li> --}}
-                            {{--                                <li class="nav-item"><a class="nav-link" href="#demo">Layout</a></li> --}}
-                            {{--                                <li class="nav-item"><a class="nav-link" href="#Applications">Applications</a></li> --}}
-                            {{--                                <li class="nav-item"><a class="nav-link" href="#core-feature">Core Feature </a></li> --}}
-                            {{--                                <li class="nav-item"><a class="nav-link" href="https://docs.pixelstrap.com/cion/document/" target="_blank">Documentation</a></li> --}}
-                            {{--                                <li class="nav-item"><a class="nav-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe6hKUXw_By-pg7yabL0FxoTM02ZPTxoXy8PE3yboRuUCuyeA/viewform" target="_blank">Hire us</a></li> --}}
-                            {{--                            </ul> --}} -->
+                            <!-- {{-- <ul class="landing-menu nav nav-pills"> --}}
+                            {{-- <li class="nav-item menu-back">back<i class="fa fa-angle-right"></i></li> --}}
+                            {{-- <li class="nav-item"><a class="nav-link" href="#home">Home</a></li> --}}
+                            {{-- <li class="nav-item"><a class="nav-link" href="#demo">Layout</a></li> --}}
+                            {{-- <li class="nav-item"><a class="nav-link" href="#Applications">Applications</a></li> --}}
+                            {{-- <li class="nav-item"><a class="nav-link" href="#core-feature">Core Feature </a></li> --}}
+                            {{-- <li class="nav-item"><a class="nav-link" href="https://docs.pixelstrap.com/cion/document/" target="_blank">Documentation</a></li> --}}
+                            {{-- <li class="nav-item"><a class="nav-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe6hKUXw_By-pg7yabL0FxoTM02ZPTxoXy8PE3yboRuUCuyeA/viewform" target="_blank">Hire us</a></li> --}}
+                            {{-- </ul> --}} -->
                             <div class="buy-block">
                                 <div class="dropdown">
                                     <button class="login-btn dropdown-toggle" type="button"id="loginDropdown"
@@ -102,8 +113,8 @@
             <div class="container">
                 <div class="row g-0">
                     <ul class="shape">
-                        <!-- <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-1.png') }}"
-                                alt=""></li> -->
+                        {{-- <!-- <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-1.png') }}"
+                                alt=""></li> --> --}}
                         <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-2.png') }}"
                                 alt=""></li>
                         <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-3.png') }}"
@@ -113,22 +124,13 @@
                         <h1 class="font-fraunces font-normal text-center fs-2 text-white mb-5">College Golf <span
                                 class="text-blue underline">Recruitment</span> Portal</h1>
                         <div class="col-lg-6 responsive-header">
-                            {{-- <figure class="cd-image-container">
-                                <img src="{{ asset('assets/images/landing/landing-home/03.png') }}"
-                                    alt="Original Image">
-                                    <span class="cd-image-label" data-type="original"> </span>
-                                <div class="cd-resize-img"><img
-                                        src="{{ asset('assets/images/landing/landing-home/02.png') }}"
-                                        alt="Modified Image"><span class="cd-image-label" data-type="modified"> </span>
-                                </div><span class="cd-handle"></span>
-                            </figure> --}}
                             <div class="d-flex flex-column justify-content-center mx-auto px-4">
-                                <p class="text-white font-fraunces fw-semibold mb-2 "><b>Get Started with CGRP</b>
+                                <p class="text-white mb-2" style="font-weight: 600;">Get Started with CGRP
                                 </p>
                                 <h1 class="font-nunito text-white">Technology to Streamline <br> your Recruitment <br>
                                     Journey
                                 </h1>
-                                <p class="font-nunito text-gray">Trusted by college golf programs – CGRP connects
+                                <p class="font-nunito text-white mt-3">Trusted by college golf programs – CGRP connects
                                     college coaches with aspiring collegiate athletes.</p>
 
                             </div>
@@ -161,20 +163,17 @@
                         advanced technology simplifies the entire process, guiding you through each stage: Our
                         technology provides you with the following:
                     </p>
-                    <ul class="list-style">
+                    <ul class="list-styles">
                         <li class="text-black">Our dedicated team proactively promotes your profile to college golf
-                            programs bi-monthly,
-                            ensuring maximum exposure and interest.</li>
+                            programs bi-monthly, ensuring maximum exposure and interest.</li>
                         <li class="text-black">View information on college golf programs</li>
                         <li class="text-black">Easily apply for college golf programs</li>
                         <li class="text-black">Have access to our 12 step recruitment videos and documents.</li>
                         <li class="text-black">Access to all Division 1, Division 2, Division 3, NAIA, Junior Colleges
-                            coaches name and
-                            email list.</li>
+                            coaches name and email list.</li>
                         <li class="text-black">Easily communicate with college coaches in our portal.</li>
                         <li class="text-black">With our exclusive platform, you receive assistance from one of our
-                            experts to help you each
-                            step of the way.</li>
+                            experts to help you each step of the way.</li>
                     </ul>
                 </div>
             </div>
