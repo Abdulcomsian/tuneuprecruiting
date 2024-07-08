@@ -30,7 +30,7 @@ class CoachController extends Controller
                 ->addColumn('email', function ($coach) {
                     return $coach->email;
                 })
-              
+
                 ->addColumn('action', function ($coach) {
                     $btns = '
                     <a href="javascript:void(0)" data-id="' . $coach->id . '" class="delete"><i class="fa fa-trash"></i></a>
@@ -119,7 +119,7 @@ class CoachController extends Controller
                 ->addColumn('email', function ($coach) {
                     return $coach->email;
                 })
-               
+
                 ->rawColumns(['university', 'division', 'name', 'email'])
                 ->make(true);
         }

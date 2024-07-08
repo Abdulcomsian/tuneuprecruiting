@@ -42,7 +42,8 @@
                                 @csrf
                                 <div class="col-md-3">
                                     <x-dynamic-input id="university" type="university" name="university"
-                                        value="{{ old('university') }}" placeholder="Enter University Name" required="true" />
+                                        value="{{ old('university') }}" placeholder="Enter University Name"
+                                        required="true" />
                                 </div>
                                 <div class="col-md-3">
                                     <x-dynamic-input id="division" type="text" name="division"
@@ -64,7 +65,7 @@
                                         @endforeach
                                     </select>
                                 </div> --}}
-                               
+
                                 <div class="col-md-12">
                                     <button class="btn btn-primary float-end mt-3" id="btn-from-add"
                                         type="submit">Submit</button>
@@ -115,8 +116,10 @@
                 serverSide: true,
                 ajax: "{{ route('manage.coach') }}",
                 columns: [{
-                        data: 'id',
-                        name: 'id'
+                        data: null,
+                        name: 'index',
+                        orderable: false,
+                        searchable: false
                     },
                     {
                         data: 'university',
@@ -134,14 +137,17 @@
                         data: 'email',
                         name: 'email'
                     },
-                   
+
                     {
                         data: 'action',
                         name: 'action',
-                        orderable: false,
+                        orderable: true,
                         searchable: false
                     },
-                ]
+                ],
+                createdRow: function(row, data, dataIndex) {
+                    $('td:eq(0)', row).html(dataIndex + 1);
+                }
             });
         });
 
