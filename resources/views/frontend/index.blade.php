@@ -1,5 +1,61 @@
 <x-guest-layout>
 
+    <style>
+        .card {
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
+            transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
+            padding: 14px 36px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+        }
+
+        .card-content {
+            flex: 1;
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            margin-bottom: 0;
+        }
+
+        .card img {
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            max-height: 120px;
+        }
+
+        .custom-hr {
+            width: 100%;
+            background: #000000;
+            margin-top: 20px;
+            border-radius: 10px;
+            height: 2px;
+            /* Adjust height if necessary */
+            border: none;
+            /* Remove default border */
+        }
+
+        @media (max-width: 990px) {
+            .card {
+                margin: 20px;
+            }
+        }
+    </style>
+
     <div class="tap-top"><i data-feather="chevrons-up"></i></div>
     <div class="page-wrapper">
         <header class="landing-header">
@@ -152,10 +208,88 @@
             </div>
         </div>
     </section>
+
     <div class="bg-white py-5">
         <section class="container">
             <div class="row justify-content-center px-4">
-                <div class="col-lg-8 col-md-10 col-12">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-blue-700 px-3 py-4">
+                            <div class="card-content">
+                                <h3 class="text-white fw-bold text-center font-nunito">Online Athlete Profile</h3>
+                                <p class="font-nunito text-base font-normal text-white text-center mt-2">Our athletes
+                                    enter their personal information, athletic information and academic information to
+                                    allow college coaches to review their potential.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-blue-700 px-3 py-4">
+                            <div class="card-content">
+                                <h3 class="text-white fw-bold text-center font-nunito">College Coaches Information Page
+                                </h3>
+                                <p class="font-nunito text-base font-normal text-white text-center mt-2">Contacting
+                                    college coaches directly can be a pain, especially when you need to locate over 900
+                                    emails.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-blue-700 px-3 py-4">
+                            <div class="card-content">
+                                <h3 class="text-white fw-bold text-center font-nunito">CGRA Notifying All College
+                                    Coaches</h3>
+                                <p class="font-nunito text-base font-normal text-white text-center mt-2">Our staff will
+                                    be reaching out 2-3 times per month, notifying all college golf coaches about your
+                                    profile to begin conversation with you.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-blue-700 px-3 py-4">
+                            <div class="card-content">
+                                <h3 class="text-white fw-bold text-center font-nunito">Coaches Interests</h3>
+                                <p class="font-nunito text-base font-normal text-white text-center mt-2">We send your
+                                    profile to all coaches and when coaches want to connect with you, they will connect
+                                    with you through CGRA.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-blue-700 px-3 py-4 d-flex align-items-stretch">
+                            <div class="card-content">
+                                <h3 class="text-white fw-bold text-center font-nunito">College Recruitment Modules</h3>
+                                <p class="font-nunito text-base font-normal text-white text-center mt-2">Our team
+                                    provides step by step instructional video modules for the 12 most important steps to
+                                    the college recruitment process.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-blue-700 px-3 py-4 d-flex align-items-stretch">
+                            <div class="card-content">
+                                <h3 class="text-white fw-bold text-center font-nunito">Resume Upload</h3>
+                                <p class="font-nunito text-base font-normal text-white text-center mt-2">Athletes will
+                                    upload their athletic resume to their profile. <b>When updates are made to the
+                                        resume, coaches are notified.</b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-blue-700 px-3 py-4 d-flex align-items-stretch">
+                            <div class="card-content">
+                                <h3 class="text-white fw-bold text-center font-nunito">Highlight Video Upload</h3>
+                                <p class="font-nunito text-base font-normal text-white text-center mt-2">Athletes will
+                                    upload their highlights for coaches to view and review.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="custom-hr">
+                <div class="col-lg-8 col-md-10 mt-5 col-12">
                     <h2 class="font-fraunces text-center fw-normal fs-2 mb-2">Student Athlete Packages - <span
                             class="text-blue">Our Services</span></h2>
                     <p class="text-darkGray text-center text-lg">Lorem ipsum dolor sit amet consectetur adipisicing
@@ -164,8 +298,8 @@
                     <div class="d-flex justify-content-center align-items-center mb-4">
                         <label for="flexSwitchCheckChecked" class="fw-semibold me-2 text-lightBlack">Monthly</label>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"
-                                checked>
+                            <input class="form-check-input" type="checkbox" role="switch"
+                                id="flexSwitchCheckChecked" checked>
                         </div>
                         <label for="flexSwitchCheckChecked" class="fw-semibold text-lightBlack">Annually</label>
                     </div>
@@ -304,7 +438,9 @@
                     </div>
                 </div>
             </div>
-        </section>
+    </div>
+
+    </section>
     </div>
     <div class="bg-black-700">
         <div class="row py-5 px-4">
