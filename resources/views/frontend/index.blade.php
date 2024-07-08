@@ -37,9 +37,9 @@
         }
 
         .custom-hr {
-            width: 80%;
+            width: 15%;
             background: black;
-            margin-top: 5px;
+            margin-top: 27px;
             border-radius: 1px;
             height: 2px;
             border: none;
@@ -296,7 +296,7 @@
             </div>
 
             <hr class="custom-hr">
-            <div class="row justify-content-center px-4">
+            <div class="row justify-content-center px-4 mt-4">
                 <div class="col-lg-8 col-md-10 col-12">
                     <h2 class="font-fraunces text-center fw-normal fs-2 mb-2">Student Athlete Packages - <span
                             class="text-blue">Our Services</span></h2>
