@@ -1,9 +1,7 @@
 <x-guest-layout>
-
     <style>
         .card {
             border-radius: 4px;
-            background: #fff;
             box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
             transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
             padding: 14px 36px;
@@ -44,20 +42,21 @@
             margin-top: 20px;
             border-radius: 10px;
             height: 2px;
-            /* Adjust height if necessary */
             border: none;
-            /* Remove default border */
         }
 
-        @media (max-width: 990px) {
+        @media(max-width: 990px) {
             .card {
-                margin: 20px;
+                margin: 20px 0;
             }
         }
     </style>
-
+    <!-- tap on top starts-->
     <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+    <!-- tap on tap ends-->
     <div class="page-wrapper">
+        <!-- Page Body Start-->
+        <!-- header start-->
         <header class="landing-header">
             <div class="container-fluid">
                 <div class="row g-0">
@@ -95,6 +94,8 @@
                 </div>
             </div>
         </header>
+        <!-- header end-->
+        <!-- landing home start-->
         <section class="landing-home" id="home">
             <img class="img-fluid bg-img-cover" src="{{ asset('assets/images/landing/landing-home/home-bg.jpg') }}"
                 alt="">
@@ -122,9 +123,10 @@
                                 </div><span class="cd-handle"></span>
                             </figure> --}}
                             <div class="d-flex flex-column justify-content-center mx-auto px-4">
-                                <p class="text-white font-nunito fw-semibold mb-2 "><b>Get Started with CGRP</b>
+                                <p class="text-white font-fraunces fw-semibold mb-2 "><b>Get Started with CGRP</b>
                                 </p>
-                                <h1 class="font-nunito text-white">Technology to Streamline your Recruitment Journey
+                                <h1 class="font-nunito text-white">Technology to Streamline <br> your Recruitment <br>
+                                    Journey
                                 </h1>
                                 <p class="font-nunito text-gray">Trusted by college golf programs – CGRP connects
                                     college coaches with aspiring collegiate athletes.</p>
@@ -138,7 +140,10 @@
                 </div>
             </div>
         </section>
+        <!-- landing home end-->
+        <!--Agency Info Section-->
     </div>
+    <!--Girls Section Start-->
     <div class="bg-white py-5">
         <section class="container bg-white px-4">
             <div class="row align-items-center">
@@ -175,6 +180,8 @@
             </div>
         </section>
     </div>
+    <!--Girls Section End-->
+    <!--Revolutionized Section Starts-->
     <section class="bg-lightblue">
         <div class="container py-5">
             <div class="row align-items-center">
@@ -200,96 +207,98 @@
                                     alt="Modified Image"><span class="cd-image-label" data-type="modified"> </span>
                             </div><span class="cd-handle" style="left: 56.353%;"></span>
                         </figure> --}}
-                        <figure class="cd-image-container is-visible">
-                            <img src="{{ asset('assets/images/landing/landing-home/06.png') }}" alt="Original Image">
-                        </figure>
+                        <img src="{{ asset('assets/images/landing/landing-home/06.png') }}" alt="Original Image"
+                            width="100%;" height="300px;">
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+    <!--Revolutionized Section Ends-->
+    <!--Athelete Package Section Starts-->
     <div class="bg-white py-5">
         <section class="container">
-            <div class="row justify-content-center px-4">
-                <div class="row">
-                    <div class="col-md-3 mb-3">
-                        <div class="card bg-blue-700 px-3 py-4">
-                            <div class="card-content">
-                                <h3 class="text-white fw-bold text-center font-nunito">Online Athlete Profile</h3>
-                                <p class="font-nunito text-base font-normal text-white text-center mt-2">Our athletes
-                                    enter their personal information, athletic information and academic information to
-                                    allow college coaches to review their potential.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <div class="card bg-blue-700 px-3 py-4">
-                            <div class="card-content">
-                                <h3 class="text-white fw-bold text-center font-nunito">College Coaches Information Page
-                                </h3>
-                                <p class="font-nunito text-base font-normal text-white text-center mt-2">Contacting
-                                    college coaches directly can be a pain, especially when you need to locate over 900
-                                    emails.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <div class="card bg-blue-700 px-3 py-4">
-                            <div class="card-content">
-                                <h3 class="text-white fw-bold text-center font-nunito">CGRA Notifying All College
-                                    Coaches</h3>
-                                <p class="font-nunito text-base font-normal text-white text-center mt-2">Our staff will
-                                    be reaching out 2-3 times per month, notifying all college golf coaches about your
-                                    profile to begin conversation with you.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <div class="card bg-blue-700 px-3 py-4">
-                            <div class="card-content">
-                                <h3 class="text-white fw-bold text-center font-nunito">Coaches Interests</h3>
-                                <p class="font-nunito text-base font-normal text-white text-center mt-2">We send your
-                                    profile to all coaches and when coaches want to connect with you, they will connect
-                                    with you through CGRA.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-md-3 mb-3">
-                        <div class="card bg-blue-700 px-3 py-4 d-flex align-items-stretch">
-                            <div class="card-content">
-                                <h3 class="text-white fw-bold text-center font-nunito">College Recruitment Modules</h3>
-                                <p class="font-nunito text-base font-normal text-white text-center mt-2">Our team
-                                    provides step by step instructional video modules for the 12 most important steps to
-                                    the college recruitment process.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <div class="card bg-blue-700 px-3 py-4 d-flex align-items-stretch">
-                            <div class="card-content">
-                                <h3 class="text-white fw-bold text-center font-nunito">Resume Upload</h3>
-                                <p class="font-nunito text-base font-normal text-white text-center mt-2">Athletes will
-                                    upload their athletic resume to their profile. <b>When updates are made to the
-                                        resume, coaches are notified.</b></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <div class="card bg-blue-700 px-3 py-4 d-flex align-items-stretch">
-                            <div class="card-content">
-                                <h3 class="text-white fw-bold text-center font-nunito">Highlight Video Upload</h3>
-                                <p class="font-nunito text-base font-normal text-white text-center mt-2">Athletes will
-                                    upload their highlights for coaches to view and review.</p>
-                            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <div class="card bg-blue-700 px-3 py-4">
+                        <div class="card-content">
+                            <h3 class="text-white fw-bold text-center font-nunito">Online Athlete Profile</h3>
+                            <p class="font-nunito text-base font-normal text-white text-center mt-2">Our athletes
+                                enter their personal information, athletic information and academic information to
+                                allow college coaches to review their potential.</p>
                         </div>
                     </div>
                 </div>
-                <hr class="custom-hr">
-                <div class="col-lg-8 col-md-10 mt-5 col-12">
+                <div class="col-md-3 mb-3">
+                    <div class="card bg-blue-700 px-3 py-4">
+                        <div class="card-content">
+                            <h3 class="text-white fw-bold text-center font-nunito">College Coaches Information Page
+                            </h3>
+                            <p class="font-nunito text-base font-normal text-white text-center mt-2">Contacting
+                                college coaches directly can be a pain, especially when you need to locate over 900
+                                emails.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card bg-blue-700 px-3 py-4">
+                        <div class="card-content">
+                            <h3 class="text-white fw-bold text-center font-nunito">CGRA Notifying All College
+                                Coaches</h3>
+                            <p class="font-nunito text-base font-normal text-white text-center mt-2">Our staff will
+                                be reaching out 2-3 times per month, notifying all college golf coaches about your
+                                profile to begin conversation with you.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card bg-blue-700 px-3 py-4">
+                        <div class="card-content">
+                            <h3 class="text-white fw-bold text-center font-nunito">Coaches Interests</h3>
+                            <p class="font-nunito text-base font-normal text-white text-center mt-2">We send your
+                                profile to all coaches and when coaches want to connect with you, they will connect
+                                with you through CGRA.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-3 mb-3">
+                    <div class="card bg-blue-700 px-3 py-4 d-flex align-items-stretch">
+                        <div class="card-content">
+                            <h3 class="text-white fw-bold text-center font-nunito">College Recruitment Modules</h3>
+                            <p class="font-nunito text-base font-normal text-white text-center mt-2">Our team provides
+                                step by step instructional video modules for the 12 most important steps to the college
+                                recruitment process.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card bg-blue-700 px-3 py-4 d-flex align-items-stretch">
+                        <div class="card-content">
+                            <h3 class="text-white fw-bold text-center font-nunito">Resume Upload</h3>
+                            <p class="font-nunito text-base font-normal text-white text-center mt-2">Athletes will
+                                upload their athletic resume to their profile. <b>When updates are made to the resume,
+                                    coaches are notified.</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card bg-blue-700 px-3 py-4 d-flex align-items-stretch">
+                        <div class="card-content">
+                            <h3 class="text-white fw-bold text-center font-nunito">Highlight Video Upload</h3>
+                            <p class="font-nunito text-base font-normal text-white text-center mt-2">Athletes will
+                                upload their highlights for coaches to view and review.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="custom-hr">
+            <div class="row justify-content-center px-4">
+                <div class="col-lg-8 col-md-10 col-12">
                     <h2 class="font-fraunces text-center fw-normal fs-2 mb-2">Student Athlete Packages - <span
                             class="text-blue">Our Services</span></h2>
                     <p class="text-darkGray text-center text-lg">Lorem ipsum dolor sit amet consectetur adipisicing
@@ -438,11 +447,12 @@
                     </div>
                 </div>
             </div>
+        </section>
     </div>
-
-    </section>
-    </div>
+    <!--Athelete Package Section Starts-->
+    <!--Footer Starts-->
     <div class="bg-black-700">
+        <!-- <div class="d-flex flex-column align-items-center justify-content-center py-5"> -->
         <div class="row py-5 px-4">
             <div class="col-lg-4 mx-auto d-flex flex-column align-items-center justify-content-center">
                 <img class="img-fluid img-90 mb-3" src="{{ asset('assets/images/white-logo.png') }}" alt="">
@@ -475,7 +485,9 @@
                     </div>
                 </div>
             </div>
+            <!-- </div> -->
         </div>
+
 
         <div class="row text-gray px-5 py-3 footer-bottom font-nunito text-lg">
             <div class="col-md-6 d-flex justify-content-md-start justify-content-center mb-2 mb-md-0">
@@ -488,4 +500,5 @@
             </div>
         </div>
     </div>
+    <!--Footer Ends-->
 </x-guest-layout>
