@@ -81,7 +81,9 @@ class CoachController extends Controller
     public function deleteCoach(Request $request)
     {
         try {
+            University::where('coach_id', $request->id)->delete();
             CoachFinal::where('id', $request->id)->delete();
+
             return response()->json(["success" => true, "msg" => "University Deleted Successfully"]);
         } catch (\Exception $e) {
             return response()->json(["success" => false, "msg" => "Something Went wrong"]);
