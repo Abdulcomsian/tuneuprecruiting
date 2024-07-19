@@ -1,4 +1,20 @@
 <x-app-layout>
+    <style>
+        .btn.btn-black {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn.btn-black:hover {
+            background-color: #444;
+        }
+    </style>
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-title">
@@ -105,6 +121,47 @@
     </div>
 
 
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Coach</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        @csrf
+                        <input type="hidden" id="id" name="id">
+                        <div class="form-group">
+                            <label for="university">University</label>
+                            <input type="text" class="form-control" id="university" name="university" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="division">Division</label>
+                            <input type="text" class="form-control" id="division" name="division" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="d-flex justify-content-end pt-3">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         $(function() {
@@ -176,7 +233,11 @@
                                 Swal.fire({
                                     title: "Deleted!",
                                     text: res.msg,
-                                    icon: "success"
+                                    icon: "success",
+                                    customClass: {
+                                        confirmButton: 'btn btn-black' // Custom class for the confirm button
+                                    },
+                                    buttonsStyling: false
                                 }).then((result) => {
                                     if (result.isConfirmed) {
                                         location.reload();
@@ -186,7 +247,11 @@
                                 Swal.fire({
                                     title: "Not Deleted!",
                                     text: res.msg,
-                                    icon: "error"
+                                    icon: "error",
+                                    customClass: {
+                                        confirmButton: 'btn btn-black' // Custom class for the confirm button
+                                    },
+                                    buttonsStyling: false
                                 }).then((result) => {
                                     if (result.isConfirmed) {
                                         location.reload();
@@ -199,5 +264,79 @@
                 }
             });
         })
+
+        $(document).on("click", ".edit", function() {
+            let id = $(this).data('id');
+            $.ajax({
+                url: "{{ route('edit.coach') }}",
+                type: 'get',
+                data: {
+                    id: id
+                },
+                success: function(res) {
+                    if (res.success) {
+                        // Populate the form with the returned data
+                        $('#editForm #id').val(res.data.id);
+                        $('#editForm #university').val(res.data.university.name);
+                        $('#editForm #division').val(res.data.division);
+                        $('#editForm #name').val(res.data.name);
+                        $('#editForm #email').val(res.data.email);
+
+                        // Show the edit modal
+                        $('#editModal').modal('show');
+                    } else {
+                        Swal.fire({
+                            title: "Error!",
+                            text: res.msg,
+                            icon: "error"
+                        });
+                    }
+                }
+            });
+        });
+
+        $(document).on("submit", "#editForm", function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "{{ route('update.coach') }}",
+                type: 'post',
+                data: $(this).serialize(),
+                success: function(res) {
+                    console.log(res);
+                    if (res.success) {
+                        Swal.fire({
+                            title: "Updated!",
+                            text: res.msg,
+                            icon: "success",
+                            customClass: {
+                                confirmButton: 'btn btn-black' // Custom class for the confirm button
+                            },
+                            buttonsStyling: false
+                        }).then(() => {
+                            $('#editModal').modal('hide');
+                            $('.data-table').DataTable().ajax.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Error!",
+                            text: res.msg,
+                            icon: "error",
+                            customClass: {
+                                confirmButton: 'btn btn-black' // Custom class for the confirm button
+                            },
+                            buttonsStyling: false
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    let errorMessage = xhr.status + ': ' + xhr.statusText;
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Error - " + errorMessage,
+                        icon: "error"
+                    });
+                }
+            });
+        });
     </script>
 </x-app-layout>

@@ -138,6 +138,8 @@ Route::middleware(['auth', 'decrypt.id'])->group(function () {
     Route::get('manage-coaches', [CoachController::class, 'manageCoaches'])->name("manage.coach");
     Route::post('store-coach', [CoachController::class, 'storeCoach'])->name('store.coach');
     Route::post('delete-coach', [CoachController::class, 'deleteCoach'])->name('delete.coach');
+    Route::get('edit-coach', [CoachController::class, 'editCoach'])->name('edit.coach');
+    Route::post('update-coach', [CoachController::class, 'updateCoach'])->name('update.coach');
 
     // University
     Route::get('manage_university', [UniversityController::class, 'manageUniversity'])->name("manage.university");

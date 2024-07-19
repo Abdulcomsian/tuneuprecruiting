@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Apply;
-use App\Models\ApplyDetail;
 use App\Models\Coach;
 use App\Models\Program;
+use App\Models\ApplyDetail;
 use App\Models\ProgramType;
-use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\CreateRecruiterAccountMail;
+use Illuminate\Auth\Passwords\PasswordBroker;
 
 class RecruiterController extends Controller
 {

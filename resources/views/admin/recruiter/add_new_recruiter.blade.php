@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-sm-6 pe-0">
                         <ol class="breadcrumb">
-                            {!! generateBreadcrumbs(["Add new Recruiter"]) !!}
+                            {!! generateBreadcrumbs(['Add new Recruiter']) !!}
                         </ol>
                     </div>
                 </div>
@@ -30,41 +30,28 @@
                                 </div>
                             @endif
 
-                            @if(session('success') || session('danger'))
+                            @if (session('success') || session('danger'))
                                 @php $className = (session('success')) ? 'success' : 'danger'; @endphp
                                 @php $message = (session('success')) ? session('success') : session('danger'); @endphp
                                 <div class="alert alert-{{ $className }}">
                                     {{ $message }}
                                 </div>
                             @endif
-                            <form method="POST" id="frm-recuriter" action="{{ route('recuriter.store') }}" class="row g-3" enctype="multipart/form-data">
+                            <form method="POST" id="frm-recuriter" action="{{ route('recuriter.store') }}"
+                                class="row g-3" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-md-3">
-                                    <x-dynamic-input
-                                        id="first-name"
-                                        type="text"
-                                        name="first_name"
-                                        value="{{ old('first_name') }}"
-                                        placeholder="First Name"
-                                        required="true" />
+                                    <x-dynamic-input id="first-name" type="text" name="first_name"
+                                        value="{{ old('first_name') }}" placeholder="First Name" required="true" />
                                 </div>
                                 <div class="col-md-3">
-                                    <x-dynamic-input
-                                        id="last-name"
-                                        type="text"
-                                        name="last_name"
-                                        value="{{ old('last_name') }}"
-                                        placeholder="Last Name"
-                                        required="true" />
+                                    <x-dynamic-input id="last-name" type="text" name="last_name"
+                                        value="{{ old('last_name') }}" placeholder="Last Name" required="true" />
                                 </div>
                                 <div class="col-md-3">
-                                    <x-dynamic-input
-                                        id="college-or-university"
-                                        type="text"
-                                        name="college_or_university"
-                                        value="{{ old('college_or_university') }}"
-                                        placeholder="College/University Name"
-                                        required="true" />
+                                    <x-dynamic-input id="college-or-university" type="text"
+                                        name="college_or_university" value="{{ old('college_or_university') }}"
+                                        placeholder="College/University Name" required="true" />
                                 </div>
                                 <div class="col-md-3">
                                     @component('components.radio-buttons', [
@@ -72,8 +59,8 @@
                                         'options' => getGenderTypes(),
                                         'selected' => ucfirst(old('gender')),
                                         'label' => 'Gender',
-                                        'required' => true
-                                        ])
+                                        'required' => true,
+                                    ])
                                     @endcomponent
                                 </div>
                                 <div class="col-md-3">
@@ -84,21 +71,17 @@
                                         'id' => 'program-type',
                                         'selectClass' => 'bw-raw-select',
                                         'label' => 'Type of Program',
-                                        'required' => true
-                                        ])
+                                        'required' => true,
+                                    ])
                                     @endcomponent
                                 </div>
                                 <div class="col-md-3">
-                                    <x-dynamic-input
-                                        id="email"
-                                        type="email"
-                                        name="email"
-                                        value="{{ old('email') }}"
-                                        placeholder="Email"
-                                        required="true" />
+                                    <x-dynamic-input id="email" type="email" name="email"
+                                        value="{{ old('email') }}" placeholder="Email" required="true" />
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary float-end mt-3" id="btn-from-add" type="submit">Submit</button>
+                                    <button class="btn btn-primary float-end mt-3" id="btn-from-add"
+                                        type="submit">Submit</button>
                                 </div>
                             </form>
                         </div>

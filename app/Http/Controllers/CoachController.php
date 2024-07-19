@@ -33,7 +33,8 @@ class CoachController extends Controller
 
                 ->addColumn('action', function ($coach) {
                     $btns = '
-                    <a href="javascript:void(0)" data-id="' . $coach->id . '" class="delete"><i class="fa fa-trash"></i></a>
+                        <a href="javascript:void(0)" data-id="' . $coach->id . '" class="edit"><i class="fa fa-edit"></i></a>
+                        <a href="javascript:void(0)" data-id="' . $coach->id . '" class="delete"><i class="fa fa-trash"></i></a>
                     ';
                     return $btns;
                 })
@@ -86,6 +87,78 @@ class CoachController extends Controller
             return response()->json(["success" => true, "msg" => "University Deleted Successfully"]);
         } catch (\Exception $e) {
             return response()->json(["success" => false, "msg" => "Something Went wrong"]);
+        }
+    }
+
+    public function editCoach(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:coaches_final,id',
+        ]);
+
+        // Find the coach by ID
+        $coach = CoachFinal::find($validated['id']);
+        $coach->load('university');
+        if ($coach) {
+            return response()->json([
+                'success' => true,
+                'data' => $coach,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Coach not found!',
+            ], 404);
+        }
+    }
+
+    public function updateCoach(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:coaches_final,id',
+            'name' => 'required',
+            'email' => 'required|email|unique:coaches_final,email,' . $request->id,
+            'university' => 'required',
+        ], [
+            'id.required' => "ID is required",
+            'id.exists' => "Coach not found",
+            'name.required' => "Name is required",
+            'email.required' => "Email is required",
+            'university.required' => "University is required",
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $coach = CoachFinal::findOrFail($request->id);
+            $coach->name = $request->name;
+            $coach->division = $request->division;
+            $coach->email = $request->email;
+            $coach->save();
+
+            $university = University::where('coach_id', $coach->id)->first();
+            if ($university) {
+                $university->name = $request->university;
+                $university->save();
+            } else {
+                $saveUniversity = new University();
+                $saveUniversity->coach_id = $coach->id;
+                $saveUniversity->name = $request->university;
+                $saveUniversity->save();
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'msg' => 'Coach updated successfully'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'msg' => 'Something went wrong: ' . $e->getMessage()
+            ]);
         }
     }
 
