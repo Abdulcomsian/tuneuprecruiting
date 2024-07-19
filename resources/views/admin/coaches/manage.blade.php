@@ -136,19 +136,19 @@
                     <form id="editForm">
                         @csrf
                         <input type="hidden" id="id" name="id">
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="university">University</label>
                             <input type="text" class="form-control" id="university" name="university" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="division">Division</label>
                             <input type="text" class="form-control" id="division" name="division" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
