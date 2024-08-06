@@ -87,11 +87,15 @@
                             {{-- <li class="nav-item"><a class="nav-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe6hKUXw_By-pg7yabL0FxoTM02ZPTxoXy8PE3yboRuUCuyeA/viewform" target="_blank">Hire us</a></li> --}}
                             {{-- </ul> --}} -->
                             <div class="buy-block">
-                                <div class="dropdown">
-                                    <button class="login-btn dropdown-toggle" type="button"id="loginDropdown"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="dropdown d-flex justify-content-between">
+                                    <button class="px-3 py-2 bg-blue-500 text-white login-button" type="button"
+                                        id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                         Login
                                     </button>
+                                    <div class="px-3 py-2 bg-blue-500 text-white angle_btn" id="loginDropdown"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    </div>
                                     <ul class="dropdown-menu" aria-labelledby="loginDropdown">
                                         <li><a class="dropdown-item" href="{{ url('/login?user=student') }}">Student
                                                 Login</a></li>
@@ -113,18 +117,29 @@
             <div class="container">
                 <div class="row g-0">
                     <ul class="shape">
+<<<<<<< HEAD
                         {{-- <!-- <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-1.png') }}"
                                 alt=""></li> --> --}}
+=======
+                        <!-- <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-1.png') }}"
+                                alt=""></li> -->
+>>>>>>> origin/master
                         <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-2.png') }}"
                                 alt=""></li>
                         <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-3.png') }}"
                                 alt=""></li>
                     </ul>
                     <div class="row g-0 header-margin">
+<<<<<<< HEAD
                         <h1 class="font-fraunces font-normal text-center fs-2 text-white mb-5">College Golf <span
                                 class="text-blue underline">Recruitment</span> Portal</h1>
+=======
+                        <h1 class="font-fraunces font-normal text-center fs-2 text-white  mb-3 mb-md-5">College Golf
+                            <span class="text-blue underline">Recruitment</span> Agency</h1>
+>>>>>>> origin/master
                         <div class="col-lg-6 responsive-header">
                             <div class="d-flex flex-column justify-content-center mx-auto px-4">
+<<<<<<< HEAD
                                 <p class="text-white mb-2" style="font-weight: 600;">Get Started with CGRP
                                 </p>
                                 <h1 class="font-nunito text-white">Technology to Streamline <br> your Recruitment <br>
@@ -132,6 +147,18 @@
                                 </h1>
                                 <p class="font-nunito text-white mt-3">Trusted by college golf programs – CGRP connects
                                     college coaches with aspiring collegiate athletes.</p>
+=======
+
+                                <h3 class="text-white font-fraunces fw-semibold mb-2 fs-4">Revolutionize Your
+                                    Recruitment Process</h3>
+                                <p class="font-nunito text-gray"> Our Mission: At RecruitU, we simplify college
+                                    recruitment. Our
+                                    mission? To connect
+                                    coaches with the ideal athletes and vice versa. With our technology, coaches can
+                                    easily filter applications, sparing them from sifting through countless submissions.
+                                    As for aspiring athletes, forget about hunting down programs and filling out
+                                    multiple forms. With us, one click applies you to programs of your choice.</p>
+>>>>>>> origin/master
 
                             </div>
                         </div>
@@ -147,6 +174,7 @@
     </div>
     <!--Girls Section Start-->
     <div class="bg-white py-5">
+<<<<<<< HEAD
         <section class="container bg-white px-4">
             <div class="row align-items-center">
                 <div class="col-md-5 mb-4 mb-md-0 img-container">
@@ -178,15 +206,51 @@
                 </div>
             </div>
         </section>
+=======
+        <div class="container px-4">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-4 mb-md-0 img-container">
+                    <img src="{{ asset('assets/images/girl.png') }}" alt="girl image" class="img-fluid img-responsive">
+                </div>
+                <div class="col-md-1 d-none d-md-block"></div>
+                <div class="col-lg-6">
+                    <p class="font-fraunces font-normal fs-md-5">
+                        College <span class="text-blue text-decoration-underline">Golf Recruiting Agency</span> helps
+                        <span class="text-gray">Student Athletes</span> achieve their
+                        dreams of achieving an athletic scholarship to <span class="text-blue">play collegiate
+                            golf</span>.
+                    </p>
+                    <ul class="list-style">
+                        <li>A sincere and devoted approach, centered entirely on championing the athlete.</li>
+                        <li>Run by experienced coaches and former Division 1 athletes.</li>
+                        <li>A widespread network across major North American Universities, cultivating bonds with
+                            coaches
+                            across the athletic and educational landscapes.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+>>>>>>> origin/master
     </div>
+    
     <!--Girls Section End-->
     <!--Revolutionized Section Starts-->
+<<<<<<< HEAD
     <section class="bg-lightblue">
         <div class="container py-5">
             <div class="row align-items-center">
                 <div class="col-md-6 mb-4 mb-md-0 px-4">
                     <h2 class="font-fraunces fs-2 font-normal mb-2 text-align-center-md-left">Revolutionize Your</h2>
                     <h3 class="text-blue font-fraunces fs-2 font-normal underline mb-3 text-align-center-md-left">
+=======
+    <section class="bg-lightblue position-relative">
+        <div class="background-image-div"></div>
+        <div class="container py-10">
+            <div class="row justify-content-end px-4 px-md-0">
+                <div class="col-lg-5 mb-4 mb-md-0 px-4">
+                    <h2 class="font-fraunces fs-2 font-normal mb-2">Revolutionize Your</h2>
+                    <h3 class="text-blue font-fraunces fs-2 font-normal underline mb-3">
+>>>>>>> origin/master
                         Recruitment
                         Process</h3>
                     <p class="font-nunito text-lg font-normal text-black">CGRP offers college golf coaches a
@@ -196,6 +260,7 @@
                         program's needs. By centralizing the entire recruitment process within our platform, we ensure
                         seamless organization and efficiency for coaches.</p>
                 </div>
+<<<<<<< HEAD
                 <div class="col-md-6 d-flex justify-content-center">
                     <div class="animat-block">
                         {{-- <figure class="cd-image-container is-visible"><img
@@ -208,15 +273,34 @@
                         </figure> --}}
                         <img src="{{ asset('assets/images/landing/landing-home/06.png') }}" alt="Original Image"
                             width="100%;" height="300px;">
+=======
+
+                <div class="col-lg-6 d-flex justify-content-center position-relative">
+                    <div class="background-circle d-none d-md-block"></div>
+                    <div class="animat-block w-100 d-flex justify-content-center">
+                        <figure class="cd-image-container is-visible">
+                            <img src="{{ asset('assets/images/landing/landing-home/03.png') }}" alt="Original Image">
+                            <span class="cd-image-label" data-type="original"> </span>
+                            <div class="cd-resize-img" style="width: 56.353%;">
+                                <img src="{{ asset('assets/images/landing/landing-home/02.png') }}"
+                                    alt="Modified Image">
+                                <span class="cd-image-label" data-type="modified"> </span>
+                            </div>
+                            <span class="cd-handle" style="left: 56.353%;"></span>
+                        </figure>
+>>>>>>> origin/master
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
+
     <!--Revolutionized Section Ends-->
     <!--Athelete Package Section Starts-->
     <div class="bg-white py-5">
         <section class="container">
+<<<<<<< HEAD
 
             <div class="row">
                 <div class="col-md-3 mb-3">
@@ -297,19 +381,27 @@
 
             <hr class="custom-hr">
             <div class="row justify-content-center px-4 mt-4">
+=======
+            <div class="row justify-content-center">
+                <h2 class="font-fraunces text-center fw-normal text-4xl mb-2">Student Athlete Packages - <span
+                        class="text-blue">Our Services</span></h2>
+>>>>>>> origin/master
                 <div class="col-lg-8 col-md-10 col-12">
-                    <h2 class="font-fraunces text-center fw-normal fs-2 mb-2">Student Athlete Packages - <span
-                            class="text-blue">Our Services</span></h2>
-                    <p class="text-darkGray text-center text-lg">Lorem ipsum dolor sit amet consectetur adipisicing
+                    <p class="text-darkGray text-center text-lg w-100 w-md-75 mx-auto">Lorem ipsum dolor sit amet
+                        consectetur
+                        adipisicing
                         elit. Magni cum enim itaque, velit eos voluptatem.</p>
 
-                    <div class="d-flex justify-content-center align-items-center mb-4">
-                        <label for="flexSwitchCheckChecked" class="fw-semibold me-2 text-lightBlack">Monthly</label>
+                    <div class="d-flex justify-content-center align-items-center mb-2 mb-md-4">
+                        <label for="flexSwitchCheckChecked"
+                            class="fw-semibold text-lg mx-2 mb-0 text-lightBlack">Monthly</label>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch"
                                 id="flexSwitchCheckChecked" checked>
+                            <label class="form-check-label" for="flexSwitchCheckChecked"></label>
                         </div>
-                        <label for="flexSwitchCheckChecked" class="fw-semibold text-lightBlack">Annually</label>
+                        <label for="flexSwitchCheckChecked"
+                            class="fw-semibold text-lg mx-2 mb-0 text-lightBlack">Annually</label>
                     </div>
 
                     <div class="row">
@@ -325,54 +417,121 @@
                                     Plan</button>
                                 <button class="text-blue border border-0 underline text-base fw-bold mb-5 w-100">Why
                                     Choose Essential?</button>
+<<<<<<< HEAD
                                 {{-- <ul>
                                     <li class="d-flex  align-items-center mb-2">
+=======
+                                <ul>
+                                    <li class="d-flex  align-items-center mb-3">
+>>>>>>> origin/master
                                         <img src="{{ asset('assets/images/dark-tick-icon.png') }}" alt=""
                                             class="me-2">
                                         <span class="text-sm text-lightBlack">Online Athlete Profile - Coaches View
                                             Each Profile</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/dark-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-lightBlack">Online Athlete Profile - Coaches View
-                                            Each Profile</span>
+                                        <span class="text-sm text-lightBlack">Personal Section</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/dark-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-lightBlack">Online Athlete Profile - Coaches View
-                                            Each Profile</span>
+                                        <span class="text-sm text-lightBlack">Athletic Section</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/dark-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-lightBlack">Online Athlete Profile - Coaches View
-                                            Each Profile</span>
+                                        <span class="text-sm text-lightBlack">Resume Upload</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/dark-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-lightBlack">Highlight Video Upload</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/dark-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-lightBlack">Ability to Apply for Programs on our
+                                            platform</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/dark-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-lightBlack">CGRA Contacting Coaches on your
+                                            behalf</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/dark-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-lightBlack">Access to College Golf Programs
+                                            Information Page</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/dark-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-lightBlack">College Recruitment Process Modeuls - 10
+                                            Lessons</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/dark-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-lightBlack">Essential Highlight</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/gray-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-lightBlack text-decoration-line-through">Online
-                                            Athlete Profile - Coaches View Each Profile</span>
+                                        <span class="text-sm text-lightBlack text-decoration-line-through">Access to
+                                            College Golf Coaches Contact Information Page</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/gray-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-lightBlack text-decoration-line-through">Online
-                                            Athlete Profile - Coaches View Each Profile</span>
+                                        <span class="text-sm text-lightBlack text-decoration-line-through">Full Access
+                                            to our platform</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/gray-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-lightBlack text-decoration-line-through">Online
-                                            Athlete Profile - Coaches View Each Profile</span>
+                                        <span class="text-sm text-lightBlack text-decoration-line-through">30 Minute
+                                            Zoom Consultation </span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/gray-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-lightBlack text-decoration-line-through">Online
-                                            Athlete Profile - Coaches View Each Profile</span>
+                                        <span class="text-sm text-lightBlack text-decoration-line-through">Email
+                                            Templates for College Coaches</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/gray-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-lightBlack text-decoration-line-through">Resume
+                                            Assistance</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/gray-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span
+                                            class="text-sm text-lightBlack text-decoration-line-through">Professionally
+                                            Edited Highlight Videos</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/gray-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-lightBlack text-decoration-line-through">Live Chat
+                                            Support</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/gray-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-lightBlack text-decoration-line-through">Target list
+                                            of programs that best fit your potential</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/gray-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-lightBlack text-decoration-line-through">Personal
+                                            Coach for your Recrutiment Journey</span>
                                     </li>
                                 </ul> --}}
                             </div>
@@ -391,54 +550,113 @@
                                 <div
                                     class="d-flex justify-content-center border border-0 underline text-base fw-bold text-white mb-5 w-100">
                                     Why Choose Essential?</div>
+<<<<<<< HEAD
                                 {{-- <ul>
                                     <li class="d-flex  align-items-center mb-2">
+=======
+                                <ul>
+                                    <li class="d-flex  align-items-center mb-3">
+>>>>>>> origin/master
                                         <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-white">Online Athlete Profile - Coaches View Each
-                                            Profile</span>
+                                        <span class="text-sm text-white">Online Athlete Profile - Coaches View
+                                            Each Profile</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-white">Online Athlete Profile - Coaches View Each
-                                            Profile</span>
+                                        <span class="text-sm text-white">Personal Section</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-white">Online Athlete Profile - Coaches View Each
-                                            Profile</span>
+                                        <span class="text-sm text-white">Athletic Section</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-white">Online Athlete Profile - Coaches View Each
-                                            Profile</span>
+                                        <span class="text-sm text-white">Resume Upload</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-white">Online Athlete Profile - Coaches View Each
-                                            Profile</span>
+                                        <span class="text-sm text-white">Highlight Video Upload</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-white">Online Athlete Profile - Coaches View Each
-                                            Profile</span>
+                                        <span class="text-sm text-white">Ability to Apply for Programs on our
+                                            platform</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-white">Online Athlete Profile - Coaches View Each
-                                            Profile</span>
+                                        <span class="text-sm text-white">CGRA Contacting Coaches on your behalf</span>
                                     </li>
-                                    <li class="d-flex  align-items-center mb-2">
+                                    <li class="d-flex  align-items-center mb-3">
                                         <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
                                             class="me-2">
-                                        <span class="text-sm text-white">Online Athlete Profile - Coaches View Each
-                                            Profile</span>
+                                        <span class="text-sm text-white">Access to College Golf Programs Information
+                                            Page</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-white">College Recruitment Process Modeuls - 10
+                                            Lessons</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-white">Essential Highlight</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-white">Access to College Golf Coaches Contact
+                                            Information Page</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-white">Full Access to our platform</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-white">30 Minute Zoom Consultation </span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-white">Email Templates for College Coaches</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-white">Resume Assistance</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-white">Professionally Edited Highlight Videos</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-white">Live Chat Support</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-white">Target list of programs that best fit your
+                                            potential</span>
+                                    </li>
+                                    <li class="d-flex  align-items-center mb-3">
+                                        <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
+                                            class="me-2">
+                                        <span class="text-sm text-white">Personal Coach for your Recrutiment
+                                            Journey</span>
                                     </li>
                                 </ul> --}}
                             </div>
@@ -453,7 +671,12 @@
     <div class="bg-black-700">
         <!-- <div class="d-flex flex-column align-items-center justify-content-center py-5"> -->
         <div class="row py-5 px-4">
+<<<<<<< HEAD
             <div class="col-lg-4 mx-auto d-flex flex-column align-items-center justify-content-center">
+=======
+            <div
+                class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 mx-auto d-flex flex-column align-items-center justify-content-center">
+>>>>>>> origin/master
                 <img class="img-fluid img-90 mb-3" src="{{ asset('assets/images/white-logo.png') }}" alt="">
                 <p class="text-white text-opacity-50 text-center font-nunito text-base mb-3">Lorem ipsum
                     dolor sit amet
@@ -488,7 +711,7 @@
         </div>
 
 
-        <div class="row text-gray px-5 py-3 footer-bottom font-nunito text-lg">
+        <div class="row text-gray px-5 py-3 footer-bottom text-center font-nunito text-lg">
             <div class="col-md-6 d-flex justify-content-md-start justify-content-center mb-2 mb-md-0">
                 ©Tuneup 2024. All rights reserved.
             </div>

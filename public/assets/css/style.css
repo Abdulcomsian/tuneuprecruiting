@@ -179,6 +179,7 @@ body[class=dark-only] {
   flex-wrap: wrap;
  margin:0px !important;
 } */
+
 .font-nunito {
   font-family: "Nunito Sans", sans-serif, sans-serif;
 }
@@ -198,9 +199,70 @@ body[class=dark-only] {
 .social-icons{
   width: 75%;
 }
+.text-4xl{
+  font-size: 2.625rem;
+}
+.position-relative {
+  position: relative;
+}
+.background-image-div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%; /* Adjust the size as needed */
+  height: 70%; /* Adjust the size as needed */
+  background-image: url('../images/arrows-background.png'); /* Replace with your image path */
+  background-size: contain; /* Adjust as needed (cover, contain, or specific size) */
+  background-repeat: no-repeat;
+  background-position: top right;
+  opacity: 10%;
+  transform: scaleX();
+}
+.background-circle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  background-image: url('../images/circles.png'); /* Replace with your image path */
+  background-size: contain; /* Adjust as needed (cover, contain, or specific size) */
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  opacity: 100%; /* Adjust the opacity as needed */
+}
+.login-button {
+ border-radius:  6px 0px 0px 6px;
+ margin-right: 2px;
+ border: none;
+}
+.bi-chevron-down {
+  color: white;
+  font-size: 1.25rem; /* Adjust size as needed */
+}
+
+.angle_btn{
+  cursor: pointer;
+  border-radius:  0px 6px 6px 0;
+ 
+}
+/* Custom styling for switch component */
+.form-check-input:checked {
+  background-color: #F2F2FF; /* Background color when switch is checked */
+}
+
+.form-check-input:checked + .form-check-label::before {
+  background-color: #16478E; /* Toggle icon color when switch is checked */
+}
+
+.py-10{
+  padding: 3.5rem 0;
+}
 @media (max-width: 767.98px) {
   .mb-md-2 {
       margin-bottom: 1rem; /* Adjust margin bottom as needed */
+  }
+  .text-4xl{
+    font-size: 1.5rem;
   }
   .fs-md-5{
     font-size: 1.125rem;
@@ -7589,8 +7651,10 @@ table.dataTable.display tbody tr.even .badge {
   border-radius: 10px;
   padding: 5px 10px;
   width: 100px;
+  border-right: 1px solid gray;
   text-align: left;
 }
+
 .dropdown .dropdown-toggle:after {
   position: absolute;
   top: 50%;
@@ -13974,6 +14038,8 @@ btn-group .dropdown-wrapper {
 .form-switch .form-check-input:checked {
   background-color: var(--theme-default);
   border-color: var(--theme-default);
+  height: 18px;
+  width: 35px;
 }
 
 .tg-list {
