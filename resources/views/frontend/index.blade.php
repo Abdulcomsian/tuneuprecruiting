@@ -117,29 +117,18 @@
             <div class="container">
                 <div class="row g-0">
                     <ul class="shape">
-<<<<<<< HEAD
                         {{-- <!-- <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-1.png') }}"
                                 alt=""></li> --> --}}
-=======
-                        <!-- <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-1.png') }}"
-                                alt=""></li> -->
->>>>>>> origin/master
                         <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-2.png') }}"
                                 alt=""></li>
                         <li><img class="img-fluid" src="{{ asset('assets/images/landing/landing-home/shape-3.png') }}"
                                 alt=""></li>
                     </ul>
                     <div class="row g-0 header-margin">
-<<<<<<< HEAD
                         <h1 class="font-fraunces font-normal text-center fs-2 text-white mb-5">College Golf <span
                                 class="text-blue underline">Recruitment</span> Portal</h1>
-=======
-                        <h1 class="font-fraunces font-normal text-center fs-2 text-white  mb-3 mb-md-5">College Golf
-                            <span class="text-blue underline">Recruitment</span> Agency</h1>
->>>>>>> origin/master
                         <div class="col-lg-6 responsive-header">
                             <div class="d-flex flex-column justify-content-center mx-auto px-4">
-<<<<<<< HEAD
                                 <p class="text-white mb-2" style="font-weight: 600;">Get Started with CGRP
                                 </p>
                                 <h1 class="font-nunito text-white">Technology to Streamline <br> your Recruitment <br>
@@ -147,18 +136,6 @@
                                 </h1>
                                 <p class="font-nunito text-white mt-3">Trusted by college golf programs – CGRP connects
                                     college coaches with aspiring collegiate athletes.</p>
-=======
-
-                                <h3 class="text-white font-fraunces fw-semibold mb-2 fs-4">Revolutionize Your
-                                    Recruitment Process</h3>
-                                <p class="font-nunito text-gray"> Our Mission: At RecruitU, we simplify college
-                                    recruitment. Our
-                                    mission? To connect
-                                    coaches with the ideal athletes and vice versa. With our technology, coaches can
-                                    easily filter applications, sparing them from sifting through countless submissions.
-                                    As for aspiring athletes, forget about hunting down programs and filling out
-                                    multiple forms. With us, one click applies you to programs of your choice.</p>
->>>>>>> origin/master
 
                             </div>
                         </div>
@@ -174,7 +151,6 @@
     </div>
     <!--Girls Section Start-->
     <div class="bg-white py-5">
-<<<<<<< HEAD
         <section class="container bg-white px-4">
             <div class="row align-items-center">
                 <div class="col-md-5 mb-4 mb-md-0 img-container">
@@ -206,51 +182,16 @@
                 </div>
             </div>
         </section>
-=======
-        <div class="container px-4">
-            <div class="row align-items-center">
-                <div class="col-lg-5 mb-4 mb-md-0 img-container">
-                    <img src="{{ asset('assets/images/girl.png') }}" alt="girl image" class="img-fluid img-responsive">
-                </div>
-                <div class="col-md-1 d-none d-md-block"></div>
-                <div class="col-lg-6">
-                    <p class="font-fraunces font-normal fs-md-5">
-                        College <span class="text-blue text-decoration-underline">Golf Recruiting Agency</span> helps
-                        <span class="text-gray">Student Athletes</span> achieve their
-                        dreams of achieving an athletic scholarship to <span class="text-blue">play collegiate
-                            golf</span>.
-                    </p>
-                    <ul class="list-style">
-                        <li>A sincere and devoted approach, centered entirely on championing the athlete.</li>
-                        <li>Run by experienced coaches and former Division 1 athletes.</li>
-                        <li>A widespread network across major North American Universities, cultivating bonds with
-                            coaches
-                            across the athletic and educational landscapes.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
->>>>>>> origin/master
     </div>
     
     <!--Girls Section End-->
     <!--Revolutionized Section Starts-->
-<<<<<<< HEAD
     <section class="bg-lightblue">
         <div class="container py-5">
             <div class="row align-items-center">
-                <div class="col-md-6 mb-4 mb-md-0 px-4">
+                <div class="col-md-6 mb-4 mb-md-0 px-4"> 
                     <h2 class="font-fraunces fs-2 font-normal mb-2 text-align-center-md-left">Revolutionize Your</h2>
                     <h3 class="text-blue font-fraunces fs-2 font-normal underline mb-3 text-align-center-md-left">
-=======
-    <section class="bg-lightblue position-relative">
-        <div class="background-image-div"></div>
-        <div class="container py-10">
-            <div class="row justify-content-end px-4 px-md-0">
-                <div class="col-lg-5 mb-4 mb-md-0 px-4">
-                    <h2 class="font-fraunces fs-2 font-normal mb-2">Revolutionize Your</h2>
-                    <h3 class="text-blue font-fraunces fs-2 font-normal underline mb-3">
->>>>>>> origin/master
                         Recruitment
                         Process</h3>
                     <p class="font-nunito text-lg font-normal text-black">CGRP offers college golf coaches a
@@ -260,7 +201,6 @@
                         program's needs. By centralizing the entire recruitment process within our platform, we ensure
                         seamless organization and efficiency for coaches.</p>
                 </div>
-<<<<<<< HEAD
                 <div class="col-md-6 d-flex justify-content-center">
                     <div class="animat-block">
                         {{-- <figure class="cd-image-container is-visible"><img
@@ -273,22 +213,6 @@
                         </figure> --}}
                         <img src="{{ asset('assets/images/landing/landing-home/06.png') }}" alt="Original Image"
                             width="100%;" height="300px;">
-=======
-
-                <div class="col-lg-6 d-flex justify-content-center position-relative">
-                    <div class="background-circle d-none d-md-block"></div>
-                    <div class="animat-block w-100 d-flex justify-content-center">
-                        <figure class="cd-image-container is-visible">
-                            <img src="{{ asset('assets/images/landing/landing-home/03.png') }}" alt="Original Image">
-                            <span class="cd-image-label" data-type="original"> </span>
-                            <div class="cd-resize-img" style="width: 56.353%;">
-                                <img src="{{ asset('assets/images/landing/landing-home/02.png') }}"
-                                    alt="Modified Image">
-                                <span class="cd-image-label" data-type="modified"> </span>
-                            </div>
-                            <span class="cd-handle" style="left: 56.353%;"></span>
-                        </figure>
->>>>>>> origin/master
                     </div>
                 </div>
 
@@ -300,7 +224,6 @@
     <!--Athelete Package Section Starts-->
     <div class="bg-white py-5">
         <section class="container">
-<<<<<<< HEAD
 
             <div class="row">
                 <div class="col-md-3 mb-3">
@@ -381,11 +304,6 @@
 
             <hr class="custom-hr">
             <div class="row justify-content-center px-4 mt-4">
-=======
-            <div class="row justify-content-center">
-                <h2 class="font-fraunces text-center fw-normal text-4xl mb-2">Student Athlete Packages - <span
-                        class="text-blue">Our Services</span></h2>
->>>>>>> origin/master
                 <div class="col-lg-8 col-md-10 col-12">
                     <p class="text-darkGray text-center text-lg w-100 w-md-75 mx-auto">Lorem ipsum dolor sit amet
                         consectetur
@@ -417,13 +335,8 @@
                                     Plan</button>
                                 <button class="text-blue border border-0 underline text-base fw-bold mb-5 w-100">Why
                                     Choose Essential?</button>
-<<<<<<< HEAD
                                 {{-- <ul>
                                     <li class="d-flex  align-items-center mb-2">
-=======
-                                <ul>
-                                    <li class="d-flex  align-items-center mb-3">
->>>>>>> origin/master
                                         <img src="{{ asset('assets/images/dark-tick-icon.png') }}" alt=""
                                             class="me-2">
                                         <span class="text-sm text-lightBlack">Online Athlete Profile - Coaches View
@@ -550,13 +463,8 @@
                                 <div
                                     class="d-flex justify-content-center border border-0 underline text-base fw-bold text-white mb-5 w-100">
                                     Why Choose Essential?</div>
-<<<<<<< HEAD
                                 {{-- <ul>
                                     <li class="d-flex  align-items-center mb-2">
-=======
-                                <ul>
-                                    <li class="d-flex  align-items-center mb-3">
->>>>>>> origin/master
                                         <img src="{{ asset('assets/images/white-tick-icon.png') }}" alt=""
                                             class="me-2">
                                         <span class="text-sm text-white">Online Athlete Profile - Coaches View
@@ -671,12 +579,7 @@
     <div class="bg-black-700">
         <!-- <div class="d-flex flex-column align-items-center justify-content-center py-5"> -->
         <div class="row py-5 px-4">
-<<<<<<< HEAD
             <div class="col-lg-4 mx-auto d-flex flex-column align-items-center justify-content-center">
-=======
-            <div
-                class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 mx-auto d-flex flex-column align-items-center justify-content-center">
->>>>>>> origin/master
                 <img class="img-fluid img-90 mb-3" src="{{ asset('assets/images/white-logo.png') }}" alt="">
                 <p class="text-white text-opacity-50 text-center font-nunito text-base mb-3">Lorem ipsum
                     dolor sit amet
